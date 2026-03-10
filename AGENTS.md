@@ -8,28 +8,32 @@ Este repositorio contiene documentación sobre la situación urbanística de la 
 
 ## Archivos
 
-### Documentación Markdown
-
-- `urbanizacion_los_angeles_san_rafael.md` - Documento principal con el contexto completo
-- `documentacion_relevante.md` - Fuentes de información, jurisprudencia y normativa aplicable
-- `docs/` - Documentación estructurada del análisis del conflicto:
-  - `docs/contexto_general.md` - Contexto general del conflicto
-  - `docs/timeline_conflicto.md` - Línea temporal detallada
-  - `docs/problemas_detectados.md` - Problemas identificados
-  - `docs/actores.md` - Actores y roles
-  - `docs/opciones_legales.md` - Vías legales disponibles
-  - `docs/preguntas_abiertas.md` - Preguntas sin resolver
-
-### Portal Web (docs/)
+### Portal Web (docs/) - GitHub Pages
 
 El portal web está en la carpeta `docs/` para despliegue en GitHub Pages:
 
-- `docs/index.html` - Página principal
+- `docs/index.html` - Página principal del portal
 - `docs/assets/config.json` - Configuración del sitio
 - `docs/assets/content.json` - Contenido del portal (editable)
 - `docs/assets/css/styles.css` - Estilos
 - `docs/assets/js/main.js` - Funcionalidad
 - `docs/DEPLOY.md` - Instrucciones de despliegue
+
+### Documentación Markdown (docs/)
+
+- `docs/urbanizacion_los_angeles_san_rafael.md` - Documento principal con el contexto completo
+- `docs/documentacion_relevante.md` - Fuentes de información, jurisprudencia y normativa
+- `docs/contexto_general.md` - Contexto general del conflicto
+- `docs/timeline_conflicto.md` - Línea temporal detallada
+- `docs/problemas_detectados.md` - Problemas identificados
+- `docs/actores.md` - Actores y roles
+- `docs/opciones_legales.md` - Vías legales disponibles
+- `docs/preguntas_abiertas.md` - Preguntas sin resolver
+
+### Raíz del proyecto
+
+- `README.md` - Página principal del repositorio
+- `AGENTS.md` - Instrucciones para agentes IA
 
 ## Comandos de desarrollo
 
