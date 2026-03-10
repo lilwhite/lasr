@@ -68,7 +68,7 @@ Según la legislación urbanística, cuando corresponde a los propietarios la ob
 
 ### Sentencia del TSJCyL de 3 de junio de 2011
 
-Esta es la sentencia clave que ordena al Ayuntamiento de El Espinar recepcionar la urbanización Los Ángeles de San Rafael. Establece la obligación municipal de asumir los costes de mantenimiento de los viales y bienes públicos.
+Esta es la sentencia clave que aborda la recepción de la urbanización Los Ángeles de San Rafael y declara que procedía la recepción de las fases I y II en los términos enjuiciados. El alcance económico concreto exige analizar también normativa y actuaciones posteriores.
 
 ### Sentencia del TSJCyL de 4 de marzo de 2016
 
