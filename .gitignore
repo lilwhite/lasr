@@ -1,23 +1,27 @@
-# Archivos temporales y del sistema
+# Sistema
 .DS_Store
 Thumbs.db
 *.swp
 *.swo
 *~
 
-# Archivos del chat de WhatsApp (fuente original)
-*.zip
-*.mp4
-
 # IDEs
 .vscode/
 .idea/
 *.sublime-*
 
-# OS
-.DS_Store
-
-# Build artifacts (GitHub Actions genera dist/)
-dist/
+# Python
 __pycache__/
 *.pyc
+*.pyo
+
+# Build y deployment
+dist/
+build/
+
+# WhatsApp
+*.zip
+*.mp4
+
+# Misc
+*.log
