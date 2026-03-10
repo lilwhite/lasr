@@ -669,6 +669,18 @@ h1, h2, h3, h4, h5, h6 {
     white-space: nowrap;
 }
 
+.sentencia-key-idea {
+    margin-top: var(--space-md);
+    margin-bottom: var(--space-lg);
+    padding: 0.85rem 1rem;
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(45, 90, 90, 0.2);
+    background-color: rgba(45, 90, 90, 0.08);
+    color: #2f4a54;
+    font-size: var(--font-size-sm);
+    line-height: 1.6;
+}
+
 /* ============================================
    Document Cards
    ============================================ */
