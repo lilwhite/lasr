@@ -195,27 +195,40 @@
         "titulo": "Vía judicial",
         "icono": "scale",
         "opciones": [
-          "Solicitar la ejecución de la sentencia ante el juzgado",
-          "Pedir multas coercitivas a responsables municipales",
-          "Reclamar el cumplimiento de las obligaciones específicas"
+          "Solicitar ejecución de la sentencia",
+          "Pedir multas coercitivas por incumplimiento",
+          "Solicitar medidas de ejecución forzosa",
+          "Denunciar incumplimiento de sentencia firme"
+        ]
+      },
+      {
+        "titulo": "Vía administrativa",
+        "icono": "document",
+        "opciones": [
+          "Presentar instancias formales al Ayuntamiento",
+          "Solicitar actos administrativos de recepción",
+          "Interponer recursos administrativos",
+          "Solicitar información urbanística oficial"
         ]
       },
       {
         "titulo": "Vía institucional",
         "icono": "building",
         "opciones": [
-          "Solicitar intervención de la Junta de Castilla y León",
-          "Acudir al Defensor del Pueblo de Castilla y León",
-          "Reclamar ante la Fiscalía de Urbanismo"
+          "Acudir a la Junta de Castilla y León",
+          "Reclamar ante el Procurador del Común",
+          "Denunciar ante Fiscalía de Urbanismo",
+          "Solicitar intervención administrativa"
         ]
       },
       {
         "titulo": "Vía política",
         "icono": "users",
         "opciones": [
-          "Participar en procesos electorales con candidatos comprometidos",
-          "Crear o apoiar formaciones políticas locales",
-          "Movilización ciudadana y presión mediática"
+          "Interpelar a grupos municipales",
+          "Participar en procesos electorales",
+          "Promover iniciativas ciudadanas",
+          "Movilización y presión mediática"
         ]
       },
       {
@@ -223,8 +236,9 @@
         "icono": "home",
         "opciones": [
           "Convocar asamblea de propietarios",
-          "Reclamar acceso a la documentación de la EUCC",
-          "Organizarse colectivamente para compartir costes jurídicos"
+          "Solicitar acceso a documentación de la EUCC",
+          "Crear plataforma vecinal organizada",
+          "Compartir costes jurídicos"
         ]
       }
     ]

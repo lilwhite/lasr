@@ -448,6 +448,34 @@ h1, h2, h3, h4, h5, h6 {
     line-height: 1.6;
 }
 
+.actuaciones-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.62rem;
+}
+
+.actuacion-item {
+    display: grid;
+    grid-template-columns: 14px 1fr;
+    gap: 0.5rem;
+    align-items: start;
+    padding: 0.35rem 0.45rem;
+    border-radius: 8px;
+    transition: background-color var(--transition-fast);
+}
+
+.actuacion-item:hover {
+    background-color: rgba(45, 90, 90, 0.06);
+}
+
+.actuacion-bullet {
+    color: var(--color-primary);
+    line-height: 1.4;
+    font-size: 1.1rem;
+}
+
 /* ============================================
    Grid
    ============================================ */
