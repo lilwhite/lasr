@@ -112,6 +112,11 @@
     "titulo": "Qué dice la sentencia",
     "descripcion": "Resumen divulgativo de la resolución judicial. Este texto tiene carácter informativo y no constituye asesoramiento jurídico.",
     "nota": "Nota: Este resumen es de carácter divulgativo. Para información jurídica precisa, consulta con un profesional del derecho.",
+    "enlace": {
+      "texto": "Consultar sentencia (buscador oficial TSJCyL)",
+      "url": "https://historico.tsjcyl.es/",
+      "ayuda": "Acceso al portal oficial de sentencias para localizar la resolución completa."
+    },
     "puntos": [
       {
         "numero": "1",
