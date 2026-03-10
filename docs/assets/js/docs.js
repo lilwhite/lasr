@@ -228,6 +228,59 @@
     `;
   }
 
+  function sanitizeTableLinks(table) {
+    const links = table.querySelectorAll('a[href]');
+    links.forEach((link) => {
+      const href = link.getAttribute('href') || '';
+      const text = (link.textContent || '').trim();
+      const looksLikeRawUrl = /^https?:\/\//i.test(text);
+      const longRawText = text.length > 45;
+
+      if ((looksLikeRawUrl || text === href) && longRawText) {
+        link.dataset.originalText = text;
+        link.textContent = 'Abrir fuente';
+        link.classList.add('table-link-clean');
+      }
+
+      if (href.length > 60) {
+        link.classList.add('table-link-long');
+      }
+    });
+  }
+
+  function highlightUrlColumn(table) {
+    const headers = Array.from(table.querySelectorAll('thead th'));
+    if (!headers.length) return;
+
+    const urlIndex = headers.findIndex((th) => /^(url|enlace)$/i.test((th.textContent || '').trim()));
+    if (urlIndex === -1) return;
+
+    table.classList.add('has-url-column');
+    const rows = table.querySelectorAll('tr');
+    rows.forEach((row) => {
+      const cells = row.querySelectorAll('th, td');
+      if (cells[urlIndex]) {
+        cells[urlIndex].classList.add('url-column-cell');
+      }
+    });
+  }
+
+  function enhanceTables(container) {
+    const tables = container.querySelectorAll('table');
+    tables.forEach((table) => {
+      table.classList.add('markdown-table');
+      sanitizeTableLinks(table);
+      highlightUrlColumn(table);
+
+      if (!table.parentElement.classList.contains('table-container')) {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'table-container';
+        table.parentNode.insertBefore(wrapper, table);
+        wrapper.appendChild(table);
+      }
+    });
+  }
+
   async function load() {
     ensureShell();
     const elements = getElements();
@@ -245,6 +298,7 @@
 
       const html = window.marked ? window.marked.parse(parsed.body) : parsed.body;
       elements.body.innerHTML = html;
+      enhanceTables(elements.body);
 
       elements.title.textContent = parsed.frontmatter.title || currentDoc.title;
       elements.breadcrumb.textContent = parsed.frontmatter.title || currentDoc.title;

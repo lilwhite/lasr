@@ -1262,23 +1262,78 @@ h1, h2, h3, h4, h5, h6 {
     padding: 0;
 }
 
-.doc-body table {
+.table-container {
     width: 100%;
-    border-collapse: collapse;
+    overflow-x: auto;
+    overflow-y: hidden;
     margin-bottom: var(--space-lg);
-    font-size: 0.95rem;
-}
-
-.doc-body th,
-.doc-body td {
-    padding: 0.65rem 0.8rem;
     border: 1px solid #d9e2e8;
-    text-align: left;
+    border-radius: 12px;
+    background-color: #fff;
+    box-shadow: 0 3px 10px rgba(13, 27, 42, 0.04);
 }
 
-.doc-body th {
-    background-color: #eef3f6;
-    font-weight: var(--font-weight-semibold);
+.markdown-table {
+    width: 100%;
+    min-width: 640px;
+    border-collapse: collapse;
+    margin: 0;
+    font-size: 0.93rem;
+    line-height: 1.45;
+}
+
+.markdown-table th,
+.markdown-table td {
+    padding: 0.72rem 0.86rem;
+    border: 1px solid #e1e8ed;
+    text-align: left;
+    vertical-align: top;
+}
+
+.markdown-table thead th {
+    background-color: #edf3f6;
+    color: #2d4a57;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.markdown-table tbody tr:nth-child(even) {
+    background-color: #fafcfd;
+}
+
+.markdown-table tbody tr:hover {
+    background-color: #f3f8fa;
+}
+
+.markdown-table td,
+.markdown-table th {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+.markdown-table .url-column-cell {
+    min-width: 220px;
+    max-width: 420px;
+}
+
+.markdown-table .table-link-long {
+    overflow-wrap: anywhere;
+    word-break: break-all;
+}
+
+.markdown-table .table-link-clean {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.2rem 0.45rem;
+    border: 1px solid rgba(31, 88, 104, 0.22);
+    border-radius: 8px;
+    background: rgba(31, 88, 104, 0.06);
+    text-decoration: none;
+}
+
+.markdown-table .table-link-clean:hover {
+    background: rgba(31, 88, 104, 0.12);
 }
 
 .doc-body hr {
@@ -1296,6 +1351,19 @@ h1, h2, h3, h4, h5, h6 {
 .doc-body a:hover {
     color: #163f4c;
     border-bottom-color: rgba(22, 63, 76, 0.7);
+}
+
+.table-container::-webkit-scrollbar {
+    height: 10px;
+}
+
+.table-container::-webkit-scrollbar-track {
+    background: #f1f4f6;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+    background: #c3d2db;
+    border-radius: 8px;
 }
 
 .doc-body img {
@@ -1398,5 +1466,10 @@ h1, h2, h3, h4, h5, h6 {
 
     .doc-body {
         font-size: 1rem;
+    }
+
+    .markdown-table {
+        min-width: 560px;
+        font-size: 0.89rem;
     }
 }
