@@ -3,78 +3,41 @@
 ## 1. Estructura del Proyecto
 
 ```
-lasr-portal/
-├── index.html              # Página principal
-├── assets/
-│   ├── config.json         # Configuración del sitio
-│   ├── content.json        # Contenido del portal
-│   ├── css/
-│   │   └── styles.css     # Estilos
-│   ├── js/
-│   │   └── main.js        # Funcionalidad JavaScript
-│   └── images/            # Imágenes (opcional)
-├── docs/                  # Documentación adicional
-└── README.md              # Este archivo
+mi-repo/
+├── docs/                   # ← Carpeta para GitHub Pages
+│   ├── index.html          # Página principal
+│   ├── DEPLOY.md           # Este archivo
+│   └── assets/
+│       ├── config.json     # Configuración del sitio
+│       ├── content.json    # Contenido del portal
+│       ├── css/
+│       │   └── styles.css # Estilos
+│       └── js/
+│           └── main.js     # Funcionalidad JavaScript
+├── docs/                   # Documentación Markdown del proyecto
+│   ├── contexto_general.md
+│   ├── timeline_conflicto.md
+│   └── ...
+├── README.md
+└── AGENTS.md
 ```
 
 ## 2. Despliegue en GitHub Pages
 
-### Opción A: Usando Git (Recomendado)
+### Activar GitHub Pages
 
-1. **Crear repositorio en GitHub**
-   - Ve a https://github.com/new
-   - Nombre: `lasr-info` (o el nombre que prefieras)
-   - Selecciona "Public"
+1. Sube el contenido de la carpeta `docs/` a tu repositorio GitHub
+2. Ve a **Settings** → **Pages** en tu repositorio
+3. En "Source" selecciona: **Deploy from a branch**
+4. En "Branch" selecciona: **main** (o la rama que uses)
+5. En "Folder" selecciona: **/docs**
+6. Click en "Save"
 
-2. **Subir archivos al repositorio**
+### URLs típicas
 
-```bash
-# En tu máquina local
-cd ruta/al/proyecto/web
+- Tu sitio estará en: `https://TU_USUARIO.github.io/TU-REPO/`
 
-# Inicializar git (si no lo has hecho)
-git init
-
-# Añadir todos los archivos
-git add .
-
-# Crear commit
-git commit -m "Initial commit - Portal LASR"
-
-# Añadir remoto (reemplaza con tu usuario)
-git remote add origin https://github.com/TU_USUARIO/lasr-info.git
-
-# Subir a GitHub
-git push -u origin main
-```
-
-3. **Activar GitHub Pages**
-
-   - Ve a tu repositorio en GitHub
-   - Settings → Pages
-   - En "Source" selecciona: **Deploy from a branch**
-   - En "Branch" selecciona: **main**
-   - En "Folder" selecciona: **/(root)**
-   - Click en "Save"
-
-4. **Acceder al sitio**
-
-   - GitHub te proporcionará una URL como: `https://TU_USUARIO.github.io/lasr-info/`
-
-### Opción B: Usando GitHub CLI
-
-```bash
-# Crear repositorio
-gh repo create lasr-info --public --source=. --clone=false
-
-# Subir archivos
-git add .
-git commit -m "Initial commit"
-git push -u origin main
-
-# Configurar GitHub Pages
-gh pages-enabled --branch main
-```
+> **Nota:** GitHub Pages busca por defecto en la carpeta `docs/` cuando se configura desde Settings.
 
 ## 3. Configuración Post-Despliegue
 
