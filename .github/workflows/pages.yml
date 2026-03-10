@@ -1,0 +1,75 @@
+name: Desplegar a GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Validar estructura
+        run: |
+          echo "=== Validando estructura antes del despliegue ==="
+          
+          REQUIRED_FILES=(
+            "docs/index.html"
+            "docs/assets/config.json"
+            "docs/assets/content.json"
+            "docs/assets/css/styles.css"
+            "docs/assets/js/main.js"
+          )
+          
+          for file in "${REQUIRED_FILES[@]}"; do
+            if [ ! -f "$file" ]; then
+              echo "ERROR: Falta archivo $file"
+              exit 1
+            fi
+          done
+          
+          echo "✓ Estructura validada"
+
+      - name: Validar JSON
+        run: |
+          python3 -c "import json; json.load(open('docs/assets/config.json'))" && echo "✓ config.json válido"
+          python3 -c "import json; json.load(open('docs/assets/content.json'))" && echo "✓ content.json válido"
+
+      - name: Copiar contenido a dist
+        run: |
+          echo "=== Copiando docs/ a dist/ ==="
+          mkdir -p dist
+          cp -r docs/* dist/
+          
+          # Crear .nojekyll para evitar procesamiento Jekyll
+          touch dist/.nojekyll
+          
+          echo "✓ Contenido copiado"
+          ls -la dist/
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
