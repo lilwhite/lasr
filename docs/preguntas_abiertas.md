@@ -1,3 +1,13 @@
+---
+title: Preguntas Abiertas
+description: Preguntas clave que quedan sin resolver
+slug: preguntas-abiertas
+category: analisis
+order: 6
+updated: 2026-03-10
+tags: [preguntas, abierto, pendiente]
+---
+
 # Preguntas Abiertas
 
 ## 1. Sobre la Sentencia y su Ejecución

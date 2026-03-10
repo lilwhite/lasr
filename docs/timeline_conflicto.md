@@ -1,3 +1,13 @@
+---
+title: Línea Temporal
+description: Cronología detallada de todos los hitos del conflicto
+slug: linea-temporal
+category: cronologia
+order: 2
+updated: 2026-03-10
+tags: [timeline, historia, cronologia]
+---
+
 # Línea Temporal del Conflicto
 
 ## Cronología de Hitos Principales

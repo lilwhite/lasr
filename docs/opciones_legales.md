@@ -1,3 +1,13 @@
+---
+title: Opciones Legales
+description: Vías legales disponibles y análisis de opciones
+slug: opciones-legales
+category: legal
+order: 5
+updated: 2026-03-10
+tags: [legal, vias, actuacion]
+---
+
 # Opciones Legales
 
 ## 1. Ejecución de Sentencia
