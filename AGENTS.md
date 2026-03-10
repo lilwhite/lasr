@@ -9,6 +9,7 @@ Este repositorio contiene documentación sobre la situación urbanística de la 
 ## Archivos
 
 - `urbanizacion_los_angeles_san_rafael.md` - Documento principal con el contexto completo
+- `documentacion_relevante.md` - Fuentes de información, jurisprudencia y normativa aplicable
 - `AGENTS.md` - Este archivo
 
 ## Comandos de desarrollo
