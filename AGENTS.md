@@ -27,25 +27,32 @@ El agente debe trabajar de forma estructurada usando skills especializadas:
 
 ### Skills Disponibles
 
+Las skills están definidas en `.agents/skills/<skill-name>/SKILL.md`:
+
 #### skill.web-design-static-portal
 - **Propósito:** Buenas prácticas de diseño web en portales estáticos
 - **Aplicar cuando:** Cambios en UI, HTML, CSS, JS
+- **Archivo:** `.agents/skills/web-design-static-portal/SKILL.md`
 
 #### skill.github-pages-workflow
 - **Propósito:** Buenas prácticas en despliegue con GitHub Actions
 - **Aplicar cuando:** Cambios en workflows
+- **Archivo:** `.agents/skills/github-pages-workflow/SKILL.md`
 
 #### skill.github-validation-guard
 - **Propósito:** Validaciones mínimas antes de desplegar
 - **Aplicar cuando:** Cambios en validación o calidad
+- **Archivo:** `.agents/skills/github-validation-guard/SKILL.md`
 
 #### skill.safe-static-site-refactor
 - **Propósito:** Cambios sin romper el portal
 - **Aplicar cuando:** Cambios en estructura o rutas
+- **Archivo:** `.agents/skills/safe-static-site-refactor/SKILL.md`
 
 #### skill.docs-and-maintenance
 - **Propósito:** Documentación operativa consistente
 - **Aplicar cuando:** Cambios en documentación
+- **Archivo:** `.agents/skills/docs-and-maintenance/SKILL.md`
 
 ### Reglas de Decisión
 
@@ -94,6 +101,17 @@ El portal web está en la carpeta `docs/` para despliegue en GitHub Pages:
 
 - `README.md` - Página principal del repositorio
 - `AGENTS.md` - Instrucciones para agentes IA
+
+### .agents/ - Skills del Agente
+
+```
+.agents/skills/
+├── web-design-static-portal/SKILL.md
+├── github-pages-workflow/SKILL.md
+├── github-validation-guard/SKILL.md
+├── safe-static-site-refactor/SKILL.md
+└── docs-and-maintenance/SKILL.md
+```
 
 ## Comandos de desarrollo
 
