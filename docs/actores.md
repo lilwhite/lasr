@@ -1,3 +1,13 @@
+---
+title: Actores
+description: Identificación de todos los actores y sus roles en el conflicto
+slug: actores
+category: referencia
+order: 4
+updated: 2026-03-10
+tags: [actores, ayuntamiento, tribunales, eucc]
+---
+
 # Actores Identificados
 
 ## 1. Administración Pública
