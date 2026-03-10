@@ -25,6 +25,62 @@ El agente debe trabajar de forma estructurada usando skills especializadas:
 9. Favorecer mantenibilidad sobre complejidad
 10. Aplicar skills especializadas antes de modificar archivos
 
+### Flujo de Trabajo con Ramas y PRs
+
+El agente debe trabajar siguiendo este flujo obligatorio:
+
+#### Reglas Obligatorias
+
+1. **NUNCA hacer commit directo en `main`**
+2. **Siempre crear rama para cada tarea**
+
+#### Pasos por Tarea
+
+1. **Crear rama** con formato:
+   ```
+   ai/<tipo>/<descripcion-corta>
+   ```
+   Ejemplos:
+   - `ai/docs/add-legal-roadmap`
+   - `ai/docs/update-timeline`
+   - `ai/site/add-navigation`
+
+2. **Hacer cambios** en los archivos necesarios
+
+3. **Hacer commit** siguiendo Conventional Commits:
+   - `feat:` nueva funcionalidad
+   - `docs:` cambios en documentación
+   - `fix:` corrección
+   - `refactor:` mejora interna
+
+4. **Hacer push** de la rama
+
+5. **Crear Pull Request** hacia `main`
+
+#### Formato de la Pull Request
+
+La PR debe incluir:
+
+```markdown
+## Summary
+Breve descripción del cambio.
+
+## Changes
+Lista de archivos añadidos/modificados.
+
+## Purpose
+Por qué se realiza este cambio.
+```
+
+#### Reglas Importantes
+
+- ✅ El agente **debe** crear ramas para cada cambio
+- ✅ El agente **debe** hacer commit con Conventional Commits
+- ✅ El agente **debe** crear PRs hacia main
+- ❌ El agente **nunca** debe hacer commit directo en main
+- ❌ El agente **nunca** debe hacer merge automático
+- ❌ La revisión humana es **obligatoria** antes del merge
+
 ### Skills Disponibles
 
 Las skills están definidas en `.agents/skills/<skill-name>/SKILL.md`:
