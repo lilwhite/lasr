@@ -13,8 +13,9 @@ Este proyecto usa **GitHub Actions** para desplegar automáticamente el sitio en
 
 1. Haces `git push` a `main`
 2. Se valida la estructura del proyecto
-3. Se copia `docs/` a `dist/`
-4. Se despliega automáticamente en GitHub Pages
+3. Se genera `docs/assets/build-meta.json` con la fecha de última actualización
+4. Se copia `docs/` a `dist/`
+5. Se despliega automáticamente en GitHub Pages
 
 ---
 
@@ -88,9 +89,10 @@ Hace:
 1. Checkout del código
 2. Validación de estructura
 3. Validación de JSON
-4. Copia `docs/` a `dist/`
-5. Crea `.nojekyll`
-6. Despliega en GitHub Pages
+4. Genera `build-meta.json` con fecha de última PR mergeada a `main` (fallback: último commit en `main`)
+5. Copia `docs/` a `dist/`
+6. Crea `.nojekyll`
+7. Despliega en GitHub Pages
 
 ---
 

@@ -116,4 +116,7 @@ Ver [`AGENTS.md`](AGENTS.md) para más detalles.
 
 ## 📝 Licencia
 
-Este proyecto es de carácter informativo. El contenido tiene fines divulgativos y no constituye asesoramiento jurídico.
+Este proyecto se distribuye bajo licencia **MIT**.
+
+- Texto completo: [`LICENSE`](LICENSE)
+- Nota: el contenido mantiene carácter informativo y no constituye asesoramiento jurídico.
