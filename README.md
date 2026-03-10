@@ -1,58 +1,119 @@
-# Documentación Urbanística Los Ángeles de San Rafael
+# 🏘️ Los Ángeles de San Rafael
 
-Este repositorio contiene documentación sobre la situación urbanística de la urbanización Los Ángeles de San Rafael en El Espinar (Segovia, España).
+> Documentación sobre la situación urbanística y jurídica de la urbanización en El Espinar (Segovia, España)
 
-## Objetivo
+---
 
-Documentar el conflicto entre los vecinos de la urbanización y el Ayuntamiento de El Espinar respecto a la recepción municipal de las infraestructuras, analizando las vías legales disponibles y organizando la información para su uso por agentes IA.
+## 📋 Descripción
 
-## Estructura
+Este repositorio contiene documentación sobre el conflicto urbanístico entre los vecinos de **Los Ángeles de San Rafael** y el **Ayuntamiento de El Espinar** respecto a la recepción municipal de las infraestructuras.
+
+El proyecto incluye:
+- 📄 Documentación detallada en Markdown
+- 🌐 Portal web estático publicado en GitHub Pages
+- ⚙️ Workflows de GitHub Actions para validación y despliegue
+- 🤖 Instrucciones para agentes IA
+
+---
+
+## 📁 Estructura del Proyecto
 
 ```
-├── urbanizacion_los_angeles_san_rafael.md  # Documento principal
-├── documentacion_relevante.md               # Fuentes y jurisprudencia
-├── docs/                                    # Portal web (GitHub Pages)
-│   ├── index.html
-│   ├── DEPLOY.md
-│   └── assets/
-│       ├── config.json
-│       ├── content.json
-│       ├── css/styles.css
-│       └── js/main.js
-├── docs/                                    # Documentación Markdown
-│   ├── contexto_general.md
-│   ├── timeline_conflicto.md
-│   ├── problemas_detectados.md
-│   ├── actores.md
-│   ├── opciones_legales.md
-│   └── preguntas_abiertas.md
-└── AGENTS.md                                # Instrucciones para agentes IA
+📂 LASR/
+├── 📂 docs/                    # Portal web (GitHub Pages)
+│   ├── index.html              # Página principal
+│   ├── DEPLOY.md               # Guía de despliegue
+│   └── 📂 assets/
+│       ├── config.json         # Configuración
+│       ├── content.json        # Contenido
+│       ├── css/styles.css      # Estilos
+│       └── js/main.js         # Funcionalidad
+│
+├── 📂 .agents/skills/          # Skills para agentes IA
+│   ├── web-design-static-portal/
+│   ├── github-pages-workflow/
+│   ├── github-validation-guard/
+│   ├── safe-static-site-refactor/
+│   └── docs-and-maintenance/
+│
+├── 📄 urbanizacion_los_angeles_san_rafael.md
+├── 📄 documentacion_relevante.md
+├── 📄 AGENTS.md
+└── 📄 README.md
 ```
 
-## Contenido Principal
+---
 
-### Contexto
+## 🏗️ Arquitectura Técnica
 
-La urbanización Los Ángeles de San Rafael, desarrollada en los años 60, fue declarada recepcionable por sentencia del TSJCyL (2013). Más de 10 años después, la sentencia no se ha ejecutado completamente.
+| Componente | Tecnología |
+|------------|------------|
+| 🌐 Hosting | GitHub Pages |
+| ⚡ CI/CD | GitHub Actions |
+| 🎨 Estilos | CSS vanilla |
+| ✨ Scripts | JavaScript vanilla |
+| 📝 Contenido | JSON + Markdown |
+| 🔒 Validación | Python |
+
+---
+
+## 📰 Contexto del Conflicto
+
+La urbanización **Los Ángeles de San Rafael**, desarrollada en los años 60, fue declarada recepcionable por sentencia del **TSJCyL** (2013). Más de 10 años después, la sentencia no se ha ejecutado completamente.
 
 ### Problema Central
 
-- Los vecinos pagan IBI + cuotas EUCC
-- No reciben servicios municipales equivalentes
-- 11 años sin asamblea de propietarios
-- EUCC excedió el plazo de 4 años establecido
+| Tema | Situación |
+|------|-----------|
+| 💰 Fiscal | Vecinos pagan IBI + cuotas EUCC |
+| 🏛️ Servicios | No reciben servicios municipales equivalentes |
+| 📅 Temporal | 11 años sin asamblea de propietarios |
+| ⚖️ Legal | Sentencia sin ejecución efectiva |
 
-## Uso
+---
 
-Este repositorio está diseñado para:
+## 🚀 Despliegue
 
-- Análisis jurídico del conflicto
-- Generación de visualizaciones (mapas de actores, líneas temporales)
-- Estrategia de actuación para propietarios
-- Contexto para herramientas de IA
+El portal se despliega automáticamente mediante **GitHub Actions**:
 
-## Fuentes
+1. Los cambios en `docs/` se validan automáticamente
+2. Al hacer push a `main`, se ejecuta el workflow
+3. El contenido se publica en GitHub Pages
 
-- Artículos de prensa local (El Adelantado, El Norte de Castilla, El Espinar Hoy)
-- Jurisprudencia del TSJCyL
-- Normativa urbanística de Castilla y León
+### Activar GitHub Pages
+
+```
+Settings → Pages → Source: GitHub Actions
+```
+
+Ver [`docs/DEPLOY.md`](docs/DEPLOY.md) para instrucciones detalladas.
+
+---
+
+## 🤖 Skills del Agente
+
+El proyecto usa un sistema de skills para mantener buenas prácticas:
+
+| Skill | Propósito |
+|-------|-----------|
+| 🌐 `web-design-static-portal` | Diseño web en portales estáticos |
+| ⚙️ `github-pages-workflow` | Despliegue con GitHub Actions |
+| 🛡️ `github-validation-guard` | Validaciones previas al despliegue |
+| 🔒 `safe-static-site-refactor` | Cambios seguros en estructura |
+| 📚 `docs-and-maintenance` | Documentación operativa |
+
+Ver [`AGENTS.md`](AGENTS.md) para más detalles.
+
+---
+
+## 📚 Fuentes
+
+- 📰 Artículos de prensa local (El Adelantado, El Norte de Castilla, El Espinar Hoy)
+- ⚖️ Jurisprudencia del TSJCyL
+- 📜 Normativa urbanística de Castilla y León
+
+---
+
+## 📝 Licencia
+
+Este proyecto es de carácter informativo. El contenido tiene fines divulgativos y no constituye asesoramiento jurídico.
