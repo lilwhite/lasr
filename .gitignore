@@ -5,6 +5,10 @@ Thumbs.db
 *.swo
 *~
 
+# Archivos del chat de WhatsApp (fuente original)
+*.zip
+*.mp4
+
 # IDEs
 .vscode/
 .idea/
