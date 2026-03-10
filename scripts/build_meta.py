@@ -5,7 +5,12 @@ from datetime import datetime
 
 
 def main() -> None:
-    prs = json.loads(os.environ.get("PRS_JSON", "[]"))
+    prs_file = os.environ.get("PRS_JSON_FILE")
+    if prs_file and os.path.exists(prs_file):
+        with open(prs_file, "r", encoding="utf-8") as f:
+            prs = json.load(f)
+    else:
+        prs = json.loads(os.environ.get("PRS_JSON", "[]"))
     merged = next((pr for pr in prs if pr.get("merged_at")), None)
 
     if merged:

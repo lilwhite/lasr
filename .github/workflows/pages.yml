@@ -61,8 +61,8 @@ jobs:
         run: |
           set -e
           echo "=== Generando docs/assets/build-meta.json ==="
-          PRS_JSON=$(curl -sS -H "Authorization: Bearer ${GITHUB_TOKEN}" -H "Accept: application/vnd.github+json" "https://api.github.com/repos/${REPO}/pulls?state=closed&base=main&sort=updated&direction=desc&per_page=100")
-          export PRS_JSON
+          curl -sS -H "Authorization: Bearer ${GITHUB_TOKEN}" -H "Accept: application/vnd.github+json" "https://api.github.com/repos/${REPO}/pulls?state=closed&base=main&sort=updated&direction=desc&per_page=100" > /tmp/prs.json
+          export PRS_JSON_FILE=/tmp/prs.json
           python3 scripts/build_meta.py
           python3 -c "import json; json.load(open('docs/assets/build-meta.json'))"
 
