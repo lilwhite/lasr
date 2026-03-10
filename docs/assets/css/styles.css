@@ -1230,6 +1230,17 @@ h1, h2, h3, h4, h5, h6 {
     margin: var(--space-lg) 0;
 }
 
+.doc-toc {
+    margin-bottom: var(--space-xl);
+    padding: var(--space-md);
+    background-color: var(--color-surface-alt);
+    border-radius: var(--radius-md);
+}
+
+.doc-related {
+    margin-top: var(--space-2xl);
+}
+
 /* Doc Footer */
 .doc-footer {
     margin-top: var(--space-2xl);
