@@ -34,6 +34,7 @@
         situacionContent: document.getElementById('situacionContent'),
         timelineContent: document.getElementById('timelineContent'),
         sentenciaContent: document.getElementById('sentenciaContent'),
+        sentenciaLinkCta: document.getElementById('sentenciaLinkCta'),
         incumplimientosContent: document.getElementById('incumplimientosContent'),
         actuacionesContent: document.getElementById('actuacionesContent'),
         documentosContent: document.getElementById('documentosContent'),
@@ -172,6 +173,24 @@
         });
         
         elements.sentenciaContent.innerHTML = html;
+
+        if (elements.sentenciaLinkCta) {
+            if (data.enlace?.url) {
+                elements.sentenciaLinkCta.innerHTML = `
+                    <div class="sentencia-cta fade-in">
+                        <div class="sentencia-cta-content">
+                            <h3 class="sentencia-cta-title">Texto completo de la sentencia</h3>
+                            <p class="sentencia-cta-text">${escapeHtml(data.enlace.ayuda || 'Consulta la fuente oficial para revisar la resolución completa.')}</p>
+                        </div>
+                        <a href="${escapeHtml(data.enlace.url)}" class="btn btn-secondary sentencia-cta-button" target="_blank" rel="noopener">
+                            ${escapeHtml(data.enlace.texto || 'Consultar sentencia')}
+                        </a>
+                    </div>
+                `;
+            } else {
+                elements.sentenciaLinkCta.innerHTML = '';
+            }
+        }
     }
 
     function renderIncumplimientos() {
