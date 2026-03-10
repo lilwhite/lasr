@@ -239,7 +239,9 @@
         let html = '';
         
         data.vias.forEach(via => {
-            let opcionesHtml = via.opciones.map(opcion => `<li>${escapeHtml(opcion)}</li>`).join('');
+            let opcionesHtml = via.opciones
+                .map(opcion => `<li class="actuacion-item"><span class="actuacion-bullet" aria-hidden="true">•</span><span>${escapeHtml(opcion)}</span></li>`)
+                .join('');
             
             html += `
                 <div class="card fade-in">
@@ -249,7 +251,7 @@
                         </div>
                         <h3 class="card-title">${escapeHtml(via.titulo)}</h3>
                     </div>
-                    <ul class="card-content" style="padding-left: 1rem;">
+                    <ul class="card-content actuaciones-list" aria-label="Opciones de ${escapeHtml(via.titulo)}">
                         ${opcionesHtml}
                     </ul>
                 </div>
