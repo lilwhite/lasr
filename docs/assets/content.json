@@ -113,9 +113,9 @@
     "descripcion": "Resumen divulgativo de la resolución judicial. Este texto tiene carácter informativo y no constituye asesoramiento jurídico.",
     "nota": "Nota: Este resumen es de carácter divulgativo. Para información jurídica precisa, consulta con un profesional del derecho.",
     "enlace": {
-      "texto": "Consultar sentencia (buscador oficial TSJCyL)",
-      "url": "https://historico.tsjcyl.es/",
-      "ayuda": "Acceso al portal oficial de sentencias para localizar la resolución completa."
+      "texto": "Consultar sentencia (Poder Judicial)",
+      "url": "https://www.poderjudicial.es/search/AN/openDocument/959f24d1537fd54b/20110628",
+      "ayuda": "Acceso directo al documento de la sentencia en el portal oficial del Poder Judicial."
     },
     "puntos": [
       {
