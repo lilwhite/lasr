@@ -24,6 +24,7 @@ El agente debe trabajar de forma estructurada usando skills especializadas:
 8. Preservar rutas relativas y comportamiento actual
 9. Favorecer mantenibilidad sobre complejidad
 10. Aplicar skills especializadas antes de modificar archivos
+11. **NUNCA subir información sensible** (datos personales, contraseñas, claves, tokens, información privada de vecinos)
 
 ### Flujo de Trabajo con Ramas y PRs
 
