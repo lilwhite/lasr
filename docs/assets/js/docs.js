@@ -183,7 +183,7 @@
   }
 
   function addHeadingAnchors(container) {
-    const headings = container.querySelectorAll('h2, h3');
+    const headings = container.querySelectorAll('h2, h3, h4');
     headings.forEach((h, idx) => {
       if (!h.id) {
         const slug = h.textContent.toLowerCase().replace(/[^a-z0-9\s-]/g, '').trim().replace(/\s+/g, '-');
@@ -193,6 +193,48 @@
     return headings;
   }
 
+  function buildTocTree(headings) {
+    const root = { level: 1, children: [] };
+    const stack = [root];
+
+    headings.forEach((heading) => {
+      const level = Number(heading.tagName.substring(1));
+      const node = {
+        id: heading.id,
+        title: (heading.textContent || '').trim(),
+        level,
+        children: []
+      };
+
+      while (stack.length > 1 && stack[stack.length - 1].level >= level) {
+        stack.pop();
+      }
+
+      stack[stack.length - 1].children.push(node);
+      stack.push(node);
+    });
+
+    return root.children;
+  }
+
+  function renderTocList(nodes, depth) {
+    if (!nodes.length) return '';
+    return `
+      <ul class="doc-toc-list depth-${depth}">
+        ${nodes
+          .map(
+            (node) => `
+              <li class="doc-toc-item level-${node.level}">
+                <a class="doc-toc-link" href="#${node.id}">${node.title}</a>
+                ${renderTocList(node.children, depth + 1)}
+              </li>
+            `
+          )
+          .join('')}
+      </ul>
+    `;
+  }
+
   function renderToc(elements) {
     const headings = addHeadingAnchors(elements.body);
     if (!headings.length) {
@@ -200,11 +242,13 @@
       return;
     }
 
-    const links = Array.from(headings)
-      .map((h) => `<li><a href="#${h.id}">${h.textContent}</a></li>`)
-      .join('');
-
-    elements.toc.innerHTML = `<h3 class="sidebar-title">Indice</h3><ul class="sidebar-nav">${links}</ul>`;
+    const tocTree = buildTocTree(Array.from(headings));
+    elements.toc.innerHTML = `
+      <nav class="doc-toc" aria-label="Tabla de contenidos">
+        <h3 class="doc-toc-title">Índice</h3>
+        ${renderTocList(tocTree, 1)}
+      </nav>
+    `;
   }
 
   function renderRelated(elements, currentDoc) {
