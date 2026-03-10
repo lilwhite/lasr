@@ -1,0 +1,71 @@
+name: Validar contenido
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+        
+      - name: Validar estructura del proyecto
+        run: |
+          echo "=== Validando estructura de archivos ==="
+          
+          # Lista de archivos obligatorios
+          REQUIRED_FILES=(
+            "docs/index.html"
+            "docs/assets/config.json"
+            "docs/assets/content.json"
+            "docs/assets/css/styles.css"
+            "docs/assets/js/main.js"
+            "docs/actores.md"
+            "docs/contexto_general.md"
+            "docs/documentacion_relevante.md"
+            "docs/opciones_legales.md"
+            "docs/preguntas_abiertas.md"
+            "docs/problemas_detectados.md"
+            "docs/timeline_conflicto.md"
+            "docs/urbanizacion_los_angeles_san_rafael.md"
+          )
+          
+          MISSING_FILES=()
+          
+          for file in "${REQUIRED_FILES[@]}"; do
+            if [ -f "$file" ]; then
+              echo "✓ $file"
+            else
+              echo "✗ $file (FALTA)"
+              MISSING_FILES+=("$file")
+            fi
+          done
+          
+          if [ ${#MISSING_FILES[@]} -gt 0 ]; then
+            echo ""
+            echo "=== ERROR: Faltan archivos obligatorios ==="
+            exit 1
+          fi
+          
+          echo ""
+          echo "=== Todos los archivos obligatorios existen ==="
+          
+      - name: Validar sintaxis JSON
+        run: |
+          echo "=== Validando JSON ==="
+          
+          if command -v python3 &> /dev/null; then
+            python3 -c "import json; json.load(open('docs/assets/config.json'))" && echo "✓ config.json válido" || exit 1
+            python3 -c "import json; json.load(open('docs/assets/content.json'))" && echo "✓ content.json válido" || exit 1
+          else
+            # Fallback: simple check
+            echo "Python no disponible, saltando validación JSON"
+          fi
+          
+          echo ""
+          echo "=== Validación completada con éxito ==="

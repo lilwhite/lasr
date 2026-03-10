@@ -1,173 +1,196 @@
 # Portal Los Ángeles de San Rafael - Guía de Despliegue
 
-## 1. Estructura del Proyecto
+## 1. Información General
 
-```
-mi-repo/
-├── docs/                   # ← Carpeta para GitHub Pages
-│   ├── index.html          # Página principal
-│   ├── DEPLOY.md           # Este archivo
-│   └── assets/
-│       ├── config.json     # Configuración del sitio
-│       ├── content.json    # Contenido del portal
-│       ├── css/
-│       │   └── styles.css # Estilos
-│       └── js/
-│           └── main.js     # Funcionalidad JavaScript
-├── docs/                   # Documentación Markdown del proyecto
-│   ├── contexto_general.md
-│   ├── timeline_conflicto.md
-│   └── ...
-├── README.md
-└── AGENTS.md
-```
+Este proyecto usa **GitHub Actions** para desplegar automáticamente el sitio en **GitHub Pages**.
 
-## 2. Despliegue en GitHub Pages
+### ¿Qué ha cambiado?
 
-### Activar GitHub Pages
+- Anterior: Despliegue manual desde rama/carpeta
+- Actual: Despliegue automático mediante GitHub Actions
 
-1. Sube el contenido de la carpeta `docs/` a tu repositorio GitHub
-2. Ve a **Settings** → **Pages** en tu repositorio
-3. En "Source" selecciona: **Deploy from a branch**
-4. En "Branch" selecciona: **main** (o la rama que uses)
-5. En "Folder" selecciona: **/docs**
-6. Click en "Save"
+### Flujo de trabajo
 
-### URLs típicas
-
-- Tu sitio estará en: `https://TU_USUARIO.github.io/TU-REPO/`
-
-> **Nota:** GitHub Pages busca por defecto en la carpeta `docs/` cuando se configura desde Settings.
-
-## 3. Configuración Post-Despliegue
-
-### Actualizar URL en el código
-
-Edita `assets/config.json` y cambia:
-
-```json
-"meta": {
-    "ogUrl": "https://TU_USUARIO.github.io/lasr-info"
-}
-```
-
-### Editar meta tags en index.html
-
-Busca y actualiza:
-
-```html
-<meta name="description" content="Tu descripción aquí">
-<meta property="og:url" content="https://TU_USUARIO.github.io/lasr-info">
-```
-
-## 4. Mantenimiento del Contenido
-
-### Añadir nuevo contenido
-
-El contenido se gestiona desde `assets/content.json`. Para actualizar:
-
-1. Abre el archivo en un editor de texto
-2. Busca la sección que quieres modificar
-3. Edita el texto (mantén el formato JSON)
-4. Guarda y haz commit
-
-**Ejemplo - Añadir un nuevo documento:**
-
-```json
-{
-    "titulo": "Nuevo documento",
-    "descripcion": "Descripción del documento",
-    "tipo": "prensa",
-    "url": "https://enlace.com/documento.pdf",
-    "fecha": "2026"
-}
-```
-
-### Añadir FAQ
-
-En `assets/content.json`, busca la sección `faq.preguntas`:
-
-```json
-{
-    "pregunta": "¿Tu pregunta aquí?",
-    "respuesta": "Tu respuesta aquí."
-}
-```
-
-## 5. Personalización
-
-### Colores
-
-Edita `assets/config.json`:
-
-```json
-"colors": {
-    "primary": "#2D5A5A",    // Color principal (verde oscuro)
-    "secondary": "#4A7C7C",  // Color secundario
-    "accent": "#D4A574"     // Color de acento (dorado)
-}
-```
-
-### Título y descripción
-
-Edita `assets/config.json`:
-
-```json
-"site": {
-    "title": "Tu Título",
-    "subtitle": "Tu subtítulo",
-    "description": "Tu descripción"
-}
-```
-
-## 6. Solución de Problemas
-
-### El sitio no carga
-
-1. Verifica que GitHub Pages esté habilitado
-2. Confirma que el archivo `index.html` está en la raíz
-3. Revisa la consola del navegador (F12) para errores
-
-### Los estilos no se cargan
-
-1. Verifica que `assets/css/styles.css` existe
-2. Confirma las rutas en el HTML
-
-### El contenido no aparece
-
-1. Abre la consola (F12)
-2. Busca errores de red al cargar `content.json`
-3. Verifica que el JSON es válido
-
-## 7. Actualizaciones Futuras
-
-### Actualizar contenido existente
-
-```bash
-# Descargar cambios
-git pull origin main
-
-# Editar archivos
-# ...
-
-# Subir cambios
-git add .
-git commit -m "Actualización de contenido"
-git push
-```
-
-### Añadir nuevas secciones
-
-1. Añade la estructura HTML en `index.html`
-2. Añade el contenido en `content.json`
-3. Añade estilos si es necesario en `styles.css`
-
-## 8. Recursos Adicionales
-
-- [GitHub Pages Documentation](https://docs.github.com/es/pages)
-- [GitHub CLI](https://cli.github.com/)
-- [JSON Validator](https://jsonformatter.org/)
+1. Haces `git push` a `main`
+2. Se valida la estructura del proyecto
+3. Se copia `docs/` a `dist/`
+4. Se despliega automáticamente en GitHub Pages
 
 ---
 
-**Nota:** Este portal está diseñado para ser fácil de mantener. No requiere conocimientos de programación para actualizar el contenido.
+## 2. Estructura del Proyecto
+
+```
+mi-repo/
+├── .github/
+│   └── workflows/
+│       ├── pages.yml      # Workflow de despliegue
+│       └── validate.yml   # Workflow de validación
+├── docs/                   # ← Contenido fuente
+│   ├── index.html
+│   ├── assets/
+│   │   ├── config.json
+│   │   ├── content.json
+│   │   ├── css/styles.css
+│   │   └── js/main.js
+│   └── *.md               # Documentación
+├── scripts/                # Scripts auxiliares
+└── README.md
+```
+
+---
+
+## 3. Activar GitHub Pages con Actions
+
+### Paso 1: Subir los workflows
+
+```bash
+git add .github/
+git commit -m "Add GitHub Actions workflows"
+git push origin main
+```
+
+### Paso 2: Configurar GitHub Pages
+
+1. Ve a tu repositorio en GitHub
+2. **Settings** → **Pages**
+3. En "Source" selecciona: **GitHub Actions**
+4. No necesitas seleccionar carpeta ni rama
+
+### Paso 3: Esperar el despliegue
+
+- Ve a la pestaña **Actions**
+- Observa el workflow "Desplegar a GitHub Pages"
+- Cuando termine, tu sitio estará disponible
+
+---
+
+## 4. Qué hace cada workflow
+
+### validate.yml (automático)
+
+Se ejecuta en:
+- Cada `push` a `main`
+- Cada `pull_request`
+
+Valida:
+- ✅ Existen todos los archivos obligatorios
+- ✅ Los JSON tienen sintaxis válida
+- ✅ Estructura correcta del proyecto
+
+### pages.yml (despliegue)
+
+Se ejecuta en:
+- Cada `push` a `main`
+- Manual: **Actions** → **Desplegar a GitHub Pages** → **Run workflow**
+
+Hace:
+1. Checkout del código
+2. Validación de estructura
+3. Validación de JSON
+4. Copia `docs/` a `dist/`
+5. Crea `.nojekyll`
+6. Despliega en GitHub Pages
+
+---
+
+## 5. Checklist para Publicar
+
+```bash
+# 1. Edita el contenido que necesites
+nano docs/assets/content.json
+
+# 2. Commit y push
+git add .
+git commit -m "Actualización de contenido"
+git push
+
+# 3. Ve a Actions y observa el despliegue
+# URL: https://github.com/TU_USUARIO/TU_REPO/actions
+```
+
+---
+
+## 6. Solución de Problemas
+
+### El workflow falla en "Validar estructura"
+
+Revisa que existan:
+- `docs/index.html`
+- `docs/assets/config.json`
+- `docs/assets/content.json`
+- `docs/assets/css/styles.css`
+- `docs/assets/js/main.js`
+
+### El workflow falla en "Validar JSON"
+
+Los archivos JSON tienen errores de sintaxis. Usa un validador:
+- https://jsonformatter.org/
+- VS Code: Cierra y abre el archivo
+
+### El sitio no aparece
+
+1. Ve a **Settings** → **Pages**
+2. Confirma que "Source" está en **GitHub Actions**
+3. Revisa la pestaña **Actions** para ver errores
+
+### Error de permisos
+
+Si ves error en `id-token`, asegurate de:
+- Tener GitHub Pages habilitado en el repo
+- Usar las acciones oficiales de GitHub
+
+---
+
+## 7. Actualizar Contenido
+
+### Desde JSON (recomendado)
+
+Edita `docs/assets/content.json`:
+```bash
+nano docs/assets/content.json
+```
+
+### Desde HTML
+
+Edita `docs/index.html`:
+```bash
+nano docs/index.html
+```
+
+### Nuevo documento markdown
+
+Simplemente crea el archivo en `docs/`:
+```bash
+nano docs/nuevo-documento.md
+```
+
+Después:
+```bash
+git add .
+git commit -m "Añadir nuevo contenido"
+git push
+```
+
+---
+
+## 8. Archivos Modificados/Creados
+
+| Archivo | Acción |
+|---------|--------|
+| `.github/workflows/pages.yml` | Nuevo - Despliegue |
+| `.github/workflows/validate.yml` | Nuevo - Validación |
+| `docs/DEPLOY.md` | Actualizado |
+| `.nojekyll` | Se crea automáticamente |
+
+---
+
+## 9. Recursos
+
+- [GitHub Pages con Actions](https://docs.github.com/es/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site#publishing-with-a-custom-github-actions-workflow)
+- [Actions de GitHub Pages](https://github.com/actions/deploy-pages)
+- [Configurar Pages](https://docs.github.com/es/pages)
+
+---
+
+**Nota:** Este portal mantiene su estructura original. Solo se añade automatización para el despliegue.

@@ -16,3 +16,8 @@ Thumbs.db
 
 # OS
 .DS_Store
+
+# Build artifacts (GitHub Actions genera dist/)
+dist/
+__pycache__/
+*.pyc
