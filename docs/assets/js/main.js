@@ -11,6 +11,8 @@
     // ============================================
     const CONFIG = {
         contentPath: 'assets/content.json',
+        configPath: 'assets/config.json',
+        buildMetaPath: 'assets/build-meta.json',
         animationDelay: 100
     };
 
@@ -67,6 +69,42 @@
         const div = document.createElement('div');
         div.textContent = text;
         return div.innerHTML;
+    }
+
+    async function updateFooterMeta() {
+        const repoLink = document.getElementById('footerRepoLink');
+        const licenseLink = document.getElementById('footerLicenseLink');
+        const lastUpdatedDate = document.getElementById('lastUpdatedDate');
+
+        try {
+            const configResponse = await fetch(CONFIG.configPath);
+            if (configResponse.ok) {
+                const config = await configResponse.json();
+                if (repoLink && config?.project?.repositoryUrl) {
+                    repoLink.href = config.project.repositoryUrl;
+                }
+                if (licenseLink && config?.project?.licenseUrl) {
+                    licenseLink.href = config.project.licenseUrl;
+                }
+                if (licenseLink && config?.project?.license) {
+                    licenseLink.textContent = `Licencia ${config.project.license}`;
+                }
+            }
+        } catch (error) {
+            console.warn('No se pudo cargar config.json', error);
+        }
+
+        try {
+            const buildMetaResponse = await fetch(CONFIG.buildMetaPath);
+            if (buildMetaResponse.ok) {
+                const buildMeta = await buildMetaResponse.json();
+                if (lastUpdatedDate && buildMeta?.updatedDate) {
+                    lastUpdatedDate.textContent = buildMeta.updatedDate;
+                }
+            }
+        } catch (error) {
+            console.warn('No se pudo cargar build-meta.json', error);
+        }
     }
 
     // ============================================
@@ -397,6 +435,9 @@
             
             // Initial scroll handler
             handleScroll();
+
+            // Footer metadata
+            await updateFooterMeta();
             
             isLoading = false;
             
