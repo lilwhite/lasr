@@ -1,3 +1,13 @@
+---
+title: Contexto General
+description: Descripción completa del conflicto, actores implicados y estado actual
+slug: contexto-general
+category: analisis
+order: 1
+updated: 2026-03-10
+tags: [contexto, conflicto, actores]
+---
+
 # Contexto General: Urbanización Los Ángeles de San Rafael
 
 ## Qué es Los Ángeles de San Rafael

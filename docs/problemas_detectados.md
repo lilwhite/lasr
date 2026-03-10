@@ -1,3 +1,13 @@
+---
+title: Problemas Detectados
+description: Listado estructurado de todos los problemas identificados
+slug: problemas-detectados
+category: analisis
+order: 3
+updated: 2026-03-10
+tags: [problemas, gestion, gouvernance]
+---
+
 # Problemas Detectados
 
 ## 1. Problemas de Gestión y Gobernanza
