@@ -1,4 +1,4 @@
-# Problemas Detectados en la Conversación
+# Problemas Detectados
 
 ## 1. Problemas de Gestión y Gobernanza
 
@@ -18,7 +18,6 @@
 ### 1.3 Organización Vecinal
 
 - Dificultad para organizar reuniones
-- Reunión cancelada por "presiones" según los vecinos
 - Falta de representación efectiva en el Ayuntamiento
 
 ---
@@ -34,9 +33,8 @@
 ### 2.2 Excusas Alegadas por el Ayuntamiento
 
 - Supuesta "deuda" de la EUCC como argumento para no recepcionar
-- alleged incapacidad económica
+- Alegada incapacidad económica
 - Estado deficiente de las infraestructuras
-- Los vecinos consideran estas excusas como "falaces"
 
 ### 2.3 Falta de Inversión
 
@@ -62,8 +60,8 @@
 
 ### 3.1 Agua
 
-- **Retraso en tariff actualización**: 1 año, 3 meses y 9 días
-- Tarifas consideradas "ESTAF" por los vecinos
+- Retraso en actualización de tarifas: 1 año, 3 meses y 9 días
+- Tarifas elevadas
 - Comparación con tarifas en Madrid (~20m3 por similar importe)
 - Servicio gestionado por Aquona desde 1995
 - Problemas de salubridad del agua
@@ -129,7 +127,6 @@
 
 - Período legal de 4 años excedido
 - Supuesta deuda como excusa
-- Los vecinos cuestionan la existencia real de dicha deuda
 
 ---
 

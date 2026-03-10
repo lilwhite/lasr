@@ -33,7 +33,7 @@ La sentencia del TSJCyL (2013) está en **fase de ejecución** en el Juzgado de 
 
 ### 2.2 ¿Contra quién actuar?
 
-Del chat se extrae la sugerencia de **actuar contra las personas responsables** en el Ayuntamiento (concejales, alcalde), no solo contra la Administración como ente abstracto.
+Se sugiere **actuar contra las personas responsables** en el Ayuntamiento (concejales, alcalde), no solo contra la Administración como ente abstracto.
 
 ### 2.3 Vías
 
@@ -148,7 +148,7 @@ Los vecinos discuten si existe realmente una deuda de la EUCC. Opciones:
 
 ---
 
-## 8. Vías Alternativas Mentionadas en el Chat
+## 8. Vías Alternativas
 
 ### 8.1 Denunciar en Prensa
 

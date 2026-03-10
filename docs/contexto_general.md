@@ -94,4 +94,4 @@ Han pasado más de 10 años (la sentencia es de 2012-2013) y:
 
 - Vecinos pagan: IBI + tasas municipales + cuotas EUCC
 - No reciben: Servicios municipales completos
-- La sentencia no se ejecuta por alleged "deuda" de la EUCC, argumentada como excusa según los vecinos
+- La sentencia no se ejecuta por alegada "deuda" de la EUCC, utilizada como excusa
