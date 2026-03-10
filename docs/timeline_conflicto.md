@@ -56,12 +56,11 @@
 
 ### 2025-2026: Situación Actual
 
-- **Diciembre 2025**: Se crea el grupo de WhatsApp "Asuntos Copropietarios ASR"
 - **Marzo 2026**: 
-  - Publicación de artículo informativo sobre la situación
+  - Publicación de artículos informativos sobre la situación
   - 11 años sin asamblea de propietarios
-  - Reunión vecinal organizada pero cancelada (presiones según vecinos)
-  - Se habla de "dejación de funciones" del Ayuntamiento
+  - Reunión vecinal organizada
+  - Continuidad del conflicto por ejecución de sentencia
 
 ---
 
@@ -77,9 +76,3 @@
 | 2026 | Sin presupuestos aprobados, sin cuentas presentadas |
 
 ---
-
-## Fechas Clave del Chat (Marzo 2026)
-
-- **8 de marzo de 2026**: Creación del grupo de WhatsApp
-- **9 de marzo de 2026**: Discusión sobre статья de prensa y situación del agua
-- **10 de marzo de 2026**: Debate sobre vías legales, elecciones, y problemas estructurales

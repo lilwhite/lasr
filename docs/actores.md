@@ -48,8 +48,7 @@
 |---------|---------|
 | **Rol** | Organización de propietarios, intento de reivindicación de derechos |
 | **Situación actual** | Intento de convocatoria de reunión vecinal (marzo 2026) |
-| **Problema** | Reunión cancelada por "presiones" |
-| **Miembros activos** | Varios vecinos mencionados en el chat |
+| **Problema** | Dificultades para organizar reunión vecinal |
 
 ### 2.2 Propietarios Individuales
 
@@ -67,7 +66,7 @@
 |---------|---------|
 | **Situación legal** | Período de 4 años establecido por sentencia **excedido** |
 | **Gestión actual** | Mantiene infraestructuras pero sin control efectivo |
-| **Supuesta deuda** | Alegada por Ayuntamiento como excusa; negada por vecinos |
+| **Supuesta deuda** | Alegada por Ayuntamiento como excusa |
 | **Estado** | Legalmente debería haber sido disuelta |
 
 ---
