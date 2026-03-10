@@ -1,168 +1,47 @@
 ---
 title: Preguntas Abiertas
-description: Preguntas clave que quedan sin resolver
+description: Preguntas clave pendientes de aclaración documental y jurídica
 slug: preguntas-abiertas
 category: analisis
 order: 6
 updated: 2026-03-10
-tags: [preguntas, abierto, pendiente]
+tags: [preguntas, seguimiento, sentencia]
 ---
 
 # Preguntas Abiertas
 
-## 1. Sobre la Sentencia y su Ejecución
+## 1. Sobre la sentencia y su alcance
 
-### 1.1 Cumplimiento de la Sentencia
+- ¿Qué actuaciones concretas constan como realizadas para materializar la recepción de fases I y II?
+- ¿Qué extremos están plenamente ejecutados y cuáles siguen pendientes de desarrollo administrativo?
+- ¿Qué parte del debate actual deriva del fallo y qué parte responde a decisiones posteriores?
 
-- ¿Por qué el Ayuntamiento no ha ejecutado una sentencia firme después de más de 10 años?
-- ¿Cuál es el estado actual de la ejecución de la sentencia en el juzgado?
-- ¿Se han impuesto ya multas coercitivas a responsables municipales?
-- ¿Qué pasos concretos ha dado el Ayuntamiento hacia el cumplimiento?
+## 2. Sobre servicios municipales
 
-### 1.2 EUCC
+- ¿Qué servicios se prestan hoy en condiciones equiparables al resto del municipio?
+- ¿Qué servicios mantienen un régimen diferenciado y por qué motivo administrativo o técnico?
+- ¿Qué calendario público existe para normalizar la situación?
 
-- ¿Cuál es la situación financiera real de la EUCC?
-- ¿Existe realmente la deuda que alega el Ayuntamiento?
-- ¿Por qué la EUCC sigue existiendo más allá de los 4 años establecidos?
-- ¿Qué servicios presta exactamente la EUCC actualmente?
+## 3. Sobre conservación y financiación
 
----
+- ¿Cuál es el marco actual de conservación y cómo se justifica documentalmente?
+- ¿Qué cargas económicas asumen hoy propietarios y administración, y con qué fundamento?
+- ¿Qué información económica auditada está disponible para consulta pública?
 
-## 2. Sobre la Gestión Financiera
+## 4. Sobre EUCC
 
-### 2.1 Cuotas
+- ¿Cuál es su función exacta en la fase actual?
+- ¿Qué actos administrativos delimitan su papel y su alcance temporal?
+- ¿Qué escenarios jurídicos se contemplan para su adaptación o eventual transformación?
 
-- ¿A qué se destinan las cuotas que pagan los propietarios?
-- ¿Por qué no se presentan cuentas en asamblea?
-- ¿Hay alguna auditoría independiente de las cuentas?
-- ¿Cuál es el importe actual de las cuotas?
+## 5. Sobre trazabilidad institucional
 
-### 2.2 Impuestos
+- ¿Qué acuerdos, informes y resoluciones públicas ordenan la situación vigente?
+- ¿Dónde puede consultarse de forma unificada la documentación esencial del caso?
+- ¿Qué órgano lidera la coordinación entre niveles administrativo, técnico y jurídico?
 
-- ¿Qué ingresos genera Los Ángeles de San Rafael para el Ayuntamiento?
-- ¿Por qué no se invierte proporcionalmente en la urbanización?
-- ¿Se puede exigir una auditoría de la recaudación?
+## 6. Sobre estrategia de seguimiento
 
----
-
-## 3. Sobre los Servicios
-
-### 3.1 Agua
-
-- ¿Cuándo se equipararán las tarifas de agua al resto del municipio?
-- ¿Por qué el retraso de más de un año en la actualización?
-- ¿Cuál es la calidad del agua?
-- ¿Cuándo termina el período transitorio con Aquona?
-
-### 3.2 Infraestructura
-
-- ¿Cuál es el estado real de las infraestructuras?
-- ¿Qué obras son necesarias para la recepción?
-- ¿Quién debería pagar esas obras?
-- ¿Por qué el estado de las aceras es deficiente?
-
-### 3.3 Telecomunicaciones
-
-- ¿Por qué solo Fibritel tiene acceso a postes?
-- ¿Es legal la discriminación entre compañías?
-- ¿Cuándo tendrá cobertura de fibra toda la urbanización?
-- ¿Qué soluciones hay para quienes no tienen conectividad?
-
----
-
-## 4. Sobre la Representación
-
-### 4.1 Ayuntamiento
-
-- ¿Por qué no hay representación efectiva de Los Ángeles en el Ayuntamiento?
-- ¿Qué partido o candidato representa verdaderamente los intereses de la urbanización?
-- ¿Cómo se puede conseguir representación?
-
-### 4.2 Comunidad de Propietarios
-
-- ¿Quiénes son los actuales responsables de la comunidad?
-- ¿Cómo se puede convocar una asamblea legalmente?
-- ¿Qué proceso se necesita para renovar los cargos?
-
----
-
-## 5. Sobre la Historia
-
-### 5.1 Orígenes
-
-- ¿Cuál es la historia completa de la urbanización?
-- ¿Qué obligaciones tenía el promotor original?
-- ¿Qué se entregó al Ayuntamiento y qué no?
-
-### 5.2 Jesús Gil
-
-- ¿Cuál es el legado real de Jesús Gil en la urbanización?
-- ¿Por qué hay una placa honors a la entrada?
-- ¿Qué responsabilidades tiene su familia?
-
----
-
-## 6. Sobre Acciones Legales
-
-### 6.1 Opciones
-
-- ¿Cuál es la mejor vía legal para exigir el cumplimiento?
-- ¿Cuánto tiempo puede durar un proceso de ejecución?
-- ¿Qué costes conlleva?
-- ¿Hay precedentes de multas a ayuntamientos?
-
-### 6.2 Riesgos
-
-- ¿Puede el Ayuntamiento exigir compensación por la recepción?
-- ¿Qué pasa si se descubren irregularidades en la EUCC?
-- ¿Pueden los vecinos ser responsables de deudas?
-
----
-
-## 7. Sobre el Futuro
-
-### 7.1 Elecciones 2027
-
-- ¿Qué candidato o partido representa mejor los intereses de Los Ángeles?
-- ¿Es viable el partido "Vecinos Núcleos de El Espinar"?
-- ¿Cuántos votos se necesitan para obtener representación?
-
-### 7.2 Escenarios
-
-- ¿Qué pasaría si el Ayuntamiento incumpliera definitivamente?
-- ¿Puede intervenir la Junta de Castilla y León?
-- ¿Hay posibilidad de que la urbanización se declare núcleo urbano a todos los efectos?
-
----
-
-## 8. Sobre Pruebas y Documentación
-
-### 8.1 Documentos Necesarios
-
-- ¿Dónde está el texto completo de la sentencia del TSJCyL?
-- ¿Hay documentación de los acuerdos del Ayuntamiento?
-- ¿Qué certificados o escrituras existen de la urbanización?
-
-### 8.2 Verificación
-
-- ¿Son ciertas las afirmaciones del Ayuntamiento sobre la deuda?
-- ¿Se puede verificar el estado de las infraestructuras?
-- ¿Cómo se документация el incumplimiento?
-
----
-
-## 9. Preguntas Prácticas Inmediatas
-
-### 9.1 Para los Propietarios
-
-- ¿Cómo puedo saber cuánto debe la EUCC (si existe deuda)?
-- ¿Cómo puedo participar en una futura asamblea?
-- ¿A quién puedo reclamar si tengo un problema específico?
-- ¿Cómo puedo contribuir a la organización vecinal?
-
-### 9.2 Para el Ayuntamiento
-
-- ¿Cuál es el cronograma previsto para la recepción?
-- ¿Qué condiciones se exigen para la recepción?
-- ¿Cuándo se equiparánn las tarifas de agua?
-- ¿Por qué no se responde a las preguntas de los vecinos en los plenos?
+- ¿Qué indicadores objetivos permiten medir avances reales de cumplimiento?
+- ¿Qué hitos deberían publicarse periódicamente para mejorar transparencia?
+- ¿Qué vías de reclamación son más adecuadas según cada tipo de incidencia?
