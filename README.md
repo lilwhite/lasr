@@ -11,14 +11,22 @@ Documentar el conflicto entre los vecinos de la urbanización y el Ayuntamiento 
 ```
 ├── urbanizacion_los_angeles_san_rafael.md  # Documento principal
 ├── documentacion_relevante.md               # Fuentes y jurisprudencia
-├── docs/
-│   ├── contexto_general.md       # Contexto del conflicto
-│   ├── timeline_conflicto.md     # Cronología detallada
-│   ├── problemas_detectados.md  # Problemas identificados
-│   ├── actores.md               # Actores y roles
-│   ├── opciones_legales.md      # Vías legales
-│   └── preguntas_abiertas.md    # Preguntas sin resolver
-└── AGENTS.md                     # Instrucciones para agentes IA
+├── docs/                                    # Portal web (GitHub Pages)
+│   ├── index.html
+│   ├── DEPLOY.md
+│   └── assets/
+│       ├── config.json
+│       ├── content.json
+│       ├── css/styles.css
+│       └── js/main.js
+├── docs/                                    # Documentación Markdown
+│   ├── contexto_general.md
+│   ├── timeline_conflicto.md
+│   ├── problemas_detectados.md
+│   ├── actores.md
+│   ├── opciones_legales.md
+│   └── preguntas_abiertas.md
+└── AGENTS.md                                # Instrucciones para agentes IA
 ```
 
 ## Contenido Principal

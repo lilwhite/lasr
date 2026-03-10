@@ -20,14 +20,16 @@ Este repositorio contiene documentación sobre la situación urbanística de la 
   - `docs/opciones_legales.md` - Vías legales disponibles
   - `docs/preguntas_abiertas.md` - Preguntas sin resolver
 
-### Portal Web (web/)
+### Portal Web (docs/)
 
-- `web/index.html` - Página principal
-- `web/assets/config.json` - Configuración del sitio
-- `web/assets/content.json` - Contenido del portal (editable)
-- `web/assets/css/styles.css` - Estilos
-- `web/assets/js/main.js` - Funcionalidad
-- `web/DEPLOY.md` - Instrucciones de despliegue
+El portal web está en la carpeta `docs/` para despliegue en GitHub Pages:
+
+- `docs/index.html` - Página principal
+- `docs/assets/config.json` - Configuración del sitio
+- `docs/assets/content.json` - Contenido del portal (editable)
+- `docs/assets/css/styles.css` - Estilos
+- `docs/assets/js/main.js` - Funcionalidad
+- `docs/DEPLOY.md` - Instrucciones de despliegue
 
 ## Comandos de desarrollo
 
@@ -35,11 +37,14 @@ No aplica - es un proyecto de documentación sin código fuente.
 
 ### Despliegue del portal web
 
-El portal está diseñado para GitHub Pages. Para desplegar:
+El portal está diseñado para GitHub Pages (carpeta `docs/`):
 
-1. Copiar el contenido de `web/` a un repositorio GitHub
-2. Habilitar GitHub Pages en Settings → Pages
-3. El sitio se publicará automáticamente
+1. Subir el proyecto a un repositorio GitHub
+2. Ir a Settings → Pages
+3. En "Source" seleccionar: **Deploy from a branch**
+4. En "Branch" seleccionar: **main**
+5. En "Folder" seleccionar: **/docs**
+6. Guardar
 
 ## Directrices de estilo
 
