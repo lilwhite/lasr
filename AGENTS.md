@@ -10,6 +10,14 @@ Este repositorio contiene documentación sobre la situación urbanística de la 
 
 - `urbanizacion_los_angeles_san_rafael.md` - Documento principal con el contexto completo
 - `documentacion_relevante.md` - Fuentes de información, jurisprudencia y normativa aplicable
+- `docs/` - Documentación estructurada derivada del análisis del chat de WhatsApp:
+  - `docs/contexto_general.md` - Contexto general del conflicto
+  - `docs/timeline_conflicto.md` - Línea temporal detallada
+  - `docs/problemas_detectados.md` - Problemas identificados
+  - `docs/actores.md` - Actores y roles
+  - `docs/opciones_legales.md` - Vías legales disponibles
+  - `docs/preguntas_abiertas.md` - Preguntas sin resolver
+- `chat_whatsapp/` - Conversación original de WhatsApp (fuente primaria)
 - `AGENTS.md` - Este archivo
 
 ## Comandos de desarrollo

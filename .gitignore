@@ -1,0 +1,14 @@
+# Archivos temporales y del sistema
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# IDEs
+.vscode/
+.idea/
+*.sublime-*
+
+# OS
+.DS_Store
