@@ -35,6 +35,7 @@
         timelineContent: document.getElementById('timelineContent'),
         sentenciaContent: document.getElementById('sentenciaContent'),
         sentenciaLinkCta: document.getElementById('sentenciaLinkCta'),
+        sentenciaIdeaClave: document.getElementById('sentenciaIdeaClave'),
         incumplimientosContent: document.getElementById('incumplimientosContent'),
         actuacionesContent: document.getElementById('actuacionesContent'),
         documentosContent: document.getElementById('documentosContent'),
@@ -189,6 +190,18 @@
                 `;
             } else {
                 elements.sentenciaLinkCta.innerHTML = '';
+            }
+        }
+
+        if (elements.sentenciaIdeaClave) {
+            if (data.ideaClave) {
+                elements.sentenciaIdeaClave.innerHTML = `
+                    <div class="sentencia-key-idea fade-in">
+                        <strong>Idea clave:</strong> ${escapeHtml(data.ideaClave.replace(/^Idea clave:\s*/i, ''))}
+                    </div>
+                `;
+            } else {
+                elements.sentenciaIdeaClave.innerHTML = '';
             }
         }
     }
