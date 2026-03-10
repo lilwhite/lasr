@@ -1,3 +1,13 @@
+---
+title: Documentacion Relevante
+description: Fuentes de informacion, jurisprudencia y normativa de referencia
+slug: documentacion-relevante
+category: referencia
+order: 7
+updated: 2026-03-10
+tags: [fuentes, jurisprudencia, normativa]
+---
+
 # Documentación y Fuentes de Información Relevante
 
 Este documento compila fuentes de información, jurisprudencia y documentación relevante sobre el caso de la urbanización Los Ángeles de San Rafael y el contexto legal de las Entidades Urbanísticas de Conservación (EUCC) en España.
