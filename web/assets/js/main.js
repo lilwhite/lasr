@@ -1,0 +1,454 @@
+/**
+ * Los Ángeles de San Rafael - Portal Informativo
+ * Main JavaScript
+ */
+
+(function() {
+    'use strict';
+
+    // ============================================
+    // Configuration
+    // ============================================
+    const CONFIG = {
+        contentPath: 'assets/content.json',
+        animationDelay: 100
+    };
+
+    // ============================================
+    // State
+    // ============================================
+    let content = null;
+    let isLoading = true;
+
+    // ============================================
+    // DOM Elements
+    // ============================================
+    const elements = {
+        header: document.getElementById('header'),
+        menuToggle: document.getElementById('menuToggle'),
+        nav: document.getElementById('nav'),
+        scrollTop: document.getElementById('scrollTop'),
+        // Content containers
+        situacionContent: document.getElementById('situacionContent'),
+        timelineContent: document.getElementById('timelineContent'),
+        sentenciaContent: document.getElementById('sentenciaContent'),
+        incumplimientosContent: document.getElementById('incumplimientosContent'),
+        actuacionesContent: document.getElementById('actuacionesContent'),
+        documentosContent: document.getElementById('documentosContent'),
+        faqContent: document.getElementById('faqContent'),
+        contactoContent: document.getElementById('contactoContent')
+    };
+
+    // ============================================
+    // Icons SVG
+    // ============================================
+    const icons = {
+        clock: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`,
+        scale: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M3 9h18"/><path d="M3 15h18"/><path d="M5 6l7-3 7 3"/><path d="M4 10v11"/><path d="M20 10v11"/><path d="M8 14v3"/><path d="M12 14v3"/><path d="M16 14v3"/></svg>`,
+        alert: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>`,
+        building: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></svg>`,
+        city: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></svg>`,
+        document: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>`,
+        droplet: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>`,
+        users: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
+        home: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>`,
+        external: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>`,
+        chevron: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>`
+    };
+
+    // ============================================
+    // Utility Functions
+    // ============================================
+    function getIcon(name) {
+        return icons[name] || icons.document;
+    }
+
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+
+    // ============================================
+    // Render Functions
+    // ============================================
+    function renderSituacion() {
+        if (!content?.situacion) return;
+        
+        const data = content.situacion;
+        let html = '';
+        
+        data.bloques.forEach(bloque => {
+            html += `
+                <div class="card fade-in">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            ${getIcon(bloque.icono)}
+                        </div>
+                        <h3 class="card-title">${escapeHtml(bloque.titulo)}</h3>
+                    </div>
+                    <p class="card-content">${escapeHtml(bloque.contenido)}</p>
+                </div>
+            `;
+        });
+        
+        elements.situacionContent.innerHTML = html;
+    }
+
+    function renderTimeline() {
+        if (!content?.historia) return;
+        
+        const data = content.historia;
+        let html = '';
+        
+        data.eventos.forEach((evento, index) => {
+            html += `
+                <div class="timeline-item fade-in" style="animation-delay: ${index * 0.1}s">
+                    <div class="timeline-dot"></div>
+                    <span class="timeline-date">${escapeHtml(evento.fecha)}</span>
+                    <h3 class="timeline-title">${escapeHtml(evento.titulo)}</h3>
+                    <p class="timeline-description">${escapeHtml(evento.descripcion)}</p>
+                </div>
+            `;
+        });
+        
+        elements.timelineContent.innerHTML = html;
+    }
+
+    function renderSentencia() {
+        if (!content?.sentencia) return;
+        
+        const data = content.sentencia;
+        let html = '';
+        
+        data.puntos.forEach(punto => {
+            html += `
+                <div class="card fade-in">
+                    <div class="card-header">
+                        <span class="card-title-number">${punto.numero}</span>
+                        <h3 class="card-title">${escapeHtml(punto.titulo)}</h3>
+                    </div>
+                    <p class="card-content">${escapeHtml(punto.descripcion)}</p>
+                </div>
+            `;
+        });
+        
+        elements.sentenciaContent.innerHTML = html;
+    }
+
+    function renderIncumplimientos() {
+        if (!content?.incumplimientos) return;
+        
+        const data = content.incumplimientos;
+        let html = '';
+        
+        data.items.forEach(item => {
+            html += `
+                <div class="card fade-in">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            ${icons.alert}
+                        </div>
+                        <h3 class="card-title">${escapeHtml(item.titulo)}</h3>
+                    </div>
+                    <p class="card-content">${escapeHtml(item.descripcion)}</p>
+                    <div class="doc-type" style="margin-top: 1rem; background-color: rgba(166, 75, 75, 0.1); color: var(--color-error);">
+                        ${item.estado.toUpperCase()}
+                    </div>
+                </div>
+            `;
+        });
+        
+        elements.incumplimientosContent.innerHTML = html;
+    }
+
+    function renderActuaciones() {
+        if (!content?.actuaciones) return;
+        
+        const data = content.actuaciones;
+        let html = '';
+        
+        data.vias.forEach(via => {
+            let opcionesHtml = via.opciones.map(opcion => `<li>${escapeHtml(opcion)}</li>`).join('');
+            
+            html += `
+                <div class="card fade-in">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            ${getIcon(via.icono)}
+                        </div>
+                        <h3 class="card-title">${escapeHtml(via.titulo)}</h3>
+                    </div>
+                    <ul class="card-content" style="padding-left: 1rem;">
+                        ${opcionesHtml}
+                    </ul>
+                </div>
+            `;
+        });
+        
+        elements.actuacionesContent.innerHTML = html;
+    }
+
+    function renderDocumentos() {
+        if (!content?.documentos) return;
+        
+        const data = content.documentos;
+        let html = '';
+        
+        data.items.forEach(doc => {
+            const typeClass = doc.tipo.toLowerCase();
+            const linkHtml = doc.url && doc.url !== '#' 
+                ? `<a href="${escapeHtml(doc.url)}" class="doc-link" target="_blank" rel="noopener">Ver documento ${icons.external}</a>`
+                : '';
+            
+            html += `
+                <div class="doc-card fade-in">
+                    <span class="doc-type ${typeClass}">${escapeHtml(doc.tipo)}</span>
+                    <h3 class="doc-title">${escapeHtml(doc.titulo)}</h3>
+                    <p class="doc-description">${escapeHtml(doc.descripcion)}</p>
+                    ${doc.fecha ? `<p class="doc-meta">${escapeHtml(doc.fecha)}</p>` : ''}
+                    ${linkHtml}
+                </div>
+            `;
+        });
+        
+        elements.documentosContent.innerHTML = html;
+    }
+
+    function renderFaq() {
+        if (!content?.faq) return;
+        
+        const data = content.faq;
+        let html = '';
+        
+        data.preguntas.forEach((item, index) => {
+            html += `
+                <div class="faq-item fade-in" style="animation-delay: ${index * 0.05}s">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>${escapeHtml(item.pregunta)}</span>
+                        <span class="faq-icon">${icons.chevron}</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            ${escapeHtml(item.respuesta)}
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+        
+        elements.faqContent.innerHTML = html;
+        
+        // Add FAQ toggle functionality
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const item = button.parentElement;
+                const isActive = item.classList.contains('active');
+                
+                // Close all
+                document.querySelectorAll('.faq-item').forEach(i => {
+                    i.classList.remove('active');
+                    i.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+                });
+                
+                // Open clicked
+                if (!isActive) {
+                    item.classList.add('active');
+                    button.setAttribute('aria-expanded', 'true');
+                }
+            });
+        });
+    }
+
+    function renderContacto() {
+        if (!content?.contacto) return;
+        
+        const data = content.contacto;
+        let html = '';
+        
+        data.opciones.forEach(opcion => {
+            html += `
+                <div class="contact-card fade-in">
+                    <h3 class="contact-card-title">${escapeHtml(opcion.titulo)}</h3>
+                    <p class="contact-card-text">${escapeHtml(opcion.descripcion)}</p>
+                    ${opcion.email ? `<span class="contact-email">${escapeHtml(opcion.email)}</span>` : ''}
+                </div>
+            `;
+        });
+        
+        elements.contactoContent.innerHTML = html;
+    }
+
+    function renderAll() {
+        renderSituacion();
+        renderTimeline();
+        renderSentencia();
+        renderIncumplimientos();
+        renderActuaciones();
+        renderDocumentos();
+        renderFaq();
+        renderContacto();
+    }
+
+    // ============================================
+    // Event Handlers
+    // ============================================
+    function handleScroll() {
+        const scrollY = window.scrollY;
+        
+        // Header shadow
+        if (elements.header) {
+            if (scrollY > 10) {
+                elements.header.classList.add('scrolled');
+            } else {
+                elements.header.classList.remove('scrolled');
+            }
+        }
+        
+        // Scroll to top button
+        if (elements.scrollTop) {
+            if (scrollY > 500) {
+                elements.scrollTop.classList.add('visible');
+            } else {
+                elements.scrollTop.classList.remove('visible');
+            }
+        }
+        
+        // Update active nav link
+        updateActiveNavLink();
+    }
+
+    function updateActiveNavLink() {
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        let currentSection = '';
+        
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 100;
+            const sectionHeight = section.offsetHeight;
+            
+            if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+                currentSection = section.getAttribute('id');
+            }
+        });
+        
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${currentSection}`) {
+                link.classList.add('active');
+            }
+        });
+    }
+
+    function handleMenuToggle() {
+        if (elements.menuToggle && elements.nav) {
+            elements.menuToggle.classList.toggle('active');
+            elements.nav.classList.toggle('active');
+        }
+    }
+
+    function handleScrollTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+
+    // Smooth scroll for anchor links
+    function handleAnchorClick(e) {
+        const href = e.currentTarget.getAttribute('href');
+        
+        if (href && href.startsWith('#')) {
+            e.preventDefault();
+            const target = document.querySelector(href);
+            
+            if (target) {
+                const headerHeight = elements.header ? elements.header.offsetHeight : 0;
+                const targetPosition = target.offsetTop - headerHeight - 20;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+                
+                // Close mobile menu
+                if (elements.nav && elements.nav.classList.contains('active')) {
+                    handleMenuToggle();
+                }
+            }
+        }
+    }
+
+    // ============================================
+    // Initialization
+    // ============================================
+    async function init() {
+        try {
+            // Load content
+            const response = await fetch(CONFIG.contentPath);
+            content = await response.json();
+            
+            // Render content
+            renderAll();
+            
+            // Setup event listeners
+            setupEventListeners();
+            
+            // Initial scroll handler
+            handleScroll();
+            
+            isLoading = false;
+            
+        } catch (error) {
+            console.error('Error loading content:', error);
+            // Show error message
+            document.body.innerHTML = `
+                <div style="padding: 2rem; text-align: center;">
+                    <h1>Error al cargar el contenido</h1>
+                    <p>Por favor, recarga la página.</p>
+                </div>
+            `;
+        }
+    }
+
+    function setupEventListeners() {
+        // Scroll
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        
+        // Menu toggle
+        if (elements.menuToggle) {
+            elements.menuToggle.addEventListener('click', handleMenuToggle);
+        }
+        
+        // Scroll to top
+        if (elements.scrollTop) {
+            elements.scrollTop.addEventListener('click', handleScrollTop);
+        }
+        
+        // Anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', handleAnchorClick);
+        });
+        
+        // Close mobile menu on resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768 && elements.nav) {
+                elements.nav.classList.remove('active');
+                if (elements.menuToggle) {
+                    elements.menuToggle.classList.remove('active');
+                }
+            }
+        });
+    }
+
+    // ============================================
+    // Start
+    // ============================================
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+
+})();
