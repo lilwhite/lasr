@@ -4,7 +4,67 @@
 
 Este repositorio contiene documentación sobre la situación urbanística de la urbanización Los Ángeles de San Rafael en El Espinar (Segovia, España).
 
-**Nota:** Este es un proyecto de documentación, no un proyecto de software. No existen comandos de build, lint o test.
+**Nota:** Este es un proyecto de documentación con portal estático. El despliegue se hace mediante GitHub Actions.
+
+---
+
+## Modelo de Trabajo del Agente
+
+El agente debe trabajar de forma estructurada usando skills especializadas:
+
+### Principios Operativos
+
+1. Priorizar cambios mínimos y reversibles
+2. No rehacer arquitectura sin petición explícita
+3. No introducir frameworks, bundlers o dependencias pesadas
+4. Mantener `/docs` como fuente del sitio
+5. Separar cambios visuales, de contenido y operativos
+6. Validar siempre antes de proponer despliegue
+7. Documentar decisiones relevantes
+8. Preservar rutas relativas y comportamiento actual
+9. Favorecer mantenibilidad sobre complejidad
+10. Aplicar skills especializadas antes de modificar archivos
+
+### Skills Disponibles
+
+#### skill.web-design-static-portal
+- **Propósito:** Buenas prácticas de diseño web en portales estáticos
+- **Aplicar cuando:** Cambios en UI, HTML, CSS, JS
+
+#### skill.github-pages-workflow
+- **Propósito:** Buenas prácticas en despliegue con GitHub Actions
+- **Aplicar cuando:** Cambios en workflows
+
+#### skill.github-validation-guard
+- **Propósito:** Validaciones mínimas antes de desplegar
+- **Aplicar cuando:** Cambios en validación o calidad
+
+#### skill.safe-static-site-refactor
+- **Propósito:** Cambios sin romper el portal
+- **Aplicar cuando:** Cambios en estructura o rutas
+
+#### skill.docs-and-maintenance
+- **Propósito:** Documentación operativa consistente
+- **Aplicar cuando:** Cambios en documentación
+
+### Reglas de Decisión
+
+- UI → `skill.web-design-static-portal`
+- Workflows/despliegue → `skill.github-pages-workflow`
+- Validación/calidad → `skill.github-validation-guard`
+- Estructura/rutas → `skill.safe-static-site-refactor`
+- Documentación → `skill.docs-and-maintenance`
+
+### Formato de Respuesta
+
+Para cada tarea técnica:
+1. Tipo de tarea detectada
+2. Skills aplicadas
+3. Riesgos detectados
+4. Archivos a modificar
+5. Cambios propuestos
+6. Validaciones a ejecutar
+7. Resultado esperado
 
 ## Archivos
 
@@ -41,14 +101,16 @@ No aplica - es un proyecto de documentación sin código fuente.
 
 ### Despliegue del portal web
 
-El portal está diseñado para GitHub Pages (carpeta `docs/`):
+El portal está diseñado para GitHub Pages mediante GitHub Actions:
 
-1. Subir el proyecto a un repositorio GitHub
-2. Ir a Settings → Pages
-3. En "Source" seleccionar: **Deploy from a branch**
-4. En "Branch" seleccionar: **main**
-5. En "Folder" seleccionar: **/docs**
-6. Guardar
+1. Los cambios en `docs/` se validan automáticamente
+2. Al hacer push a `main`, el workflow copia `docs/` a `dist/`
+3. GitHub Pages sirve el contenido desde `dist/`
+
+**Activar GitHub Actions:**
+- Settings → Pages → Source: **GitHub Actions**
+
+Ver `docs/DEPLOY.md` para instrucciones detalladas.
 
 ## Directrices de estilo
 
