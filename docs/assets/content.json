@@ -37,7 +37,7 @@
       },
       {
         "titulo": "Sentencia sin ejecutar",
-        "descripcion": "La resolución judicial que obliga al Ayuntamiento a recepcionar la urbanización sigue sin cumplirse."
+        "descripcion": "La resolución judicial fijó un criterio favorable a la recepción de fases I y II, pero su implementación material sigue generando controversias."
       }
     ]
   },
@@ -58,7 +58,7 @@
       {
         "titulo": "EUCC",
         "icono": "document",
-        "contenido": "La Entidad Urbanística de Conservación supera con creces el plazo de 4 años establecido por la sentencia. Su gestión carece de transparencia efectiva."
+        "contenido": "La Entidad Urbanística de Conservación continúa asumiendo funciones de conservación y servicios. Esta situación se mantiene en el tiempo y genera dudas sobre su encaje como solución prolongada."
       },
       {
         "titulo": "Agua",
@@ -89,7 +89,7 @@
       {
         "fecha": "2013-2017",
         "titulo": "Período EUCC",
-        "descripcion": "Período de transición de 4 años establecido por la sentencia para la Entidad Urbanística de Conservación."
+        "descripcion": "Período posterior al fallo en el que continuó la gestión de conservación mediante entidades de propietarios y acuerdos administrativos."
       },
       {
         "fecha": "2017",
@@ -99,12 +99,12 @@
       {
         "fecha": "2023-2026",
         "titulo": "Fase de ejecución",
-        "descripcion": "El proceso está en fase de ejecución judicial. Los incumplimiento persisten."
+        "descripcion": "Se mantienen actuaciones y debates sobre la ejecución material y el alcance de los servicios."
       },
       {
         "fecha": "2026",
         "titulo": "Situación actual",
-        "descripcion": "Más de 10 años después de la sentencia firme, la recepción no se ha completado. Los problemas persisten."
+        "descripcion": "Años después del fallo, siguen abiertas cuestiones de recepción, conservación y prestación ordinaria de servicios."
       }
     ]
   },
@@ -152,12 +152,12 @@
     "ideaClave": "Idea clave: la sentencia no solo cuestiona la negativa municipal, sino que ordena la recepción de las fases I y II y recuerda que la prestación y conservación de los servicios urbanos no puede descargarse indefinidamente sobre los propietarios.",
     "estado": {
       "titulo": "Estado actual del cumplimiento",
-      "texto": "La sentencia es firme y no cabe recurso contra ella. Sin embargo, más de 10 años después, su ejecución sigue incompleta."
+      "texto": "La resolución judicial fijó un criterio claro sobre la recepción de las fases I y II. Aun así, la normalización completa de la situación sigue siendo objeto de debate y actuaciones posteriores."
     }
   },
   "incumplimientos": {
     "titulo": "Qué no se ha cumplido",
-    "descripcion": "Lista de las obligaciones derivadas de la sentencia que siguen sin ejecutarse completamente.",
+    "descripcion": "Lista de aspectos que, según el criterio expuesto en la sentencia y su contexto posterior, siguen pendientes de consolidación.",
     "items": [
       {
         "titulo": "Recepción completa",
@@ -166,7 +166,7 @@
       },
       {
         "titulo": "Disolución EUCC",
-        "descripcion": "La Entidad Urbanística de Conservación debería haberse disuelto tras los 4 años establecidos (2017).",
+        "descripcion": "La continuidad prolongada de la Entidad Urbanística de Conservación sigue siendo una cuestión discutida en relación con la recepción municipal.",
         "estado": "pendiente"
       },
       {
@@ -274,11 +274,11 @@
       },
       {
         "pregunta": "¿Por qué tenemos que pagar cuotas si ya pagamos impuestos?",
-        "respuesta": "Actualmente, las infraestructuras de Los Ángeles de San Rafael no son municipales. Por eso los propietarios deben mantenerlas mediante la EUCC, además de pagar sus impuestos municipales. La sentencia obliga al Ayuntamiento a asumir estos costes."
+        "respuesta": "Actualmente conviven cargas municipales y fórmulas de conservación privada. La sentencia fija un criterio sobre la recepción de fases I y II, pero el alcance económico concreto requiere analizar normativa y actuaciones posteriores."
       },
       {
         "pregunta": "¿Qué pasa con la sentencia judicial?",
-        "respuesta": "La sentencia es firme y obliga al Ayuntamiento. Sin embargo, su ejecución práctica está pendiente desde hace más de 10 años. Los propietarios pueden solicitar al juzgado que obligue a su cumplimiento."
+        "respuesta": "La sentencia de referencia establece que procedía la recepción de fases I y II en el caso enjuiciado. La ejecución material posterior puede requerir actuaciones administrativas y, en su caso, judiciales de seguimiento."
       },
       {
         "pregunta": "¿Cuánto tiempo puede durar el proceso judicial?",
@@ -290,7 +290,7 @@
       },
       {
         "pregunta": "¿Qué es la EUCC?",
-        "respuesta": "La Entidad Urbanística de Conservación es una figura jurídica que agrupa a los propietarios para mantener las infraestructuras comunes hasta que el Ayuntamiento las recepcione. Debería haber durado solo 4 años según la sentencia."
+        "respuesta": "La Entidad Urbanística de Conservación es una figura jurídica prevista en la normativa urbanística para asumir tareas de conservación. Según el criterio recogido en la sentencia, no debe operar como sustitución permanente de las responsabilidades municipales."
       },
       {
         "pregunta": "¿Dónde puedo consultar la sentencia completa?",

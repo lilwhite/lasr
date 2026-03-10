@@ -1,88 +1,49 @@
 ---
 title: Línea Temporal
-description: Cronología detallada de todos los hitos del conflicto
+description: Cronología del conflicto y de los hitos judiciales principales
 slug: linea-temporal
 category: cronologia
 order: 2
 updated: 2026-03-10
-tags: [timeline, historia, cronologia]
+tags: [timeline, sentencia, recepcion]
 ---
 
 # Línea Temporal del Conflicto
 
-## Cronología de Hitos Principales
+## Cronología resumida
 
-### Década de 1960: Origen de la Urbanización
+### Década de 1960
 
-- **1967 (28 de septiembre)**: Se aprueba el Plan Parcial que dio lugar a la urbanización de la finca "El Carrascal"
-- Desarrollo impulsado por Jesús Gil
-- Construcción de infraestructuras privadas por los promotores
-- Modelo de segunda residencia y destino turístico
+- Desarrollo inicial de la urbanización.
+- Construcción de infraestructuras en un contexto de promoción privada.
 
-### Décadas de 1970-2000: Mantenimiento Privado
+### Décadas posteriores
 
-- Mantenimiento de infraestructuras asumido por promotores y posteriormente por los propietarios
-- Funcionamiento como destino de segunda residencia con población permanente creciente
+- Consolidación del uso residencial.
+- Mantenimiento de servicios mediante fórmulas de conservación privada.
 
-### 2012-2013: Sentencia del TSJCyL
+### 03/06/2011
 
-- **2012-2013**: El Tribunal Superior de Justicia de Castilla y León dicta sentencia favorable a los propietarios
-- **Obligaciones impuestas al Ayuntamiento**:
-  1. Recepcionar la urbanización Los Ángeles de San Rafael
-  2. Crear una Entidad Urbanística de Conservación (EUCC) por período máximo de 4 años
-  3. Asumir el mantenimiento de viales y servicios públicos
+- STSJ Castilla y León 2781/2011 (ECLI: ES:TSJCL:2011:2781).
+- La resolución declara que la negativa municipal analizada no era conforme a derecho y que procedía la recepción de las fases I y II.
 
-- **Recurso del Ayuntamiento**: El Ayuntamiento de El Espinar recurre la sentencia
-- **Confirmación por Tribunal Supremo**: Se confirman las obligaciones impuestas
+### Etapa posterior a la sentencia
 
-### 2013: Intentos de Cumplimiento
+- Continúan actuaciones administrativas y controversias sobre ejecución material y régimen de servicios.
+- Se mantienen debates sobre financiación, conservación y responsabilidades públicas/privadas.
 
-- **Enero 2013**: Noticia sobre la obligación del TSJCyL al Ayuntamiento
-- **Abril 2013**: Se pospone la recepción a pleno extraordinario
-- **Junio 2013**: El Pleno aprueba la recepción de las fases primera y segunda
-- Problemas con el servicio de agua que quedan pendientes
+### Situación actual
 
-### 2013-2016: Período de Transición
-
-- El Ayuntamiento asume "parcialmente" algunos servicios
-- Problemas con el agua (abastecimiento y depuración)
-- Período transitorio de cinco años para el servicio de agua con Aquona
-
-### 2016: Nueva Sentencia
-
-- **4 de marzo de 2016**: Sentencia del TSJCyL (Rollo de Apelacion nº 165/2015)
-- Confirma aspectos relacionados con la recepción de urbanizaciones
-
-### 2019-2021: Apertura de Oficinas
-
-- **Octubre 2019**: Bando sobre apertura de oficinas municipales en Los Ángeles de San Rafael
-- **Septiembre 2021**: Horario de atención presencial provisional
-
-### 2023-2025: Fase de Ejecución
-
-- **2023**: Eltsunjode ejecutar la sentencia
-- **2024-2025**: Autos de ejecución para obligar al consistorio a dar pasos concretos
-- **2025**: Caso similar de Maello (Ávila) recibe sentencia casi idéntica del TSJCyL
-
-### 2025-2026: Situación Actual
-
-- **Marzo 2026**: 
-  - Publicación de artículos informativos sobre la situación
-  - 11 años sin asamblea de propietarios
-  - Reunión vecinal organizada
-  - Continuidad del conflicto por ejecución de sentencia
+- La sentencia sigue siendo referencia central del conflicto.
+- Persisten cuestiones de implementación práctica y coordinación institucional.
 
 ---
 
-## Resumen de Plazos
+## Nota de lectura
 
-| Período | Situación |
-|---------|-----------|
-| 2013 | Sentencia firme obliga a recepción |
-| 2013-2017 | Período EUCC (4 años) establecido por sentencia |
-| 2017 | Fin del período EUCC - debía completarse recepción |
-| 2026 | **13 años después**: Recepción incompleta |
-| 2026 | **11 años** sin asamblea de propietarios |
-| 2026 | Sin presupuestos aprobados, sin cuentas presentadas |
+Esta cronología diferencia entre:
 
----
+- **hecho judicial** (contenido del fallo), y
+- **desarrollo posterior** (actuaciones y debates que requieren análisis adicional).
+
+No se incorporan en esta sección plazos concretos no fijados expresamente en la sentencia de referencia.
