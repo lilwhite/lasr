@@ -110,8 +110,8 @@
   },
   "sentencia": {
     "titulo": "Qué dice la sentencia",
-    "descripcion": "Resumen divulgativo de la resolución judicial. Este texto tiene carácter informativo y no constituye asesoramiento jurídico.",
-    "nota": "Nota: Este resumen es de carácter divulgativo. Para información jurídica precisa, consulta con un profesional del derecho.",
+    "descripcion": "Resumen divulgativo de la resolución judicial",
+    "nota": "Este resumen tiene carácter divulgativo y sintetiza los aspectos principales de la sentencia. Para interpretación jurídica especializada, debe acudirse al texto íntegro de la resolución y, en su caso, a asesoramiento profesional.",
     "enlace": {
       "texto": "Consultar sentencia (Poder Judicial)",
       "url": "https://www.poderjudicial.es/search/AN/openDocument/959f24d1537fd54b/20110628",
@@ -120,25 +120,36 @@
     "puntos": [
       {
         "numero": "1",
-        "titulo": "Recepción obligatoria",
-        "descripcion": "El Ayuntamiento de El Espinar debe recepcionar formalmente la urbanización Los Ángeles de San Rafael, incorporando las infraestructuras al patrimonio municipal."
+        "titulo": "Recepción de la urbanización",
+        "descripcion": "La sentencia declara que la negativa del Ayuntamiento de El Espinar a recepcionar la urbanización no era conforme a derecho y que debía procederse a la recepción de las fases I y II."
       },
       {
         "numero": "2",
-        "titulo": "Entidad de Conservación",
-        "descripcion": "Se establece un período máximo de 4 años para la transición con Entidad Urbanística de Conservación (EUCC), tras el cual el Ayuntamiento debe asumir completamente el mantenimiento."
+        "titulo": "Urbanización ya ejecutada",
+        "descripcion": "El tribunal parte de que las fases I y II se encontraban ejecutadas, por lo que no aprecia una razón válida para rechazar su recepción en los términos solicitados."
       },
       {
         "numero": "3",
-        "titulo": "Asunción de servicios",
-        "descripcion": "El Ayuntamiento debe asumir el mantenimiento de viales, servicios y dotaciones públicas, equiparando a los vecinos con el resto del municipio."
+        "titulo": "Servicios municipales",
+        "descripcion": "La resolución reconoce el derecho de los vecinos a la prestación de los servicios municipales básicos, en condiciones equiparables al resto del municipio."
       },
       {
         "numero": "4",
-        "titulo": "Obligaciones financieras",
-        "descripcion": "La sentencia establece que los costes de mantenimiento deben transferirse al Ayuntamiento, no-recaer adicionalmente sobre los propietarios."
+        "titulo": "Responsabilidad del Ayuntamiento",
+        "descripcion": "La sentencia afirma que la conservación de las obras y servicios urbanísticos es, con carácter general, una exigencia propia del Ayuntamiento."
+      },
+      {
+        "numero": "5",
+        "titulo": "Conservación no indefinida por privados",
+        "descripcion": "El tribunal rechaza que la conservación y prestación de servicios pueda recaer de forma indefinida sobre una comunidad de propietarios como si sustituyera permanentemente a la administración."
+      },
+      {
+        "numero": "6",
+        "titulo": "Entidad Urbanística de Conservación",
+        "descripcion": "La sentencia admite la figura de la Entidad Urbanística de Conservación dentro del marco urbanístico, pero no como excusa para evitar la recepción ni para descargar indefinidamente la responsabilidad municipal."
       }
     ],
+    "ideaClave": "Idea clave: la sentencia no solo cuestiona la negativa municipal, sino que ordena la recepción de las fases I y II y recuerda que la prestación y conservación de los servicios urbanos no puede descargarse indefinidamente sobre los propietarios.",
     "estado": {
       "titulo": "Estado actual del cumplimiento",
       "texto": "La sentencia es firme y no cabe recurso contra ella. Sin embargo, más de 10 años después, su ejecución sigue incompleta."
