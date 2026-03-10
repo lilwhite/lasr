@@ -1131,6 +1131,69 @@ h1, h2, h3, h4, h5, h6 {
     border-top: 1px solid rgba(45, 90, 90, 0.12);
 }
 
+.doc-toc {
+    padding: 0.7rem;
+    background-color: #f4f7f8;
+    border: 1px solid #d9e3e8;
+    border-radius: 12px;
+}
+
+.doc-toc-title {
+    font-size: 0.78rem;
+    font-weight: var(--font-weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #4f6772;
+    margin: 0 0 0.55rem 0;
+    padding-bottom: 0.45rem;
+    border-bottom: 1px solid rgba(45, 90, 90, 0.12);
+}
+
+.doc-toc-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.doc-toc-list .doc-toc-list {
+    margin-top: 0.35rem;
+    margin-left: 0.7rem;
+    padding-left: 0.65rem;
+    border-left: 1px solid rgba(45, 90, 90, 0.16);
+}
+
+.doc-toc-item {
+    margin: 0;
+}
+
+.doc-toc-item + .doc-toc-item {
+    margin-top: 0.25rem;
+}
+
+.doc-toc-link {
+    display: block;
+    padding: 0.37rem 0.5rem;
+    border-radius: 8px;
+    color: #335462;
+    font-size: 0.88rem;
+    line-height: 1.35;
+    text-decoration: none;
+    border: 1px solid transparent;
+    transition: background-color var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
+}
+
+.doc-toc-link:hover {
+    background-color: rgba(45, 90, 90, 0.09);
+    border-color: rgba(45, 90, 90, 0.18);
+    color: #173f4b;
+}
+
+.doc-toc-item.level-3 > .doc-toc-link,
+.doc-toc-item.level-4 > .doc-toc-link {
+    font-size: 0.83rem;
+    color: #4a6470;
+}
+
 /* Doc Content */
 .doc-content {
     background-color: var(--color-surface);
@@ -1373,14 +1436,6 @@ h1, h2, h3, h4, h5, h6 {
     margin: var(--space-lg) 0;
 }
 
-.doc-toc {
-    margin-bottom: var(--space-lg);
-    padding: var(--space-md);
-    background-color: #f4f7f8;
-    border: 1px solid #d9e3e8;
-    border-radius: var(--radius-md);
-}
-
 .doc-related {
     margin-top: var(--space-2xl);
 }
@@ -1449,6 +1504,14 @@ h1, h2, h3, h4, h5, h6 {
 
     .sidebar-nav li {
         flex: 0 0 auto;
+    }
+
+    .doc-toc {
+        padding: 0.6rem;
+    }
+
+    .doc-toc-link {
+        padding: 0.45rem 0.52rem;
     }
 
     .doc-content {
