@@ -80,10 +80,10 @@
     if (document.getElementById('docBody')) return;
 
     document.body.innerHTML = `
-      <header class="header" id="header">
+      <header class="header doc-header-top" id="header">
         <div class="header-container">
           <a href="${getRootPrefix()}/index.html" class="logo"><span class="logo-text">LASR</span></a>
-          <nav class="nav" id="nav"><ul class="nav-list"><li><a href="${getRootPrefix()}/index.html#documentacion" class="nav-link">Volver al portal</a></li></ul></nav>
+          <nav class="doc-top-actions" aria-label="Acciones"><a class="btn btn-secondary doc-back-btn" href="${getRootPrefix()}/index.html#documentacion">Volver al portal</a></nav>
         </div>
       </header>
       <main class="doc-page">
@@ -96,6 +96,7 @@
           <aside class="doc-sidebar">
             <h3 class="sidebar-title">Documentos</h3>
             <ul class="sidebar-nav" id="sidebarNav"></ul>
+            <div class="sidebar-toc" id="sidebarToc"></div>
           </aside>
           <article class="doc-content">
             <header class="doc-header">
@@ -106,7 +107,6 @@
                 <span class="doc-category" id="docCategory"></span>
               </div>
             </header>
-            <aside class="doc-toc" id="docToc"></aside>
             <div class="doc-body" id="docBody"></div>
             <section class="doc-related" id="docRelated"></section>
             <footer class="doc-footer">
@@ -128,7 +128,7 @@
       source: document.getElementById('docSource'),
       sidebar: document.getElementById('sidebarNav'),
       breadcrumb: document.getElementById('breadcrumbTitle'),
-      toc: document.getElementById('docToc'),
+      toc: document.getElementById('sidebarToc'),
       related: document.getElementById('docRelated')
     };
   }
