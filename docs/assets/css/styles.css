@@ -774,6 +774,25 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: var(--space-sm);
 }
 
+.footer-links {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-sm);
+    font-size: var(--font-size-sm);
+    opacity: 0.92;
+}
+
+.footer-links a {
+    color: #f3f7f8;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(243, 247, 248, 0.35);
+}
+
+.footer-links a:hover {
+    border-bottom-color: rgba(243, 247, 248, 0.9);
+}
+
 .footer-copy {
     font-size: var(--font-size-xs);
     opacity: 0.6;

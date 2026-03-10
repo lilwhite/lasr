@@ -289,13 +289,8 @@
     "opciones": [
       {
         "titulo": "Colaborar con el portal",
-        "descripcion": "Si tienes información relevante, documentos o quieres colaborar en la difusión, puedes contactar con nosotros.",
+        "descripcion": "Si tienes información relevante, documentos, resoluciones o quieres colaborar en la difusión, puedes contactar con nosotros.",
         "email": "contacto@lasr-info.es"
-      },
-      {
-        "titulo": "Aportar documentación",
-        "descripcion": "Si tienes documentos, resoluciones o información que pueda ayudar,compártela para enriquecer este recurso común.",
-        "email": "documentos@lasr-info.es"
       },
       {
         "titulo": "Difundir",

@@ -4,7 +4,13 @@
     "subtitle": "Portal informativo sobre la situación urbanística",
     "description": "Información clara y transparente sobre el conflicto urbanístico entre los propietarios y el Ayuntamiento de El Espinar",
     "language": "es",
-    "author": "Portal vecinal Los Ángeles de San Rafael"
+    "author": "Portal vecinal Los Ángeles de San Rafael",
+    "contactEmail": "contacto@lasr-info.es"
+  },
+  "project": {
+    "repositoryUrl": "https://github.com/lilwhite/lasr",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/lilwhite/lasr/blob/main/LICENSE"
   },
   "navigation": {
     "logo": {

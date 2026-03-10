@@ -23,8 +23,10 @@ jobs:
             "docs/index.html"
             "docs/assets/config.json"
             "docs/assets/content.json"
+            "docs/assets/build-meta.json"
             "docs/assets/css/styles.css"
             "docs/assets/js/main.js"
+            "scripts/build_meta.py"
             "docs/actores.md"
             "docs/contexto_general.md"
             "docs/documentacion_relevante.md"
@@ -62,6 +64,7 @@ jobs:
           if command -v python3 &> /dev/null; then
             python3 -c "import json; json.load(open('docs/assets/config.json'))" && echo "✓ config.json válido" || exit 1
             python3 -c "import json; json.load(open('docs/assets/content.json'))" && echo "✓ content.json válido" || exit 1
+            python3 -c "import json; json.load(open('docs/assets/build-meta.json'))" && echo "✓ build-meta.json válido" || exit 1
           else
             # Fallback: simple check
             echo "Python no disponible, saltando validación JSON"
