@@ -27,10 +27,6 @@
     return document.body.dataset.docRoot || '.';
   }
 
-  function getRepoSourceBase() {
-    return document.body.dataset.repoBase || 'https://github.com/tu-usuario/tu-repo/blob/main/docs/';
-  }
-
   function getSlugFromPage() {
     const explicit = document.body.dataset.docSlug;
     if (explicit) return explicit;
@@ -109,12 +105,21 @@
             </header>
             <div class="doc-body" id="docBody"></div>
             <section class="doc-related" id="docRelated"></section>
-            <footer class="doc-footer">
-              <a href="#" class="doc-source" id="docSource" target="_blank" rel="noopener">Ver archivo fuente en GitHub</a>
-            </footer>
           </article>
         </div>
       </main>
+      <footer class="footer">
+        <div class="container">
+          <p class="footer-text"><strong>Los Angeles de San Rafael</strong> — Portal informativo vecinal</p>
+          <p class="footer-disclaimer">Este portal tiene caracter informativo y divulgativo. No constituye asesoramiento juridico.</p>
+          <p class="footer-links">
+            <a id="footerRepoLink" href="https://github.com/lilwhite/lasr" target="_blank" rel="noopener">Ver repositorio</a>
+            <span>·</span>
+            <a id="footerLicenseLink" href="https://github.com/lilwhite/lasr/blob/main/LICENSE" target="_blank" rel="noopener">Licencia MIT</a>
+          </p>
+          <p class="footer-copy">© 2026 — Informacion actualizada a <span id="lastUpdatedDate">10/03/2026</span></p>
+        </div>
+      </footer>
     `;
   }
 
@@ -125,12 +130,40 @@
       date: document.getElementById('docDate'),
       category: document.getElementById('docCategory'),
       body: document.getElementById('docBody'),
-      source: document.getElementById('docSource'),
       sidebar: document.getElementById('sidebarNav'),
       breadcrumb: document.getElementById('breadcrumbTitle'),
       toc: document.getElementById('sidebarToc'),
       related: document.getElementById('docRelated')
     };
+  }
+
+  async function updateFooterMeta() {
+    const root = getRootPrefix();
+    const repoLink = document.getElementById('footerRepoLink');
+    const licenseLink = document.getElementById('footerLicenseLink');
+    const dateNode = document.getElementById('lastUpdatedDate');
+
+    try {
+      const cfgRes = await fetch(`${root}/assets/config.json`);
+      if (cfgRes.ok) {
+        const cfg = await cfgRes.json();
+        if (repoLink && cfg?.project?.repositoryUrl) repoLink.href = cfg.project.repositoryUrl;
+        if (licenseLink && cfg?.project?.licenseUrl) licenseLink.href = cfg.project.licenseUrl;
+        if (licenseLink && cfg?.project?.license) licenseLink.textContent = `Licencia ${cfg.project.license}`;
+      }
+    } catch (e) {
+      console.warn('No se pudo cargar config del sitio', e);
+    }
+
+    try {
+      const metaRes = await fetch(`${root}/assets/build-meta.json`);
+      if (metaRes.ok) {
+        const meta = await metaRes.json();
+        if (dateNode && meta?.updatedDate) dateNode.textContent = meta.updatedDate;
+      }
+    } catch (e) {
+      console.warn('No se pudo cargar build-meta', e);
+    }
   }
 
   function linkForSlug(slug) {
@@ -218,8 +251,6 @@
       elements.description.textContent = parsed.frontmatter.description || '';
       elements.date.textContent = formatDate(parsed.frontmatter.updated);
       elements.category.textContent = parsed.frontmatter.category || currentDoc.category;
-      elements.source.href = `${getRepoSourceBase()}${currentDoc.file}`;
-
       renderSidebar(elements, currentDoc.slug);
       renderToc(elements);
       renderRelated(elements, currentDoc);
@@ -232,8 +263,11 @@
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', load);
+    document.addEventListener('DOMContentLoaded', async () => {
+      await load();
+      await updateFooterMeta();
+    });
   } else {
-    load();
+    load().then(updateFooterMeta);
   }
 })();

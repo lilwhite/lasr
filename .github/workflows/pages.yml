@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: read
+  pull-requests: read
   pages: write
   id-token: write
 
@@ -52,6 +53,18 @@ jobs:
         run: |
           python3 -c "import json; json.load(open('docs/assets/config.json'))" && echo "✓ config.json válido"
           python3 -c "import json; json.load(open('docs/assets/content.json'))" && echo "✓ content.json válido"
+
+      - name: Generar metadata de actualización
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -e
+          echo "=== Generando docs/assets/build-meta.json ==="
+          PRS_JSON=$(curl -sS -H "Authorization: Bearer ${GITHUB_TOKEN}" -H "Accept: application/vnd.github+json" "https://api.github.com/repos/${REPO}/pulls?state=closed&base=main&sort=updated&direction=desc&per_page=100")
+          export PRS_JSON
+          python3 scripts/build_meta.py
+          python3 -c "import json; json.load(open('docs/assets/build-meta.json'))"
 
       - name: Copiar contenido a dist
         run: |
