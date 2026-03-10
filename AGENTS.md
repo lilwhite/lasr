@@ -8,6 +8,8 @@ Este repositorio contiene documentación sobre la situación urbanística de la 
 
 ## Archivos
 
+### Documentación Markdown
+
 - `urbanizacion_los_angeles_san_rafael.md` - Documento principal con el contexto completo
 - `documentacion_relevante.md` - Fuentes de información, jurisprudencia y normativa aplicable
 - `docs/` - Documentación estructurada del análisis del conflicto:
@@ -17,11 +19,27 @@ Este repositorio contiene documentación sobre la situación urbanística de la 
   - `docs/actores.md` - Actores y roles
   - `docs/opciones_legales.md` - Vías legales disponibles
   - `docs/preguntas_abiertas.md` - Preguntas sin resolver
-- `AGENTS.md` - Este archivo
+
+### Portal Web (web/)
+
+- `web/index.html` - Página principal
+- `web/assets/config.json` - Configuración del sitio
+- `web/assets/content.json` - Contenido del portal (editable)
+- `web/assets/css/styles.css` - Estilos
+- `web/assets/js/main.js` - Funcionalidad
+- `web/DEPLOY.md` - Instrucciones de despliegue
 
 ## Comandos de desarrollo
 
 No aplica - es un proyecto de documentación sin código fuente.
+
+### Despliegue del portal web
+
+El portal está diseñado para GitHub Pages. Para desplegar:
+
+1. Copiar el contenido de `web/` a un repositorio GitHub
+2. Habilitar GitHub Pages en Settings → Pages
+3. El sitio se publicará automáticamente
 
 ## Directrices de estilo
 

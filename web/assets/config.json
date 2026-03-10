@@ -1,0 +1,42 @@
+{
+  "site": {
+    "title": "Los Ángeles de San Rafael",
+    "subtitle": "Portal informativo sobre la situación urbanística",
+    "description": "Información clara y transparente sobre el conflicto urbanístico entre los propietarios y el Ayuntamiento de El Espinar",
+    "language": "es",
+    "author": "Portal vecinal Los Ángeles de San Rafael"
+  },
+  "navigation": {
+    "logo": {
+      "text": "LASR",
+      "alt": "Los Ángeles de San Rafael"
+    },
+    "sections": [
+      { "id": "inicio", "label": "Inicio" },
+      { "id": "situacion", "label": "Situación actual" },
+      { "id": "historia", "label": "Línea temporal" },
+      { "id": "sentencia", "label": "La sentencia" },
+      { "id": "incumplimientos", "label": "Incumplimientos" },
+      { "id": "actuaciones", "label": "Vías de actuación" },
+      { "id": "documentos", "label": "Documentos" },
+      { "id": "faq", "label": "Preguntas" },
+      { "id": "contacto", "label": "Contacto" }
+    ]
+  },
+  "colors": {
+    "primary": "#2D5A5A",
+    "secondary": "#4A7C7C",
+    "accent": "#D4A574",
+    "background": "#F8F6F3",
+    "surface": "#FFFFFF",
+    "text": "#333333",
+    "textLight": "#666666",
+    "border": "#E5E0DB"
+  },
+  "meta": {
+    "ogTitle": "Los Ángeles de San Rafael - Información sobre el conflicto urbanístico",
+    "ogDescription": "Portal informativo para vecinos sobre la situación jurídica y urbanística de Los Ángeles de San Rafael",
+    "ogUrl": "https://tu-usuario.github.io/lasr-info",
+    "ogImage": "assets/images/og-image.png"
+  }
+}

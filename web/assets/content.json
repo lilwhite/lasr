@@ -1,0 +1,307 @@
+{
+  "inicio": {
+    "hero": {
+      "title": "Los Ángeles de San Rafael",
+      "subtitle": "Información clara y transparente para los vecinos",
+      "description": "Un espacio informativo sobre la situación urbanística y jurídica de nuestra urbanización. Aquí encontrarás respuestas a tus preguntas y podrás entender cómo se ha llegado hasta aquí.",
+      "cta": {
+        "text": "Ver la situación actual",
+        "link": "#situacion"
+      }
+    },
+    "estadisticas": [
+      {
+        "numero": "10+",
+        "label": "Años desde la sentencia",
+        "icon": "clock"
+      },
+      {
+        "numero": "1",
+        "label": "Sentencia firme",
+        "icon": "scale"
+      },
+      {
+        "numero": "0",
+        "label": "Cumplimiento efectivo",
+        "icon": "alert"
+      }
+    ],
+    "突出的问题": [
+      {
+        "titulo": "Falta de transparencia",
+        "descripcion": "Más de una década sin asambleas de propietarios, sin presupuestos aprobados ni cuentas presentadas."
+      },
+      {
+        "titulo": "Doble pago",
+        "descripcion": "Los vecinos pagan IBI y cuotas de mantenimiento, pero no reciben servicios municipales equivalentes."
+      },
+      {
+        "titulo": "Sentencia sin ejecutar",
+        "descripcion": "La resolución judicial que obliga al Ayuntamiento a recepcionar la urbanización sigue sin cumplirse."
+      }
+    ]
+  },
+  "situacion": {
+    "titulo": "Situación actual",
+    "descripcion": "Resumen del estado actual del conflicto urbanístico y administrativo.",
+    "bloques": [
+      {
+        "titulo": "Gestión de la comunidad",
+        "icono": "building",
+        "contenido": "No se han celebrado asambleas de propietarios en los últimos 11 años. No se aprueban presupuestos anuales, no se presentan cuentas y los cargos de la comunidad no se han renovado."
+      },
+      {
+        "titulo": "Servicios municipales",
+        "icono": "city",
+        "contenido": "El Ayuntamiento no asume los servicios públicos correspondientes. Los vecinos pagan impuestos municipales (IBI, basura) pero no reciben los mismos servicios que el casco urbano."
+      },
+      {
+        "titulo": "EUCC",
+        "icono": "document",
+        "contenido": "La Entidad Urbanística de Conservación supera con creces el plazo de 4 años establecido por la sentencia. Su gestión carece de transparencia efectiva."
+      },
+      {
+        "titulo": "Agua",
+        "icono": "droplet",
+        "contenido": "Las tarifas del agua no se han equiparado al resto del municipio. Hay un retraso acumulado de más de un año en la actualización de tarifas."
+      }
+    ]
+  },
+  "historia": {
+    "titulo": "Línea temporal",
+    "descripcion": "Cronología de los eventos más importantes del conflicto.",
+    "eventos": [
+      {
+        "fecha": "1967",
+        "titulo": "Origen de la urbanización",
+        "descripcion": "Se aprueba el Plan Parcial que dio lugar a la urbanización de la finca 'El Carrascal'. Desarrollo impulsado por Jesús Gil."
+      },
+      {
+        "fecha": "2012-2013",
+        "titulo": "Sentencia del TSJCyL",
+        "descripcion": "El Tribunal Superior de Justicia de Castilla y León dicta sentencia favorable a los propietarios, ordenando al Ayuntamiento recepcionar la urbanización."
+      },
+      {
+        "fecha": "2013",
+        "titulo": "Confirmación y primeros pasos",
+        "descripcion": "El Tribunal Supremo confirma la sentencia. El Pleno del Ayuntamiento aprueba la recepción de las fases primera y segunda."
+      },
+      {
+        "fecha": "2013-2017",
+        "titulo": "Período EUCC",
+        "descripcion": "Período de transición de 4 años establecido por la sentencia para la Entidad Urbanística de Conservación."
+      },
+      {
+        "fecha": "2017",
+        "titulo": "Fin del período EUCC",
+        "descripcion": "Debía completarse la recepción municipal. La situación no se normaliza."
+      },
+      {
+        "fecha": "2023-2026",
+        "titulo": "Fase de ejecución",
+        "descripcion": "El proceso está en fase de ejecución judicial. Los incumplimiento persisten."
+      },
+      {
+        "fecha": "2026",
+        "titulo": "Situación actual",
+        "descripcion": "Más de 10 años después de la sentencia firme, la recepción no se ha completado. Los problemas persisten."
+      }
+    ]
+  },
+  "sentencia": {
+    "titulo": "Qué dice la sentencia",
+    "descripcion": "Resumen divulgativo de la resolución judicial. Este texto tiene carácter informativo y no constituye asesoramiento jurídico.",
+    "nota": "Nota: Este resumen es de carácter divulgativo. Para información jurídica precisa, consulta con un profesional del derecho.",
+    "puntos": [
+      {
+        "numero": "1",
+        "titulo": "Recepción obligatoria",
+        "descripcion": "El Ayuntamiento de El Espinar debe recepcionar formalmente la urbanización Los Ángeles de San Rafael, incorporando las infraestructuras al patrimonio municipal."
+      },
+      {
+        "numero": "2",
+        "titulo": "Entidad de Conservación",
+        "descripcion": "Se establece un período máximo de 4 años para la transición con Entidad Urbanística de Conservación (EUCC), tras el cual el Ayuntamiento debe asumir completamente el mantenimiento."
+      },
+      {
+        "numero": "3",
+        "titulo": "Asunción de servicios",
+        "descripcion": "El Ayuntamiento debe asumir el mantenimiento de viales, servicios y dotaciones públicas, equiparando a los vecinos con el resto del municipio."
+      },
+      {
+        "numero": "4",
+        "titulo": "Obligaciones financieras",
+        "descripcion": "La sentencia establece que los costes de mantenimiento deben transferirse al Ayuntamiento, no-recaer adicionalmente sobre los propietarios."
+      }
+    ],
+    "estado": {
+      "titulo": "Estado actual del cumplimiento",
+      "texto": "La sentencia es firme y no cabe recurso contra ella. Sin embargo, más de 10 años después, su ejecución sigue incompleta."
+    }
+  },
+  "incumplimientos": {
+    "titulo": "Qué no se ha cumplido",
+    "descripcion": "Lista de las obligaciones derivadas de la sentencia que siguen sin ejecutarse completamente.",
+    "items": [
+      {
+        "titulo": "Recepción completa",
+        "descripcion": "El Ayuntamiento no ha completado la recepción formal de la urbanización.",
+        "estado": "pendiente"
+      },
+      {
+        "titulo": "Disolución EUCC",
+        "descripcion": "La Entidad Urbanística de Conservación debería haberse disuelto tras los 4 años establecidos (2017).",
+        "estado": "pendiente"
+      },
+      {
+        "titulo": "Equiparación de servicios",
+        "descripcion": "Los vecinos no reciben los mismos servicios municipales que el casco urbano.",
+        "estado": "pendiente"
+      },
+      {
+        "titulo": "Tarifas de agua",
+        "descripcion": "Las tarifas del agua no se han actualizado ni equiparado al resto del municipio.",
+        "estado": "pendiente"
+      },
+      {
+        "titulo": "Transparencia",
+        "descripcion": "No se ha garantizado el derecho a la información de los propietarios sobre el uso de las cuotas.",
+        "estado": "pendiente"
+      }
+    ]
+  },
+  "actuaciones": {
+    "titulo": "Posibles vías de actuación",
+    "descripcion": "Opciones que los propietarios pueden considerar para hacer efectivo sus derechos. Esta información tiene carácter informativo.",
+    "nota": "Nota: Las siguientes opciones son orientativas. Se recomienda asesoramiento jurídico personalizado.",
+    "vias": [
+      {
+        "titulo": "Vía judicial",
+        "icono": "scale",
+        "opciones": [
+          "Solicitar la ejecución de la sentencia ante el juzgado",
+          "Pedir multas coercitivas a responsables municipales",
+          "Reclamar el cumplimiento de las obligaciones específicas"
+        ]
+      },
+      {
+        "titulo": "Vía institucional",
+        "icono": "building",
+        "opciones": [
+          "Solicitar intervención de la Junta de Castilla y León",
+          "Acudir al Defensor del Pueblo de Castilla y León",
+          "Reclamar ante la Fiscalía de Urbanismo"
+        ]
+      },
+      {
+        "titulo": "Vía política",
+        "icono": "users",
+        "opciones": [
+          "Participar en procesos electorales con candidatos comprometidos",
+          "Crear o apoiar formaciones políticas locales",
+          "Movilización ciudadana y presión mediática"
+        ]
+      },
+      {
+        "titulo": "Vía vecinal",
+        "icono": "home",
+        "opciones": [
+          "Convocar asamblea de propietarios",
+          "Reclamar acceso a la documentación de la EUCC",
+          "Organizarse colectivamente para compartir costes jurídicos"
+        ]
+      }
+    ]
+  },
+  "documentos": {
+    "titulo": "Documentación",
+    "descripcion": "Enlaces a documentos, resoluciones y fuentes de información.",
+    "nota": "Documentos disponibles actualmente. Esta sección se ira actualizando.",
+    "items": [
+      {
+        "titulo": "Sentencia del TSJCyL",
+        "descripcion": "Sentencia del Tribunal Superior de Justicia de Castilla y León",
+        "tipo": "jurisprudencia",
+        "url": "#",
+        "fecha": "[Pendiente de añadir]"
+      },
+      {
+        "titulo": "Normativa urbanística de Castilla y León",
+        "descripcion": "Régimen jurídico de las entidades urbanísticas de conservación",
+        "tipo": "normativa",
+        "url": "#",
+        "fecha": ""
+      },
+      {
+        "titulo": "Artículo de prensa - El Adelantado",
+        "descripcion": "Información sobre la recepción de la urbanización",
+        "tipo": "prensa",
+        "url": "https://eladelantado.com/provincia/2013/01/04/el_tsjcyl_obliga_al_ayuntamiento_a_recepcionar_los_angeles_de_san_rafael/",
+        "fecha": "2013"
+      },
+      {
+        "titulo": "Artículo de prensa - El Espinar Hoy",
+        "descripcion": "Artículo sobre la situación actual de la urbanización",
+        "tipo": "prensa",
+        "url": "https://www.elespinarhoy.com/2026/03/06/el-espinar-entre-dos-mundos-vecinos-de-siempre-frente-al-auge-de-las-casas-de-fin-de-semana/",
+        "fecha": "2026"
+      }
+    ]
+  },
+  "faq": {
+    "titulo": "Preguntas frecuentes",
+    "descripcion": "Respuestas a las dudas más comunes de los vecinos.",
+    "preguntas": [
+      {
+        "pregunta": "¿Qué es la recepción de una urbanización?",
+        "respuesta": "Es el acto formal por el cual el Ayuntamiento acepta las infraestructuras construida por los promotores y las incorpora al patrimonio municipal. A partir de ese momento, el Ayuntamiento es responsable del mantenimiento de calles, alumbrado, zonas verdes, etc."
+      },
+      {
+        "pregunta": "¿Por qué tenemos que pagar cuotas si ya pagamos impuestos?",
+        "respuesta": "Actualmente, las infraestructuras de Los Ángeles de San Rafael no son municipales. Por eso los propietarios deben mantenerlas mediante la EUCC, además de pagar sus impuestos municipales. La sentencia obliga al Ayuntamiento a asumir estos costes."
+      },
+      {
+        "pregunta": "¿Qué pasa con la sentencia judicial?",
+        "respuesta": "La sentencia es firme y obliga al Ayuntamiento. Sin embargo, su ejecución práctica está pendiente desde hace más de 10 años. Los propietarios pueden solicitar al juzgado que obligue a su cumplimiento."
+      },
+      {
+        "pregunta": "¿Cuánto tiempo puede durar el proceso judicial?",
+        "respuesta": "Los procesos de ejecución de sentencias pueden ser largos. Depende de muchos factores, incluyendo la voluntad del Ayuntamiento de cumplir y las acciones que tomes los propietarios."
+      },
+      {
+        "pregunta": "¿Puedo hacer algo como vecino particular?",
+        "respuesta": "Sí. Puedes informarte, participar en la organización vecinal, compartir información con otros vecinos, y considerar acciones colectivas. También puedes contactar con representantes políticos para exigir soluciones."
+      },
+      {
+        "pregunta": "¿Qué es la EUCC?",
+        "respuesta": "La Entidad Urbanística de Conservación es una figura jurídica que agrupa a los propietarios para mantener las infraestructuras comunes hasta que el Ayuntamiento las recepcione. Debería haber durado solo 4 años según la sentencia."
+      },
+      {
+        "pregunta": "¿Dónde puedo consultar la sentencia completa?",
+        "respuesta": "Puedes solicitarla al Ayuntamiento o a los tribunales. También puedes contactar con un abogado para obtener copia. En la sección de documentos intentaremos incluir enlaces cuando estén disponibles."
+      }
+    ]
+  },
+  "contacto": {
+    "titulo": "Contacto y colaboración",
+    "descripcion": " formas de participar, aportar información o colaborar con el portal.",
+    "nota": "Este portal es informativo y no representa a ninguna organización formal. No somos un despacho de abogados ni ofrecemos asesoramiento jurídico.",
+    "opciones": [
+      {
+        "titulo": "Colaborar con el portal",
+        "descripcion": "Si tienes información relevante, documentos o quieres colaborar en la difusión, puedes contactar con nosotros.",
+        "email": "contacto@lasr-info.es"
+      },
+      {
+        "titulo": "Aportar documentación",
+        "descripcion": "Si tienes documentos, resoluciones o información que pueda ayudar,compártela para enriquecer este recurso común.",
+        "email": "documentos@lasr-info.es"
+      },
+      {
+        "titulo": "Difundir",
+        "descripcion": "Comparte este portal con otros vecinos para que más personas conozcan la situación."
+      }
+    ],
+    "aviso": "Este portal no constituye asesoramiento jurídico. Para cuestiones legales específicas, consulta con un profesional."
+  }
+}
