@@ -1,3 +1,13 @@
+---
+title: Documento Principal
+description: Contexto completo de la urbanización Los Ángeles de San Rafael
+slug: documento-principal
+category: principal
+order: 0
+updated: 2026-03-10
+tags: [principal, contexto, completo]
+---
+
 # Contexto: Urbanización Los Ángeles de San Rafael
 
 ## 1. Introducción
