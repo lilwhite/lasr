@@ -25,3 +25,11 @@ build/
 
 # Misc
 *.log
+
+# OpenCode / Agent runtime (mantener versionados .agents/skills y opencode.jsonc)
+skills-lock.json
+.opencode/
+.opencode-cache/
+.agents/cache/
+.agents/tmp/
+.agents/.cache/
