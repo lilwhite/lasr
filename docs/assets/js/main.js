@@ -346,6 +346,19 @@
                 }))
                 : groupItems;
 
+            if (isPressGroup) {
+                while (iterableItems.length < 3) {
+                    iterableItems.push({
+                        tipo: 'prensa',
+                        source: 'Selección editorial',
+                        titulo: 'Nueva noticia en revisión editorial',
+                        descripcion: 'Estamos incorporando nuevas referencias periodísticas relevantes para Los Ángeles de San Rafael.',
+                        url: '',
+                        fecha: 'Actualización en curso'
+                    });
+                }
+            }
+
             iterableItems.forEach((doc, cardIndex) => {
                 const typeClass = (doc.tipo || 'documento').toLowerCase();
                 const safeDocUrl = sanitizeExternalUrl(doc.url || '');

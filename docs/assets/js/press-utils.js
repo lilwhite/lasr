@@ -54,6 +54,48 @@
     return text.includes('los angeles de san rafael') || text.includes('los ángeles de san rafael');
   }
 
+  function isContextualFallbackCandidate(item) {
+    if (!item || item.isRelevant === true) return false;
+
+    const allowedCategories = new Set([
+      'juntas_y_vecinos',
+      'urbanismo',
+      'recepcion',
+      'infraestructuras',
+      'servicios',
+      'judicial',
+      'contexto_municipal'
+    ]);
+
+    const text = `${item.title || ''} ${item.excerpt || ''}`.toLowerCase();
+    const contextTerms = [
+      'urbanizacion',
+      'urbanización',
+      'copropietarios',
+      'propietarios',
+      'vecinos',
+      'eucc',
+      'recepcion',
+      'recepción',
+      'sentencia',
+      'ayuntamiento',
+      'infraestructuras',
+      'servicios'
+    ];
+
+    const hasContextTerm = contextTerms.some((term) => text.includes(term));
+    const hasAllowedCategory = allowedCategories.has(item.category);
+    const hasEnoughScore = (Number(item.relevanceScore) || 0) >= 4;
+
+    return hasAllowedCategory && hasContextTerm && hasEnoughScore;
+  }
+
+  function isStrongFallbackCandidate(item) {
+    if (!item || item.isRelevant === true) return false;
+    const score = Number(item.relevanceScore) || 0;
+    return isContextualFallbackCandidate(item) && score >= 7;
+  }
+
   function getLandingFeaturedNews(items, limit) {
     const max = Number(limit) || 3;
     const relevant = getRelevantNews(items);
@@ -71,10 +113,21 @@
     if (output.length < max) {
       const contextualFallback = sortNews(
         (Array.isArray(items) ? items : []).filter(
-          (item) => item && item.isRelevant !== true && mentionLASR(item)
+          (item) => mentionLASR(item) && isContextualFallbackCandidate(item)
         )
       );
       contextualFallback.forEach((item) => {
+        if (output.length < max && !output.find((existing) => existing.id === item.id)) {
+          output.push(item);
+        }
+      });
+    }
+
+    if (output.length < max) {
+      const strongFallback = sortNews(
+        (Array.isArray(items) ? items : []).filter((item) => isStrongFallbackCandidate(item))
+      );
+      strongFallback.forEach((item) => {
         if (output.length < max && !output.find((existing) => existing.id === item.id)) {
           output.push(item);
         }
