@@ -11,11 +11,11 @@ Este proyecto usa **GitHub Actions** para desplegar automáticamente el sitio en
 
 ### Flujo de trabajo
 
-1. Haces `git push` a `main`
-2. Se valida la estructura del proyecto
-3. Se genera `docs/assets/build-meta.json` con la fecha de última actualización
-4. Se copia `docs/` a `dist/`
-5. Se despliega automáticamente en GitHub Pages
+1. Creas una rama de trabajo desde `dev`
+2. Abres PR de rama de trabajo hacia `dev` (solo validación)
+3. Se integran cambios en `dev`
+4. Abres PR de promoción `dev` → `main`
+5. Al mergear en `main`, se despliega automáticamente en GitHub Pages
 
 ---
 
@@ -47,8 +47,9 @@ mi-repo/
 
 ```bash
 git add .github/
-git commit -m "Add GitHub Actions workflows"
-git push origin main
+git commit -m "chore: actualizar workflows de GitHub Actions"
+git push origin <rama-de-trabajo>
+# abrir PR hacia dev y después PR dev -> main
 ```
 
 ### Paso 2: Configurar GitHub Pages
@@ -71,8 +72,8 @@ git push origin main
 ### validate.yml (automático)
 
 Se ejecuta en:
-- Cada `push` a `main`
-- Cada `pull_request`
+- PRs hacia `dev` y `main`
+- `push` a `dev` y ramas de trabajo (`feature/*`, `fix/*`, `docs/*`, `visual/*`, `chore/*`)
 
 Valida:
 - ✅ Existen todos los archivos obligatorios
@@ -102,12 +103,17 @@ Hace:
 # 1. Edita el contenido que necesites
 nano docs/assets/content.json
 
-# 2. Commit y push
+# 2. Crea rama desde dev y haz commit
+git checkout dev
+git pull --ff-only origin dev
+git checkout -b docs/actualizacion-contenido
 git add .
 git commit -m "Actualización de contenido"
-git push
+git push -u origin docs/actualizacion-contenido
 
-# 3. Ve a Actions y observa el despliegue
+# 3. Abre PR hacia dev y valida
+# 4. Promociona con PR dev -> main
+# 5. Ve a Actions y observa el despliegue tras merge en main
 # URL: https://github.com/TU_USUARIO/TU_REPO/actions
 ```
 
@@ -134,7 +140,16 @@ Los archivos JSON tienen errores de sintaxis. Usa un validador:
 
 1. Ve a **Settings** → **Pages**
 2. Confirma que "Source" está en **GitHub Actions**
-3. Revisa la pestaña **Actions** para ver errores
+3. Verifica que el merge final se hizo en `main`
+4. Revisa la pestaña **Actions** para ver errores
+
+### Validación local con Docker
+
+```bash
+docker compose up -d
+```
+
+Abre `http://localhost:8080` para validar antes de abrir PR.
 
 ### Error de permisos
 

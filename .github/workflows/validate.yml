@@ -2,9 +2,17 @@ name: Validar contenido
 
 on:
   pull_request:
-    branches: [main]
+    branches: [dev, main]
   push:
-    branches: [main]
+    branches:
+      - main
+      - dev
+      - 'feature/**'
+      - 'fix/**'
+      - 'docs/**'
+      - 'visual/**'
+      - 'chore/**'
+  workflow_dispatch:
 
 jobs:
   validate:
@@ -13,6 +21,17 @@ jobs:
     steps:
       - name: Checkout código
         uses: actions/checkout@v4
+
+      - name: Validar convención de rama de trabajo
+        if: github.event_name == 'pull_request' && github.base_ref == 'dev'
+        run: |
+          BRANCH="${{ github.head_ref }}"
+          if [[ ! "$BRANCH" =~ ^(feature|fix|docs|visual|chore)/[a-z0-9._-]+$ ]]; then
+            echo "ERROR: La rama '$BRANCH' no cumple la convención permitida."
+            echo "Usa: feature/<slug>, fix/<slug>, docs/<slug>, visual/<slug> o chore/<slug>."
+            exit 1
+          fi
+          echo "✓ Convención de rama válida: $BRANCH"
         
       - name: Validar estructura del proyecto
         run: |
