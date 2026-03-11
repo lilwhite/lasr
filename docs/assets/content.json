@@ -245,36 +245,75 @@
   },
   "documentos": {
     "titulo": "Documentación",
-    "descripcion": "Enlaces a documentos, resoluciones y fuentes de información.",
-    "nota": "Documentos disponibles actualmente. Esta sección se ira actualizando.",
-    "items": [
+    "descripcion": "Fuentes externas para ampliar información: normativa, referencias institucionales y prensa.",
+    "nota": "Repositorio de apoyo en actualización continua.",
+    "grupos": [
       {
-        "titulo": "Sentencia del TSJCyL",
-        "descripcion": "Sentencia del Tribunal Superior de Justicia de Castilla y León",
-        "tipo": "jurisprudencia",
-        "url": "#",
-        "fecha": "[Pendiente de añadir]"
+        "titulo": "Normativa",
+        "descripcion": "Marco legal aplicable en Castilla y León.",
+        "items": [
+          {
+            "titulo": "Ley de Urbanismo de Castilla y León",
+            "descripcion": "Norma autonómica de referencia en materia urbanística.",
+            "tipo": "normativa",
+            "url": "",
+            "fecha": "Pendiente de incorporar"
+          },
+          {
+            "titulo": "Reglamento de Urbanismo de Castilla y León",
+            "descripcion": "Desarrollo reglamentario de la legislación urbanística autonómica.",
+            "tipo": "normativa",
+            "url": "",
+            "fecha": "Pendiente de incorporar"
+          },
+          {
+            "titulo": "Régimen de Entidades Urbanísticas de Conservación",
+            "descripcion": "Referencia normativa sobre funciones y límites de las EUCC.",
+            "tipo": "normativa",
+            "url": "",
+            "fecha": "Pendiente de incorporar"
+          }
+        ]
       },
       {
-        "titulo": "Normativa urbanística de Castilla y León",
-        "descripcion": "Régimen jurídico de las entidades urbanísticas de conservación",
-        "tipo": "normativa",
-        "url": "#",
-        "fecha": ""
+        "titulo": "Información institucional",
+        "descripcion": "Documentación pública de administraciones con competencia urbanística.",
+        "items": [
+          {
+            "titulo": "Documentación urbanística del Ayuntamiento de El Espinar",
+            "descripcion": "Planeamiento o documentación pública relacionada con la urbanización.",
+            "tipo": "institucional",
+            "url": "",
+            "fecha": "Pendiente de incorporar"
+          }
+        ]
       },
       {
-        "titulo": "Artículo de prensa - El Adelantado",
-        "descripcion": "Información sobre la recepción de la urbanización",
-        "tipo": "prensa",
-        "url": "https://eladelantado.com/provincia/2013/01/04/el_tsjcyl_obliga_al_ayuntamiento_a_recepcionar_los_angeles_de_san_rafael/",
-        "fecha": "2013"
-      },
-      {
-        "titulo": "Artículo de prensa - El Espinar Hoy",
-        "descripcion": "Artículo sobre la situación actual de la urbanización",
-        "tipo": "prensa",
-        "url": "https://www.elespinarhoy.com/2026/03/06/el-espinar-entre-dos-mundos-vecinos-de-siempre-frente-al-auge-de-las-casas-de-fin-de-semana/",
-        "fecha": "2026"
+        "titulo": "Prensa",
+        "descripcion": "Cobertura periodística para contexto y seguimiento.",
+        "items": [
+          {
+            "titulo": "El Adelantado",
+            "descripcion": "Cobertura sobre la recepción de la urbanización.",
+            "tipo": "prensa",
+            "url": "https://eladelantado.com/provincia/2013/01/04/el_tsjcyl_obliga_al_ayuntamiento_a_recepcionar_los_angeles_de_san_rafael/",
+            "fecha": "2013"
+          },
+          {
+            "titulo": "El Espinar Hoy",
+            "descripcion": "Contexto reciente sobre la situación de la urbanización.",
+            "tipo": "prensa",
+            "url": "https://www.elespinarhoy.com/2026/03/06/el-espinar-entre-dos-mundos-vecinos-de-siempre-frente-al-auge-de-las-casas-de-fin-de-semana/",
+            "fecha": "2026"
+          },
+          {
+            "titulo": "Fuente externa adicional",
+            "descripcion": "Espacio reservado para nuevas fuentes periodísticas relevantes.",
+            "tipo": "prensa",
+            "url": "",
+            "fecha": "Pendiente de incorporar"
+          }
+        ]
       }
     ]
   },
