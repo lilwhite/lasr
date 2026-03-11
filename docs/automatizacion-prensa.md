@@ -17,6 +17,9 @@ La actualización es manual (sin cron ni Actions en esta fase).
 - `scripts/prensa/helpers.py`
 - `docs/data/prensa/sources.json`
 - `docs/data/prensa/curated_news.json`
+- `docs/prensa/index.html`
+- `docs/assets/js/press-utils.js`
+- `docs/assets/js/prensa-archive.js`
 
 ## Ejecución
 
@@ -48,6 +51,13 @@ python3 scripts/prensa/fetch_press.py --config docs/data/prensa/sources.json --o
 - `servicios`
 - `contexto_municipal`
 - `judicial`
+
+## Campo editorial `featured`
+
+El JSON soporta `featured: true/false` para destacar noticias en la landing.
+
+- Landing: muestra hasta 3 destacadas (`featured=true`) y, si faltan, completa con relevantes recientes.
+- Archivo: muestra todas las noticias relevantes con filtros.
 
 ## Cómo añadir una fuente
 

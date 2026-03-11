@@ -9,6 +9,7 @@
     "category": "juntas_y_vecinos",
     "relevanceScore": 4,
     "isRelevant": false,
+    "featured": false,
     "tags": [
       "vecinos"
     ]
@@ -23,6 +24,7 @@
     "category": "juntas_y_vecinos",
     "relevanceScore": 4,
     "isRelevant": false,
+    "featured": false,
     "tags": [
       "vecinos"
     ]
@@ -37,6 +39,7 @@
     "category": "contexto_municipal",
     "relevanceScore": 3,
     "isRelevant": false,
+    "featured": false,
     "tags": [
       "ayuntamiento"
     ]
@@ -51,6 +54,7 @@
     "category": "contexto_municipal",
     "relevanceScore": 0,
     "isRelevant": false,
+    "featured": false,
     "tags": []
   },
   {
@@ -63,6 +67,7 @@
     "category": "contexto_municipal",
     "relevanceScore": 0,
     "isRelevant": false,
+    "featured": false,
     "tags": []
   },
   {
@@ -75,6 +80,7 @@
     "category": "contexto_municipal",
     "relevanceScore": 0,
     "isRelevant": false,
+    "featured": false,
     "tags": []
   },
   {
@@ -87,6 +93,7 @@
     "category": "contexto_municipal",
     "relevanceScore": 0,
     "isRelevant": false,
+    "featured": false,
     "tags": []
   },
   {
@@ -99,6 +106,7 @@
     "category": "contexto_municipal",
     "relevanceScore": 0,
     "isRelevant": false,
+    "featured": false,
     "tags": []
   },
   {
@@ -111,6 +119,7 @@
     "category": "contexto_municipal",
     "relevanceScore": 0,
     "isRelevant": false,
+    "featured": false,
     "tags": []
   },
   {
@@ -123,6 +132,7 @@
     "category": "contexto_municipal",
     "relevanceScore": -8,
     "isRelevant": false,
+    "featured": false,
     "tags": []
   },
   {
@@ -135,6 +145,7 @@
     "category": "juntas_y_vecinos",
     "relevanceScore": 3,
     "isRelevant": false,
+    "featured": false,
     "tags": [
       "junta"
     ]
@@ -149,6 +160,7 @@
     "category": "juntas_y_vecinos",
     "relevanceScore": 3,
     "isRelevant": false,
+    "featured": false,
     "tags": [
       "junta"
     ]
@@ -163,6 +175,7 @@
     "category": "juntas_y_vecinos",
     "relevanceScore": 3,
     "isRelevant": false,
+    "featured": false,
     "tags": [
       "junta"
     ]
@@ -177,6 +190,7 @@
     "category": "contexto_municipal",
     "relevanceScore": 0,
     "isRelevant": false,
+    "featured": false,
     "tags": []
   },
   {
@@ -189,6 +203,7 @@
     "category": "contexto_municipal",
     "relevanceScore": 0,
     "isRelevant": false,
+    "featured": false,
     "tags": []
   },
   {
@@ -201,6 +216,7 @@
     "category": "contexto_municipal",
     "relevanceScore": 0,
     "isRelevant": false,
+    "featured": false,
     "tags": []
   },
   {
@@ -213,6 +229,7 @@
     "category": "judicial",
     "relevanceScore": 0,
     "isRelevant": false,
+    "featured": false,
     "tags": []
   },
   {
@@ -225,6 +242,7 @@
     "category": "contexto_municipal",
     "relevanceScore": -8,
     "isRelevant": false,
+    "featured": false,
     "tags": []
   },
   {
@@ -237,6 +255,7 @@
     "category": "contexto_municipal",
     "relevanceScore": -8,
     "isRelevant": false,
+    "featured": false,
     "tags": []
   },
   {
@@ -249,6 +268,7 @@
     "category": "infraestructuras",
     "relevanceScore": -8,
     "isRelevant": false,
+    "featured": false,
     "tags": []
   },
   {
@@ -261,6 +281,7 @@
     "category": "contexto_municipal",
     "relevanceScore": -8,
     "isRelevant": false,
+    "featured": false,
     "tags": []
   },
   {
@@ -273,6 +294,7 @@
     "category": "contexto_municipal",
     "relevanceScore": 0,
     "isRelevant": false,
+    "featured": false,
     "tags": []
   },
   {
@@ -285,6 +307,7 @@
     "category": "contexto_municipal",
     "relevanceScore": 0,
     "isRelevant": false,
+    "featured": false,
     "tags": []
   },
   {
@@ -297,6 +320,7 @@
     "category": "contexto_municipal",
     "relevanceScore": 0,
     "isRelevant": false,
+    "featured": false,
     "tags": []
   },
   {
@@ -309,6 +333,7 @@
     "category": "juntas_y_vecinos",
     "relevanceScore": 14,
     "isRelevant": true,
+    "featured": true,
     "tags": [
       "los angeles de san rafael",
       "propietarios"
@@ -324,6 +349,7 @@
     "category": "infraestructuras",
     "relevanceScore": 3,
     "isRelevant": false,
+    "featured": false,
     "tags": [
       "agua"
     ]
@@ -338,6 +364,7 @@
     "category": "infraestructuras",
     "relevanceScore": 0,
     "isRelevant": false,
+    "featured": false,
     "tags": []
   },
   {
@@ -350,6 +377,7 @@
     "category": "contexto_municipal",
     "relevanceScore": -6,
     "isRelevant": false,
+    "featured": false,
     "tags": []
   },
   {
@@ -362,6 +390,7 @@
     "category": "juntas_y_vecinos",
     "relevanceScore": 18,
     "isRelevant": true,
+    "featured": true,
     "tags": [
       "los angeles de san rafael",
       "propietarios",
@@ -378,6 +407,7 @@
     "category": "juntas_y_vecinos",
     "relevanceScore": 4,
     "isRelevant": false,
+    "featured": false,
     "tags": [
       "vecinos"
     ]
@@ -392,6 +422,7 @@
     "category": "contexto_municipal",
     "relevanceScore": 0,
     "isRelevant": false,
+    "featured": false,
     "tags": []
   }
 ]
