@@ -165,6 +165,20 @@ def sort_candidates(items: Iterable[Candidate]) -> List[Candidate]:
 def run(config_path: Path, output_path: Path, timeout: int):
     config = load_json(config_path)
     candidates: List[Candidate] = []
+    existing_featured = {}
+
+    if output_path.exists():
+        try:
+            existing_items = load_json(output_path)
+            if isinstance(existing_items, list):
+                for item in existing_items:
+                    if not isinstance(item, dict):
+                        continue
+                    key = canonicalize_url(item.get("url", ""))
+                    if key:
+                        existing_featured[key] = bool(item.get("featured", False))
+        except (ValueError, OSError, TypeError):
+            existing_featured = {}
 
     for source in config["sources"]:
         source_count = 0
@@ -233,6 +247,7 @@ def run(config_path: Path, output_path: Path, timeout: int):
             "category": item.category,
             "relevanceScore": item.relevance_score,
             "isRelevant": item.is_relevant,
+            "featured": existing_featured.get(canonicalize_url(item.url), False),
             "tags": item.tags,
         }
         for item in limited
