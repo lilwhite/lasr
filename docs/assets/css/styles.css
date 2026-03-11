@@ -712,6 +712,31 @@ h1, h2, h3, h4, h5, h6 {
 /* ============================================
    Document Cards
    ============================================ */
+.documentos-groups {
+    display: grid;
+    gap: var(--space-2xl);
+}
+
+.doc-group {
+    display: grid;
+    gap: var(--space-md);
+}
+
+.doc-group-header {
+    display: grid;
+    gap: var(--space-xs);
+}
+
+.doc-group-title {
+    font-size: var(--font-size-xl);
+    color: var(--color-primary-dark);
+}
+
+.doc-group-description {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-light);
+}
+
 .doc-card {
     background-color: var(--color-surface);
     border-radius: var(--radius-lg);
@@ -752,6 +777,16 @@ h1, h2, h3, h4, h5, h6 {
 .doc-type.prensa {
     background-color: rgba(212, 165, 116, 0.2);
     color: var(--color-accent);
+}
+
+.doc-type.institucional {
+    background-color: rgba(74, 124, 124, 0.14);
+    color: var(--color-secondary);
+}
+
+.doc-type.documento {
+    background-color: rgba(45, 90, 90, 0.1);
+    color: var(--color-primary);
 }
 
 .doc-title {

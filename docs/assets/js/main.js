@@ -266,21 +266,46 @@
         
         const data = content.documentos;
         let html = '';
-        
-        data.items.forEach(doc => {
-            const typeClass = doc.tipo.toLowerCase();
-            const linkHtml = doc.url && doc.url !== '#' 
-                ? `<a href="${escapeHtml(doc.url)}" class="doc-link" target="_blank" rel="noopener">Ver documento ${icons.external}</a>`
-                : '';
-            
+
+        const groups = Array.isArray(data.grupos) ? data.grupos : [
+            {
+                titulo: 'Documentación',
+                descripcion: '',
+                items: Array.isArray(data.items) ? data.items : []
+            }
+        ];
+
+        groups.forEach((group, groupIndex) => {
+            const groupItems = Array.isArray(group.items) ? group.items : [];
+            let groupCards = '';
+
+            groupItems.forEach((doc, cardIndex) => {
+                const typeClass = (doc.tipo || 'documento').toLowerCase();
+                const linkHtml = doc.url && doc.url !== '#'
+                    ? `<a href="${escapeHtml(doc.url)}" class="doc-link" target="_blank" rel="noopener">Ver fuente ${icons.external}</a>`
+                    : '';
+
+                groupCards += `
+                    <div class="doc-card fade-in" style="animation-delay: ${(groupIndex * 0.08) + (cardIndex * 0.04)}s">
+                        <span class="doc-type ${typeClass}">${escapeHtml(doc.tipo || 'Documento')}</span>
+                        <h3 class="doc-title">${escapeHtml(doc.titulo)}</h3>
+                        <p class="doc-description">${escapeHtml(doc.descripcion || '')}</p>
+                        ${doc.fecha ? `<p class="doc-meta">${escapeHtml(doc.fecha)}</p>` : ''}
+                        ${linkHtml}
+                    </div>
+                `;
+            });
+
             html += `
-                <div class="doc-card fade-in">
-                    <span class="doc-type ${typeClass}">${escapeHtml(doc.tipo)}</span>
-                    <h3 class="doc-title">${escapeHtml(doc.titulo)}</h3>
-                    <p class="doc-description">${escapeHtml(doc.descripcion)}</p>
-                    ${doc.fecha ? `<p class="doc-meta">${escapeHtml(doc.fecha)}</p>` : ''}
-                    ${linkHtml}
-                </div>
+                <section class="doc-group">
+                    <header class="doc-group-header">
+                        <h3 class="doc-group-title">${escapeHtml(group.titulo || 'Documentación')}</h3>
+                        ${group.descripcion ? `<p class="doc-group-description">${escapeHtml(group.descripcion)}</p>` : ''}
+                    </header>
+                    <div class="cards doc-group-cards">
+                        ${groupCards}
+                    </div>
+                </section>
             `;
         });
         
