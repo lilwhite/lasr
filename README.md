@@ -9,7 +9,7 @@
 Este repositorio contiene documentación sobre el conflicto urbanístico entre los vecinos de **Los Ángeles de San Rafael** y el **Ayuntamiento de El Espinar** respecto a la recepción municipal de las infraestructuras.
 
 El proyecto incluye:
-- 📄 Documentación detallada en Markdown
+- 📄 Documentación de referencia en Markdown
 - 🌐 Portal web estático publicado en GitHub Pages
 - ⚙️ Workflows de GitHub Actions para validación y despliegue
 - 🤖 Instrucciones para agentes IA
@@ -36,8 +36,7 @@ El proyecto incluye:
 │   ├── safe-static-site-refactor/
 │   └── docs-and-maintenance/
 │
-├── 📄 urbanizacion_los_angeles_san_rafael.md
-├── 📄 documentacion_relevante.md
+├── 📄 docs/documentacion_relevante.md
 ├── 📄 AGENTS.md
 └── 📄 README.md
 ```

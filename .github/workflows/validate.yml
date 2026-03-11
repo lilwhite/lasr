@@ -27,14 +27,7 @@ jobs:
             "docs/assets/css/styles.css"
             "docs/assets/js/main.js"
             "scripts/build_meta.py"
-            "docs/actores.md"
-            "docs/contexto_general.md"
             "docs/documentacion_relevante.md"
-            "docs/opciones_legales.md"
-            "docs/preguntas_abiertas.md"
-            "docs/problemas_detectados.md"
-            "docs/timeline_conflicto.md"
-            "docs/urbanizacion_los_angeles_san_rafael.md"
           )
           
           MISSING_FILES=()
