@@ -145,14 +145,7 @@ El portal web está en la carpeta `docs/` para despliegue en GitHub Pages:
 
 ### Documentación Markdown (docs/)
 
-- `docs/urbanizacion_los_angeles_san_rafael.md` - Documento principal con el contexto completo
 - `docs/documentacion_relevante.md` - Fuentes de información, jurisprudencia y normativa
-- `docs/contexto_general.md` - Contexto general del conflicto
-- `docs/timeline_conflicto.md` - Línea temporal detallada
-- `docs/problemas_detectados.md` - Problemas identificados
-- `docs/actores.md` - Actores y roles
-- `docs/opciones_legales.md` - Vías legales disponibles
-- `docs/preguntas_abiertas.md` - Preguntas sin resolver
 
 ### Raíz del proyecto
 
@@ -207,22 +200,6 @@ Ver `docs/DEPLOY.md` para instrucciones detalladas.
 - Fuentes de información identificadas cuando sea posible
 - Evitar jerga jurídica innecesaria
 - Explicar términos técnicos cuando sea imprescindible usarlos
-
-## Estructura del documento principal
-
-El documento `urbanizacion_los_angeles_san_rafael.md` sigue la estructura:
-
-1. Introducción - ubicación y contexto general
-2. Origen de la urbanización - historia y desarrollo inicial
-3. Evolución del modelo urbano - cambios demográficos y funcionales
-4. Sistema de mantenimiento (EUCC) - figura jurídica y funcionamiento
-5. Hito legal clave - sentencia judicial
-6. Situación actual - estado de la ejecución
-7. Actores implicados - vecinos, Ayuntamiento, EUCC, tribunales, Junta
-8. Problema central - resumen del conflicto
-9. Posibles vías de actuación - judicial, institucional, política
-10. Línea temporal resumida - cronología
-11. Uso del documento - aplicaciones previsto
 
 ## Notas para agentes
 

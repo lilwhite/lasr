@@ -1,27 +1,15 @@
 /**
  * Documentacion - Renderizador Markdown
- * Mantiene los .md como fuente de verdad.
  */
 
 (function () {
   'use strict';
 
   const documents = [
-    { file: 'urbanizacion_los_angeles_san_rafael.md', slug: 'documento-principal', title: 'Documento principal', category: 'principal', order: 0 },
-    { file: 'contexto_general.md', slug: 'contexto-general', title: 'Contexto general', category: 'analisis', order: 1 },
-    { file: 'timeline_conflicto.md', slug: 'linea-temporal', title: 'Linea temporal', category: 'cronologia', order: 2 },
-    { file: 'problemas_detectados.md', slug: 'problemas-detectados', title: 'Problemas detectados', category: 'analisis', order: 3 },
-    { file: 'actores.md', slug: 'actores', title: 'Actores', category: 'referencia', order: 4 },
-    { file: 'opciones_legales.md', slug: 'opciones-legales', title: 'Opciones legales', category: 'legal', order: 5 },
-    { file: 'preguntas_abiertas.md', slug: 'preguntas-abiertas', title: 'Preguntas abiertas', category: 'analisis', order: 6 },
-    { file: 'documentacion_relevante.md', slug: 'documentacion-relevante', title: 'Documentacion relevante', category: 'referencia', order: 7 }
+    { file: 'documentacion_relevante.md', slug: 'documentacion-relevante', title: 'Documentacion relevante', category: 'referencia', order: 0 }
   ];
 
-  const routeAliases = {
-    'cronologia': 'linea-temporal',
-    'recepcion-urbanizacion': 'contexto-general',
-    'sentencia-tsjcyl': 'opciones-legales'
-  };
+  const routeAliases = {};
 
   function getRootPrefix() {
     return document.body.dataset.docRoot || '.';
@@ -39,7 +27,7 @@
     const maybeSlug = parts[parts.length - 1];
     if (maybeSlug && maybeSlug !== 'doc.html') return maybeSlug;
 
-    return 'documento-principal';
+    return 'documentacion-relevante';
   }
 
   function canonicalSlug(slug) {
@@ -79,7 +67,7 @@
       <header class="header doc-header-top" id="header">
         <div class="header-container">
           <a href="${getRootPrefix()}/index.html" class="logo"><span class="logo-text">LASR</span></a>
-          <nav class="doc-top-actions" aria-label="Acciones"><a class="btn btn-secondary doc-back-btn" href="${getRootPrefix()}/index.html#documentacion">Volver al portal</a></nav>
+          <nav class="doc-top-actions" aria-label="Acciones"><a class="btn btn-secondary doc-back-btn" href="${getRootPrefix()}/index.html#documentos">Volver al portal</a></nav>
         </div>
       </header>
       <main class="doc-page">
