@@ -73,6 +73,23 @@
         return div.innerHTML;
     }
 
+    function sanitizeExternalUrl(url) {
+        if (typeof url !== 'string') return '';
+        const trimmed = url.trim();
+        if (!trimmed) return '';
+
+        try {
+            const parsed = new URL(trimmed, window.location.origin);
+            if (parsed.protocol === 'http:' || parsed.protocol === 'https:') {
+                return parsed.href;
+            }
+        } catch (error) {
+            return '';
+        }
+
+        return '';
+    }
+
     async function updateFooterMeta() {
         const repoLink = document.getElementById('footerRepoLink');
         const licenseLink = document.getElementById('footerLicenseLink');
@@ -83,10 +100,12 @@
             if (configResponse.ok) {
                 const config = await configResponse.json();
                 if (repoLink && config?.project?.repositoryUrl) {
-                    repoLink.href = config.project.repositoryUrl;
+                    const safeRepoUrl = sanitizeExternalUrl(config.project.repositoryUrl);
+                    if (safeRepoUrl) repoLink.href = safeRepoUrl;
                 }
                 if (licenseLink && config?.project?.licenseUrl) {
-                    licenseLink.href = config.project.licenseUrl;
+                    const safeLicenseUrl = sanitizeExternalUrl(config.project.licenseUrl);
+                    if (safeLicenseUrl) licenseLink.href = safeLicenseUrl;
                 }
                 if (licenseLink && config?.project?.license) {
                     licenseLink.textContent = `Licencia ${config.project.license}`;
@@ -176,14 +195,15 @@
         elements.sentenciaContent.innerHTML = html;
 
         if (elements.sentenciaLinkCta) {
-            if (data.enlace?.url) {
+            const safeSentenciaUrl = sanitizeExternalUrl(data.enlace?.url || '');
+            if (safeSentenciaUrl) {
                 elements.sentenciaLinkCta.innerHTML = `
                     <div class="sentencia-cta fade-in">
                         <div class="sentencia-cta-content">
                             <h3 class="sentencia-cta-title">Texto completo de la sentencia</h3>
                             <p class="sentencia-cta-text">${escapeHtml(data.enlace.ayuda || 'Consulta la fuente oficial para revisar la resolución completa.')}</p>
                         </div>
-                        <a href="${escapeHtml(data.enlace.url)}" class="btn btn-secondary sentencia-cta-button" target="_blank" rel="noopener">
+                        <a href="${escapeHtml(safeSentenciaUrl)}" class="btn btn-secondary sentencia-cta-button" target="_blank" rel="noopener noreferrer">
                             ${escapeHtml(data.enlace.texto || 'Consultar sentencia')}
                         </a>
                     </div>
@@ -281,8 +301,9 @@
 
             groupItems.forEach((doc, cardIndex) => {
                 const typeClass = (doc.tipo || 'documento').toLowerCase();
-                const linkHtml = doc.url && doc.url !== '#'
-                    ? `<a href="${escapeHtml(doc.url)}" class="doc-link" target="_blank" rel="noopener">Ver fuente ${icons.external}</a>`
+                const safeDocUrl = sanitizeExternalUrl(doc.url || '');
+                const linkHtml = safeDocUrl
+                    ? `<a href="${escapeHtml(safeDocUrl)}" class="doc-link" target="_blank" rel="noopener noreferrer">Ver fuente ${icons.external}</a>`
                     : '';
 
                 groupCards += `
