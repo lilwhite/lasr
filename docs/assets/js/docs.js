@@ -34,6 +34,78 @@
     return routeAliases[slug] || slug;
   }
 
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
+  function sanitizeUrl(url, options = {}) {
+    if (typeof url !== 'string') return '';
+    const trimmed = url.trim();
+    if (!trimmed) return '';
+
+    const allowRelative = options.allowRelative === true;
+    const allowHash = options.allowHash === true;
+    const allowMailto = options.allowMailto === true;
+
+    if (allowHash && trimmed.startsWith('#')) return trimmed;
+
+    if (allowRelative && !trimmed.includes(':') && !trimmed.startsWith('//')) {
+      return trimmed;
+    }
+
+    try {
+      const parsed = new URL(trimmed, window.location.origin);
+      if (parsed.protocol === 'http:' || parsed.protocol === 'https:') {
+        return parsed.href;
+      }
+      if (allowMailto && parsed.protocol === 'mailto:') {
+        return parsed.href;
+      }
+    } catch (error) {
+      return '';
+    }
+
+    return '';
+  }
+
+  function sanitizeRenderedHtml(html) {
+    const template = document.createElement('template');
+    template.innerHTML = html;
+
+    const blockedSelectors = 'script, iframe, object, embed, form, input, button, link, meta, base';
+    template.content.querySelectorAll(blockedSelectors).forEach((node) => node.remove());
+
+    const nodes = template.content.querySelectorAll('*');
+    nodes.forEach((node) => {
+      Array.from(node.attributes).forEach((attr) => {
+        const name = attr.name.toLowerCase();
+        const value = attr.value || '';
+
+        if (name.startsWith('on')) {
+          node.removeAttribute(attr.name);
+          return;
+        }
+
+        if (name === 'href' || name === 'src' || name === 'xlink:href') {
+          const safe = sanitizeUrl(value, { allowRelative: true, allowHash: true, allowMailto: true });
+          if (!safe) {
+            node.removeAttribute(attr.name);
+            return;
+          }
+          node.setAttribute(attr.name, safe);
+        }
+      });
+
+      if (node.tagName === 'A' && node.getAttribute('target') === '_blank') {
+        node.setAttribute('rel', 'noopener noreferrer');
+      }
+    });
+
+    return template.innerHTML;
+  }
+
   function parseFrontmatter(content) {
     const fmRegex = /^---\s*\n([\s\S]*?)\n---\s*\n/;
     const match = content.match(fmRegex);
@@ -101,9 +173,9 @@
           <p class="footer-text"><strong>Los Angeles de San Rafael</strong> — Portal informativo vecinal</p>
           <p class="footer-disclaimer">Este portal tiene caracter informativo y divulgativo. No constituye asesoramiento juridico.</p>
           <p class="footer-links">
-            <a id="footerRepoLink" href="https://github.com/lilwhite/lasr" target="_blank" rel="noopener">Ver repositorio</a>
+            <a id="footerRepoLink" href="https://github.com/lilwhite/lasr" target="_blank" rel="noopener noreferrer">Ver repositorio</a>
             <span>·</span>
-            <a id="footerLicenseLink" href="https://github.com/lilwhite/lasr/blob/main/LICENSE" target="_blank" rel="noopener">Licencia MIT</a>
+            <a id="footerLicenseLink" href="https://github.com/lilwhite/lasr/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">Licencia MIT</a>
           </p>
           <p class="footer-copy">© 2026 — Informacion actualizada a <span id="lastUpdatedDate">10/03/2026</span></p>
         </div>
@@ -132,13 +204,19 @@
     const dateNode = document.getElementById('lastUpdatedDate');
 
     try {
-      const cfgRes = await fetch(`${root}/assets/config.json`);
-      if (cfgRes.ok) {
-        const cfg = await cfgRes.json();
-        if (repoLink && cfg?.project?.repositoryUrl) repoLink.href = cfg.project.repositoryUrl;
-        if (licenseLink && cfg?.project?.licenseUrl) licenseLink.href = cfg.project.licenseUrl;
-        if (licenseLink && cfg?.project?.license) licenseLink.textContent = `Licencia ${cfg.project.license}`;
-      }
+        const cfgRes = await fetch(`${root}/assets/config.json`);
+        if (cfgRes.ok) {
+          const cfg = await cfgRes.json();
+          if (repoLink && cfg?.project?.repositoryUrl) {
+            const safeRepoUrl = sanitizeUrl(cfg.project.repositoryUrl);
+            if (safeRepoUrl) repoLink.href = safeRepoUrl;
+          }
+          if (licenseLink && cfg?.project?.licenseUrl) {
+            const safeLicenseUrl = sanitizeUrl(cfg.project.licenseUrl);
+            if (safeLicenseUrl) licenseLink.href = safeLicenseUrl;
+          }
+          if (licenseLink && cfg?.project?.license) licenseLink.textContent = `Licencia ${cfg.project.license}`;
+        }
     } catch (e) {
       console.warn('No se pudo cargar config del sitio', e);
     }
@@ -165,7 +243,7 @@
     elements.sidebar.innerHTML = sorted
       .map((doc) => {
         const active = doc.slug === currentSlug ? 'active' : '';
-        return `<li><a class="sidebar-link ${active}" href="${linkForSlug(doc.slug)}">${doc.title}</a></li>`;
+        return `<li><a class="sidebar-link ${active}" href="${linkForSlug(doc.slug)}">${escapeHtml(doc.title)}</a></li>`;
       })
       .join('');
   }
@@ -213,7 +291,7 @@
           .map(
             (node) => `
               <li class="doc-toc-item level-${node.level}">
-                <a class="doc-toc-link" href="#${node.id}">${node.title}</a>
+                <a class="doc-toc-link" href="#${node.id}">${escapeHtml(node.title)}</a>
                 ${renderTocList(node.children, depth + 1)}
               </li>
             `
@@ -254,7 +332,7 @@
       <h3 class="sidebar-title">Documentos relacionados</h3>
       <div class="cards">
         ${related
-          .map((d) => `<a class="doc-card" href="${linkForSlug(d.slug)}"><h4 class="doc-title">${d.title}</h4><p class="doc-description">${d.category}</p></a>`)
+          .map((d) => `<a class="doc-card" href="${linkForSlug(d.slug)}"><h4 class="doc-title">${escapeHtml(d.title)}</h4><p class="doc-description">${escapeHtml(d.category)}</p></a>`)
           .join('')}
       </div>
     `;
@@ -329,7 +407,7 @@
       const parsed = parseFrontmatter(raw);
 
       const html = window.marked ? window.marked.parse(parsed.body) : parsed.body;
-      elements.body.innerHTML = html;
+      elements.body.innerHTML = sanitizeRenderedHtml(html);
       enhanceTables(elements.body);
 
       elements.title.textContent = parsed.frontmatter.title || currentDoc.title;
