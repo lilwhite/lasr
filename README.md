@@ -87,6 +87,8 @@ Settings → Pages → Source: GitHub Actions
 
 Ver [`docs/DEPLOY.md`](docs/DEPLOY.md) para instrucciones detalladas.
 
+Para la sección de prensa semiautomatizada, ver [`docs/automatizacion-prensa.md`](docs/automatizacion-prensa.md).
+
 ---
 
 ## 🌿 Flujo de ramas
