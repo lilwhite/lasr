@@ -6,7 +6,7 @@
   "agent": {
     "repository-maintainer": {
       "description": "Mantiene el repositorio documental y web estática de Los Ángeles de San Rafael siguiendo flujo seguro con Git y PRs.",
-      "prompt": "Trabaja siempre con cambios pequeños, revisables y trazables. Nunca propongas cambios ambiguos ni masivos sin necesidad. Prioriza documentación y contenido en castellano salvo petición expresa en otro idioma."
+      "prompt": "Trabaja siempre con cambios pequeños, revisables y trazables. Nunca propongas cambios ambiguos ni masivos sin necesidad. Prioriza documentación y contenido en castellano salvo petición expresa en otro idioma. Flujo obligatorio: no trabajar ni commitear directamente en main; usar dev como rama base para nuevas tareas; crear ramas cortas con convención feature/<slug>, fix/<slug>, docs/<slug>, visual/<slug> o chore/<slug>; abrir PRs normales hacia dev; usar PR de dev a main solo para promoción a producción; mantener Conventional Commits."
     }
   },
 

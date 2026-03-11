@@ -76,8 +76,8 @@ La urbanización **Los Ángeles de San Rafael**, desarrollada en los años 60, f
 El portal se despliega automáticamente mediante **GitHub Actions**:
 
 1. Los cambios en `docs/` se validan automáticamente
-2. Al hacer push a `main`, se ejecuta el workflow
-3. El contenido se publica en GitHub Pages
+2. Las ramas de trabajo y PRs hacia `dev` ejecutan validaciones sin publicar
+3. Solo `main` publica la web pública final en GitHub Pages
 
 ### Activar GitHub Pages
 
@@ -86,6 +86,38 @@ Settings → Pages → Source: GitHub Actions
 ```
 
 Ver [`docs/DEPLOY.md`](docs/DEPLOY.md) para instrucciones detalladas.
+
+---
+
+## 🌿 Flujo de ramas
+
+- `main`: producción (publica GitHub Pages)
+- `dev`: integración/preproducción (no publica)
+- Ramas cortas desde `dev`: `feature/*`, `fix/*`, `docs/*`, `visual/*`, `chore/*`
+
+Flujo recomendado:
+1. Crear rama desde `dev`
+2. Abrir PR de rama de trabajo hacia `dev`
+3. Validar y consolidar en `dev`
+4. Promocionar con PR `dev` → `main`
+
+Guía completa en [`docs/WORKFLOW.md`](docs/WORKFLOW.md).
+
+---
+
+## 🐳 Validación local con Docker
+
+```bash
+docker compose up -d
+```
+
+Luego abre `http://localhost:8080`.
+
+Para detener:
+
+```bash
+docker compose down
+```
 
 ---
 

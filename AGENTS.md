@@ -33,30 +33,39 @@ El agente debe trabajar siguiendo este flujo obligatorio:
 #### Reglas Obligatorias
 
 1. **NUNCA hacer commit directo en `main`**
-2. **Siempre crear rama para cada tarea**
+2. **NUNCA hacer commit directo en `dev`**
+3. **Siempre crear rama para cada tarea**
+4. **Las ramas de trabajo deben nacer desde `dev`**
 
 #### Pasos por Tarea
 
-1. **Crear rama** con formato:
+1. **Actualizar rama base local `dev`** y crear rama de trabajo desde `dev`.
+
+2. **Crear rama** con formato:
    ```
-   ai/<tipo>/<descripcion-corta>
+   <tipo>/<descripcion-corta>
    ```
    Ejemplos:
-   - `ai/docs/add-legal-roadmap`
-   - `ai/docs/update-timeline`
-   - `ai/site/add-navigation`
+   - `feature/mejorar-linea-tiempo`
+   - `fix/corregir-enlace-sentencia`
+   - `docs/actualizar-fuentes`
+   - `visual/ajustar-cards-documentacion`
+   - `chore/actualizar-workflows`
 
-2. **Hacer cambios** en los archivos necesarios
+3. **Hacer cambios** en los archivos necesarios
 
-3. **Hacer commit** siguiendo Conventional Commits:
+4. **Hacer commit** siguiendo Conventional Commits:
    - `feat:` nueva funcionalidad
    - `docs:` cambios en documentación
    - `fix:` corrección
    - `refactor:` mejora interna
+   - `chore:` cambios operativos/infraestructura
 
-4. **Hacer push** de la rama
+5. **Hacer push** de la rama
 
-5. **Crear Pull Request** hacia `main`
+6. **Crear Pull Request normal** hacia `dev`
+
+7. **Promoción a producción**: crear PR de `dev` hacia `main`.
 
 #### Formato de la Pull Request
 
@@ -76,9 +85,12 @@ Por qué se realiza este cambio.
 #### Reglas Importantes
 
 - ✅ El agente **debe** crear ramas para cada cambio
+- ✅ El agente **debe** crear ramas desde `dev`
 - ✅ El agente **debe** hacer commit con Conventional Commits
-- ✅ El agente **debe** crear PRs hacia main
+- ✅ El agente **debe** crear PRs normales hacia `dev`
+- ✅ El agente **debe** usar PR `dev` → `main` para producción
 - ❌ El agente **nunca** debe hacer commit directo en main
+- ❌ El agente **nunca** debe hacer commit directo en dev
 - ❌ El agente **nunca** debe hacer merge automático
 - ❌ La revisión humana es **obligatoria** antes del merge
 
@@ -172,8 +184,9 @@ No aplica - es un proyecto de documentación sin código fuente.
 El portal está diseñado para GitHub Pages mediante GitHub Actions:
 
 1. Los cambios en `docs/` se validan automáticamente
-2. Al hacer push a `main`, el workflow copia `docs/` a `dist/`
-3. GitHub Pages sirve el contenido desde `dist/`
+2. Las ramas de trabajo y PRs hacia `dev` ejecutan validaciones
+3. `dev` actúa como integración previa sin publicación final
+4. Solo `main` publica en GitHub Pages copiando `docs/` a `dist/`
 
 **Activar GitHub Actions:**
 - Settings → Pages → Source: **GitHub Actions**
