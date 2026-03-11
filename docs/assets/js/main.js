@@ -146,47 +146,6 @@
         }
     }
 
-    function toSortableDate(dateValue) {
-        if (!dateValue || typeof dateValue !== 'string') return null;
-        const parsed = new Date(dateValue);
-        if (Number.isNaN(parsed.getTime())) return null;
-        return parsed;
-    }
-
-    function formatPressDate(dateValue) {
-        const parsed = toSortableDate(dateValue);
-        if (!parsed) return 'Fecha no disponible';
-        return parsed.toLocaleDateString('es-ES', {
-            year: 'numeric',
-            month: '2-digit',
-            day: '2-digit'
-        });
-    }
-
-    function getRelevantPressNews(limit = 6) {
-        const filtered = pressNews.filter(item => {
-            if (!item || typeof item !== 'object') return false;
-            if (item.isRelevant !== true) return false;
-            return typeof item.title === 'string' && typeof item.url === 'string';
-        });
-
-        filtered.sort((a, b) => {
-            const dateA = toSortableDate(a.date);
-            const dateB = toSortableDate(b.date);
-
-            if (dateA && dateB) {
-                return dateB.getTime() - dateA.getTime();
-            }
-
-            if (dateA && !dateB) return -1;
-            if (!dateA && dateB) return 1;
-
-            return (Number(b.relevanceScore) || 0) - (Number(a.relevanceScore) || 0);
-        });
-
-        return filtered.slice(0, limit);
-    }
-
     // ============================================
     // Render Functions
     // ============================================
@@ -358,7 +317,9 @@
             const groupKey = (group.key || '').toString().toLowerCase();
             const isPressGroup = groupKey === 'prensa' || (group.titulo || '').toString().trim().toLowerCase() === 'prensa';
             const groupItems = Array.isArray(group.items) ? group.items : [];
-            const pressItems = isPressGroup ? getRelevantPressNews(6) : [];
+            const pressItems = isPressGroup && window.PressUtils
+                ? window.PressUtils.getLandingFeaturedNews(pressNews, 3)
+                : [];
             let groupCards = '';
 
             if (isPressGroup && pressItems.length === 0) {
@@ -375,12 +336,28 @@
             const iterableItems = isPressGroup
                 ? pressItems.map(item => ({
                     tipo: 'prensa',
+                    source: item.source,
                     titulo: item.title,
                     descripcion: item.excerpt || 'Cobertura periodística relacionada con Los Ángeles de San Rafael.',
                     url: item.url,
-                    fecha: `${formatPressDate(item.date)} · ${item.source || 'Fuente sin identificar'}`
+                    fecha: window.PressUtils
+                        ? `${window.PressUtils.formatDate(item.date)} · ${window.PressUtils.getCategoryLabel(item.category)}`
+                        : (item.date || 'Fecha no disponible')
                 }))
                 : groupItems;
+
+            if (isPressGroup) {
+                while (iterableItems.length < 3) {
+                    iterableItems.push({
+                        tipo: 'prensa',
+                        source: 'Selección editorial',
+                        titulo: 'Nueva noticia en revisión editorial',
+                        descripcion: 'Estamos incorporando nuevas referencias periodísticas relevantes para Los Ángeles de San Rafael.',
+                        url: '',
+                        fecha: 'Actualización en curso'
+                    });
+                }
+            }
 
             iterableItems.forEach((doc, cardIndex) => {
                 const typeClass = (doc.tipo || 'documento').toLowerCase();
@@ -390,15 +367,24 @@
                     : '';
 
                 groupCards += `
-                    <div class="doc-card fade-in" style="animation-delay: ${(groupIndex * 0.08) + (cardIndex * 0.04)}s">
+                    <div class="doc-card ${isPressGroup ? 'press-featured-card' : ''} fade-in" style="animation-delay: ${(groupIndex * 0.08) + (cardIndex * 0.04)}s">
                         <span class="doc-type ${typeClass}">${escapeHtml(doc.tipo || 'Documento')}</span>
+                        ${doc.source ? `<span class="press-source-badge">${escapeHtml(doc.source)}</span>` : ''}
                         <h3 class="doc-title">${escapeHtml(doc.titulo)}</h3>
-                        <p class="doc-description">${escapeHtml(doc.descripcion || '')}</p>
+                        <p class="doc-description press-excerpt">${escapeHtml(doc.descripcion || '')}</p>
                         ${doc.fecha ? `<p class="doc-meta">${escapeHtml(doc.fecha)}</p>` : ''}
                         ${linkHtml}
                     </div>
                 `;
             });
+
+            if (isPressGroup) {
+                groupCards += `
+                    <div class="press-archive-link-wrap fade-in" style="animation-delay: ${(groupIndex * 0.08) + 0.18}s">
+                        <a href="prensa/" class="btn btn-secondary">Ver archivo de prensa</a>
+                    </div>
+                `;
+            }
 
             html += `
                 <section class="doc-group">
