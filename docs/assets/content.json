@@ -289,31 +289,10 @@
         ]
       },
       {
+        "key": "prensa",
         "titulo": "Prensa",
-        "descripcion": "Cobertura periodística para contexto y seguimiento.",
-        "items": [
-          {
-            "titulo": "El Adelantado",
-            "descripcion": "Cobertura sobre la recepción de la urbanización.",
-            "tipo": "prensa",
-            "url": "https://eladelantado.com/provincia/2013/01/04/el_tsjcyl_obliga_al_ayuntamiento_a_recepcionar_los_angeles_de_san_rafael/",
-            "fecha": "2013"
-          },
-          {
-            "titulo": "El Espinar Hoy",
-            "descripcion": "Contexto reciente sobre la situación de la urbanización.",
-            "tipo": "prensa",
-            "url": "https://www.elespinarhoy.com/2026/03/06/el-espinar-entre-dos-mundos-vecinos-de-siempre-frente-al-auge-de-las-casas-de-fin-de-semana/",
-            "fecha": "2026"
-          },
-          {
-            "titulo": "Fuente externa adicional",
-            "descripcion": "Espacio reservado para nuevas fuentes periodísticas relevantes.",
-            "tipo": "prensa",
-            "url": "",
-            "fecha": "Pendiente de incorporar"
-          }
-        ]
+        "descripcion": "Cobertura periodística relevante para seguimiento vecinal y urbanístico.",
+        "items": []
       }
     ]
   },
