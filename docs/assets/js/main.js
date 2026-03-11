@@ -13,6 +13,7 @@
         contentPath: 'assets/content.json',
         configPath: 'assets/config.json',
         buildMetaPath: 'assets/build-meta.json',
+        pressDataPath: 'data/prensa/curated_news.json',
         animationDelay: 100
     };
 
@@ -20,6 +21,7 @@
     // State
     // ============================================
     let content = null;
+    let pressNews = [];
     let isLoading = true;
 
     // ============================================
@@ -126,6 +128,63 @@
         } catch (error) {
             console.warn('No se pudo cargar build-meta.json', error);
         }
+    }
+
+    async function loadPressNews() {
+        try {
+            const response = await fetch(CONFIG.pressDataPath);
+            if (!response.ok) {
+                pressNews = [];
+                return;
+            }
+
+            const payload = await response.json();
+            pressNews = Array.isArray(payload) ? payload : [];
+        } catch (error) {
+            console.warn('No se pudo cargar curated_news.json', error);
+            pressNews = [];
+        }
+    }
+
+    function toSortableDate(dateValue) {
+        if (!dateValue || typeof dateValue !== 'string') return null;
+        const parsed = new Date(dateValue);
+        if (Number.isNaN(parsed.getTime())) return null;
+        return parsed;
+    }
+
+    function formatPressDate(dateValue) {
+        const parsed = toSortableDate(dateValue);
+        if (!parsed) return 'Fecha no disponible';
+        return parsed.toLocaleDateString('es-ES', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit'
+        });
+    }
+
+    function getRelevantPressNews(limit = 6) {
+        const filtered = pressNews.filter(item => {
+            if (!item || typeof item !== 'object') return false;
+            if (item.isRelevant !== true) return false;
+            return typeof item.title === 'string' && typeof item.url === 'string';
+        });
+
+        filtered.sort((a, b) => {
+            const dateA = toSortableDate(a.date);
+            const dateB = toSortableDate(b.date);
+
+            if (dateA && dateB) {
+                return dateB.getTime() - dateA.getTime();
+            }
+
+            if (dateA && !dateB) return -1;
+            if (!dateA && dateB) return 1;
+
+            return (Number(b.relevanceScore) || 0) - (Number(a.relevanceScore) || 0);
+        });
+
+        return filtered.slice(0, limit);
     }
 
     // ============================================
@@ -296,10 +355,34 @@
         ];
 
         groups.forEach((group, groupIndex) => {
+            const groupKey = (group.key || '').toString().toLowerCase();
+            const isPressGroup = groupKey === 'prensa' || (group.titulo || '').toString().trim().toLowerCase() === 'prensa';
             const groupItems = Array.isArray(group.items) ? group.items : [];
+            const pressItems = isPressGroup ? getRelevantPressNews(6) : [];
             let groupCards = '';
 
-            groupItems.forEach((doc, cardIndex) => {
+            if (isPressGroup && pressItems.length === 0) {
+                groupCards = `
+                    <div class="doc-card fade-in">
+                        <span class="doc-type prensa">Prensa</span>
+                        <h3 class="doc-title">Sin noticias relevantes publicadas</h3>
+                        <p class="doc-description">Estamos actualizando la recopilación periodística. Vuelve en próximos días para consultar nuevas referencias.</p>
+                        <p class="doc-meta">Estado: pendiente de actualización</p>
+                    </div>
+                `;
+            }
+
+            const iterableItems = isPressGroup
+                ? pressItems.map(item => ({
+                    tipo: 'prensa',
+                    titulo: item.title,
+                    descripcion: item.excerpt || 'Cobertura periodística relacionada con Los Ángeles de San Rafael.',
+                    url: item.url,
+                    fecha: `${formatPressDate(item.date)} · ${item.source || 'Fuente sin identificar'}`
+                }))
+                : groupItems;
+
+            iterableItems.forEach((doc, cardIndex) => {
                 const typeClass = (doc.tipo || 'documento').toLowerCase();
                 const safeDocUrl = sanitizeExternalUrl(doc.url || '');
                 const linkHtml = safeDocUrl
@@ -506,6 +589,9 @@
             // Load content
             const response = await fetch(CONFIG.contentPath);
             content = await response.json();
+
+            // Load press feed
+            await loadPressNews();
             
             // Render content
             renderAll();
