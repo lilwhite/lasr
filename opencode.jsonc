@@ -1,198 +1,34 @@
 {
-  // Configuración base de OpenCode para trabajo seguro sobre Git
-  "$schema": "./schemas/opencode.schema.json",
+  "$schema": "https://opencode.ai/config.json",
 
-  "project": {
-    "name": "los-angeles-de-san-rafael",
-    "description": "Repositorio documental y web estática del proyecto Los Ángeles de San Rafael",
-    "defaultBranch": "main",
-    "language": "es"
-  },
-
-  "git": {
-    // Nunca trabajar directamente sobre main
-    "directCommitToDefaultBranch": false,
-
-    // Patrón de ramas para cambios generados por agente
-    "branchNaming": {
-      "enabled": true,
-      "pattern": "ai/{type}/{slug}",
-      "allowedTypes": [
-        "docs",
-        "web",
-        "legal",
-        "visual",
-        "data",
-        "fix",
-        "infra"
-      ]
-    },
-
-    // Convención de commits
-    "commits": {
-      "enabled": true,
-      "convention": "conventional-commits",
-      "allowedTypes": [
-        "feat",
-        "fix",
-        "docs",
-        "refactor",
-        "chore"
-      ]
-    },
-
-    // Política de Pull Request
-    "pullRequests": {
-      "enabled": true,
-      "targetBranch": "main",
-      "autoCreate": true,
-      "autoMerge": false,
-      "draft": false,
-      "requireHumanReview": true,
-      "titleTemplate": "{commitType}: {changeSummary}",
-      "bodyTemplate": [
-        "## Summary",
-        "{summary}",
-        "",
-        "## Changes",
-        "{changes}",
-        "",
-        "## Purpose",
-        "{purpose}",
-        "",
-        "## Validation",
-        "{validation}"
-      ]
-    }
-  },
+  "default_agent": "repository-maintainer",
 
   "agent": {
-    "mode": "repository-maintainer",
-    "rules": [
-      "Nunca hacer commit directo sobre main.",
-      "Para cada cambio, crear una rama nueva antes de modificar archivos.",
-      "Usar nombres de rama con formato ai/<type>/<slug>.",
-      "Hacer commits siguiendo Conventional Commits.",
-      "Abrir Pull Request automáticamente contra main.",
-      "Nunca hacer merge automático.",
-      "Priorizar cambios pequeños, trazables y revisables.",
-      "Mantener todo el contenido y documentación en castellano salvo que se solicite lo contrario."
-    ],
-
-    "workflow": [
-      "Analizar la solicitud",
-      "Clasificar el tipo de cambio",
-      "Crear rama nueva",
-      "Modificar archivos necesarios",
-      "Validar estructura y consistencia",
-      "Crear commit",
-      "Hacer push",
-      "Abrir PR con resumen claro"
-    ]
-  },
-
-  "classification": {
-    // Mapeo simple de tipos de cambio a carpetas/ámbitos
-    "types": {
-      "docs": {
-        "description": "Cambios de documentación",
-        "paths": ["docs/**", "README.md", "*.md"]
-      },
-      "web": {
-        "description": "Cambios en la web estática o navegación",
-        "paths": ["web/**", "docs/web/**", "assets/**", "index.html"]
-      },
-      "legal": {
-        "description": "Contenido jurídico, cronologías y materiales legales",
-        "paths": ["docs/legal/**", "docs/roadmap/**", "docs/cronologia/**"]
-      },
-      "visual": {
-        "description": "Diagramas, esquemas, imágenes y recursos visuales",
-        "paths": ["assets/**", "docs/visual/**", "docs/diagrams/**"]
-      },
-      "data": {
-        "description": "Datos estructurados, JSON, CSV, inventarios",
-        "paths": ["data/**", "*.json", "*.csv", "*.yaml", "*.yml"]
-      },
-      "fix": {
-        "description": "Correcciones puntuales",
-        "paths": ["**"]
-      },
-      "infra": {
-        "description": "Workflows, GitHub Pages, CI/CD, configuración",
-        "paths": [".github/**", "infra/**", "*.jsonc", "*.json"]
-      }
+    "repository-maintainer": {
+      "description": "Mantiene el repositorio documental y web estática de Los Ángeles de San Rafael siguiendo flujo seguro con Git y PRs.",
+      "prompt": "Trabaja siempre con cambios pequeños, revisables y trazables. Nunca propongas cambios ambiguos ni masivos sin necesidad. Prioriza documentación y contenido en castellano salvo petición expresa en otro idioma."
     }
   },
 
-  "validation": {
-    "enabled": true,
-    "checks": [
-      {
-        "name": "no-main-direct-write",
-        "description": "Bloquear cambios directos sobre la rama principal"
-      },
-      {
-        "name": "markdown-structure",
-        "description": "Validar estructura básica de documentos markdown"
-      },
-      {
-        "name": "link-consistency",
-        "description": "Verificar enlaces relativos si aplica"
-      },
-      {
-        "name": "pages-compatibility",
-        "description": "Comprobar compatibilidad básica con GitHub Pages"
-      }
+  "instructions": [
+    "AGENTS.md"
+  ],
+
+  "watcher": {
+    "ignore": [
+      ".git/**",
+      "node_modules/**",
+      "dist/**",
+      ".next/**"
     ]
   },
 
-  "prDefaults": {
-    "labels": [
-      "ai-generated",
-      "needs-review"
-    ],
-    "reviewChecklist": [
-      "La rama sigue la convención ai/<type>/<slug>",
-      "No hay cambios directos sobre main",
-      "El contenido está en castellano",
-      "La modificación está acotada al alcance solicitado",
-      "La PR describe claramente el propósito del cambio"
-    ]
+  "permission": {
+    "bash": "ask",
+    "edit": "ask",
+    "write": "ask"
   },
 
-  "contentPolicy": {
-    "defaultLanguage": "es",
-    "tone": "claro, formal, comprensible para vecinos y no técnicos cuando aplique",
-    "documentationStyle": {
-      "prefer": [
-        "cronologías",
-        "resúmenes ejecutivos",
-        "mapas visuales sencillos",
-        "documentos markdown reutilizables"
-      ],
-      "avoid": [
-        "jergas innecesarias",
-        "ambigüedad",
-        "cambios masivos no solicitados"
-      ]
-    }
-  },
-
-  "outputs": {
-    "preferredFormats": [
-      "md",
-      "json",
-      "jsonc",
-      "html",
-      "yaml"
-    ],
-    "artifacts": {
-      "roadmaps": "docs/roadmap/",
-      "legalDocs": "docs/legal/",
-      "summaries": "docs/resumenes/",
-      "visualDocs": "docs/visual/",
-      "web": "web/"
-    }
-  }
+  "share": "manual",
+  "autoupdate": "notify"
 }
