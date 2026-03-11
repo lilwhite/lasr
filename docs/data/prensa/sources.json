@@ -1,0 +1,122 @@
+{
+  "max_per_source": 50,
+  "max_items": 150,
+  "sources": [
+    {
+      "name": "La Voz de El Espinar",
+      "domain": "lavozdeelespinar.es",
+      "feeds": [
+        "https://lavozdeelespinar.es/feed/"
+      ]
+    },
+    {
+      "name": "El Adelantado",
+      "domain": "eladelantado.com",
+      "feeds": [
+        "https://eladelantado.com/feed/"
+      ]
+    },
+    {
+      "name": "El Espinar Hoy",
+      "domain": "elespinarhoy.com",
+      "feeds": [
+        "https://www.elespinarhoy.com/feed/"
+      ]
+    }
+  ],
+  "relevance": {
+    "min_score": 7,
+    "priority_phrase": {
+      "los angeles de san rafael": 10,
+      "los ángeles de san rafael": 10,
+      "urbanizacion los angeles": 8,
+      "urbanización los ángeles": 8
+    },
+    "include": {
+      "urbanizacion": 4,
+      "urbanización": 4,
+      "propietarios": 4,
+      "vecinos": 4,
+      "junta": 3,
+      "eucc": 6,
+      "recepcion": 5,
+      "recepción": 5,
+      "urbanismo": 5,
+      "ayuntamiento": 3,
+      "infraestructuras": 4,
+      "servicios": 4,
+      "sentencia": 4,
+      "planeamiento": 4,
+      "conservacion": 4,
+      "conservación": 4,
+      "mantenimiento": 4,
+      "agua": 3,
+      "saneamiento": 3,
+      "alumbrado": 3,
+      "viales": 3,
+      "seguridad": 2
+    },
+    "exclude": {
+      "deportes": 8,
+      "futbol": 8,
+      "fútbol": 8,
+      "agenda cultural": 7,
+      "concierto": 6,
+      "fiestas": 6,
+      "carnaval": 6,
+      "suceso": 5,
+      "sucesos": 5
+    }
+  },
+  "categories": {
+    "juntas_y_vecinos": [
+      "junta",
+      "propietarios",
+      "vecinos",
+      "comunidad"
+    ],
+    "urbanismo": [
+      "urbanismo",
+      "planeamiento",
+      "licencia",
+      "planeamiento urbanistico",
+      "planeamiento urbanístico"
+    ],
+    "recepcion": [
+      "recepcion",
+      "recepción",
+      "recepcionar",
+      "recepcionable",
+      "recepcion urbanistica",
+      "recepción urbanística"
+    ],
+    "infraestructuras": [
+      "infraestructuras",
+      "viales",
+      "alumbrado",
+      "saneamiento",
+      "red"
+    ],
+    "servicios": [
+      "servicios",
+      "mantenimiento",
+      "agua",
+      "conservacion",
+      "conservación",
+      "seguridad"
+    ],
+    "judicial": [
+      "sentencia",
+      "tribunal",
+      "juzgado",
+      "tsjcyl",
+      "supremo"
+    ],
+    "contexto_municipal": [
+      "ayuntamiento",
+      "municipio",
+      "espinar",
+      "pleno"
+    ]
+  }
+}
