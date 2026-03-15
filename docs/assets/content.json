@@ -396,7 +396,10 @@
       "version": "v1.1.1",
       "fecha": "2026-03-15",
       "cambios": [
-        "Actualización de mantenimiento sin cambios destacados."
+        "chore(release): promover dev a main con mejoras de prensa y release",
+        "chore(workflow): adopt dev-main workflow and local Docker validation",
+        "fix(security): harden static site surface and client rendering",
+        "feat(web): integrar Google Analytics 4"
       ]
     }
   }
