@@ -8,6 +8,7 @@
   };
 
   const elements = {
+    sourceTypeFilter: document.getElementById('pressSourceTypeFilter'),
     sourceFilter: document.getElementById('pressSourceFilter'),
     categoryFilter: document.getElementById('pressCategoryFilter'),
     yearFilter: document.getElementById('pressYearFilter'),
@@ -17,6 +18,12 @@
   };
 
   let relevantNews = [];
+
+  const SOURCE_TYPE_LABELS = {
+    local: 'Local',
+    provincial: 'Provincial',
+    institucional: 'Institucional'
+  };
 
   function escapeHtml(text) {
     const div = document.createElement('div');
@@ -65,8 +72,9 @@
       if (!safeUrl) return '';
       const title = escapeHtml(item.title || 'Sin titular');
       const source = escapeHtml(item.source || 'Medio no disponible');
+      const sourceType = escapeHtml(SOURCE_TYPE_LABELS[item.sourceType] || 'General');
       const category = escapeHtml(window.PressUtils.getCategoryLabel(item.category));
-      const excerpt = escapeHtml((item.excerpt || '').slice(0, 220));
+      const excerpt = escapeHtml((item.summary || item.excerpt || '').slice(0, 220));
       const date = escapeHtml(window.PressUtils.formatDate(item.date));
 
       return `
@@ -74,6 +82,7 @@
           <div class="press-row-main">
             <div class="press-row-meta" aria-label="Metadatos de la noticia">
               <span class="press-meta-date">${date}</span>
+              <span class="press-meta-type press-meta-type-${(item.sourceType || 'general').toLowerCase()}">${sourceType}</span>
               <span class="press-meta-chip">${source}</span>
               <span class="press-meta-chip">${category}</span>
             </div>
@@ -93,6 +102,7 @@
 
   function readFilters() {
     return {
+      sourceType: elements.sourceTypeFilter.value,
       source: elements.sourceFilter.value,
       category: elements.categoryFilter.value,
       year: elements.yearFilter.value,
@@ -117,7 +127,7 @@
     buildOptions(elements.categoryFilter, window.PressUtils.getFilterValues(relevantNews, 'category'), window.PressUtils.getCategoryLabel);
     buildOptions(elements.yearFilter, window.PressUtils.getFilterYears(relevantNews));
 
-    [elements.sourceFilter, elements.categoryFilter, elements.yearFilter].forEach((node) => {
+    [elements.sourceTypeFilter, elements.sourceFilter, elements.categoryFilter, elements.yearFilter].forEach((node) => {
       node.addEventListener('change', applyCurrentFilters);
     });
     elements.queryFilter.addEventListener('input', applyCurrentFilters);

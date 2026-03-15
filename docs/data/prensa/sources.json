@@ -1,9 +1,12 @@
 {
-  "max_per_source": 50,
-  "max_items": 260,
+  "max_per_source": 80,
+  "max_items": 420,
+  "relevance_threshold": 10,
   "sources": [
     {
       "name": "La Voz de El Espinar",
+      "adapter": "lavozespinar",
+      "source_type": "local",
       "domain": "lavozdeelespinar.es",
       "feeds": [
         "https://lavozdeelespinar.es/feed/"
@@ -12,124 +15,177 @@
       "wp_per_page": 100,
       "historical_searches": [
         "los angeles de san rafael",
-        "los ángeles de san rafael",
-        "urbanizacion los angeles",
-        "urbanización los ángeles",
+        "urbanizacion los angeles de san rafael",
         "entidad urbanistica de conservacion",
-        "entidad urbanística de conservación",
-        "recepcion urbanizacion",
-        "recepción urbanización"
+        "euc",
+        "infraestructuras",
+        "n-603",
+        "presa del tejo",
+        "consultorio"
+      ],
+      "related_to": [
+        "los-angeles-de-san-rafael"
       ]
     },
     {
-      "name": "El Adelantado",
+      "name": "El Norte de Castilla",
+      "adapter": "elnortedecastilla",
+      "source_type": "provincial",
+      "domain": "elnortedecastilla.es",
+      "feeds": [
+        "https://www.elnortedecastilla.es/rss/2.0/?section=segovia",
+        "https://www.elnortedecastilla.es/rss/2.0/?section=municipalismo/segovia",
+        "https://www.elnortedecastilla.es/rss/2.0/?section=castillayleon"
+      ],
+      "related_to": [
+        "los-angeles-de-san-rafael",
+        "el-espinar"
+      ]
+    },
+    {
+      "name": "El Adelantado de Segovia",
+      "adapter": "eladelantado",
+      "source_type": "provincial",
       "domain": "eladelantado.com",
       "feeds": [
         "https://eladelantado.com/feed/"
+      ],
+      "related_to": [
+        "los-angeles-de-san-rafael",
+        "el-espinar"
       ]
     },
     {
-      "name": "El Espinar Hoy",
-      "domain": "elespinarhoy.com",
+      "name": "Segovia Audaz",
+      "adapter": "segoviaaudaz",
+      "source_type": "provincial",
+      "domain": "segoviaaudaz.es",
+      "feeds": [],
+      "related_to": [
+        "los-angeles-de-san-rafael",
+        "el-espinar"
+      ]
+    },
+    {
+      "name": "Ayuntamiento de El Espinar",
+      "adapter": "ayuntamiento_elespinar",
+      "source_type": "institucional",
+      "domain": "elespinar.es",
       "feeds": [
-        "https://www.elespinarhoy.com/feed/"
+        "https://elespinar.es/feed/"
+      ],
+      "related_to": [
+        "los-angeles-de-san-rafael",
+        "el-espinar"
+      ]
+    },
+    {
+      "name": "Diputación de Segovia",
+      "adapter": "diputacion_segovia",
+      "source_type": "institucional",
+      "domain": "dipsegovia.es",
+      "feeds": [],
+      "related_to": [
+        "los-angeles-de-san-rafael",
+        "el-espinar"
+      ]
+    },
+    {
+      "name": "Junta de Castilla y León",
+      "adapter": "junta_cyl",
+      "source_type": "institucional",
+      "domain": "jcyl.es",
+      "feeds": [],
+      "related_to": [
+        "los-angeles-de-san-rafael",
+        "castilla-y-leon"
       ]
     }
   ],
-  "relevance": {
-    "min_score": 7,
-    "priority_phrase": {
-      "los angeles de san rafael": 10,
-      "los ángeles de san rafael": 10,
-      "urbanizacion los angeles": 8,
-      "urbanización los ángeles": 8
-    },
-    "include": {
-      "urbanizacion": 4,
-      "urbanización": 4,
-      "propietarios": 4,
-      "vecinos": 4,
-      "junta": 3,
-      "euc": 6,
-      "eucc": 6,
-      "recepcion": 5,
-      "recepción": 5,
-      "urbanismo": 5,
-      "ayuntamiento": 3,
-      "infraestructuras": 4,
-      "servicios": 4,
-      "sentencia": 4,
-      "planeamiento": 4,
-      "conservacion": 4,
-      "conservación": 4,
-      "mantenimiento": 4,
-      "agua": 3,
-      "saneamiento": 3,
-      "alumbrado": 3,
-      "viales": 3,
-      "seguridad": 2
-    },
-    "exclude": {
-      "deportes": 8,
-      "futbol": 8,
-      "fútbol": 8,
-      "agenda cultural": 7,
-      "concierto": 6,
-      "fiestas": 6,
-      "carnaval": 6,
-      "suceso": 5,
-      "sucesos": 5
-    }
+  "scoring": {
+    "relation_terms": [
+      "los angeles de san rafael",
+      "urbanizacion los angeles de san rafael",
+      "entidad urbanistica de conservacion",
+      "euc",
+      "el espinar"
+    ],
+    "unclear_relation_penalty": 10,
+    "positive": [
+      {"term": "los angeles de san rafael", "weight": 10},
+      {"term": "urbanizacion los angeles de san rafael", "weight": 8},
+      {"term": "euc", "weight": 6},
+      {"term": "entidad urbanistica de conservacion", "weight": 6},
+      {"term": "urbanismo", "weight": 5},
+      {"term": "vecinos", "weight": 4},
+      {"term": "consultorio", "weight": 4},
+      {"term": "sanidad", "weight": 4},
+      {"term": "seguridad", "weight": 4},
+      {"term": "ocupacion", "weight": 4},
+      {"term": "okupacion", "weight": 4},
+      {"term": "n-603", "weight": 3},
+      {"term": "infraestructuras", "weight": 3},
+      {"term": "pasarela", "weight": 3},
+      {"term": "presa del tejo", "weight": 3},
+      {"term": "mancomunidad", "weight": 3},
+      {"term": "milasr", "weight": 3}
+    ],
+    "negative": [
+      {"term": "fiestas", "weight": 8},
+      {"term": "concierto", "weight": 8},
+      {"term": "agenda cultural", "weight": 8},
+      {"term": "evento deportivo", "weight": 8},
+      {"term": "deportes", "weight": 8}
+    ]
   },
   "categories": {
     "juntas_y_vecinos": [
       "junta",
-      "propietarios",
       "vecinos",
-      "comunidad"
+      "asamblea",
+      "milasr",
+      "mancomunidad"
     ],
     "urbanismo": [
       "urbanismo",
       "planeamiento",
       "licencia",
-      "planeamiento urbanistico",
-      "planeamiento urbanístico"
+      "urbanizacion",
+      "urbanización"
     ],
     "recepcion": [
       "recepcion",
       "recepción",
       "recepcionar",
-      "recepcionable",
-      "recepcion urbanistica",
-      "recepción urbanística"
+      "entidad urbanistica",
+      "entidad urbanística"
     ],
     "infraestructuras": [
       "infraestructuras",
-      "viales",
-      "alumbrado",
-      "saneamiento",
-      "red"
+      "n-603",
+      "pasarela",
+      "presa del tejo",
+      "viales"
     ],
     "servicios": [
-      "servicios",
-      "mantenimiento",
+      "consultorio",
+      "sanidad",
+      "seguridad",
       "agua",
-      "conservacion",
-      "conservación",
-      "seguridad"
+      "servicios publicos",
+      "servicios públicos"
     ],
     "judicial": [
       "sentencia",
       "tribunal",
-      "juzgado",
-      "tsjcyl",
-      "supremo"
+      "juzgado"
     ],
     "contexto_municipal": [
       "ayuntamiento",
-      "municipio",
-      "espinar",
-      "pleno"
+      "diputacion",
+      "diputación",
+      "junta",
+      "el espinar"
     ]
   }
 }
