@@ -784,6 +784,11 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--color-secondary);
 }
 
+.doc-type.planeamiento {
+    background-color: rgba(31, 88, 104, 0.12);
+    color: #1f5868;
+}
+
 .doc-type.documento {
     background-color: rgba(45, 90, 90, 0.1);
     color: var(--color-primary);
