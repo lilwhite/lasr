@@ -74,20 +74,20 @@
 
     /* Theme tokens */
     --theme-doc-page-bg: linear-gradient(180deg, #f7f6f2 0%, #f2f4f4 100%);
-    --theme-doc-header-bg: rgba(255, 255, 255, 0.9);
+    --theme-doc-header-bg: rgba(255, 255, 255, 0.84);
     --theme-doc-header-border: rgba(45, 90, 90, 0.14);
-    --theme-overlay-primary-10: rgba(45, 90, 90, 0.1);
-    --theme-overlay-primary-08: rgba(45, 90, 90, 0.08);
+    --theme-overlay-primary-10: rgba(45, 90, 90, 0.09);
+    --theme-overlay-primary-08: rgba(45, 90, 90, 0.07);
     --theme-overlay-primary-07: rgba(45, 90, 90, 0.07);
     --theme-overlay-primary-06: rgba(45, 90, 90, 0.06);
-    --theme-overlay-primary-16: rgba(45, 90, 90, 0.16);
-    --theme-overlay-primary-18: rgba(45, 90, 90, 0.18);
-    --theme-overlay-primary-20: rgba(45, 90, 90, 0.2);
-    --theme-overlay-primary-28: rgba(45, 90, 90, 0.28);
-    --theme-overlay-primary-32: rgba(45, 90, 90, 0.32);
-    --theme-overlay-primary-35: rgba(45, 90, 90, 0.35);
-    --theme-overlay-primary-45: rgba(45, 90, 90, 0.45);
-    --theme-overlay-primary-26: rgba(45, 90, 90, 0.26);
+    --theme-overlay-primary-16: rgba(45, 90, 90, 0.14);
+    --theme-overlay-primary-18: rgba(45, 90, 90, 0.17);
+    --theme-overlay-primary-20: rgba(45, 90, 90, 0.19);
+    --theme-overlay-primary-28: rgba(45, 90, 90, 0.24);
+    --theme-overlay-primary-32: rgba(45, 90, 90, 0.29);
+    --theme-overlay-primary-35: rgba(45, 90, 90, 0.3);
+    --theme-overlay-primary-45: rgba(45, 90, 90, 0.39);
+    --theme-overlay-primary-26: rgba(45, 90, 90, 0.22);
     --theme-overlay-blue-08: rgba(74, 106, 140, 0.08);
     --theme-overlay-blue-10: rgba(74, 106, 140, 0.1);
     --theme-overlay-blue-12: rgba(74, 106, 140, 0.12);
@@ -96,9 +96,9 @@
     --theme-overlay-accent-20: rgba(212, 165, 116, 0.2);
     --theme-press-divider: rgba(243, 247, 248, 0.35);
     --theme-press-divider-strong: rgba(243, 247, 248, 0.9);
-    --theme-doc-sidebar-bg: rgba(255, 255, 255, 0.72);
-    --theme-doc-sidebar-border: rgba(45, 90, 90, 0.12);
-    --theme-doc-sidebar-shadow: 0 8px 30px rgba(13, 27, 42, 0.05);
+    --theme-doc-sidebar-bg: rgba(255, 255, 255, 0.76);
+    --theme-doc-sidebar-border: rgba(45, 90, 90, 0.14);
+    --theme-doc-sidebar-shadow: 0 10px 26px rgba(13, 27, 42, 0.04);
     --theme-doc-toc-bg: #f4f7f8;
     --theme-doc-toc-border: #d9e3e8;
     --theme-doc-title: #183f48;
@@ -120,25 +120,59 @@
     --theme-scroll-track: #f1f4f6;
     --theme-scroll-thumb: #c3d2db;
     --theme-footer-divider: rgba(45, 90, 90, 0.14);
+
+    --theme-footer-bg: linear-gradient(180deg, #24454f 0%, #213f48 100%);
+    --theme-footer-text: #e4ecef;
+    --theme-footer-muted: rgba(228, 236, 239, 0.8);
+    --theme-footer-link: #f3f7f8;
+    --theme-footer-link-border: rgba(243, 247, 248, 0.35);
+    --theme-footer-link-border-hover: rgba(243, 247, 248, 0.88);
+    --theme-theme-toggle-bg: rgba(45, 90, 90, 0.06);
+    --theme-theme-toggle-border: rgba(45, 90, 90, 0.14);
+    --theme-theme-toggle-text: #3f5f66;
+    --theme-theme-toggle-hover-bg: rgba(45, 90, 90, 0.1);
+    --theme-theme-toggle-hover-border: rgba(45, 90, 90, 0.2);
+    --theme-theme-toggle-knob: rgba(255, 255, 255, 0.92);
+    --theme-theme-toggle-knob-shadow: 0 2px 6px rgba(13, 27, 42, 0.14);
+    --theme-theme-toggle-active-bg: rgba(45, 90, 90, 0.16);
+    --theme-theme-toggle-active-border: rgba(45, 90, 90, 0.24);
+    --theme-theme-toggle-focus: rgba(45, 90, 90, 0.28);
+    --theme-keyidea-bg: rgba(45, 90, 90, 0.08);
+    --theme-keyidea-border: rgba(45, 90, 90, 0.22);
+    --theme-keyidea-text: #2d4450;
+    --theme-keyidea-strong: #24414a;
+    --theme-warning-bg: rgba(196, 135, 59, 0.13);
+    --theme-warning-border: rgba(196, 135, 59, 0.6);
+    --theme-warning-title: #8f5f27;
+    --theme-warning-text: #5f5345;
+    --theme-chip-bg: rgba(74, 106, 140, 0.08);
+    --theme-chip-border: rgba(74, 106, 140, 0.22);
+    --theme-chip-text: #2f4d63;
+    --theme-doc-meta: #5f707c;
+    --theme-doc-link-button-bg: rgba(45, 90, 90, 0.05);
+    --theme-doc-link-button-border: rgba(45, 90, 90, 0.35);
+    --theme-doc-link-button-text: #214954;
+    --theme-doc-link-button-hover-bg: var(--color-primary);
+    --theme-doc-link-button-hover-text: #ffffff;
 }
 
 [data-theme="dark"] {
-    --color-primary: #7ea6a6;
-    --color-primary-light: #9bc1c1;
-    --color-primary-dark: #678e8e;
-    --color-secondary: #89b0b0;
-    --color-accent: #d2ad7e;
-    --color-accent-light: #e0be93;
+    --color-primary: #87aeb0;
+    --color-primary-light: #a6cbcd;
+    --color-primary-dark: #9bc3c5;
+    --color-secondary: #96b8b9;
+    --color-accent: #dcb685;
+    --color-accent-light: #e6c79f;
 
-    --color-bg: #1f2428;
-    --color-surface: #262d33;
-    --color-surface-alt: #2d353c;
+    --color-bg: #21272c;
+    --color-surface: #283036;
+    --color-surface-alt: #303942;
 
-    --color-text: #e9ecef;
-    --color-text-light: #c5ccd3;
-    --color-text-muted: #9aa5b1;
-    --color-border: #3a454f;
-    --color-border-light: #33404a;
+    --color-text: #edf1f4;
+    --color-text-light: #d0d8df;
+    --color-text-muted: #a7b2bd;
+    --color-border: #3f4b56;
+    --color-border-light: #394651;
 
     --color-success: #78a589;
     --color-warning: #d3a768;
@@ -150,53 +184,87 @@
     --shadow-lg: 0 14px 28px rgba(0, 0, 0, 0.42);
     --shadow-xl: 0 24px 40px rgba(0, 0, 0, 0.5);
 
-    --theme-doc-page-bg: linear-gradient(180deg, #1f2428 0%, #222a31 100%);
-    --theme-doc-header-bg: rgba(38, 45, 51, 0.88);
-    --theme-doc-header-border: rgba(126, 166, 166, 0.28);
-    --theme-overlay-primary-10: rgba(126, 166, 166, 0.12);
-    --theme-overlay-primary-08: rgba(126, 166, 166, 0.1);
-    --theme-overlay-primary-07: rgba(126, 166, 166, 0.08);
-    --theme-overlay-primary-06: rgba(126, 166, 166, 0.08);
-    --theme-overlay-primary-16: rgba(126, 166, 166, 0.2);
-    --theme-overlay-primary-18: rgba(126, 166, 166, 0.24);
-    --theme-overlay-primary-20: rgba(126, 166, 166, 0.26);
-    --theme-overlay-primary-28: rgba(126, 166, 166, 0.32);
-    --theme-overlay-primary-32: rgba(126, 166, 166, 0.38);
-    --theme-overlay-primary-35: rgba(126, 166, 166, 0.4);
-    --theme-overlay-primary-45: rgba(126, 166, 166, 0.52);
-    --theme-overlay-primary-26: rgba(126, 166, 166, 0.3);
-    --theme-overlay-blue-08: rgba(126, 163, 196, 0.12);
-    --theme-overlay-blue-10: rgba(126, 163, 196, 0.15);
-    --theme-overlay-blue-12: rgba(126, 163, 196, 0.18);
-    --theme-overlay-blue-14: rgba(126, 163, 196, 0.2);
-    --theme-overlay-accent-10: rgba(210, 173, 126, 0.14);
-    --theme-overlay-accent-20: rgba(210, 173, 126, 0.22);
-    --theme-press-divider: rgba(80, 102, 118, 0.42);
-    --theme-press-divider-strong: rgba(121, 149, 170, 0.78);
-    --theme-doc-sidebar-bg: rgba(38, 45, 51, 0.8);
-    --theme-doc-sidebar-border: rgba(126, 166, 166, 0.26);
-    --theme-doc-sidebar-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
-    --theme-doc-toc-bg: #2a333a;
-    --theme-doc-toc-border: #41505c;
-    --theme-doc-title: #dce9ef;
-    --theme-doc-text-strong: #d8e0e6;
-    --theme-doc-heading: #d3e2e8;
-    --theme-doc-link: #9cc8df;
-    --theme-doc-link-hover: #b8d8ea;
-    --theme-doc-code-bg: #2e3943;
-    --theme-doc-code-border: #495a67;
-    --theme-doc-pre-bg: #2a333c;
-    --theme-doc-pre-border: #41515d;
-    --theme-table-bg: #293137;
-    --theme-table-border: #43515b;
-    --theme-table-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
-    --theme-table-header-bg: #324049;
-    --theme-table-header-text: #e2edf2;
-    --theme-table-row-even: #2f383f;
-    --theme-table-row-hover: #36424b;
-    --theme-scroll-track: #263039;
-    --theme-scroll-thumb: #4a5e6b;
-    --theme-footer-divider: rgba(126, 166, 166, 0.2);
+    --theme-doc-page-bg: linear-gradient(180deg, #21272c 0%, #242d35 100%);
+    --theme-doc-header-bg: rgba(40, 48, 54, 0.84);
+    --theme-doc-header-border: rgba(135, 174, 176, 0.3);
+    --theme-overlay-primary-10: rgba(135, 174, 176, 0.16);
+    --theme-overlay-primary-08: rgba(135, 174, 176, 0.13);
+    --theme-overlay-primary-07: rgba(135, 174, 176, 0.12);
+    --theme-overlay-primary-06: rgba(135, 174, 176, 0.1);
+    --theme-overlay-primary-16: rgba(135, 174, 176, 0.24);
+    --theme-overlay-primary-18: rgba(135, 174, 176, 0.27);
+    --theme-overlay-primary-20: rgba(135, 174, 176, 0.3);
+    --theme-overlay-primary-28: rgba(135, 174, 176, 0.36);
+    --theme-overlay-primary-32: rgba(135, 174, 176, 0.4);
+    --theme-overlay-primary-35: rgba(135, 174, 176, 0.46);
+    --theme-overlay-primary-45: rgba(135, 174, 176, 0.56);
+    --theme-overlay-primary-26: rgba(135, 174, 176, 0.34);
+    --theme-overlay-blue-08: rgba(156, 199, 223, 0.12);
+    --theme-overlay-blue-10: rgba(156, 199, 223, 0.16);
+    --theme-overlay-blue-12: rgba(156, 199, 223, 0.2);
+    --theme-overlay-blue-14: rgba(156, 199, 223, 0.24);
+    --theme-overlay-accent-10: rgba(220, 182, 133, 0.2);
+    --theme-overlay-accent-20: rgba(220, 182, 133, 0.28);
+    --theme-press-divider: rgba(98, 120, 136, 0.5);
+    --theme-press-divider-strong: rgba(142, 171, 191, 0.82);
+    --theme-doc-sidebar-bg: rgba(40, 48, 54, 0.84);
+    --theme-doc-sidebar-border: rgba(135, 174, 176, 0.3);
+    --theme-doc-sidebar-shadow: 0 14px 32px rgba(0, 0, 0, 0.34);
+    --theme-doc-toc-bg: #2d3740;
+    --theme-doc-toc-border: #4b5c68;
+    --theme-doc-title: #e3edf2;
+    --theme-doc-text-strong: #dde6ec;
+    --theme-doc-heading: #dce9ee;
+    --theme-doc-link: #9fcbe2;
+    --theme-doc-link-hover: #c0ddef;
+    --theme-doc-code-bg: #313d47;
+    --theme-doc-code-border: #50626f;
+    --theme-doc-pre-bg: #2d3943;
+    --theme-doc-pre-border: #4a5d69;
+    --theme-table-bg: #2b343b;
+    --theme-table-border: #4b5b66;
+    --theme-table-shadow: 0 7px 16px rgba(0, 0, 0, 0.28);
+    --theme-table-header-bg: #36454f;
+    --theme-table-header-text: #e6eff4;
+    --theme-table-row-even: #313b42;
+    --theme-table-row-hover: #3a464e;
+    --theme-scroll-track: #2b3540;
+    --theme-scroll-thumb: #536874;
+    --theme-footer-divider: rgba(135, 174, 176, 0.28);
+
+    --theme-footer-bg: linear-gradient(180deg, #20272d 0%, #1d2429 100%);
+    --theme-footer-text: #d9e1e6;
+    --theme-footer-muted: rgba(217, 225, 230, 0.78);
+    --theme-footer-link: #c8dde8;
+    --theme-footer-link-border: rgba(200, 221, 232, 0.36);
+    --theme-footer-link-border-hover: rgba(200, 221, 232, 0.88);
+    --theme-theme-toggle-bg: rgba(135, 174, 176, 0.1);
+    --theme-theme-toggle-border: rgba(135, 174, 176, 0.22);
+    --theme-theme-toggle-text: #cfdee6;
+    --theme-theme-toggle-hover-bg: rgba(135, 174, 176, 0.16);
+    --theme-theme-toggle-hover-border: rgba(135, 174, 176, 0.3);
+    --theme-theme-toggle-knob: rgba(48, 58, 66, 0.96);
+    --theme-theme-toggle-knob-shadow: 0 2px 8px rgba(0, 0, 0, 0.42);
+    --theme-theme-toggle-active-bg: rgba(135, 174, 176, 0.22);
+    --theme-theme-toggle-active-border: rgba(135, 174, 176, 0.36);
+    --theme-theme-toggle-focus: rgba(135, 174, 176, 0.42);
+    --theme-keyidea-bg: rgba(135, 174, 176, 0.18);
+    --theme-keyidea-border: rgba(135, 174, 176, 0.36);
+    --theme-keyidea-text: #d9e5ec;
+    --theme-keyidea-strong: #f0f6fa;
+    --theme-warning-bg: rgba(211, 167, 104, 0.2);
+    --theme-warning-border: rgba(211, 167, 104, 0.58);
+    --theme-warning-title: #f2c98d;
+    --theme-warning-text: #e8dcc8;
+    --theme-chip-bg: rgba(156, 199, 223, 0.15);
+    --theme-chip-border: rgba(156, 199, 223, 0.34);
+    --theme-chip-text: #d5e8f2;
+    --theme-doc-meta: #bdc9d3;
+    --theme-doc-link-button-bg: rgba(135, 174, 176, 0.12);
+    --theme-doc-link-button-border: rgba(135, 174, 176, 0.36);
+    --theme-doc-link-button-text: #d8eaf3;
+    --theme-doc-link-button-hover-bg: #6f989b;
+    --theme-doc-link-button-hover-text: #f4f8fb;
 }
 
 /* ============================================
@@ -311,39 +379,63 @@ h1, h2, h3, h4, h5, h6 {
 .theme-toggle {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    gap: 0.45rem;
-    min-width: 44px;
-    height: 38px;
-    padding: 0 0.72rem;
+    justify-content: flex-start;
+    gap: 0.36rem;
+    min-width: 76px;
+    height: 34px;
+    padding: 0.2rem 0.5rem 0.2rem 0.38rem;
     border-radius: 999px;
-    border: 1px solid var(--color-border);
-    background-color: var(--color-surface-alt);
-    color: var(--color-text-light);
-    font-size: 0.8rem;
-    font-weight: var(--font-weight-medium);
+    border: 1px solid var(--theme-theme-toggle-border);
+    background-color: var(--theme-theme-toggle-bg);
+    color: var(--theme-theme-toggle-text);
+    font-size: 0.76rem;
+    font-weight: var(--font-weight-semibold);
+    line-height: 1;
     cursor: pointer;
+    backdrop-filter: blur(2px);
+    transition: background-color var(--transition-base), border-color var(--transition-base), color var(--transition-base), box-shadow var(--transition-base), transform var(--transition-fast);
 }
 
 .theme-toggle:hover,
 .theme-toggle:focus-visible {
     color: var(--color-primary-dark);
-    border-color: var(--theme-overlay-primary-35);
-    background-color: var(--theme-overlay-primary-10);
+    border-color: var(--theme-theme-toggle-hover-border);
+    background-color: var(--theme-theme-toggle-hover-bg);
 }
 
 .theme-toggle:focus-visible {
-    outline: 2px solid var(--theme-overlay-primary-32);
+    outline: 2px solid var(--theme-theme-toggle-focus);
     outline-offset: 2px;
 }
 
+.theme-toggle.is-dark {
+    border-color: var(--theme-theme-toggle-active-border);
+    background-color: var(--theme-theme-toggle-active-bg);
+}
+
 .theme-toggle-icon {
-    font-size: 0.92rem;
+    width: 1.45rem;
+    height: 1.45rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    background-color: var(--theme-theme-toggle-knob);
+    box-shadow: var(--theme-theme-toggle-knob-shadow);
+    font-size: 0.82rem;
     line-height: 1;
+    transform: translateX(0);
+    transition: transform var(--transition-base), background-color var(--transition-base), box-shadow var(--transition-base);
+}
+
+.theme-toggle.is-dark .theme-toggle-icon {
+    transform: translateX(0.14rem) rotate(10deg);
 }
 
 .theme-toggle-label {
     letter-spacing: 0.01em;
+    font-size: 0.72rem;
+    text-transform: uppercase;
 }
 
 .logo {
@@ -813,7 +905,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .notice-info {
-    background-color: rgba(74, 106, 140, 0.1);
+    background-color: var(--theme-overlay-blue-10);
     border-color: var(--color-info);
 }
 
@@ -829,28 +921,28 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .alert-warning {
-    background-color: rgba(196, 135, 59, 0.1);
-    border: 1px solid var(--color-warning);
-    border-left: 4px solid var(--color-warning);
+    background-color: var(--theme-warning-bg);
+    border: 1px solid var(--theme-warning-border);
+    border-left: 4px solid var(--theme-warning-border);
 }
 
 .alert-warning h3 {
-    color: var(--color-warning);
+    color: var(--theme-warning-title);
     font-size: var(--font-size-base);
     margin-bottom: var(--space-sm);
 }
 
 .alert-warning p {
-    color: var(--color-text-light);
+    color: var(--theme-warning-text);
 }
 
 .sentencia-cta {
     margin-top: var(--space-xl);
     margin-bottom: var(--space-lg);
     padding: var(--space-lg);
-    border: 1px solid rgba(45, 90, 90, 0.2);
+    border: 1px solid var(--theme-overlay-primary-20);
     border-radius: var(--radius-lg);
-    background: linear-gradient(135deg, rgba(45, 90, 90, 0.08), rgba(74, 124, 124, 0.06));
+    background: linear-gradient(135deg, var(--theme-overlay-primary-08), var(--theme-overlay-primary-06));
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -877,11 +969,15 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: var(--space-lg);
     padding: 0.85rem 1rem;
     border-radius: var(--radius-md);
-    border: 1px solid rgba(45, 90, 90, 0.2);
-    background-color: rgba(45, 90, 90, 0.08);
-    color: #2f4a54;
+    border: 1px solid var(--theme-keyidea-border);
+    background-color: var(--theme-keyidea-bg);
+    color: var(--theme-keyidea-text);
     font-size: var(--font-size-sm);
     line-height: 1.6;
+}
+
+.sentencia-key-idea strong {
+    color: var(--theme-keyidea-strong);
 }
 
 /* ============================================
@@ -982,7 +1078,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .doc-meta {
     font-size: var(--font-size-xs);
-    color: var(--color-text-muted);
+    color: var(--theme-doc-meta);
     margin-top: auto;
 }
 
@@ -1000,10 +1096,10 @@ h1, h2, h3, h4, h5, h6 {
     width: fit-content;
     max-width: 100%;
     padding: 0.18rem 0.5rem;
-    border: 1px solid rgba(74, 106, 140, 0.2);
+    border: 1px solid var(--theme-chip-border);
     border-radius: 999px;
-    background-color: rgba(74, 106, 140, 0.08);
-    color: #2e4f6b;
+    background-color: var(--theme-chip-bg);
+    color: var(--theme-chip-text);
     font-size: 0.76rem;
     line-height: 1.35;
 }
@@ -1225,10 +1321,10 @@ h1, h2, h3, h4, h5, h6 {
     white-space: nowrap;
     min-width: 8.2rem;
     padding: 0.58rem 0.88rem;
-    border: 1px solid rgba(45, 90, 90, 0.35);
+    border: 1px solid var(--theme-doc-link-button-border);
     border-radius: 999px;
-    background-color: rgba(45, 90, 90, 0.05);
-    color: var(--color-primary-dark);
+    background-color: var(--theme-doc-link-button-bg);
+    color: var(--theme-doc-link-button-text);
     font-size: var(--font-size-sm);
     font-weight: var(--font-weight-semibold);
     text-decoration: none;
@@ -1237,9 +1333,9 @@ h1, h2, h3, h4, h5, h6 {
 
 .press-source-link:hover,
 .press-source-link:focus-visible {
-    background-color: var(--color-primary);
-    border-color: var(--color-primary);
-    color: #ffffff;
+    background-color: var(--theme-doc-link-button-hover-bg);
+    border-color: var(--theme-doc-link-button-hover-bg);
+    color: var(--theme-doc-link-button-hover-text);
     transform: translateY(-1px);
 }
 
@@ -1303,10 +1399,11 @@ h1, h2, h3, h4, h5, h6 {
    Footer
    ============================================ */
 .footer {
-    background-color: var(--color-primary);
-    color: white;
+    background: var(--theme-footer-bg);
+    color: var(--theme-footer-text);
     padding: var(--space-2xl) 0;
     text-align: center;
+    border-top: 1px solid var(--theme-footer-divider);
 }
 
 .footer-text {
@@ -1316,7 +1413,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .footer-disclaimer {
     font-size: var(--font-size-sm);
-    opacity: 0.8;
+    color: var(--theme-footer-muted);
     margin-bottom: var(--space-sm);
 }
 
@@ -1326,22 +1423,22 @@ h1, h2, h3, h4, h5, h6 {
     gap: var(--space-sm);
     margin-bottom: var(--space-sm);
     font-size: var(--font-size-sm);
-    opacity: 0.92;
+    color: var(--theme-footer-muted);
 }
 
 .footer-links a {
-    color: #f3f7f8;
+    color: var(--theme-footer-link);
     text-decoration: none;
-    border-bottom: 1px solid rgba(243, 247, 248, 0.35);
+    border-bottom: 1px solid var(--theme-footer-link-border);
 }
 
 .footer-links a:hover {
-    border-bottom-color: rgba(243, 247, 248, 0.9);
+    border-bottom-color: var(--theme-footer-link-border-hover);
 }
 
 .footer-copy {
     font-size: var(--font-size-xs);
-    opacity: 0.6;
+    color: var(--theme-footer-muted);
 }
 
 /* ============================================
@@ -1409,9 +1506,16 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     .theme-toggle {
-        height: 34px;
-        padding: 0 0.55rem;
+        min-width: 38px;
+        height: 32px;
+        padding: 0.18rem 0.3rem;
         font-size: 0.75rem;
+    }
+
+    .theme-toggle-icon {
+        width: 1.25rem;
+        height: 1.25rem;
+        font-size: 0.74rem;
     }
 
     .theme-toggle-label {

@@ -13,9 +13,6 @@
       // ignore
     }
 
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      return DARK;
-    }
     return LIGHT;
   }
 
@@ -34,6 +31,7 @@
       const labelNode = btn.querySelector('.theme-toggle-label');
       if (iconNode) iconNode.textContent = icon;
       if (labelNode) labelNode.textContent = label;
+      btn.classList.toggle('is-dark', value === DARK);
     }
   }
 
