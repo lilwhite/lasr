@@ -188,25 +188,6 @@
             </div>
         </section>
 
-        <section class="section" id="actualizaciones">
-            <div class="container">
-                <h2 class="section-title">Últimas actualizaciones</h2>
-                <p class="section-description">Historial resumido de cambios publicados en producción.</p>
-                <article class="card update-card" id="releaseSummaryCard">
-                    <div class="card-header">
-                        <div class="card-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M19 5H9.5a2.5 2.5 0 0 0 0 5H14a2.5 2.5 0 0 1 0 5H5"/></svg>
-                        </div>
-                        <h3 class="card-title" id="releaseVersion">Versión actual</h3>
-                    </div>
-                    <p class="card-content" id="releaseDate">Fecha de release: —</p>
-                    <ul class="release-list" id="releaseChangesList">
-                        <li>Cargando cambios recientes…</li>
-                    </ul>
-                </article>
-            </div>
-        </section>
-
         <!-- FAQ -->
         <section class="section" id="faq">
             <div class="container">
@@ -239,20 +220,31 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p class="footer-text">
-                <strong>Los Ángeles de San Rafael</strong> — Portal informativo vecinal
-            </p>
-            <p class="footer-disclaimer">
-                Este portal tiene carácter informativo y divulgativo. No constituye asesoramiento jurídico.
-            </p>
-            <p class="footer-links">
-                <a id="footerRepoLink" href="https://github.com/lilwhite/lasr" target="_blank" rel="noopener noreferrer">Ver repositorio</a>
-                <span>·</span>
-                <a id="footerLicenseLink" href="https://github.com/lilwhite/lasr/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">Licencia MIT</a>
-            </p>
-            <p class="footer-copy">
-                © 2026 — Información actualizada a <span id="lastUpdatedDate">10/03/2026</span>
-            </p>
+            <div class="footer-layout">
+                <div class="footer-main">
+                    <p class="footer-text">
+                        <strong>Los Ángeles de San Rafael</strong> — Portal informativo vecinal
+                    </p>
+                    <p class="footer-disclaimer">
+                        Este portal tiene carácter informativo y divulgativo. No constituye asesoramiento jurídico.
+                    </p>
+                    <p class="footer-links">
+                        <a id="footerRepoLink" href="https://github.com/lilwhite/lasr" target="_blank" rel="noopener noreferrer">Ver repositorio</a>
+                        <span>·</span>
+                        <a id="footerLicenseLink" href="https://github.com/lilwhite/lasr/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">Licencia MIT</a>
+                    </p>
+                    <p class="footer-copy">
+                        © 2026 — Información actualizada a <span id="lastUpdatedDate">10/03/2026</span>
+                    </p>
+                </div>
+                <div class="footer-release-meta" aria-label="Información de versión del portal">
+                    <p class="footer-release-line" id="footerReleaseVersion">Versión actual: —</p>
+                    <p class="footer-release-line" id="footerReleaseDate">Última actualización: —</p>
+                    <p class="footer-release-link-wrap">
+                        <a class="footer-release-link" href="RELEASES.md">Ver historial de cambios</a>
+                    </p>
+                </div>
+            </div>
         </div>
     </footer>
 
