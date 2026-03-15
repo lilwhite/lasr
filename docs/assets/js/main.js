@@ -362,8 +362,9 @@
             iterableItems.forEach((doc, cardIndex) => {
                 const typeClass = (doc.tipo || 'documento').toLowerCase();
                 const safeDocUrl = sanitizeExternalUrl(doc.url || '');
+                const linkLabel = (doc.cta || 'Ver fuente').toString().trim() || 'Ver fuente';
                 const linkHtml = safeDocUrl
-                    ? `<a href="${escapeHtml(safeDocUrl)}" class="doc-link" target="_blank" rel="noopener noreferrer">Ver fuente ${icons.external}</a>`
+                    ? `<a href="${escapeHtml(safeDocUrl)}" class="doc-link" target="_blank" rel="noopener noreferrer">${escapeHtml(linkLabel)} ${icons.external}</a>`
                     : '';
 
                 groupCards += `
