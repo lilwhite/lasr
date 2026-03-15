@@ -906,6 +906,13 @@ h1, h2, h3, h4, h5, h6 {
     line-height: 1.75;
 }
 
+.press-archive-note {
+    margin-top: var(--space-sm);
+    margin-bottom: 0;
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+}
+
 .press-filters {
     margin-top: 0;
     margin-bottom: var(--space-md);
