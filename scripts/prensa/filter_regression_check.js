@@ -100,6 +100,88 @@ const caseF = u.applyFiltersTrace(allNews, {
 });
 assert(caseF.finalItems.length <= caseA.finalItems.length, 'Búsqueda textual restringe en institucional');
 
+const landingFixture = [
+  {
+    id: 'a-1',
+    source: 'Medio A',
+    date: '2026-03-10T09:00:00Z',
+    title: 'A reciente',
+    excerpt: 'Los Ángeles de San Rafael y urbanización',
+    category: 'urbanismo',
+    isRelevant: true,
+    relevanceScore: 9
+  },
+  {
+    id: 'a-2',
+    source: 'medio   a',
+    date: '2026-03-05T09:00:00Z',
+    title: 'A antigua',
+    excerpt: 'Los Ángeles de San Rafael y vecinos',
+    category: 'juntas_y_vecinos',
+    isRelevant: true,
+    relevanceScore: 8
+  },
+  {
+    id: 'b-1',
+    source: 'Medio B',
+    date: '2026-03-09T09:00:00Z',
+    title: 'B reciente',
+    excerpt: 'Los Ángeles de San Rafael y servicios',
+    category: 'servicios',
+    isRelevant: true,
+    relevanceScore: 7
+  },
+  {
+    id: 'c-1',
+    source: 'Medio C',
+    date: '2026-03-08T09:00:00Z',
+    title: 'C reciente',
+    excerpt: 'Los Ángeles de San Rafael y infraestructuras',
+    category: 'infraestructuras',
+    isRelevant: true,
+    relevanceScore: 6
+  }
+];
+
+const landingCards = u.getLandingFeaturedNews(landingFixture, 3);
+assertEqual(landingCards.length, 3, 'Landing limitada al número de cards');
+assertEqual(landingCards[0].id, 'a-1', 'Landing elige la noticia más reciente de Medio A');
+assertEqual(landingCards[1].id, 'b-1', 'Landing mantiene Medio B en segundo lugar');
+assertEqual(landingCards[2].id, 'c-1', 'Landing mantiene Medio C en tercer lugar');
+
+const normalizedSources = landingCards.map((item) => (item.source || '').toLowerCase().replace(/\s+/g, ' ').trim());
+assertEqual(new Set(normalizedSources).size, landingCards.length, 'Landing no repite medio si hay alternativas');
+
+const landingDates = landingCards.map((item) => new Date(item.date).getTime());
+assert(landingDates[0] >= landingDates[1] && landingDates[1] >= landingDates[2], 'Landing ordenada por fecha descendente');
+
+const invalidDateFixture = [
+  {
+    id: 'invalid-a',
+    source: 'Medio D',
+    date: 'sin-fecha',
+    title: 'Fecha inválida',
+    excerpt: 'Los Ángeles de San Rafael',
+    category: 'urbanismo',
+    isRelevant: true,
+    relevanceScore: 10
+  },
+  {
+    id: 'valid-a',
+    source: 'Medio E',
+    date: '2026-03-07T09:00:00Z',
+    title: 'Fecha válida',
+    excerpt: 'Los Ángeles de San Rafael',
+    category: 'urbanismo',
+    isRelevant: true,
+    relevanceScore: 8
+  }
+];
+
+const invalidDateResult = u.getLandingFeaturedNews(invalidDateFixture, 3);
+assertEqual(invalidDateResult.length, 1, 'Landing ignora entradas sin fecha válida para ordenar');
+assertEqual(invalidDateResult[0].id, 'valid-a', 'Landing conserva noticias con fecha válida');
+
 // sanity: file still parses with browser-like environment
 vm.runInContext(archiveCode, sandbox);
 console.log('[OK] prensa-archive.js carga en entorno simulado sin errores de sintaxis');
