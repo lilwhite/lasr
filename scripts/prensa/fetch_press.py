@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
 
 import argparse
+import json
 import sys
 import xml.etree.ElementTree as ET
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Dict, Iterable, List, Tuple
-from urllib.error import URLError
+from urllib.error import HTTPError, URLError
+from urllib.parse import quote
 from urllib.request import Request, urlopen
 
 from helpers import (
@@ -23,15 +25,17 @@ from helpers import (
 
 DEFAULT_CONFIG = Path("docs/data/prensa/sources.json")
 DEFAULT_OUTPUT = Path("docs/data/prensa/curated_news.json")
-USER_AGENT = "LASR-PressFetcher/1.0 (+https://lasr-info.es)"
+USER_AGENT = "LASR-PressFetcher/1.1 (+https://lasr-info.es)"
 
 
 @dataclass
 class Candidate:
     title: str
     url: str
+    canonical_url: str
     source: str
     date: str
+    published_at: str
     excerpt: str
     category: str
     relevance_score: int
@@ -39,10 +43,25 @@ class Candidate:
     tags: List[str]
 
 
-def fetch_feed(url: str, timeout: int) -> bytes:
+def fetch_bytes(url: str, timeout: int) -> bytes:
     req = Request(url, headers={"User-Agent": USER_AGENT})
     with urlopen(req, timeout=timeout) as response:
         return response.read()
+
+
+def fetch_feed(url: str, timeout: int) -> bytes:
+    return fetch_bytes(url, timeout)
+
+
+def fetch_json(url: str, timeout: int) -> Tuple[Dict[str, str], object]:
+    req = Request(url, headers={"User-Agent": USER_AGENT})
+    with urlopen(req, timeout=timeout) as response:
+        headers = {
+            "x-wp-total": response.headers.get("X-WP-Total", ""),
+            "x-wp-totalpages": response.headers.get("X-WP-TotalPages", ""),
+        }
+        payload = json.loads(response.read().decode("utf-8"))
+        return headers, payload
 
 
 def parse_feed_items(payload: bytes) -> List[Dict[str, str]]:
@@ -58,6 +77,7 @@ def parse_feed_items(payload: bytes) -> List[Dict[str, str]]:
                 "title": text_of(item, "title"),
                 "url": text_of(item, "link"),
                 "date": text_of(item, "pubDate"),
+                "published_at": text_of(item, "pubDate"),
                 "excerpt": text_of(item, "description"),
                 "raw_category": text_of(item, "category"),
             }
@@ -74,12 +94,15 @@ def parse_feed_items(payload: bytes) -> List[Dict[str, str]]:
         if link_el is not None:
             link = link_el.attrib.get("href", "")
 
+        published = text_of(entry, f"{atom_ns}published") or text_of(
+            entry, f"{atom_ns}updated"
+        )
         atom_items.append(
             {
                 "title": text_of(entry, f"{atom_ns}title"),
                 "url": link,
-                "date": text_of(entry, f"{atom_ns}updated")
-                or text_of(entry, f"{atom_ns}published"),
+                "date": published,
+                "published_at": published,
                 "excerpt": text_of(entry, f"{atom_ns}summary")
                 or text_of(entry, f"{atom_ns}content"),
                 "raw_category": "",
@@ -130,24 +153,43 @@ def classify(item_text: str, config: Dict) -> str:
     return winner
 
 
+def slug_from_url(url: str) -> str:
+    cleaned = canonicalize_url(url)
+    if not cleaned:
+        return ""
+    path = cleaned.split("?", 1)[0].rstrip("/")
+    if "/" not in path:
+        return path
+    return path.rsplit("/", 1)[-1]
+
+
 def dedupe(items: Iterable[Candidate]) -> List[Candidate]:
     seen_urls = set()
     seen_titles = set()
+    seen_source_slugs = set()
     result = []
 
     for item in items:
-        url_key = canonicalize_url(item.url)
+        canonical_key = item.canonical_url or canonicalize_url(item.url)
         title_key = normalize_title_key(item.title)
+        slug_key = slug_from_url(item.url)
+        source_slug_key = (
+            f"{normalize_text(item.source)}::{slug_key}" if slug_key else ""
+        )
 
-        if url_key and url_key in seen_urls:
+        if canonical_key and canonical_key in seen_urls:
             continue
         if title_key and title_key in seen_titles:
             continue
+        if source_slug_key and source_slug_key in seen_source_slugs:
+            continue
 
-        if url_key:
-            seen_urls.add(url_key)
+        if canonical_key:
+            seen_urls.add(canonical_key)
         if title_key:
             seen_titles.add(title_key)
+        if source_slug_key:
+            seen_source_slugs.add(source_slug_key)
 
         result.append(item)
 
@@ -162,6 +204,112 @@ def sort_candidates(items: Iterable[Candidate]) -> List[Candidate]:
     return sorted(items, key=sort_key, reverse=True)
 
 
+def build_candidate(
+    raw: Dict[str, str], source_name: str, config: Dict
+) -> Candidate | None:
+    title = strip_html((raw.get("title") or "").strip())
+    url = canonicalize_url((raw.get("url") or "").strip())
+    if not title or not url:
+        return None
+
+    excerpt = strip_html(raw.get("excerpt") or "")
+    excerpt = excerpt[:220].strip()
+    date = parse_date(raw.get("date") or "")
+    published_at = (raw.get("published_at") or "").strip()
+    if not published_at:
+        published_at = date
+
+    text = normalize_text(" ".join([title, excerpt, raw.get("raw_category", "")]))
+    relevance_score, tags = score_relevance(text, config)
+    category = classify(text, config)
+    is_relevant = relevance_score >= int(config["relevance"]["min_score"])
+
+    return Candidate(
+        title=title,
+        url=url,
+        canonical_url=canonicalize_url(url),
+        source=source_name,
+        date=date,
+        published_at=published_at,
+        excerpt=excerpt,
+        category=category,
+        relevance_score=relevance_score,
+        is_relevant=is_relevant,
+        tags=tags,
+    )
+
+
+def fetch_wordpress_history(source: Dict, timeout: int) -> List[Dict[str, str]]:
+    endpoint = source.get("wp_endpoint")
+    searches = source.get("historical_searches", [])
+    if not endpoint or not searches:
+        return []
+
+    output: List[Dict[str, str]] = []
+    per_page = min(int(source.get("wp_per_page", 100)), 100)
+
+    for term in searches:
+        if not term or not str(term).strip():
+            continue
+
+        page = 1
+        total_pages = 1
+        encoded_term = quote(str(term).strip())
+
+        while page <= total_pages:
+            wp_url = (
+                f"{endpoint}?search={encoded_term}&per_page={per_page}&page={page}"
+                "&_fields=link,slug,date,date_gmt,title,excerpt"
+            )
+
+            try:
+                headers, payload = fetch_json(wp_url, timeout=timeout)
+            except HTTPError as exc:
+                if exc.code == 400:
+                    break
+                print(f"[warn] {source['name']} error WP ({exc.code}): {wp_url}")
+                break
+            except (URLError, TimeoutError, ValueError) as exc:
+                print(
+                    f"[warn] {source['name']} histórico no disponible: {wp_url} ({exc})"
+                )
+                break
+
+            if not isinstance(payload, list) or not payload:
+                break
+
+            try:
+                total_pages = int(headers.get("x-wp-totalpages", "") or "1")
+            except ValueError:
+                total_pages = 1
+
+            for post in payload:
+                title = strip_html(
+                    ((post.get("title") or {}).get("rendered") or "").strip()
+                )
+                link = (post.get("link") or "").strip()
+                if not title or not link:
+                    continue
+
+                excerpt = strip_html((post.get("excerpt") or {}).get("rendered") or "")
+                published_at = (post.get("date_gmt") or post.get("date") or "").strip()
+
+                output.append(
+                    {
+                        "title": title,
+                        "url": link,
+                        "date": published_at,
+                        "published_at": (post.get("date") or published_at),
+                        "excerpt": excerpt,
+                        "raw_category": "",
+                    }
+                )
+
+            page += 1
+
+    return output
+
+
 def run(config_path: Path, output_path: Path, timeout: int):
     config = load_json(config_path)
     candidates: List[Candidate] = []
@@ -174,14 +322,19 @@ def run(config_path: Path, output_path: Path, timeout: int):
                 for item in existing_items:
                     if not isinstance(item, dict):
                         continue
-                    key = canonicalize_url(item.get("url", ""))
+                    key = canonicalize_url(
+                        item.get("canonicalUrl") or item.get("url", "")
+                    )
                     if key:
                         existing_featured[key] = bool(item.get("featured", False))
         except (ValueError, OSError, TypeError):
             existing_featured = {}
 
+    max_per_source = int(config.get("max_per_source", 40))
+
     for source in config["sources"]:
         source_count = 0
+
         for feed_url in source.get("feeds", []):
             try:
                 payload = fetch_feed(feed_url, timeout=timeout)
@@ -195,68 +348,65 @@ def run(config_path: Path, output_path: Path, timeout: int):
                 continue
 
             for raw in items:
-                title = (raw.get("title") or "").strip()
-                url = canonicalize_url((raw.get("url") or "").strip())
-                if not title or not url:
+                candidate = build_candidate(raw, source["name"], config)
+                if not candidate:
                     continue
 
-                excerpt = strip_html(raw.get("excerpt") or "")
-                excerpt = excerpt[:220].strip()
-                date = parse_date(raw.get("date") or "")
-
-                text = normalize_text(
-                    " ".join([title, excerpt, raw.get("raw_category", "")])
-                )
-                relevance_score, tags = score_relevance(text, config)
-                category = classify(text, config)
-                is_relevant = relevance_score >= int(config["relevance"]["min_score"])
-
-                candidates.append(
-                    Candidate(
-                        title=title,
-                        url=url,
-                        source=source["name"],
-                        date=date,
-                        excerpt=excerpt,
-                        category=category,
-                        relevance_score=relevance_score,
-                        is_relevant=is_relevant,
-                        tags=tags,
-                    )
-                )
-
+                candidates.append(candidate)
                 source_count += 1
-                if source_count >= int(config.get("max_per_source", 40)):
+                if source_count >= max_per_source:
                     break
 
-            if source_count >= int(config.get("max_per_source", 40)):
+            if source_count >= max_per_source:
                 break
+
+        historical_items = fetch_wordpress_history(source, timeout=timeout)
+        for raw in historical_items:
+            candidate = build_candidate(raw, source["name"], config)
+            if candidate:
+                candidates.append(candidate)
 
     deduped = dedupe(candidates)
     ordered = sort_candidates(deduped)
     limited = ordered[: int(config.get("max_items", 120))]
 
-    output = [
-        {
-            "id": stable_id(item.url, item.title),
-            "title": item.title,
-            "url": item.url,
-            "source": item.source,
-            "date": item.date,
-            "excerpt": item.excerpt,
-            "category": item.category,
-            "relevanceScore": item.relevance_score,
-            "isRelevant": item.is_relevant,
-            "featured": existing_featured.get(canonicalize_url(item.url), False),
-            "tags": item.tags,
-        }
-        for item in limited
-    ]
+    output = []
+    for item in limited:
+        canonical_key = canonicalize_url(item.canonical_url or item.url)
+        output.append(
+            {
+                "id": stable_id(item.url, item.title),
+                "title": item.title,
+                "url": item.url,
+                "canonicalUrl": canonical_key,
+                "source": item.source,
+                "date": item.date,
+                "publishedAt": item.published_at,
+                "year": int(item.date[:4])
+                if item.date and len(item.date) >= 4
+                else None,
+                "excerpt": item.excerpt,
+                "category": item.category,
+                "relevanceScore": item.relevance_score,
+                "isRelevant": item.is_relevant,
+                "featured": existing_featured.get(canonical_key, False),
+                "tags": item.tags,
+            }
+        )
 
     write_json(output_path, output)
 
     relevant_count = sum(1 for item in output if item["isRelevant"])
+    years = sorted(
+        {
+            item.get("year")
+            for item in output
+            if isinstance(item.get("year"), int) and item.get("isRelevant")
+        }
+    )
+    year_info = f"{years[0]}-{years[-1]}" if years else "sin rango"
     print(f"[ok] Total candidatas: {len(output)} | Relevantes: {relevant_count}")
+    print(f"[ok] Rango histórico relevante: {year_info}")
     print(f"[ok] JSON generado: {output_path}")
 
 
@@ -271,7 +421,7 @@ def parse_args(argv: List[str]):
         "--output", default=str(DEFAULT_OUTPUT), help="Ruta de salida curated_news.json"
     )
     parser.add_argument(
-        "--timeout", type=int, default=12, help="Timeout HTTP por feed en segundos"
+        "--timeout", type=int, default=12, help="Timeout HTTP por feed/API en segundos"
     )
     return parser.parse_args(argv)
 
