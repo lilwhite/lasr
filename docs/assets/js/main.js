@@ -475,6 +475,26 @@
         elements.contactoContent.innerHTML = html;
     }
 
+    function renderReleaseSummary() {
+        const portalMeta = content?.portal?.ultimas_actualizaciones;
+        const versionNode = document.getElementById('releaseVersion');
+        const dateNode = document.getElementById('releaseDate');
+        const changesNode = document.getElementById('releaseChangesList');
+        if (!versionNode || !dateNode || !changesNode) return;
+
+        const version = portalMeta?.version || 'Versión no disponible';
+        const date = portalMeta?.fecha || 'Fecha no disponible';
+        const changes = Array.isArray(portalMeta?.cambios) ? portalMeta.cambios : [];
+
+        versionNode.textContent = `Versión actual: ${escapeHtml(version)}`;
+        dateNode.textContent = `Fecha de release: ${escapeHtml(date)}`;
+        if (!changes.length) {
+            changesNode.innerHTML = '<li>Actualización de mantenimiento sin cambios destacados.</li>';
+            return;
+        }
+        changesNode.innerHTML = changes.map((item) => `<li>${escapeHtml(item)}</li>`).join('');
+    }
+
     function renderAll() {
         renderSituacion();
         renderTimeline();
@@ -484,6 +504,7 @@
         renderDocumentos();
         renderFaq();
         renderContacto();
+        renderReleaseSummary();
     }
 
     // ============================================

@@ -390,5 +390,14 @@
       }
     ],
     "aviso": "Este portal no constituye asesoramiento jurídico. Para cuestiones legales específicas, consulta con un profesional."
+  },
+  "portal": {
+    "ultimas_actualizaciones": {
+      "version": "v1.1.1",
+      "fecha": "2026-03-15",
+      "cambios": [
+        "Actualización de mantenimiento sin cambios destacados."
+      ]
+    }
   }
 }
