@@ -10,7 +10,7 @@ tags: [fuentes, jurisprudencia, normativa]
 
 # Documentación y Fuentes de Información Relevante
 
-Este documento compila fuentes de información, jurisprudencia y documentación relevante sobre el caso de la urbanización Los Ángeles de San Rafael y el contexto legal de las Entidades Urbanísticas de Conservación (EUCC) en España.
+Este documento compila fuentes de información, jurisprudencia y documentación relevante sobre el caso de la urbanización Los Ángeles de San Rafael y el contexto legal de las Entidades Urbanísticas de Conservación (EUC) en España.
 
 ---
 
@@ -41,7 +41,7 @@ La sentencia del Tribunal Superior de Justicia de Castilla y León que ordena al
 
 ### Definición y Naturaleza Jurídica
 
-Una Entidad Urbanística de Conservación (EUC o EUCC) es una figura jurídica prevista en la legislación urbanística española que permite a los propietarios de una urbanización asumir colectivamente las obligaciones de conservación y mantenimiento de las infraestructuras y servicios comunes.
+Una Entidad Urbanística de Conservación (EUC) es una figura jurídica prevista en la legislación urbanística española que permite a los propietarios de una urbanización asumir colectivamente las obligaciones de conservación y mantenimiento de las infraestructuras y servicios comunes.
 
 **Características principales:**
 
@@ -52,11 +52,11 @@ Una Entidad Urbanística de Conservación (EUC o EUCC) es una figura jurídica p
 
 ### Diferencias con Otras Figuras
 
-Es importante distinguir las EUCC de otras entidades similares:
+Es importante distinguir las EUC de otras entidades similares:
 
 - **Junta de Compensación**:前身 constituye los propietarios para ejecutar la urbanización
 - **Comunidad de Propietarios**: Tiene carácter privado y se regula por la Ley de Propiedad Horizontal
-- **EUCC**: Tiene carácter público y su finalidad es el mantenimiento hasta la recepción municipal
+- **EUC**: Tiene carácter público y su finalidad es el mantenimiento hasta la recepción municipal
 
 ### Obligatoriedad de Constitución
 
@@ -84,7 +84,7 @@ El Ayuntamiento de Maello fue condenado por el TSJCyL a recepcionar su urbanizac
 
 - El Ayuntamiento debe recepcionar la urbanización
 - Debe asumir el coste de los servicios públicos (agua, limpieza, mantenimiento, etc.)
-- Debe iniciarse el proceso de disolución de la EUCC al haber superado el plazo legal de existencia
+- Debe iniciarse el proceso de disolución de la EUC al haber superado el plazo legal de existencia
 
 Este caso es muy similares al de Los Ángeles de San Rafael.
 
@@ -144,7 +144,7 @@ La ejecución de sentencias que condenan a los ayuntamientos a recepcionar urban
 - **El Consultor de los Ayuntamento**s: Publica análisis sobre recepción de obras de urbanización
 - **Revista de Urbanismo** (reurbanismo.es): Artículos sobre entidades urbanísticas de conservación
 - **juridicamente.org**: Guía completa sobre Entidades Urbanísticas de Conservación
-- **conceptosjuridicos.com**: Definiciones y guías sobre EUCC
+- **conceptosjuridicos.com**: Definiciones y guías sobre EUC
 
 ### Revistas Académicas
 
@@ -180,8 +180,8 @@ La ejecución de sentencias que condenan a los ayuntamientos a recepcionar urban
 
 El caso de Los Ángeles de San Rafael no es aislado. Existen numerosos precedentes en España de urbanizaciones que han tenido que recurrir a la vía judicial para obtener la recepción municipal:
 
-- **Móstoles**: Caso de la EUCC Residencial Norte, que fue disuelta por sentencia judicial
-- **Valdemorillo**: El Ayuntamiento se comprometió a iniciar los trámites para la disolución de EUCC
+- **Móstoles**: Caso de la EUC Residencial Norte, que fue disuelta por sentencia judicial
+- **Valdemorillo**: El Ayuntamiento se comprometió a iniciar los trámites para la disolución de EUC
 - **Maello**: Sentencia de 2025 muy similar al caso de Los Ángeles de San Rafael
 
 Estos casos demuestran que el conflicto entre vecinos y ayuntamientos por la recepción de urbanizaciones es un problema extendido en toda España, especialmente en urbanizaciones construidas en las décadas de 1960 y 1970.
@@ -222,7 +222,7 @@ Estos casos demuestran que el conflicto entre vecinos y ayuntamientos por la rec
 | 9 | Entidad Urbanística de Conservación: GUÍA COMPLETA | https://juridicamente.org/entidad-urbanistica-de-conservacion/ | Guía |
 | 10 | ¿Qué son las entidades urbanísticas de conservación? | https://reurbanismo.es/que-son-las-entidades-urbanisticas-de-conservacion/ | Guía |
 | 11 | Entidad Urbanística de Conservación: ¿qué es? - Conceptos Jurídicos | https://www.conceptosjuridicos.com/entidad-urbanistica-de-conservacion/ | Guía |
-| 12 | Disolución de EUCC Residencial Norte en Móstoles | https://manga-abogados.com/articulo/un-caso-de-existo-en-mostoles-disolucion-eucc/ | Jurisprudencia |
+| 12 | Disolución de EUC Residencial Norte en Móstoles | https://manga-abogados.com/articulo/un-caso-de-existo-en-mostoles-disolucion-eucc/ | Jurisprudencia |
 | 13 | El Ayuntamiento de Maello debe recepcionar la urbanización | https://pinardepuenteviejo.es/el-ayuntamiento-de-maello-debe-recepcionar-la-urbanizacion-y-asumir-el-coste-de-los-servicios-publicos/ | Jurisprudencia |
 | 14 | La Justicia obliga a los municipios a costear miles de urbanizaciones | https://www.expansion.com/2011/06/19/juridico/1308519762.html | Prensa |
 | 15 | Decreto 22/2004 RUCCL Castilla y León | https://www.iberley.es/legislacion/decreto-22-2004-29-ene-c-castilla-leon-aprueba-reglamento-urbanismo-castilla-leon-799645 | Normativa |

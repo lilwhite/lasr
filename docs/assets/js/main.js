@@ -13,6 +13,7 @@
         contentPath: 'assets/content.json',
         configPath: 'assets/config.json',
         buildMetaPath: 'assets/build-meta.json',
+        pressDataPath: 'data/prensa/curated_news.json',
         animationDelay: 100
     };
 
@@ -20,6 +21,7 @@
     // State
     // ============================================
     let content = null;
+    let pressNews = [];
     let isLoading = true;
 
     // ============================================
@@ -125,6 +127,22 @@
             }
         } catch (error) {
             console.warn('No se pudo cargar build-meta.json', error);
+        }
+    }
+
+    async function loadPressNews() {
+        try {
+            const response = await fetch(CONFIG.pressDataPath);
+            if (!response.ok) {
+                pressNews = [];
+                return;
+            }
+
+            const payload = await response.json();
+            pressNews = Array.isArray(payload) ? payload : [];
+        } catch (error) {
+            console.warn('No se pudo cargar curated_news.json', error);
+            pressNews = [];
         }
     }
 
@@ -296,26 +314,86 @@
         ];
 
         groups.forEach((group, groupIndex) => {
+            const groupKey = (group.key || '').toString().toLowerCase();
+            const isPressGroup = groupKey === 'prensa' || (group.titulo || '').toString().trim().toLowerCase() === 'prensa';
+            const isNormativeGroup = (group.titulo || '').toString().trim().toLowerCase() === 'normativa';
             const groupItems = Array.isArray(group.items) ? group.items : [];
+            const pressItems = isPressGroup && window.PressUtils
+                ? window.PressUtils.getLandingFeaturedNews(pressNews, 3)
+                : [];
             let groupCards = '';
 
-            groupItems.forEach((doc, cardIndex) => {
+            if (isPressGroup && pressItems.length === 0) {
+                groupCards = `
+                    <div class="doc-card fade-in">
+                        <span class="doc-type prensa">Prensa</span>
+                        <h3 class="doc-title">Sin noticias relevantes publicadas</h3>
+                        <p class="doc-description">Estamos actualizando la recopilación periodística. Vuelve en próximos días para consultar nuevas referencias.</p>
+                        <p class="doc-meta">Estado: pendiente de actualización</p>
+                    </div>
+                `;
+            }
+
+            const iterableItems = isPressGroup
+                ? pressItems.map(item => ({
+                    tipo: 'prensa',
+                    source: item.source,
+                    titulo: item.title,
+                    descripcion: item.excerpt || 'Cobertura periodística relacionada con Los Ángeles de San Rafael.',
+                    url: item.url,
+                    fecha: window.PressUtils
+                        ? `${window.PressUtils.formatDate(item.date)} · ${window.PressUtils.getCategoryLabel(item.category)}`
+                        : (item.date || 'Fecha no disponible')
+                }))
+                : groupItems;
+
+            if (isPressGroup) {
+                while (iterableItems.length < 3) {
+                    iterableItems.push({
+                        tipo: 'prensa',
+                        source: 'Selección editorial',
+                        titulo: 'Nueva noticia en revisión editorial',
+                        descripcion: 'Estamos incorporando nuevas referencias periodísticas relevantes para Los Ángeles de San Rafael.',
+                        url: '',
+                        fecha: 'Actualización en curso'
+                    });
+                }
+            }
+
+            iterableItems.forEach((doc, cardIndex) => {
                 const typeClass = (doc.tipo || 'documento').toLowerCase();
                 const safeDocUrl = sanitizeExternalUrl(doc.url || '');
+                const linkLabel = (doc.cta || 'Ver fuente').toString().trim() || 'Ver fuente';
                 const linkHtml = safeDocUrl
-                    ? `<a href="${escapeHtml(safeDocUrl)}" class="doc-link" target="_blank" rel="noopener noreferrer">Ver fuente ${icons.external}</a>`
+                    ? `<a href="${escapeHtml(safeDocUrl)}" class="doc-link" target="_blank" rel="noopener noreferrer">${escapeHtml(linkLabel)} ${icons.external}</a>`
                     : '';
+                const articles = Array.isArray(doc.articulos) ? doc.articulos.filter(Boolean) : [];
+                const articlesHtml = articles.length
+                    ? `<ul class="doc-article-list">${articles.map(article => `<li>${escapeHtml(article)}</li>`).join('')}</ul>`
+                    : '';
+                const isEucReferenceCard = isNormativeGroup
+                    && (doc.titulo || '').toString().trim().toLowerCase() === 'régimen de entidades urbanísticas de conservación';
 
                 groupCards += `
-                    <div class="doc-card fade-in" style="animation-delay: ${(groupIndex * 0.08) + (cardIndex * 0.04)}s">
+                    <div class="doc-card ${isPressGroup ? 'press-featured-card' : ''} ${isEucReferenceCard ? 'is-euc-reference' : ''} fade-in" style="animation-delay: ${(groupIndex * 0.08) + (cardIndex * 0.04)}s">
                         <span class="doc-type ${typeClass}">${escapeHtml(doc.tipo || 'Documento')}</span>
+                        ${doc.source ? `<span class="press-source-badge">${escapeHtml(doc.source)}</span>` : ''}
                         <h3 class="doc-title">${escapeHtml(doc.titulo)}</h3>
-                        <p class="doc-description">${escapeHtml(doc.descripcion || '')}</p>
+                        <p class="doc-description press-excerpt">${escapeHtml(doc.descripcion || '')}</p>
+                        ${articlesHtml}
                         ${doc.fecha ? `<p class="doc-meta">${escapeHtml(doc.fecha)}</p>` : ''}
                         ${linkHtml}
                     </div>
                 `;
             });
+
+            if (isPressGroup) {
+                groupCards += `
+                    <div class="press-archive-link-wrap fade-in" style="animation-delay: ${(groupIndex * 0.08) + 0.18}s">
+                        <a href="prensa/" class="btn btn-secondary">Ver archivo de prensa</a>
+                    </div>
+                `;
+            }
 
             html += `
                 <section class="doc-group">
@@ -323,7 +401,7 @@
                         <h3 class="doc-group-title">${escapeHtml(group.titulo || 'Documentación')}</h3>
                         ${group.descripcion ? `<p class="doc-group-description">${escapeHtml(group.descripcion)}</p>` : ''}
                     </header>
-                    <div class="cards doc-group-cards">
+                    <div class="cards doc-group-cards ${isNormativeGroup ? 'is-normativa-grid' : ''}">
                         ${groupCards}
                     </div>
                 </section>
@@ -506,6 +584,9 @@
             // Load content
             const response = await fetch(CONFIG.contentPath);
             content = await response.json();
+
+            // Load press feed
+            await loadPressNews();
             
             // Render content
             renderAll();
