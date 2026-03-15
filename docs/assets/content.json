@@ -256,7 +256,7 @@
             "titulo": "Ley de Urbanismo de Castilla y León",
             "descripcion": "Texto legal autonómico de referencia en materia de ordenación urbanística, planeamiento, gestión y conservación.",
             "tipo": "normativa",
-            "url": "https://www.boe.es/eli/es-cl/l/1999/04/08/5/con",
+            "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1999-12599",
             "fecha": "Texto consolidado · BOE",
             "cta": "Abrir texto consolidado"
           },
@@ -264,7 +264,7 @@
             "titulo": "Reglamento de Urbanismo de Castilla y León",
             "descripcion": "Desarrollo reglamentario de la legislación urbanística autonómica y marco técnico de aplicación.",
             "tipo": "normativa",
-            "url": "https://www.boe.es/eli/es-cl/d/2004/01/29/22/con",
+            "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2004-1679",
             "fecha": "Texto consolidado · BOE",
             "cta": "Abrir reglamento"
           },
@@ -272,7 +272,7 @@
             "titulo": "Régimen de Entidades Urbanísticas de Conservación",
             "descripcion": "Referencia temática sobre funciones, límites y encaje jurídico de las EUC dentro de la Ley y el Reglamento de Urbanismo de Castilla y León.",
             "tipo": "normativa",
-            "url": "https://www.boe.es/eli/es-cl/d/2004/01/29/22/con",
+            "url": "https://bocyl.jcyl.es/boletines/2004/02/02/pdf/BOCYL-D-02022004-1.pdf",
             "fecha": "Marco normativo de referencia · Fuente oficial",
             "cta": "Ver marco normativo"
           }
@@ -283,7 +283,7 @@
         "descripcion": "Documentación pública de administraciones con competencia urbanística.",
         "items": [
           {
-            "titulo": "Documentación urbanística del Ayuntamiento de El Espinar",
+            "titulo": "Urbanismo municipal — Ayuntamiento de El Espinar",
             "descripcion": "Planeamiento, gestión urbanística, licencias y documentación pública municipal relacionada con la urbanización y su contexto administrativo.",
             "tipo": "institucional",
             "url": "https://elespinar.es/urbanismo/",
@@ -291,12 +291,12 @@
             "cta": "Ver urbanismo municipal"
           },
           {
-            "titulo": "Planeamiento y normativa urbanística municipal (índice)",
-            "descripcion": "Acceso al índice institucional donde el Ayuntamiento publica la información urbanística municipal vigente y sus actualizaciones.",
-            "tipo": "institucional",
-            "url": "https://elespinar.es/urbanismo/",
-            "fecha": "Página índice oficial · Ayuntamiento de El Espinar",
-            "cta": "Abrir índice urbanístico"
+            "titulo": "Planeamiento urbanístico (PGOU)",
+            "descripcion": "Acceso a documentación del planeamiento urbanístico municipal vigente (PGOU y normativa asociada) publicada por el Ayuntamiento de El Espinar.",
+            "tipo": "planeamiento",
+            "url": "https://elespinar.es/aprobacion-definitva-parcial-del-pgou-de-el-espinar/",
+            "fecha": "Planeamiento municipal · Fuente oficial",
+            "cta": "Abrir planeamiento urbanístico"
           }
         ]
       },
