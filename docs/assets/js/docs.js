@@ -6,7 +6,8 @@
   'use strict';
 
   const documents = [
-    { file: 'documentacion_relevante.md', slug: 'documentacion-relevante', title: 'Documentacion relevante', category: 'referencia', order: 0 }
+    { file: 'documentacion_relevante.md', slug: 'documentacion-relevante', title: 'Documentacion relevante', category: 'referencia', order: 0 },
+    { file: 'CHANGELOG.md', slug: 'actualizaciones', title: 'Historial de cambios', category: 'portal', order: 99, hideInSidebar: true }
   ];
 
   const routeAliases = {};
@@ -256,6 +257,7 @@
   function renderSidebar(elements, currentSlug) {
     const sorted = [...documents].sort((a, b) => a.order - b.order);
     elements.sidebar.innerHTML = sorted
+      .filter((doc) => !doc.hideInSidebar)
       .map((doc) => {
         const active = doc.slug === currentSlug ? 'active' : '';
         return `<li><a class="sidebar-link ${active}" href="${linkForSlug(doc.slug)}">${escapeHtml(doc.title)}</a></li>`;
@@ -406,6 +408,10 @@
     });
   }
 
+  function buildDocumentPath(root, currentDoc) {
+    return `${root}/${currentDoc.file}`;
+  }
+
   async function load() {
     ensureShell();
     if (window.LASRTheme && typeof window.LASRTheme.initThemeToggle === 'function') {
@@ -418,8 +424,11 @@
     const root = getRootPrefix();
 
     try {
-      const response = await fetch(`${root}/${currentDoc.file}`);
-      if (!response.ok) throw new Error('Documento no encontrado');
+      const docPath = buildDocumentPath(root, currentDoc);
+      const response = await fetch(docPath);
+      if (!response.ok) {
+        throw new Error(`Documento no encontrado (${response.status}): ${docPath}`);
+      }
 
       const raw = await response.text();
       const parsed = parseFrontmatter(raw);
@@ -427,6 +436,10 @@
       const html = window.marked ? window.marked.parse(parsed.body) : parsed.body;
       elements.body.innerHTML = sanitizeRenderedHtml(html);
       enhanceTables(elements.body);
+
+      if (currentDoc.slug === 'actualizaciones') {
+        elements.body.classList.add('changelog-body');
+      }
 
       elements.title.textContent = parsed.frontmatter.title || currentDoc.title;
       elements.breadcrumb.textContent = parsed.frontmatter.title || currentDoc.title;
@@ -439,7 +452,14 @@
 
       document.title = `${parsed.frontmatter.title || currentDoc.title} - Los Angeles de San Rafael`;
     } catch (err) {
-      elements.body.innerHTML = '<p class="error">Error al cargar el documento.</p>';
+      const fallbackUrl = currentDoc.slug === 'actualizaciones' ? `${root}/CHANGELOG.md` : '';
+      elements.body.innerHTML = `
+        <div class="error">
+          <p><strong>No se pudo cargar este documento.</strong></p>
+          <p>Revisa la conexión o inténtalo de nuevo en unos minutos.</p>
+          ${fallbackUrl ? `<p><a href="${escapeHtml(fallbackUrl)}" target="_blank" rel="noopener noreferrer">Abrir versión de respaldo del historial</a></p>` : ''}
+        </div>
+      `;
       console.error(err);
     }
   }
