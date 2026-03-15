@@ -138,12 +138,21 @@
     document.body.innerHTML = `
       <header class="header doc-header-top" id="header">
         <div class="header-container">
-          <a href="${getRootPrefix()}/index.html" class="logo"><span class="logo-text">LASR</span></a>
-          <div class="header-controls">
-            <button class="theme-toggle" data-theme-toggle type="button" aria-label="Cambiar tema" aria-pressed="false">
-              <span class="theme-toggle-icon" aria-hidden="true">☀️</span>
-              <span class="theme-toggle-label">Claro</span>
+          <div class="header-branding">
+            <button class="theme-toggle" data-theme-toggle type="button" aria-label="Activar modo oscuro" aria-pressed="false" title="Cambiar tema">
+              <span class="theme-toggle-track" aria-hidden="true">
+                <span class="theme-toggle-icon theme-toggle-icon-sun">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.4"/><path d="M12 2v2.4M12 19.6V22M4.93 4.93l1.7 1.7M17.37 17.37l1.7 1.7M2 12h2.4M19.6 12H22M4.93 19.07l1.7-1.7M17.37 6.63l1.7-1.7"/></svg>
+                </span>
+                <span class="theme-toggle-icon theme-toggle-icon-moon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+                </span>
+                <span class="theme-toggle-thumb"></span>
+              </span>
             </button>
+            <a href="${getRootPrefix()}/index.html" class="logo"><span class="logo-text">LASR</span></a>
+          </div>
+          <div class="header-controls">
             <nav class="doc-top-actions" aria-label="Acciones"><a class="btn btn-secondary doc-back-btn" href="${getRootPrefix()}/index.html#documentos">Volver al portal</a></nav>
           </div>
         </div>
