@@ -366,6 +366,10 @@
                 const linkHtml = safeDocUrl
                     ? `<a href="${escapeHtml(safeDocUrl)}" class="doc-link" target="_blank" rel="noopener noreferrer">${escapeHtml(linkLabel)} ${icons.external}</a>`
                     : '';
+                const articles = Array.isArray(doc.articulos) ? doc.articulos.filter(Boolean) : [];
+                const articlesHtml = articles.length
+                    ? `<ul class="doc-article-list">${articles.map(article => `<li>${escapeHtml(article)}</li>`).join('')}</ul>`
+                    : '';
 
                 groupCards += `
                     <div class="doc-card ${isPressGroup ? 'press-featured-card' : ''} fade-in" style="animation-delay: ${(groupIndex * 0.08) + (cardIndex * 0.04)}s">
@@ -373,6 +377,7 @@
                         ${doc.source ? `<span class="press-source-badge">${escapeHtml(doc.source)}</span>` : ''}
                         <h3 class="doc-title">${escapeHtml(doc.titulo)}</h3>
                         <p class="doc-description press-excerpt">${escapeHtml(doc.descripcion || '')}</p>
+                        ${articlesHtml}
                         ${doc.fecha ? `<p class="doc-meta">${escapeHtml(doc.fecha)}</p>` : ''}
                         ${linkHtml}
                     </div>
