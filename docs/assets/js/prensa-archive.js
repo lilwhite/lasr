@@ -119,7 +119,7 @@
     const response = await fetch(CONFIG.pressDataPath);
     if (!response.ok) throw new Error('No se pudo cargar curated_news.json');
     const payload = await response.json();
-    relevantNews = window.PressUtils.getRelevantNews(payload);
+    relevantNews = window.PressUtils.getArchiveNews(payload);
   }
 
   function setupFilters() {
