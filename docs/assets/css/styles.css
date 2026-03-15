@@ -833,6 +833,14 @@ h1, h2, h3, h4, h5, h6 {
     line-height: 1.35;
 }
 
+.doc-group-cards.is-normativa-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.doc-group-cards.is-normativa-grid .doc-card.is-euc-reference {
+    grid-column: span 2;
+}
+
 .doc-link {
     display: inline-flex;
     align-items: center;
@@ -1260,6 +1268,14 @@ h1, h2, h3, h4, h5, h6 {
     
     .cards {
         grid-template-columns: 1fr;
+    }
+
+    .doc-group-cards.is-normativa-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .doc-group-cards.is-normativa-grid .doc-card.is-euc-reference {
+        grid-column: auto;
     }
 
     .sentencia-cta {
