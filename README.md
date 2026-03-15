@@ -64,7 +64,7 @@ La urbanización **Los Ángeles de San Rafael**, desarrollada en los años 60, f
 
 | Tema | Situación |
 |------|-----------|
-| 💰 Fiscal | Vecinos pagan IBI + cuotas EUCC |
+| 💰 Fiscal | Vecinos pagan IBI + cuotas EUC |
 | 🏛️ Servicios | No reciben servicios municipales equivalentes |
 | 📅 Temporal | 11 años sin asamblea de propietarios |
 | ⚖️ Legal | Sentencia sin ejecución efectiva |

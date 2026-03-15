@@ -1,12 +1,24 @@
 {
   "max_per_source": 50,
-  "max_items": 150,
+  "max_items": 260,
   "sources": [
     {
       "name": "La Voz de El Espinar",
       "domain": "lavozdeelespinar.es",
       "feeds": [
         "https://lavozdeelespinar.es/feed/"
+      ],
+      "wp_endpoint": "https://lavozdeelespinar.es/wp-json/wp/v2/posts",
+      "wp_per_page": 100,
+      "historical_searches": [
+        "los angeles de san rafael",
+        "los ángeles de san rafael",
+        "urbanizacion los angeles",
+        "urbanización los ángeles",
+        "entidad urbanistica de conservacion",
+        "entidad urbanística de conservación",
+        "recepcion urbanizacion",
+        "recepción urbanización"
       ]
     },
     {
@@ -38,6 +50,7 @@
       "propietarios": 4,
       "vecinos": 4,
       "junta": 3,
+      "euc": 6,
       "eucc": 6,
       "recepcion": 5,
       "recepción": 5,
