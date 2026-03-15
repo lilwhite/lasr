@@ -1,0 +1,82 @@
+name: Generar release automática
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: read
+
+jobs:
+  release:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Obtener PRs cerradas de main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -e
+          curl -sS \
+            -H "Authorization: Bearer ${GITHUB_TOKEN}" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${REPO}/pulls?state=closed&base=main&sort=updated&direction=desc&per_page=100" \
+            > /tmp/prs.json
+          echo "PRS_JSON_FILE=/tmp/prs.json" >> $GITHUB_ENV
+
+      - name: Preparar changelog + metadata + notas
+        run: |
+          python3 scripts/release_sync.py
+
+      - name: Comprobar si hay cambios para commitear
+        id: changes
+        run: |
+          if git diff --quiet; then
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+          else
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Commit de changelog y metadata
+        if: steps.changes.outputs.has_changes == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add CHANGELOG.md docs/assets/build-meta.json docs/assets/content.json release-notes.md release-version.txt
+          git commit -m "chore(release): actualizar changelog y metadata"
+          git push origin main
+
+      - name: Leer versión release
+        id: version
+        run: |
+          VERSION=$(cat release-version.txt | tr -d '\n')
+          echo "value=${VERSION}" >> $GITHUB_OUTPUT
+
+      - name: Crear tag si no existe
+        run: |
+          VERSION="${{ steps.version.outputs.value }}"
+          if git rev-parse "$VERSION" >/dev/null 2>&1; then
+            echo "Tag $VERSION ya existe"
+          else
+            git tag -a "$VERSION" -m "Release $VERSION"
+            git push origin "$VERSION"
+          fi
+
+      - name: Publicar GitHub Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          VERSION="${{ steps.version.outputs.value }}"
+          if gh release view "$VERSION" >/dev/null 2>&1; then
+            gh release edit "$VERSION" --title "Release $VERSION" --notes-file release-notes.md
+          else
+            gh release create "$VERSION" --title "Release $VERSION" --notes-file release-notes.md
+          fi
