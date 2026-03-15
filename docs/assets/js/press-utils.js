@@ -244,10 +244,30 @@
   }
 
   function applyFilters(items, filters) {
-    const sourceType = (filters.sourceType || '').trim();
-    const source = (filters.source || '').trim();
-    const category = (filters.category || '').trim();
-    const year = (filters.year || '').trim();
+    const normalizeToken = (value) => (typeof value === 'string' ? value.trim().toLowerCase() : '');
+    const isNeutralSelect = (value, neutralWords) => {
+      const normalized = normalizeToken(value);
+      if (!normalized) return true;
+      return neutralWords.includes(normalized);
+    };
+
+    const sourceTypeNeutralWords = ['all', 'todas', 'todas las fuentes', 'todos', 'todas las fuentes informativas'];
+    const sourceNeutralWords = ['all', 'todos', 'todos los medios', 'todas'];
+    const categoryNeutralWords = ['all', 'todas', 'todas las categorías', 'todas las categorias', 'todos'];
+    const yearNeutralWords = ['all', 'todos', 'todos los años', 'todos los anos'];
+
+    const sourceType = isNeutralSelect(filters.sourceType, sourceTypeNeutralWords)
+      ? ''
+      : (filters.sourceType || '').trim();
+    const source = isNeutralSelect(filters.source, sourceNeutralWords)
+      ? ''
+      : (filters.source || '').trim();
+    const category = isNeutralSelect(filters.category, categoryNeutralWords)
+      ? ''
+      : (filters.category || '').trim();
+    const year = isNeutralSelect(filters.year, yearNeutralWords)
+      ? ''
+      : (filters.year || '').trim();
     const query = (filters.query || '').trim().toLowerCase();
 
     return sortNews(
