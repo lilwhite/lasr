@@ -3,8 +3,7 @@
 
   try {
     var stored = localStorage.getItem('lasr-theme');
-    var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    var theme = (stored === 'dark' || stored === 'light') ? stored : (prefersDark ? 'dark' : 'light');
+    var theme = (stored === 'dark' || stored === 'light') ? stored : 'light';
     document.documentElement.setAttribute('data-theme', theme);
     document.documentElement.style.colorScheme = theme;
   } catch (e) {
