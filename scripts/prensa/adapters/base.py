@@ -15,6 +15,7 @@ def _to_raw_item(entry: Dict[str, str], source: Dict) -> RawNewsItem | None:
         return None
 
     return RawNewsItem(
+        guid=entry.get("guid", ""),
         title=strip_html(title),
         url=url,
         date=entry.get("date", ""),
@@ -112,6 +113,9 @@ def fetch_wordpress_history(source: Dict, timeout: int) -> AdapterResult:
 
                 output.append(
                     RawNewsItem(
+                        guid=(post.get("guid") or {}).get("rendered", "")
+                        if isinstance(post.get("guid"), dict)
+                        else "",
                         title=title,
                         url=link,
                         date=(post.get("date_gmt") or post.get("date") or "").strip(),

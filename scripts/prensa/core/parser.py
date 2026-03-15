@@ -19,6 +19,7 @@ def parse_feed_items(payload: bytes) -> List[Dict[str, str]]:
     for item in root.findall(".//item"):
         rss_items.append(
             {
+                "guid": text_of(item, "guid"),
                 "title": text_of(item, "title"),
                 "url": text_of(item, "link"),
                 "date": text_of(item, "pubDate"),
@@ -44,6 +45,7 @@ def parse_feed_items(payload: bytes) -> List[Dict[str, str]]:
         )
         atom_items.append(
             {
+                "guid": text_of(entry, f"{atom_ns}id") or link,
                 "title": text_of(entry, f"{atom_ns}title"),
                 "url": link,
                 "date": published,
