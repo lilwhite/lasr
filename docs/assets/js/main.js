@@ -316,6 +316,7 @@
         groups.forEach((group, groupIndex) => {
             const groupKey = (group.key || '').toString().toLowerCase();
             const isPressGroup = groupKey === 'prensa' || (group.titulo || '').toString().trim().toLowerCase() === 'prensa';
+            const isNormativeGroup = (group.titulo || '').toString().trim().toLowerCase() === 'normativa';
             const groupItems = Array.isArray(group.items) ? group.items : [];
             const pressItems = isPressGroup && window.PressUtils
                 ? window.PressUtils.getLandingFeaturedNews(pressNews, 3)
@@ -370,9 +371,11 @@
                 const articlesHtml = articles.length
                     ? `<ul class="doc-article-list">${articles.map(article => `<li>${escapeHtml(article)}</li>`).join('')}</ul>`
                     : '';
+                const isEucReferenceCard = isNormativeGroup
+                    && (doc.titulo || '').toString().trim().toLowerCase() === 'régimen de entidades urbanísticas de conservación';
 
                 groupCards += `
-                    <div class="doc-card ${isPressGroup ? 'press-featured-card' : ''} fade-in" style="animation-delay: ${(groupIndex * 0.08) + (cardIndex * 0.04)}s">
+                    <div class="doc-card ${isPressGroup ? 'press-featured-card' : ''} ${isEucReferenceCard ? 'is-euc-reference' : ''} fade-in" style="animation-delay: ${(groupIndex * 0.08) + (cardIndex * 0.04)}s">
                         <span class="doc-type ${typeClass}">${escapeHtml(doc.tipo || 'Documento')}</span>
                         ${doc.source ? `<span class="press-source-badge">${escapeHtml(doc.source)}</span>` : ''}
                         <h3 class="doc-title">${escapeHtml(doc.titulo)}</h3>
@@ -398,7 +401,7 @@
                         <h3 class="doc-group-title">${escapeHtml(group.titulo || 'Documentación')}</h3>
                         ${group.descripcion ? `<p class="doc-group-description">${escapeHtml(group.descripcion)}</p>` : ''}
                     </header>
-                    <div class="cards doc-group-cards">
+                    <div class="cards doc-group-cards ${isNormativeGroup ? 'is-normativa-grid' : ''}">
                         ${groupCards}
                     </div>
                 </section>
