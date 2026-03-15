@@ -264,17 +264,17 @@
             "titulo": "Reglamento de Urbanismo de Castilla y León",
             "descripcion": "Desarrollo reglamentario de la legislación urbanística autonómica y marco técnico de aplicación.",
             "tipo": "normativa",
-            "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2004-1679",
-            "fecha": "Texto consolidado · BOE",
+            "url": "https://www.boe.es/buscar/pdf/2004/BOCL-h-2004-90152-consolidado.pdf",
+            "fecha": "Texto consolidado · Junta de Castilla y León",
             "cta": "Abrir reglamento"
           },
           {
             "titulo": "Régimen de Entidades Urbanísticas de Conservación",
-            "descripcion": "Referencia temática sobre funciones, límites y encaje jurídico de las EUC dentro de la Ley y el Reglamento de Urbanismo de Castilla y León.",
+            "descripcion": "Referencia temática sobre constitución, funcionamiento y obligaciones de conservación dentro del Reglamento de Urbanismo de Castilla y León.",
             "tipo": "normativa",
-            "url": "https://bocyl.jcyl.es/boletines/2004/02/02/pdf/BOCYL-D-02022004-1.pdf",
-            "fecha": "Marco normativo de referencia · Fuente oficial",
-            "cta": "Ver marco normativo"
+            "url": "https://www.boe.es/eli/es-cl/d/2004/01/29/22/con",
+            "fecha": "Arts. 192–197 y 208 · Fuente oficial",
+            "cta": "Ver régimen de conservación"
           }
         ]
       },
