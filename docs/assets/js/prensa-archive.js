@@ -17,7 +17,8 @@
     count: document.getElementById('pressResultCount')
   };
 
-  let relevantNews = [];
+  let archiveNews = [];
+  let allNews = [];
 
   const SOURCE_TYPE_LABELS = {
     local: 'Local',
@@ -111,7 +112,9 @@
   }
 
   function applyCurrentFilters() {
-    const filtered = window.PressUtils.applyFilters(relevantNews, readFilters());
+    const filters = readFilters();
+    const baseItems = filters.source ? allNews : archiveNews;
+    const filtered = window.PressUtils.applyFilters(baseItems, filters);
     renderList(filtered);
   }
 
@@ -119,13 +122,14 @@
     const response = await fetch(CONFIG.pressDataPath);
     if (!response.ok) throw new Error('No se pudo cargar curated_news.json');
     const payload = await response.json();
-    relevantNews = window.PressUtils.getArchiveNews(payload);
+    allNews = window.PressUtils.sortNews(Array.isArray(payload) ? payload : []);
+    archiveNews = window.PressUtils.getArchiveNews(payload);
   }
 
   function setupFilters() {
-    buildOptions(elements.sourceFilter, window.PressUtils.getFilterValues(relevantNews, 'source'));
-    buildOptions(elements.categoryFilter, window.PressUtils.getFilterValues(relevantNews, 'category'), window.PressUtils.getCategoryLabel);
-    buildOptions(elements.yearFilter, window.PressUtils.getFilterYears(relevantNews));
+    buildOptions(elements.sourceFilter, window.PressUtils.getFilterValues(allNews, 'source'));
+    buildOptions(elements.categoryFilter, window.PressUtils.getFilterValues(archiveNews, 'category'), window.PressUtils.getCategoryLabel);
+    buildOptions(elements.yearFilter, window.PressUtils.getFilterYears(archiveNews));
 
     [elements.sourceTypeFilter, elements.sourceFilter, elements.categoryFilter, elements.yearFilter].forEach((node) => {
       node.addEventListener('change', applyCurrentFilters);

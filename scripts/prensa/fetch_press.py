@@ -71,10 +71,22 @@ def run(config_path: Path, output_path: Path, timeout: int):
 
     collected: List[RawNewsItem] = []
     warnings: List[str] = []
+    source_stats: Dict[str, Dict[str, int]] = {}
     for source in config.get("sources", []):
+        source_name = source.get("name", "Fuente")
         result = _collect_from_source(source, timeout, max_per_source)
-        collected.extend(result.get("items", []))
+        source_items = result.get("items", [])
+        collected.extend(source_items)
         warnings.extend(result.get("warnings", []))
+        source_stats[source_name] = {
+            "fetched": int(result.get("fetched_count", 0)),
+            "parsed": int(result.get("parsed_count", 0)),
+            "normalized": 0,
+            "relevant": 0,
+            "deduped": 0,
+            "final": 0,
+            "raw_items": len(source_items),
+        }
 
     normalized: List[NormalizedNewsItem] = []
     for raw in collected:
@@ -87,10 +99,27 @@ def run(config_path: Path, output_path: Path, timeout: int):
         )
         if item:
             normalized.append(item)
+            stats = source_stats.get(item.source)
+            if stats is not None:
+                stats["normalized"] += 1
+                if item.is_relevant:
+                    stats["relevant"] += 1
 
     deduped = dedupe_items(normalized)
+    deduped_ids = {item.id for item in deduped}
+    for item in normalized:
+        stats = source_stats.get(item.source)
+        if stats is None:
+            continue
+        if item.id not in deduped_ids:
+            stats["deduped"] += 1
+
     ordered = sort_items(deduped)
     limited = ordered[:max_items]
+    for item in limited:
+        stats = source_stats.get(item.source)
+        if stats is not None:
+            stats["final"] += 1
 
     output = []
     for item in limited:
@@ -130,6 +159,12 @@ def run(config_path: Path, output_path: Path, timeout: int):
 
     for warning in warnings:
         print(warning)
+    for source_name, stats in source_stats.items():
+        print(
+            f"[{source_name}] fetched={stats['fetched']} parsed={stats['parsed']} "
+            f"normalized={stats['normalized']} relevant={stats['relevant']} "
+            f"deduped={stats['deduped']} final={stats['final']}"
+        )
     print(f"[ok] Total candidatas: {len(output)} | Relevantes: {len(relevant)}")
     print(f"[ok] Rango histórico relevante: {year_info}")
     print(f"[ok] JSON generado: {output_path}")
