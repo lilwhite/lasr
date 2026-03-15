@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Archivo de prensa sobre Los Ángeles de San Rafael">
+    <meta name="author" content="Portal vecinal Los Ángeles de San Rafael">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; script-src 'self' https://www.googletagmanager.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com; frame-src 'none'; form-action 'self'; upgrade-insecure-requests">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="Permissions-Policy" content="geolocation=(), camera=(), microphone=()">
+
+    <meta property="og:title" content="Archivo de prensa - Los Ángeles de San Rafael">
+    <meta property="og:description" content="Recopilación de noticias relevantes para seguimiento vecinal y urbanístico.">
+    <meta property="og:type" content="website">
+
+    <title>Archivo de prensa - Los Ángeles de San Rafael</title>
+
+    <link rel="stylesheet" href="../assets/css/styles.css">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7CKX4GC8L5"></script>
+    <script src="../assets/js/ga4.js"></script>
+</head>
+<body>
+    <header class="header doc-header-top" id="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">
+                <span class="logo-text">LASR</span>
+            </a>
+            <nav class="doc-top-actions" aria-label="Acciones">
+                <a href="../index.html#documentos" class="btn btn-secondary doc-back-btn">Volver al portal</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="section press-archive-page">
+        <div class="container">
+            <header class="press-archive-hero">
+                <h1 class="section-title">Archivo de prensa</h1>
+                <p class="section-description">Recopilación editorial de noticias relevantes para el seguimiento vecinal, urbanístico e institucional de Los Ángeles de San Rafael.</p>
+                <p class="press-archive-note">Incluye noticias altamente relevantes y una selección contextual mínima por fuente para facilitar el contraste informativo.</p>
+            </header>
+
+            <section class="press-filters" aria-label="Filtros de prensa">
+                <label class="press-filter-field" for="pressSourceTypeFilter">
+                    <span>Tipo de fuente</span>
+                    <select id="pressSourceTypeFilter">
+                        <option value="">Todas</option>
+                        <option value="local">Local</option>
+                        <option value="provincial">Provincial</option>
+                        <option value="institucional">Institucional</option>
+                    </select>
+                </label>
+
+                <label class="press-filter-field" for="pressSourceFilter">
+                    <span>Medio</span>
+                    <select id="pressSourceFilter">
+                        <option value="">Todos los medios</option>
+                    </select>
+                </label>
+
+                <label class="press-filter-field" for="pressCategoryFilter">
+                    <span>Categoría</span>
+                    <select id="pressCategoryFilter">
+                        <option value="">Todas las categorías</option>
+                    </select>
+                </label>
+
+                <label class="press-filter-field" for="pressYearFilter">
+                    <span>Año</span>
+                    <select id="pressYearFilter">
+                        <option value="">Todos los años</option>
+                    </select>
+                </label>
+
+                <label class="press-filter-field" for="pressQueryFilter">
+                    <span>Búsqueda</span>
+                    <input id="pressQueryFilter" type="search" placeholder="Buscar titular o extracto">
+                </label>
+            </section>
+
+            <p class="press-results-count" id="pressResultCount">Cargando...</p>
+
+            <section class="press-archive-list" id="pressArchiveList" aria-live="polite"></section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-text">
+                <strong>Los Ángeles de San Rafael</strong> — Portal informativo vecinal
+            </p>
+            <p class="footer-disclaimer">
+                Este portal tiene carácter informativo y divulgativo. No constituye asesoramiento jurídico.
+            </p>
+            <p class="footer-links">
+                <a id="footerRepoLink" href="https://github.com/lilwhite/lasr" target="_blank" rel="noopener noreferrer">Ver repositorio</a>
+                <span>·</span>
+                <a id="footerLicenseLink" href="https://github.com/lilwhite/lasr/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">Licencia MIT</a>
+            </p>
+            <p class="footer-copy">
+                © 2026 — Información actualizada a <span id="lastUpdatedDate">10/03/2026</span>
+            </p>
+        </div>
+    </footer>
+
+    <script src="../assets/js/press-utils.js"></script>
+    <script src="../assets/js/prensa-archive.js"></script>
+</body>
+</html>

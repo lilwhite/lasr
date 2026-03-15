@@ -56,7 +56,7 @@
         "contenido": "El Ayuntamiento no asume los servicios públicos correspondientes. Los vecinos pagan impuestos municipales (IBI, basura) pero no reciben los mismos servicios que el casco urbano."
       },
       {
-        "titulo": "EUCC",
+        "titulo": "EUC",
         "icono": "document",
         "contenido": "La Entidad Urbanística de Conservación continúa asumiendo funciones de conservación y servicios. Esta situación se mantiene en el tiempo y genera dudas sobre su encaje como solución prolongada."
       },
@@ -88,12 +88,12 @@
       },
       {
         "fecha": "2013-2017",
-        "titulo": "Período EUCC",
+        "titulo": "Período EUC",
         "descripcion": "Período posterior al fallo en el que continuó la gestión de conservación mediante entidades de propietarios y acuerdos administrativos."
       },
       {
         "fecha": "2017",
-        "titulo": "Fin del período EUCC",
+        "titulo": "Fin del período EUC",
         "descripcion": "Debía completarse la recepción municipal. La situación no se normaliza."
       },
       {
@@ -165,7 +165,7 @@
         "estado": "pendiente"
       },
       {
-        "titulo": "Disolución EUCC",
+        "titulo": "Disolución EUC",
         "descripcion": "La continuidad prolongada de la Entidad Urbanística de Conservación sigue siendo una cuestión discutida en relación con la recepción municipal.",
         "estado": "pendiente"
       },
@@ -236,7 +236,7 @@
         "icono": "home",
         "opciones": [
           "Convocar asamblea de propietarios",
-          "Solicitar acceso a documentación de la EUCC",
+          "Solicitar acceso a documentación de la EUC",
           "Crear plataforma vecinal organizada",
           "Compartir costes jurídicos"
         ]
@@ -254,24 +254,37 @@
         "items": [
           {
             "titulo": "Ley de Urbanismo de Castilla y León",
-            "descripcion": "Norma autonómica de referencia en materia urbanística.",
+            "descripcion": "Texto legal autonómico de referencia en materia de ordenación urbanística, planeamiento, gestión y conservación.",
             "tipo": "normativa",
-            "url": "",
-            "fecha": "Pendiente de incorporar"
+            "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1999-12599",
+            "fecha": "Texto consolidado · BOE",
+            "cta": "Abrir texto consolidado"
           },
           {
             "titulo": "Reglamento de Urbanismo de Castilla y León",
-            "descripcion": "Desarrollo reglamentario de la legislación urbanística autonómica.",
+            "descripcion": "Desarrollo reglamentario de la legislación urbanística autonómica y marco técnico de aplicación.",
             "tipo": "normativa",
-            "url": "",
-            "fecha": "Pendiente de incorporar"
+            "url": "https://www.boe.es/buscar/pdf/2004/BOCL-h-2004-90152-consolidado.pdf",
+            "fecha": "Texto consolidado · Junta de Castilla y León",
+            "cta": "Abrir reglamento"
           },
           {
             "titulo": "Régimen de Entidades Urbanísticas de Conservación",
-            "descripcion": "Referencia normativa sobre funciones y límites de las EUCC.",
+            "descripcion": "Referencia temática sobre constitución, funcionamiento y obligaciones de conservación dentro del Reglamento de Urbanismo de Castilla y León.",
             "tipo": "normativa",
-            "url": "",
-            "fecha": "Pendiente de incorporar"
+            "url": "https://www.boe.es/buscar/pdf/2004/BOCL-h-2004-90152-consolidado.pdf",
+            "articulos": [
+              "Art. 192 — Régimen y estatutos",
+              "Art. 193 — Constitución",
+              "Art. 193 bis — Constitución abreviada",
+              "Art. 194 — Afección de fincas",
+              "Art. 195 — Acuerdos",
+              "Art. 196 — Responsabilidades e impagos",
+              "Art. 197 — Disolución",
+              "Art. 208 — Conservación de la urbanización"
+            ],
+            "fecha": "Arts. 192–197, 193 bis y 208 · Reglamento de Urbanismo de Castilla y León",
+            "cta": "Ver base normativa"
           }
         ]
       },
@@ -280,40 +293,28 @@
         "descripcion": "Documentación pública de administraciones con competencia urbanística.",
         "items": [
           {
-            "titulo": "Documentación urbanística del Ayuntamiento de El Espinar",
-            "descripcion": "Planeamiento o documentación pública relacionada con la urbanización.",
+            "titulo": "Urbanismo municipal — Ayuntamiento de El Espinar",
+            "descripcion": "Planeamiento, gestión urbanística, licencias y documentación pública municipal relacionada con la urbanización y su contexto administrativo.",
             "tipo": "institucional",
-            "url": "",
-            "fecha": "Pendiente de incorporar"
+            "url": "https://elespinar.es/urbanismo/",
+            "fecha": "Recurso institucional · Ayuntamiento de El Espinar",
+            "cta": "Ver urbanismo municipal"
+          },
+          {
+            "titulo": "Planeamiento urbanístico (PGOU)",
+            "descripcion": "Acceso a documentación del planeamiento urbanístico municipal vigente (PGOU y normativa asociada) publicada por el Ayuntamiento de El Espinar.",
+            "tipo": "planeamiento",
+            "url": "https://elespinar.es/aprobacion-definitva-parcial-del-pgou-de-el-espinar/",
+            "fecha": "Planeamiento municipal · Fuente oficial",
+            "cta": "Abrir planeamiento urbanístico"
           }
         ]
       },
       {
+        "key": "prensa",
         "titulo": "Prensa",
-        "descripcion": "Cobertura periodística para contexto y seguimiento.",
-        "items": [
-          {
-            "titulo": "El Adelantado",
-            "descripcion": "Cobertura sobre la recepción de la urbanización.",
-            "tipo": "prensa",
-            "url": "https://eladelantado.com/provincia/2013/01/04/el_tsjcyl_obliga_al_ayuntamiento_a_recepcionar_los_angeles_de_san_rafael/",
-            "fecha": "2013"
-          },
-          {
-            "titulo": "El Espinar Hoy",
-            "descripcion": "Contexto reciente sobre la situación de la urbanización.",
-            "tipo": "prensa",
-            "url": "https://www.elespinarhoy.com/2026/03/06/el-espinar-entre-dos-mundos-vecinos-de-siempre-frente-al-auge-de-las-casas-de-fin-de-semana/",
-            "fecha": "2026"
-          },
-          {
-            "titulo": "Fuente externa adicional",
-            "descripcion": "Espacio reservado para nuevas fuentes periodísticas relevantes.",
-            "tipo": "prensa",
-            "url": "",
-            "fecha": "Pendiente de incorporar"
-          }
-        ]
+        "descripcion": "Cobertura periodística relevante para seguimiento vecinal y urbanístico.",
+        "items": []
       }
     ]
   },
@@ -342,7 +343,7 @@
         "respuesta": "Sí. Puedes informarte, participar en la organización vecinal, compartir información con otros vecinos, y considerar acciones colectivas. También puedes contactar con representantes políticos para exigir soluciones."
       },
       {
-        "pregunta": "¿Qué es la EUCC?",
+        "pregunta": "¿Qué es la EUC?",
         "respuesta": "La Entidad Urbanística de Conservación es una figura jurídica prevista en la normativa urbanística para asumir tareas de conservación. Según el criterio recogido en la sentencia, no debe operar como sustitución permanente de las responsabilidades municipales."
       },
       {
