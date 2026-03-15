@@ -811,6 +811,28 @@ h1, h2, h3, h4, h5, h6 {
     margin-top: auto;
 }
 
+.doc-article-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.3rem;
+}
+
+.doc-article-list li {
+    display: inline-flex;
+    align-items: center;
+    width: fit-content;
+    max-width: 100%;
+    padding: 0.18rem 0.5rem;
+    border: 1px solid rgba(74, 106, 140, 0.2);
+    border-radius: 999px;
+    background-color: rgba(74, 106, 140, 0.08);
+    color: #2e4f6b;
+    font-size: 0.76rem;
+    line-height: 1.35;
+}
+
 .doc-link {
     display: inline-flex;
     align-items: center;

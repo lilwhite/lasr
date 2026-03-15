@@ -272,9 +272,19 @@
             "titulo": "Régimen de Entidades Urbanísticas de Conservación",
             "descripcion": "Referencia temática sobre constitución, funcionamiento y obligaciones de conservación dentro del Reglamento de Urbanismo de Castilla y León.",
             "tipo": "normativa",
-            "url": "https://www.boe.es/eli/es-cl/d/2004/01/29/22/con",
-            "fecha": "Arts. 192–197 y 208 · Fuente oficial",
-            "cta": "Ver régimen de conservación"
+            "url": "https://www.boe.es/buscar/pdf/2004/BOCL-h-2004-90152-consolidado.pdf",
+            "articulos": [
+              "Art. 192 — Régimen y estatutos",
+              "Art. 193 — Constitución",
+              "Art. 193 bis — Constitución abreviada",
+              "Art. 194 — Afección de fincas",
+              "Art. 195 — Acuerdos",
+              "Art. 196 — Responsabilidades e impagos",
+              "Art. 197 — Disolución",
+              "Art. 208 — Conservación de la urbanización"
+            ],
+            "fecha": "Arts. 192–197, 193 bis y 208 · Reglamento de Urbanismo de Castilla y León",
+            "cta": "Ver base normativa"
           }
         ]
       },
