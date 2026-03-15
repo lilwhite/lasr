@@ -755,14 +755,15 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .card-title-number {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     justify-content: center;
     width: 32px;
-    height: 32px;
+    aspect-ratio: 1 / 1;
     background-color: var(--color-primary);
     color: white;
     border-radius: 50%;
+    flex-shrink: 0;
     font-size: var(--font-size-sm);
     font-weight: var(--font-weight-bold);
     margin-right: var(--space-sm);
