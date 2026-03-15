@@ -111,11 +111,49 @@
     };
   }
 
+  function shouldDebugFilters() {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      return params.get('debugFilters') === '1';
+    } catch (error) {
+      return false;
+    }
+  }
+
+  function debugFilters(rawFilters, trace, baseItemsLength) {
+    if (!shouldDebugFilters()) return;
+    console.group('[press-filter-debug] pipeline');
+    console.log('selectedSourceType:', rawFilters.sourceType);
+    console.log('selectedMedium:', rawFilters.source);
+    console.log('selectedCategory:', rawFilters.category);
+    console.log('selectedYear:', rawFilters.year);
+    console.log('searchTerm:', rawFilters.query);
+    console.log('baseItemsLength:', baseItemsLength);
+    console.log('normalizedFilters:', trace.normalizedFilters);
+    console.log('countInitial:', trace.counts.initial);
+    console.log('countAfterSourceType:', trace.counts.afterSourceType);
+    console.log('countAfterSource:', trace.counts.afterSource);
+    console.log('countAfterCategory:', trace.counts.afterCategory);
+    console.log('countAfterYear:', trace.counts.afterYear);
+    console.log('countAfterQuery:', trace.counts.afterQuery);
+    console.log('countAfterDedupe:', trace.counts.afterDedupe);
+    console.log('countFinal:', trace.counts.final);
+    console.groupEnd();
+  }
+
   function applyCurrentFilters() {
-    const filters = readFilters();
-    const baseItems = filters.source ? allNews : archiveNews;
-    const filtered = window.PressUtils.applyFilters(baseItems, filters);
-    renderList(filtered);
+    const rawFilters = readFilters();
+    const normalizedFilters = window.PressUtils.normalizeFilterValues(rawFilters);
+    const hasNeutralFilters =
+      !normalizedFilters.sourceType &&
+      !normalizedFilters.source &&
+      !normalizedFilters.category &&
+      !normalizedFilters.year &&
+      !normalizedFilters.query;
+    const baseItems = hasNeutralFilters ? archiveNews : allNews;
+    const trace = window.PressUtils.applyFiltersTrace(baseItems, rawFilters);
+    debugFilters(rawFilters, trace, baseItems.length);
+    renderList(trace.finalItems);
   }
 
   async function loadPressNews() {
