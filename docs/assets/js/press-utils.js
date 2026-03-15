@@ -49,6 +49,73 @@
     );
   }
 
+  function isSupplementalMultiSourceCandidate(item) {
+    if (!item || item.isRelevant === true) return false;
+    const sourceType = (item.sourceType || '').toLowerCase();
+    if (sourceType === 'local') return false;
+
+    const score = Number(item.relevanceScore ?? item.score) || 0;
+    if (score < 0) return false;
+
+    const text = `${item.title || ''} ${item.summary || ''} ${item.excerpt || ''}`.toLowerCase();
+    const contextTerms = [
+      'el espinar',
+      'los angeles de san rafael',
+      'los ángeles de san rafael'
+    ];
+    const thematicTerms = [
+      'urbanismo',
+      'urbanizacion',
+      'urbanización',
+      'consultorio',
+      'sanidad',
+      'seguridad',
+      'ocupacion',
+      'okupacion',
+      'infraestructuras',
+      'n-603',
+      'presa del tejo',
+      'mancomunidad',
+      'euc',
+      'entidad urbanistica de conservacion',
+      'entidad urbanística de conservación',
+      'agua',
+      'saneamiento'
+    ];
+
+    const hasContext = contextTerms.some((term) => text.includes(term));
+    const hasTheme = thematicTerms.some((term) => text.includes(term));
+    return hasContext && hasTheme;
+  }
+
+  function getArchiveNews(items) {
+    const relevant = getRelevantNews(items);
+    const supplementalBySource = new Map();
+
+    sortNews(Array.isArray(items) ? items : []).forEach((item) => {
+      if (!isSupplementalMultiSourceCandidate(item)) return;
+      const source = (item.source || '').trim();
+      if (!source) return;
+      const existing = supplementalBySource.get(source) || [];
+      if (existing.length >= 2) return;
+      existing.push(item);
+      supplementalBySource.set(source, existing);
+    });
+
+    const supplemental = [];
+    supplementalBySource.forEach((rows) => supplemental.push(...rows));
+
+    const output = [];
+    const seen = new Set();
+    [...relevant, ...supplemental].forEach((item) => {
+      if (!item || !item.id || seen.has(item.id)) return;
+      seen.add(item.id);
+      output.push(item);
+    });
+
+    return sortNews(output);
+  }
+
   function mentionLASR(item) {
     const text = `${item.title || ''} ${item.excerpt || ''}`.toLowerCase();
     return text.includes('los angeles de san rafael') || text.includes('los ángeles de san rafael');
@@ -191,6 +258,7 @@
   window.PressUtils = {
     formatDate,
     getRelevantNews,
+    getArchiveNews,
     getLandingFeaturedNews,
     getCategoryLabel,
     getFilterValues,
