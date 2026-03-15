@@ -6,7 +6,8 @@
   'use strict';
 
   const documents = [
-    { file: 'documentacion_relevante.md', slug: 'documentacion-relevante', title: 'Documentacion relevante', category: 'referencia', order: 0 }
+    { file: 'documentacion_relevante.md', slug: 'documentacion-relevante', title: 'Documentacion relevante', category: 'referencia', order: 0 },
+    { file: 'CHANGELOG.md', slug: 'actualizaciones', title: 'Historial de cambios', category: 'portal', order: 99, hideInSidebar: true }
   ];
 
   const routeAliases = {};
@@ -256,6 +257,7 @@
   function renderSidebar(elements, currentSlug) {
     const sorted = [...documents].sort((a, b) => a.order - b.order);
     elements.sidebar.innerHTML = sorted
+      .filter((doc) => !doc.hideInSidebar)
       .map((doc) => {
         const active = doc.slug === currentSlug ? 'active' : '';
         return `<li><a class="sidebar-link ${active}" href="${linkForSlug(doc.slug)}">${escapeHtml(doc.title)}</a></li>`;
@@ -427,6 +429,10 @@
       const html = window.marked ? window.marked.parse(parsed.body) : parsed.body;
       elements.body.innerHTML = sanitizeRenderedHtml(html);
       enhanceTables(elements.body);
+
+      if (currentDoc.slug === 'actualizaciones') {
+        elements.body.classList.add('changelog-body');
+      }
 
       elements.title.textContent = parsed.frontmatter.title || currentDoc.title;
       elements.breadcrumb.textContent = parsed.frontmatter.title || currentDoc.title;
