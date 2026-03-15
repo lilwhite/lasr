@@ -139,7 +139,13 @@
       <header class="header doc-header-top" id="header">
         <div class="header-container">
           <a href="${getRootPrefix()}/index.html" class="logo"><span class="logo-text">LASR</span></a>
-          <nav class="doc-top-actions" aria-label="Acciones"><a class="btn btn-secondary doc-back-btn" href="${getRootPrefix()}/index.html#documentos">Volver al portal</a></nav>
+          <div class="header-controls">
+            <button class="theme-toggle" data-theme-toggle type="button" aria-label="Cambiar tema" aria-pressed="false">
+              <span class="theme-toggle-icon" aria-hidden="true">☀️</span>
+              <span class="theme-toggle-label">Claro</span>
+            </button>
+            <nav class="doc-top-actions" aria-label="Acciones"><a class="btn btn-secondary doc-back-btn" href="${getRootPrefix()}/index.html#documentos">Volver al portal</a></nav>
+          </div>
         </div>
       </header>
       <main class="doc-page">
@@ -393,6 +399,9 @@
 
   async function load() {
     ensureShell();
+    if (window.LASRTheme && typeof window.LASRTheme.initThemeToggle === 'function') {
+      window.LASRTheme.initThemeToggle();
+    }
     const elements = getElements();
 
     const slug = canonicalSlug(getSlugFromPage());
@@ -424,6 +433,10 @@
       elements.body.innerHTML = '<p class="error">Error al cargar el documento.</p>';
       console.error(err);
     }
+  }
+
+  if (window.LASRTheme && typeof window.LASRTheme.applyTheme === 'function') {
+    window.LASRTheme.applyTheme(window.LASRTheme.preferredTheme());
   }
 
   if (document.readyState === 'loading') {
