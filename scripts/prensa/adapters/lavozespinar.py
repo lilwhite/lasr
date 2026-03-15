@@ -9,4 +9,6 @@ def collect(source: Dict, timeout: int, max_per_source: int):
     return {
         "items": [*base.items, *historical.items],
         "warnings": [*base.warnings, *historical.warnings],
+        "fetched_count": base.fetched_count + historical.fetched_count,
+        "parsed_count": base.parsed_count + historical.parsed_count,
     }

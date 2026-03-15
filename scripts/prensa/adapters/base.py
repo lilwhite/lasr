@@ -31,10 +31,13 @@ def _to_raw_item(entry: Dict[str, str], source: Dict) -> RawNewsItem | None:
 def fetch_feed_items(source: Dict, timeout: int, max_per_source: int) -> AdapterResult:
     output: List[RawNewsItem] = []
     warnings: List[str] = []
+    fetched_count = 0
+    parsed_count = 0
 
     for feed_url in source.get("feeds", []):
         try:
             payload = fetch_bytes(feed_url, timeout)
+            fetched_count += 1
         except URLError as exc:
             warnings.append(
                 f"[warn] {source['name']} feed no disponible: {feed_url} ({exc})"
@@ -42,6 +45,7 @@ def fetch_feed_items(source: Dict, timeout: int, max_per_source: int) -> Adapter
             continue
 
         parsed_items = parse_feed_items(payload)
+        parsed_count += len(parsed_items)
         if not parsed_items:
             warnings.append(f"[warn] {source['name']} sin items parseables: {feed_url}")
             continue
@@ -51,19 +55,31 @@ def fetch_feed_items(source: Dict, timeout: int, max_per_source: int) -> Adapter
             if item:
                 output.append(item)
                 if len(output) >= max_per_source:
-                    return AdapterResult(items=output, warnings=warnings)
+                    return AdapterResult(
+                        items=output,
+                        warnings=warnings,
+                        fetched_count=fetched_count,
+                        parsed_count=parsed_count,
+                    )
 
-    return AdapterResult(items=output, warnings=warnings)
+    return AdapterResult(
+        items=output,
+        warnings=warnings,
+        fetched_count=fetched_count,
+        parsed_count=parsed_count,
+    )
 
 
 def fetch_wordpress_history(source: Dict, timeout: int) -> AdapterResult:
     endpoint = source.get("wp_endpoint")
     searches = source.get("historical_searches", [])
     if not endpoint or not searches:
-        return AdapterResult(items=[], warnings=[])
+        return AdapterResult(items=[], warnings=[], fetched_count=0, parsed_count=0)
 
     output: List[RawNewsItem] = []
     warnings: List[str] = []
+    fetched_count = 0
+    parsed_count = 0
     per_page = min(int(source.get("wp_per_page", 100)), 100)
 
     for term in searches:
@@ -83,6 +99,7 @@ def fetch_wordpress_history(source: Dict, timeout: int) -> AdapterResult:
             )
             try:
                 headers, payload = fetch_json(wp_url, timeout)
+                fetched_count += 1
             except HTTPError as exc:
                 if exc.code != 400:
                     warnings.append(
@@ -97,6 +114,8 @@ def fetch_wordpress_history(source: Dict, timeout: int) -> AdapterResult:
 
             if not isinstance(payload, list) or not payload:
                 break
+
+            parsed_count += len(payload)
 
             try:
                 total_pages = int(headers.get("x-wp-totalpages", "") or "1")
@@ -132,4 +151,9 @@ def fetch_wordpress_history(source: Dict, timeout: int) -> AdapterResult:
 
             page += 1
 
-    return AdapterResult(items=output, warnings=warnings)
+    return AdapterResult(
+        items=output,
+        warnings=warnings,
+        fetched_count=fetched_count,
+        parsed_count=parsed_count,
+    )
