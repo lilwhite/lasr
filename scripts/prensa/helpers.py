@@ -51,12 +51,24 @@ def canonicalize_url(url: str) -> str:
         return ""
 
     parsed = urlparse(url.strip())
+    netloc = parsed.netloc.lower()
+    if netloc.endswith(":80"):
+        netloc = netloc[:-3]
+    if netloc.endswith(":443"):
+        netloc = netloc[:-4]
+
+    path = parsed.path or ""
+    if path != "/":
+        path = path.rstrip("/")
+
     query = [
         (k, v)
         for k, v in parse_qsl(parsed.query, keep_blank_values=True)
         if not any(k.lower().startswith(prefix) for prefix in TRACKING_QUERY_PREFIXES)
     ]
-    cleaned = parsed._replace(fragment="", query=urlencode(query))
+    cleaned = parsed._replace(
+        fragment="", query=urlencode(query), netloc=netloc, path=path
+    )
     return urlunparse(cleaned)
 
 
