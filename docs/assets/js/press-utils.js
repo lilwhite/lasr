@@ -74,6 +74,7 @@
       'copropietarios',
       'propietarios',
       'vecinos',
+      'euc',
       'eucc',
       'recepcion',
       'recepción',
