@@ -46,3 +46,5 @@ AdapterConfig = Dict
 class AdapterResult:
     items: List[RawNewsItem]
     warnings: List[str]
+    fetched_count: int = 0
+    parsed_count: int = 0

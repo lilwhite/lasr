@@ -92,12 +92,25 @@
     const relevant = getRelevantNews(items);
     const supplementalBySource = new Map();
 
-    sortNews(Array.isArray(items) ? items : []).forEach((item) => {
-      if (!isSupplementalMultiSourceCandidate(item)) return;
+    const strictContextualSupplement = sortNews(Array.isArray(items) ? items : []).filter((item) =>
+      isSupplementalMultiSourceCandidate(item)
+    );
+
+    const fallbackBySource = sortNews(Array.isArray(items) ? items : []).filter((item) => {
+      if (!item || item.isRelevant === true) return false;
+      const sourceType = (item.sourceType || '').toLowerCase();
+      if (sourceType === 'local') return false;
+      const score = Number(item.relevanceScore ?? item.score) || 0;
+      if (score < 0) return false;
+      const text = `${item.title || ''} ${item.summary || ''} ${item.excerpt || ''}`.toLowerCase();
+      return text.includes('el espinar');
+    });
+
+    [...strictContextualSupplement, ...fallbackBySource].forEach((item) => {
       const source = (item.source || '').trim();
       if (!source) return;
       const existing = supplementalBySource.get(source) || [];
-      if (existing.length >= 2) return;
+      if (existing.length >= 1) return;
       existing.push(item);
       supplementalBySource.set(source, existing);
     });
