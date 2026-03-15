@@ -408,6 +408,10 @@
     });
   }
 
+  function buildDocumentPath(root, currentDoc) {
+    return `${root}/${currentDoc.file}`;
+  }
+
   async function load() {
     ensureShell();
     if (window.LASRTheme && typeof window.LASRTheme.initThemeToggle === 'function') {
@@ -420,8 +424,11 @@
     const root = getRootPrefix();
 
     try {
-      const response = await fetch(`${root}/${currentDoc.file}`);
-      if (!response.ok) throw new Error('Documento no encontrado');
+      const docPath = buildDocumentPath(root, currentDoc);
+      const response = await fetch(docPath);
+      if (!response.ok) {
+        throw new Error(`Documento no encontrado (${response.status}): ${docPath}`);
+      }
 
       const raw = await response.text();
       const parsed = parseFrontmatter(raw);
@@ -445,7 +452,14 @@
 
       document.title = `${parsed.frontmatter.title || currentDoc.title} - Los Angeles de San Rafael`;
     } catch (err) {
-      elements.body.innerHTML = '<p class="error">Error al cargar el documento.</p>';
+      const fallbackUrl = currentDoc.slug === 'actualizaciones' ? `${root}/CHANGELOG.md` : '';
+      elements.body.innerHTML = `
+        <div class="error">
+          <p><strong>No se pudo cargar este documento.</strong></p>
+          <p>Revisa la conexión o inténtalo de nuevo en unos minutos.</p>
+          ${fallbackUrl ? `<p><a href="${escapeHtml(fallbackUrl)}" target="_blank" rel="noopener noreferrer">Abrir versión de respaldo del historial</a></p>` : ''}
+        </div>
+      `;
       console.error(err);
     }
   }
