@@ -244,6 +244,10 @@
   }
 
   function applyFilters(items, filters) {
+    return applyFiltersTrace(items, filters).finalItems;
+  }
+
+  function normalizeFilterValues(filters) {
     const normalizeToken = (value) => (typeof value === 'string' ? value.trim().toLowerCase() : '');
     const isNeutralSelect = (value, neutralWords) => {
       const normalized = normalizeToken(value);
@@ -256,36 +260,72 @@
     const categoryNeutralWords = ['all', 'todas', 'todas las categorías', 'todas las categorias', 'todos'];
     const yearNeutralWords = ['all', 'todos', 'todos los años', 'todos los anos'];
 
-    const sourceType = isNeutralSelect(filters.sourceType, sourceTypeNeutralWords)
-      ? ''
-      : (filters.sourceType || '').trim();
-    const source = isNeutralSelect(filters.source, sourceNeutralWords)
-      ? ''
-      : (filters.source || '').trim();
-    const category = isNeutralSelect(filters.category, categoryNeutralWords)
-      ? ''
-      : (filters.category || '').trim();
-    const year = isNeutralSelect(filters.year, yearNeutralWords)
-      ? ''
-      : (filters.year || '').trim();
-    const query = (filters.query || '').trim().toLowerCase();
+    return {
+      sourceType: isNeutralSelect(filters.sourceType, sourceTypeNeutralWords)
+        ? ''
+        : (filters.sourceType || '').trim(),
+      source: isNeutralSelect(filters.source, sourceNeutralWords)
+        ? ''
+        : (filters.source || '').trim(),
+      category: isNeutralSelect(filters.category, categoryNeutralWords)
+        ? ''
+        : (filters.category || '').trim(),
+      year: isNeutralSelect(filters.year, yearNeutralWords)
+        ? ''
+        : (filters.year || '').trim(),
+      query: (filters.query || '').trim().toLowerCase()
+    };
+  }
 
-    return sortNews(
-      (Array.isArray(items) ? items : []).filter((item) => {
-        if (sourceType && item.sourceType !== sourceType) return false;
-        if (source && item.source !== source) return false;
-        if (category && item.category !== category) return false;
-        if (year) {
-          const parsed = parseDate(item.date);
-          if (!parsed || String(parsed.getFullYear()) !== year) return false;
-        }
-        if (query) {
-          const text = `${item.title || ''} ${item.excerpt || ''}`.toLowerCase();
-          if (!text.includes(query)) return false;
-        }
-        return true;
-      })
-    );
+  function applyFiltersTrace(items, filters) {
+    const normalizedFilters = normalizeFilterValues(filters || {});
+    const initialItems = Array.isArray(items) ? items : [];
+
+    const afterSourceType = initialItems.filter((item) => {
+      if (!normalizedFilters.sourceType) return true;
+      return item.sourceType === normalizedFilters.sourceType;
+    });
+
+    const afterSource = afterSourceType.filter((item) => {
+      if (!normalizedFilters.source) return true;
+      return item.source === normalizedFilters.source;
+    });
+
+    const afterCategory = afterSource.filter((item) => {
+      if (!normalizedFilters.category) return true;
+      return item.category === normalizedFilters.category;
+    });
+
+    const afterYear = afterCategory.filter((item) => {
+      if (!normalizedFilters.year) return true;
+      const parsed = parseDate(item.date);
+      return !!parsed && String(parsed.getFullYear()) === normalizedFilters.year;
+    });
+
+    const afterQuery = afterYear.filter((item) => {
+      if (!normalizedFilters.query) return true;
+      const text = `${item.title || ''} ${item.excerpt || ''}`.toLowerCase();
+      return text.includes(normalizedFilters.query);
+    });
+
+    // En runtime UI no hay deduplicación adicional: los datos llegan ya deduplicados.
+    const afterDedupe = afterQuery;
+    const finalItems = sortNews(afterDedupe);
+
+    return {
+      normalizedFilters,
+      counts: {
+        initial: initialItems.length,
+        afterSourceType: afterSourceType.length,
+        afterSource: afterSource.length,
+        afterCategory: afterCategory.length,
+        afterYear: afterYear.length,
+        afterQuery: afterQuery.length,
+        afterDedupe: afterDedupe.length,
+        final: finalItems.length
+      },
+      finalItems
+    };
   }
 
   window.PressUtils = {
@@ -297,6 +337,8 @@
     getFilterValues,
     getFilterYears,
     applyFilters,
+    applyFiltersTrace,
+    normalizeFilterValues,
     sortNews
   };
 })();
