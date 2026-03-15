@@ -97,6 +97,7 @@ def run(config_path: Path, output_path: Path, timeout: int):
         output.append(
             {
                 "id": item.id,
+                "feedGuid": item.feed_guid,
                 "title": item.title,
                 "date": item.date,
                 "source": item.source,

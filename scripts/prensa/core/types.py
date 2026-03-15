@@ -7,6 +7,7 @@ SourceType = Literal["local", "provincial", "institucional"]
 
 @dataclass
 class RawNewsItem:
+    guid: str
     title: str
     url: str
     date: str
@@ -21,6 +22,7 @@ class RawNewsItem:
 @dataclass
 class NormalizedNewsItem:
     id: str
+    feed_guid: str
     title: str
     date: str
     source: str

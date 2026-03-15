@@ -43,6 +43,7 @@ def normalize_item(
 
     return NormalizedNewsItem(
         id=stable_id(url, title),
+        feed_guid=(raw.guid or "").strip(),
         title=title,
         date=date,
         source=raw.source,
