@@ -2238,6 +2238,27 @@ h1, h2, h3, h4, h5, h6 {
     margin: 1.8rem 0;
 }
 
+.doc-body.changelog-body h2 {
+    margin-top: 2.35rem;
+    padding: 0.75rem 0.95rem;
+    border: 1px solid var(--theme-overlay-primary-20);
+    border-left: 4px solid var(--color-primary);
+    border-radius: 10px;
+    background-color: var(--theme-overlay-primary-07);
+    font-size: 1.35rem;
+}
+
+.doc-body.changelog-body h3 {
+    margin-top: 1.2rem;
+    margin-bottom: 0.6rem;
+    font-size: 1.08rem;
+    color: var(--color-text-light);
+}
+
+.doc-body.changelog-body ul {
+    margin-bottom: 1.1rem;
+}
+
 .doc-body a {
     color: var(--theme-doc-link);
     text-decoration: none;
