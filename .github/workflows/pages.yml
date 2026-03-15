@@ -62,9 +62,13 @@ jobs:
         run: |
           set -e
           echo "=== Generando docs/assets/build-meta.json ==="
-          curl -sS -H "Authorization: Bearer ${GITHUB_TOKEN}" -H "Accept: application/vnd.github+json" "https://api.github.com/repos/${REPO}/pulls?state=closed&base=main&sort=updated&direction=desc&per_page=100" > /tmp/prs.json
-          export PRS_JSON_FILE=/tmp/prs.json
-          python3 scripts/build_meta.py
+          if [ -f docs/assets/build-meta.json ]; then
+            echo "✓ build-meta.json ya existe en repositorio (fuente release/changelog)"
+          else
+            curl -sS -H "Authorization: Bearer ${GITHUB_TOKEN}" -H "Accept: application/vnd.github+json" "https://api.github.com/repos/${REPO}/pulls?state=closed&base=main&sort=updated&direction=desc&per_page=100" > /tmp/prs.json
+            export PRS_JSON_FILE=/tmp/prs.json
+            python3 scripts/build_meta.py
+          fi
           python3 -c "import json; json.load(open('docs/assets/build-meta.json'))"
 
       - name: Copiar contenido a dist
