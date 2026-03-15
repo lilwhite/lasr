@@ -593,6 +593,10 @@
             
             // Setup event listeners
             setupEventListeners();
+
+            if (window.LASRTheme && typeof window.LASRTheme.initThemeToggle === 'function') {
+                window.LASRTheme.initThemeToggle();
+            }
             
             // Initial scroll handler
             handleScroll();
