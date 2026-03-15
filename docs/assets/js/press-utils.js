@@ -18,6 +18,18 @@
     return parsed;
   }
 
+  function normalizeSourceName(source) {
+    if (typeof source !== 'string') return '';
+
+    return source
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[\s\-_]+/g, ' ')
+      .replace(/[^a-zA-Z0-9 ]/g, '')
+      .trim()
+      .toLowerCase();
+  }
+
   function formatDate(value) {
     const parsed = parseDate(value);
     if (!parsed) return 'Fecha no disponible';
@@ -179,43 +191,28 @@
 
   function getLandingFeaturedNews(items, limit) {
     const max = Number(limit) || 3;
-    const relevant = getRelevantNews(items);
-    const featuredRelevant = relevant.filter((item) => item.featured === true);
-    const regularRelevant = relevant.filter((item) => item.featured !== true);
+    const candidates = getArchiveNews(items).filter((item) => parseDate(item && item.date));
+    const latestBySource = new Map();
 
-    const output = [];
-    featuredRelevant.forEach((item) => {
-      if (output.length < max) output.push(item);
+    candidates.forEach((item) => {
+      const normalizedSource = normalizeSourceName(item && item.source);
+      if (!normalizedSource) return;
+
+      const current = latestBySource.get(normalizedSource);
+      if (!current) {
+        latestBySource.set(normalizedSource, item);
+        return;
+      }
+
+      const currentDate = parseDate(current.date);
+      const itemDate = parseDate(item.date);
+      if (!currentDate || !itemDate) return;
+      if (itemDate.getTime() > currentDate.getTime()) {
+        latestBySource.set(normalizedSource, item);
+      }
     });
-    regularRelevant.forEach((item) => {
-      if (output.length < max) output.push(item);
-    });
 
-    if (output.length < max) {
-      const contextualFallback = sortNews(
-        (Array.isArray(items) ? items : []).filter(
-          (item) => mentionLASR(item) && isContextualFallbackCandidate(item)
-        )
-      );
-      contextualFallback.forEach((item) => {
-        if (output.length < max && !output.find((existing) => existing.id === item.id)) {
-          output.push(item);
-        }
-      });
-    }
-
-    if (output.length < max) {
-      const strongFallback = sortNews(
-        (Array.isArray(items) ? items : []).filter((item) => isStrongFallbackCandidate(item))
-      );
-      strongFallback.forEach((item) => {
-        if (output.length < max && !output.find((existing) => existing.id === item.id)) {
-          output.push(item);
-        }
-      });
-    }
-
-    return output.slice(0, max);
+    return sortNews(Array.from(latestBySource.values())).slice(0, max);
   }
 
   function getCategoryLabel(value) {
