@@ -164,6 +164,7 @@
   }
 
   function applyFilters(items, filters) {
+    const sourceType = (filters.sourceType || '').trim();
     const source = (filters.source || '').trim();
     const category = (filters.category || '').trim();
     const year = (filters.year || '').trim();
@@ -171,6 +172,7 @@
 
     return sortNews(
       (Array.isArray(items) ? items : []).filter((item) => {
+        if (sourceType && item.sourceType !== sourceType) return false;
         if (source && item.source !== source) return false;
         if (category && item.category !== category) return false;
         if (year) {
