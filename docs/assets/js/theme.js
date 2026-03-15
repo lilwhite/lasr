@@ -23,14 +23,11 @@
 
     const btn = document.querySelector('[data-theme-toggle]');
     if (btn) {
-      const label = value === DARK ? 'Oscuro' : 'Claro';
-      const icon = value === DARK ? '🌙' : '☀️';
-      btn.setAttribute('aria-label', `Cambiar tema (actual: ${label})`);
+      const label = value === DARK ? 'oscuro' : 'claro';
+      const next = value === DARK ? 'claro' : 'oscuro';
+      btn.setAttribute('aria-label', `Cambiar a modo ${next}`);
+      btn.setAttribute('title', `Tema actual: ${label}. Pulsar para cambiar a ${next}.`);
       btn.setAttribute('aria-pressed', value === DARK ? 'true' : 'false');
-      const iconNode = btn.querySelector('.theme-toggle-icon');
-      const labelNode = btn.querySelector('.theme-toggle-label');
-      if (iconNode) iconNode.textContent = icon;
-      if (labelNode) labelNode.textContent = label;
       btn.classList.toggle('is-dark', value === DARK);
     }
   }
