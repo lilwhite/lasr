@@ -1,6 +1,7 @@
 [
   {
     "id": "news-417085f11e11",
+    "feedGuid": "https://www.elnortedecastilla.es/elecciones/castilla-y-leon/participacion-segovia-1800-horas-similar-2022-20260315190000-nt.html",
     "title": "La participación en Segovia a las 18:00 horas, muy similar a la de 2022",
     "date": "2026-03-15",
     "source": "El Norte de Castilla",
@@ -24,6 +25,7 @@
   },
   {
     "id": "news-12caa7a1abb9",
+    "feedGuid": "https://eladelantado.com/?p=595714",
     "title": "Abre el plazo de inscripción para las Escuelas Infantiles de El Espinar",
     "date": "2026-03-15",
     "source": "El Adelantado de Segovia",
@@ -47,6 +49,7 @@
   },
   {
     "id": "news-60d89e84f439",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/pueblo-segovia-recomienda-vecinos-adquirir-kit-supervivencia-20260315124122-nt.html",
     "title": "Un pueblo de Segovia recomienda a sus vecinos adquirir un kit de supervivencia por la guerra en Irán",
     "date": "2026-03-15",
     "source": "El Norte de Castilla",
@@ -72,6 +75,7 @@
   },
   {
     "id": "news-d5e4c8e35e3a",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/participacion-crece-segovia-dos-puntos-1400-horas-20260315154923-nt.html",
     "title": "La participación crece en Segovia más de dos puntos a las 14:00 horas",
     "date": "2026-03-15",
     "source": "El Norte de Castilla",
@@ -95,6 +99,7 @@
   },
   {
     "id": "news-f5961bfeab1d",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/segovia-segunda-provincia-participacion-20260315132442-nt.html",
     "title": "Segovia, la segunda provincia con más participación",
     "date": "2026-03-15",
     "source": "El Norte de Castilla",
@@ -118,6 +123,7 @@
   },
   {
     "id": "news-29c3b45b5705",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/camarero-finalista-cocina-20260315123329-nt.html",
     "title": "De camarero a finalista de cocina",
     "date": "2026-03-15",
     "source": "El Norte de Castilla",
@@ -141,6 +147,7 @@
   },
   {
     "id": "news-5f32e53891b1",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/proyecto-llevar-agua-potable-mata-quintanar-paraliza-20260315123140-nt.html",
     "title": "El proyecto para llevar agua potable a Mata de Quintanar se paraliza por desacuerdos entre Junta y Ayuntamiento",
     "date": "2026-03-15",
     "source": "El Norte de Castilla",
@@ -164,6 +171,7 @@
   },
   {
     "id": "news-aa57bf81293d",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/equipo-matar-marcar-20260315113856-nt.html",
     "title": "«Cuando tienes a un equipo así, lo tienes que matar y tienes que marcar»",
     "date": "2026-03-15",
     "source": "El Norte de Castilla",
@@ -187,6 +195,7 @@
   },
   {
     "id": "news-ba54d843104d",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/mejores-sego-empate-ante-fabril-20260315113002-nt.html",
     "title": "Los mejores de la Sego en el empate ante el Fabril",
     "date": "2026-03-15",
     "source": "El Norte de Castilla",
@@ -210,6 +219,7 @@
   },
   {
     "id": "news-0532c16b59bb",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/catedral-segovia-rescata-polvo-tesoro-isabel-catolica-20260315085035-nt.html",
     "title": "La Catedral de Segovia rescata del polvo un tesoro de Isabel la Católica",
     "date": "2026-03-15",
     "source": "El Norte de Castilla",
@@ -233,6 +243,7 @@
   },
   {
     "id": "news-e13b5b3dad50",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/duracion-trayecto-ave-madrid-aumentara-siete-minutos-20260315103652-nt.html",
     "title": "La duración del trayecto en AVE a Madrid aumentará en siete minutos por obras",
     "date": "2026-03-15",
     "source": "El Norte de Castilla",
@@ -255,7 +266,32 @@
     "featured": false
   },
   {
+    "id": "news-9d68fa96e0fd",
+    "feedGuid": "https://eladelantado.com/?p=595735",
+    "title": "15M- Los debutantes del voto",
+    "date": "2026-03-15",
+    "source": "El Adelantado de Segovia",
+    "sourceType": "provincial",
+    "url": "https://eladelantado.com/castilla-leon/2026/03/15/15m-los-debutantes-del-voto",
+    "summary": "15M- Los debutantes del voto",
+    "excerpt": "15M- Los debutantes del voto",
+    "tags": [],
+    "relatedTo": [
+      "los-angeles-de-san-rafael",
+      "el-espinar"
+    ],
+    "score": -10,
+    "relevanceScore": -10,
+    "isRelevant": false,
+    "category": "contexto_municipal",
+    "publishedAt": "Sun, 15 Mar 2026 18:54:52 +0000",
+    "year": 2026,
+    "canonicalUrl": "https://eladelantado.com/castilla-leon/2026/03/15/15m-los-debutantes-del-voto",
+    "featured": false
+  },
+  {
     "id": "news-05bb9602e0c0",
+    "feedGuid": "https://eladelantado.com/?p=595716",
     "title": "Los líderes de los principales partidos animan a la participación para decidir el futuro de la Comunidad y la provincia",
     "date": "2026-03-15",
     "source": "El Adelantado de Segovia",
@@ -279,6 +315,7 @@
   },
   {
     "id": "news-237e2d97e4cb",
+    "feedGuid": "https://eladelantado.com/?p=595711",
     "title": "La Red PAME reúne en una jornada a mujeres rurales emprendedoras",
     "date": "2026-03-15",
     "source": "El Adelantado de Segovia",
@@ -302,6 +339,7 @@
   },
   {
     "id": "news-5c0f6c6ab3ff",
+    "feedGuid": "https://eladelantado.com/?p=595708",
     "title": "Boceguillas es finalista de ‘Proyectos Reactivadores’",
     "date": "2026-03-15",
     "source": "El Adelantado de Segovia",
@@ -325,6 +363,7 @@
   },
   {
     "id": "news-48d603f8196f",
+    "feedGuid": "https://eladelantado.com/?p=595704",
     "title": "Una veintena de empresarios analiza los retos de la empresa familiar en la provincia",
     "date": "2026-03-15",
     "source": "El Adelantado de Segovia",
@@ -348,6 +387,7 @@
   },
   {
     "id": "news-d1d13c3f5849",
+    "feedGuid": "https://eladelantado.com/?p=595013",
     "title": "Juntas electorales de zona, las vigilantes de las elecciones",
     "date": "2026-03-15",
     "source": "El Adelantado de Segovia",
@@ -371,6 +411,7 @@
   },
   {
     "id": "news-6e30300fed55",
+    "feedGuid": "https://eladelantado.com/?p=595700",
     "title": "Publicatessen celebra una nueva edición en la UVa",
     "date": "2026-03-15",
     "source": "El Adelantado de Segovia",
@@ -394,6 +435,7 @@
   },
   {
     "id": "news-fdf05f163918",
+    "feedGuid": "https://eladelantado.com/?p=595696",
     "title": "Afroblue confirma a los primeros artistas para su próxima edición",
     "date": "2026-03-15",
     "source": "El Adelantado de Segovia",
@@ -417,6 +459,7 @@
   },
   {
     "id": "news-45e4c761e95c",
+    "feedGuid": "https://eladelantado.com/?p=595693",
     "title": "Abierta una bolsa de trabajo municipal para dinamizar el ocio juvenil",
     "date": "2026-03-15",
     "source": "El Adelantado de Segovia",
@@ -440,6 +483,7 @@
   },
   {
     "id": "news-822e1d8b471a",
+    "feedGuid": "https://eladelantado.com/?p=595691",
     "title": "Cerca de 500 médicos de la provincia están llamados a la huelga en esta semana",
     "date": "2026-03-15",
     "source": "El Adelantado de Segovia",
@@ -463,6 +507,7 @@
   },
   {
     "id": "news-6276a9b480cd",
+    "feedGuid": "https://eladelantado.com/?p=595542",
     "title": "Panorámica desde el altozano",
     "date": "2026-03-15",
     "source": "El Adelantado de Segovia",
@@ -486,6 +531,7 @@
   },
   {
     "id": "news-64815ce30307",
+    "feedGuid": "https://eladelantado.com/?p=595559",
     "title": "Lágrimas",
     "date": "2026-03-15",
     "source": "El Adelantado de Segovia",
@@ -509,6 +555,7 @@
   },
   {
     "id": "news-44b4537923a2",
+    "feedGuid": "https://eladelantado.com/?p=595526",
     "title": "Andrés Sanz Hernando, un artista olvidado (I)",
     "date": "2026-03-15",
     "source": "El Adelantado de Segovia",
@@ -532,6 +579,7 @@
   },
   {
     "id": "news-4cf13fdbdd28",
+    "feedGuid": "https://eladelantado.com/?p=595519",
     "title": "Manuel Menchén, el pincel más artesano del río Tormes",
     "date": "2026-03-15",
     "source": "El Adelantado de Segovia",
@@ -554,30 +602,8 @@
     "featured": false
   },
   {
-    "id": "news-41549d7243f6",
-    "title": "“La hispano-tlaxcalteca, fue una alianza pragmática y mutuamente beneficiosa que cambió la historia del continente”",
-    "date": "2026-03-15",
-    "source": "El Adelantado de Segovia",
-    "sourceType": "provincial",
-    "url": "https://eladelantado.com/segovia/2026/03/15/la-hispano-tlaxcalteca-fue-una-alianza-pragmatica-y-mutuamente-beneficiosa-que-cambio-la-historia-del-continente",
-    "summary": "—Es usted un mexicano que ha creado canales de contenido con mucho éxito tanto en Youtube como en Facebook. Se refiere sobre todo a la colaboración de Tlaxcala en la conquista de México, ayudando a las tropas de Cortés. Cuéntenos, ¿Qué fue Tlaxcala? —Tlaxcala,",
-    "excerpt": "—Es usted un mexicano que ha creado canales de contenido con mucho éxito tanto en Youtube como en Facebook. Se refiere sobre todo a la colaboración de Tlaxcala en la conquista de México, ayudando a las tropas de Cortés. Cuéntenos, ¿Qué fue Tlaxcala? —Tlaxcala,",
-    "tags": [],
-    "relatedTo": [
-      "los-angeles-de-san-rafael",
-      "el-espinar"
-    ],
-    "score": -10,
-    "relevanceScore": -10,
-    "isRelevant": false,
-    "category": "contexto_municipal",
-    "publishedAt": "Sun, 15 Mar 2026 05:15:39 +0000",
-    "year": 2026,
-    "canonicalUrl": "https://eladelantado.com/segovia/2026/03/15/la-hispano-tlaxcalteca-fue-una-alianza-pragmatica-y-mutuamente-beneficiosa-que-cambio-la-historia-del-continente",
-    "featured": false
-  },
-  {
     "id": "news-3c5ae0fe80a4",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/fiestas-2026-segovia-fechas-20260315121830-nt.html",
     "title": "Las fiestas 2026 de Segovia ya tienen fechas",
     "date": "2026-03-15",
     "source": "El Norte de Castilla",
@@ -601,6 +627,7 @@
   },
   {
     "id": "news-6db65cf68a2f",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/san-millan-suena-semana-santa-20260315120532-nt.html",
     "title": "San Millán ya suena a Semana Santa",
     "date": "2026-03-15",
     "source": "El Norte de Castilla",
@@ -624,6 +651,7 @@
   },
   {
     "id": "news-e838478415f8",
+    "feedGuid": "https://eladelantado.com/?p=595724",
     "title": "Celia Hidalgo, campeona de España sub-18 en pista cubierta",
     "date": "2026-03-15",
     "source": "El Adelantado de Segovia",
@@ -647,6 +675,7 @@
   },
   {
     "id": "news-3f8ef176177d",
+    "feedGuid": "https://eladelantado.com/?p=595720",
     "title": "El Segosala mantiene la buena racha",
     "date": "2026-03-15",
     "source": "El Adelantado de Segovia",
@@ -670,6 +699,7 @@
   },
   {
     "id": "news-e19b3a76b516",
+    "feedGuid": "https://eladelantado.com/?p=595685",
     "title": "Claudia Corral brilla en el Mundial Universitario de Cross",
     "date": "2026-03-15",
     "source": "El Adelantado de Segovia",
@@ -693,6 +723,7 @@
   },
   {
     "id": "news-c9c234406ca4",
+    "feedGuid": "https://eladelantado.com/?p=595680",
     "title": "Marina Muñoz logra un top-20 en la Copa del Mundo de Lanzarote",
     "date": "2026-03-15",
     "source": "El Adelantado de Segovia",
@@ -716,6 +747,7 @@
   },
   {
     "id": "news-b577a67561b5",
+    "feedGuid": "https://eladelantado.com/?p=595675",
     "title": "Segovia Orientación logra dos podios en la Liga Nacional",
     "date": "2026-03-15",
     "source": "El Adelantado de Segovia",
@@ -739,6 +771,7 @@
   },
   {
     "id": "news-c51d96a36057",
+    "feedGuid": "https://eladelantado.com/?p=595672",
     "title": "Sonia de la Calle se cuelga dos oros en el Nacional Máster",
     "date": "2026-03-15",
     "source": "El Adelantado de Segovia",
@@ -762,6 +795,7 @@
   },
   {
     "id": "news-9302134969d6",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/calle-larga-incorpora-paso-cebra-mejorar-seguridad-20260314140036-nt.html",
     "title": "La calle Larga incorpora un paso de cebra para mejorar la seguridad de los peatones",
     "date": "2026-03-14",
     "source": "El Norte de Castilla",
@@ -787,6 +821,7 @@
   },
   {
     "id": "news-c9b2935483d1",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/sego-corrobora-abismo-liderato-20260314220114-nt.html",
     "title": "La Sego corrobora su abismo con el liderato",
     "date": "2026-03-14",
     "source": "El Norte de Castilla",
@@ -810,6 +845,7 @@
   },
   {
     "id": "news-318a3c8db395",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/segovia-sale-calle-jugar-aprender-matematicas-20260314175852-nt.html",
     "title": "Segovia sale a la calle para jugar y aprender con las matemáticas",
     "date": "2026-03-14",
     "source": "El Norte de Castilla",
@@ -833,6 +869,7 @@
   },
   {
     "id": "news-da40d1c0442d",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/unica-comarca-castilla-leon-esquiva-despoblacion-segovia-20260314100042-nt.html",
     "title": "La única comarca de Castilla y León que esquiva la despoblación está en Segovia",
     "date": "2026-03-14",
     "source": "El Norte de Castilla",
@@ -856,6 +893,7 @@
   },
   {
     "id": "news-f0a459b778c9",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/segovia-accede-top-provincias-pais-mayor-densidad-20260314095515-nt.html",
     "title": "Segovia accede al 'top 15' de las provincias del país con mayor densidad de empresas",
     "date": "2026-03-14",
     "source": "El Norte de Castilla",
@@ -879,6 +917,7 @@
   },
   {
     "id": "news-8fec76c85c1c",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/carburantes-amenazan-batir-record-precios-junio-2022-20260314095308-nt.html",
     "title": "Los carburantes amenazan con batir su récord de precios de junio de 2022",
     "date": "2026-03-14",
     "source": "El Norte de Castilla",
@@ -902,6 +941,7 @@
   },
   {
     "id": "news-318b77fbc394",
+    "feedGuid": "https://lavozdeelespinar.es/?p=33945",
     "title": "El 17 de marzo se abre el plazo de admisión para las Escuelas Infantiles Municipales de El Espinar y San Rafael",
     "date": "2026-03-13",
     "source": "La Voz de El Espinar",
@@ -924,6 +964,7 @@
   },
   {
     "id": "news-57f9562597a4",
+    "feedGuid": "https://elespinar.es/?p=33029",
     "title": "ESCUELAS INFANTILES MUNICIPALES CURSO 2026/2027",
     "date": "2026-03-13",
     "source": "Ayuntamiento de El Espinar",
@@ -947,6 +988,7 @@
   },
   {
     "id": "news-837c088ac254",
+    "feedGuid": "https://lavozdeelespinar.es/?p=33942",
     "title": "La Voz Kids 2026 busca las mejores voces infantiles en Castilla y León",
     "date": "2026-03-13",
     "source": "La Voz de El Espinar",
@@ -969,6 +1011,7 @@
   },
   {
     "id": "news-16f9a3c97e43",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/federacion-prepara-expulsion-categorias-nacionales-tres-clubes-20260313220005-nt.html",
     "title": "La Federación prepara la expulsión de categorías nacionales de tres clubes de Segovia",
     "date": "2026-03-13",
     "source": "El Norte de Castilla",
@@ -992,6 +1035,7 @@
   },
   {
     "id": "news-5557b611a99e",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/balonmano-nava-borda-final-tenso-20260313212013-nt.html",
     "title": "El Balonmano Nava borda otro final tenso",
     "date": "2026-03-13",
     "source": "El Norte de Castilla",
@@ -1015,6 +1059,7 @@
   },
   {
     "id": "news-7aa5e8f60446",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/ordenan-retirar-publicacion-ayuntamiento-segovia-vulneracion-electoral-20260313201603-nt.html",
     "title": "Ordenan retirar una publicación del Ayuntamiento de Segovia por vulneración electoral",
     "date": "2026-03-13",
     "source": "El Norte de Castilla",
@@ -1038,6 +1083,7 @@
   },
   {
     "id": "news-eaf7acdb8e40",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/humedad-terreno-frena-obras-parking-provisional-estacion-20260313153209-nt.html",
     "title": "La humedad del terreno frena las obras del parking provisional de la estación del AVE",
     "date": "2026-03-13",
     "source": "El Norte de Castilla",
@@ -1061,6 +1107,7 @@
   },
   {
     "id": "news-764914015b73",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/plaza-mayor-segovia-grada-ver-principales-procesiones-20260313125820-nt.html",
     "title": "La Plaza Mayor de Segovia tendrá grada para ver las principales procesiones de Semana Santa",
     "date": "2026-03-13",
     "source": "El Norte de Castilla",
@@ -1084,6 +1131,7 @@
   },
   {
     "id": "news-fd7fcf601243",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/podemos-llegar-20260313120949-nt.html",
     "title": "«¿Hasta dónde podemos llegar?»",
     "date": "2026-03-13",
     "source": "El Norte de Castilla",
@@ -1107,6 +1155,7 @@
   },
   {
     "id": "news-67460ed6be54",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/sego-inicia-camino-sad-consejo-administracion-continuista-20260313102138-nt.html",
     "title": "La Sego inicia su camino como SAD con un consejo de administración continuista",
     "date": "2026-03-13",
     "source": "El Norte de Castilla",
@@ -1130,6 +1179,7 @@
   },
   {
     "id": "news-754043fff0e9",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/pescaderia-carniceria-fruteria-huertos-quedan-adjudicatario-20260313083957-nt.html",
     "title": "La pescadería, la carnicería y la frutería de Los Huertos se quedan sin adjudicatario",
     "date": "2026-03-13",
     "source": "El Norte de Castilla",
@@ -1153,6 +1203,7 @@
   },
   {
     "id": "news-380fdf860c16",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/trabajadores-residencias-publicas-movilizan-falta-personal-20260313083859-nt.html",
     "title": "Los trabajadores de las residencias públicas se movilizan contra la falta de personal",
     "date": "2026-03-13",
     "source": "El Norte de Castilla",
@@ -1176,6 +1227,7 @@
   },
   {
     "id": "news-b4500ad5fa44",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/agricultores-ganaderos-segovia-denuncian-abandono-parte-junta-20260313083725-nt.html",
     "title": "Los agricultores y ganaderos de Segovia denuncian el «abandono» por parte de la Junta",
     "date": "2026-03-13",
     "source": "El Norte de Castilla",
@@ -1199,6 +1251,7 @@
   },
   {
     "id": "news-9f6e3601128a",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/ayuntamiento-negocia-policia-local-nuevo-sistema-rotatorio-20260313083513-nt.html",
     "title": "El Ayuntamiento negocia con la Policía Local un nuevo sistema rotatorio de turnos",
     "date": "2026-03-13",
     "source": "El Norte de Castilla",
@@ -1222,6 +1275,7 @@
   },
   {
     "id": "news-5c6ce449cf29",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/segovia-pierde-empresas-fuga-negocios-madrid-burgos-20260313083133-nt.html",
     "title": "Segovia pierde empresas por la fuga de negocios a Madrid y Burgos",
     "date": "2026-03-13",
     "source": "El Norte de Castilla",
@@ -1245,6 +1299,7 @@
   },
   {
     "id": "news-27da03a88a46",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/proliferacion-espacios-coworking-despachos-compartidos-frena-demanda-20260313082956-nt.html",
     "title": "La proliferación de espacios 'coworking' y despachos compartidos frena la demanda de oficinas",
     "date": "2026-03-13",
     "source": "El Norte de Castilla",
@@ -1268,6 +1323,7 @@
   },
   {
     "id": "news-7ec26bdac069",
+    "feedGuid": "https://www.elnortedecastilla.es/elecciones/castilla-y-leon/vecinos-1131-localidades-mesa-electoral-pedanias-entidad-local-menor-transporte-autobus-votar-castilla-leon-20260312145054-nt.html",
     "title": "Vecinos de 1.131 localidades sin mesa electoral en su pueblo contarán con autobús para ir a votar",
     "date": "2026-03-12",
     "source": "El Norte de Castilla",
@@ -1293,6 +1349,7 @@
   },
   {
     "id": "news-3d15fc248253",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/psoe-pide-ordenanza-ambiciosa-protocolo-grafitis-monumentos-20260312140755-nt.html",
     "title": "El PSOE pide una ordenanza más ambiciosa con protocolo para grafitis en monumentos",
     "date": "2026-03-12",
     "source": "El Norte de Castilla",
@@ -1316,6 +1373,7 @@
   },
   {
     "id": "news-98883b775263",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/ayuntamiento-baraja-mejoras-futuro-contrato-limpieza-mayor-20260312140715-nt.html",
     "title": "El Ayuntamiento baraja mejoras en el futuro contrato de limpieza para una mayor eficiencia",
     "date": "2026-03-12",
     "source": "El Norte de Castilla",
@@ -1339,6 +1397,7 @@
   },
   {
     "id": "news-e8ecd7b2315b",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/segovia-regalara-botellas-duenos-perros-limpien-orines-20260312140552-nt.html",
     "title": "Segovia regalará botellas a los dueños de los perros para que limpien sus orines con agua y jabón",
     "date": "2026-03-12",
     "source": "El Norte de Castilla",
@@ -1362,6 +1421,7 @@
   },
   {
     "id": "news-9ffea4728dff",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/segovia-sacara-concurso-tres-nuevas-licencias-eurotaxi-20260312140302-nt.html",
     "title": "Segovia sacará a concurso tres nuevas licencias de eurotaxi con un canon de 150.000 euros",
     "date": "2026-03-12",
     "source": "El Norte de Castilla",
@@ -1385,6 +1445,7 @@
   },
   {
     "id": "news-ac5132f0c3d2",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/segovia-invierte-260000-euros-tres-nuevos-coches-20260312133814-nt.html",
     "title": "Segovia invierte 260.000 euros en tres nuevos coches híbridos para la Policía Local",
     "date": "2026-03-12",
     "source": "El Norte de Castilla",
@@ -1408,6 +1469,7 @@
   },
   {
     "id": "news-d2d507f459b8",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/segovianos-acuden-masa-reparto-gratuito-700-tarrinas-20260312123143-nt.html",
     "title": "Los segovianos acuden en masa al reparto gratuito de 700 tarrinas de fresas",
     "date": "2026-03-12",
     "source": "El Norte de Castilla",
@@ -1431,6 +1493,7 @@
   },
   {
     "id": "news-af351ee2ca0b",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/fuga-actuara-pueblo-segovia-proximo-abril-20260312122938-nt.html",
     "title": "La Fuga actuará en un pueblo de Segovia el próximo 30 de abril",
     "date": "2026-03-12",
     "source": "El Norte de Castilla",
@@ -1454,6 +1517,7 @@
   },
   {
     "id": "news-f356b45ba415",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/comprar-piso-segovia-cuesta-mes-alquilarlo-20260312075209-nt.html",
     "title": "Comprar un piso en Segovia cuesta un 54% menos al mes que alquilarlo",
     "date": "2026-03-12",
     "source": "El Norte de Castilla",
@@ -1477,6 +1541,7 @@
   },
   {
     "id": "news-75a436502edb",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/vinedo-regadio-gana-peso-segovia-gracias-mayor-20260312074735-nt.html",
     "title": "El viñedo de regadío gana peso en Segovia gracias a su mayor producción",
     "date": "2026-03-12",
     "source": "El Norte de Castilla",
@@ -1500,6 +1565,7 @@
   },
   {
     "id": "news-e25d64cb5085",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/escalada-precio-gasoleo-alarma-indigna-transportistas-agricultores-20260312074549-nt.html",
     "title": "La escalada del precio del gasóleo alarma e indigna a transportistas y agricultores",
     "date": "2026-03-12",
     "source": "El Norte de Castilla",
@@ -1523,6 +1589,7 @@
   },
   {
     "id": "news-998a3e4df9f7",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/detenido-agredir-sexualmente-mujer-intentar-matarla-pueblo-20260311202756-nt.html",
     "title": "Detenido por agredir sexualmente a una mujer e intentar matarla en un pueblo de Segovia",
     "date": "2026-03-11",
     "source": "El Norte de Castilla",
@@ -1546,6 +1613,7 @@
   },
   {
     "id": "news-435d068399c0",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/segovia-repara-fuente-santa-columba-acabar-humedades-20260311180335-nt.html",
     "title": "Segovia repara la fuente de Santa Columba para acabar con las humedades del Centro de Visitantes",
     "date": "2026-03-11",
     "source": "El Norte de Castilla",
@@ -1569,6 +1637,7 @@
   },
   {
     "id": "news-494058acc392",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/patotski-estira-era-nava-2028-20260311175141-nt.html",
     "title": "Patotski estira su era en Nava hasta 2028",
     "date": "2026-03-11",
     "source": "El Norte de Castilla",
@@ -1592,6 +1661,7 @@
   },
   {
     "id": "news-751c4c038f07",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/libertad-conductor-accidente-nava-asuncion-murio-joven-20260311140810-nt.html",
     "title": "En libertad el conductor del accidente de Nava de la Asunción en el que murió una joven de 17 años",
     "date": "2026-03-11",
     "source": "El Norte de Castilla",
@@ -1615,6 +1685,7 @@
   },
   {
     "id": "news-2f109ba0cec2",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/ocho-denuncias-robo-catalizadores-coches-aparcados-segovia-20260311132508-nt.html",
     "title": "Ocho denuncias por robo de catalizadores en coches aparcados en Segovia",
     "date": "2026-03-11",
     "source": "El Norte de Castilla",
@@ -1638,6 +1709,7 @@
   },
   {
     "id": "news-f5efed8d3512",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/interceptados-autopista-segovia-madrid-cocaina-varias-armas-20260311111232-nt.html",
     "title": "Interceptados en la autopista entre Segovia y Madrid con cocaína y varias armas",
     "date": "2026-03-11",
     "source": "El Norte de Castilla",
@@ -1661,6 +1733,7 @@
   },
   {
     "id": "news-b183c477d6e6",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/muere-anos-periodista-academico-honorario-san-quirce-20260310135646-nt.html",
     "title": "Muere a los 95 años el periodista y académico honorario de San Quirce, Pablo Martín Cantalejo",
     "date": "2026-03-11",
     "source": "El Norte de Castilla",
@@ -1684,6 +1757,7 @@
   },
   {
     "id": "news-062cd7e6074e",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/agencias-viajes-segovia-notan-guerra-iran-clientes-20260311082637-nt.html",
     "title": "Las agencias de viajes de Segovia notan la guerra en Irán: «Tenemos clientes que se han quedado colgados»",
     "date": "2026-03-11",
     "source": "El Norte de Castilla",
@@ -1707,6 +1781,7 @@
   },
   {
     "id": "news-c586ab64d0bc",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/labor-parroquias-mantener-edificios-pie-fundamental-20260311082605-nt.html",
     "title": "«La labor que las parroquias han hecho para mantener los edificios en pie ha sido fundamental»",
     "date": "2026-03-11",
     "source": "El Norte de Castilla",
@@ -1730,6 +1805,7 @@
   },
   {
     "id": "news-5146807b36ae",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/humedades-grietas-cubiertas-danadas-amenazan-decenas-iglesias-20260311082511-nt.html",
     "title": "Humedades, grietas y cubiertas dañadas amenazan decenas de iglesias de Segovia",
     "date": "2026-03-11",
     "source": "El Norte de Castilla",
@@ -1753,6 +1829,7 @@
   },
   {
     "id": "news-cf63e944332c",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/sector-velodromo-vuelve-moverse-tras-decadas-paralizado-20260311082319-nt.html",
     "title": "El sector del Velódromo vuelve a moverse tras décadas paralizado",
     "date": "2026-03-11",
     "source": "El Norte de Castilla",
@@ -1776,6 +1853,7 @@
   },
   {
     "id": "news-f5c6b27aa995",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/segovia-bajara-velocidad-via-roma-mejorar-seguridad-20260310183152-nt.html",
     "title": "Segovia bajará la velocidad en Vía Roma para mejorar la seguridad vial",
     "date": "2026-03-10",
     "source": "El Norte de Castilla",
@@ -1801,6 +1879,7 @@
   },
   {
     "id": "news-9daf9b4bf818",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/incendio-coche-corta-carretera-lastrilla-espirdo-20260310210534-nt.html",
     "title": "El incendio de un coche corta la carretera de La Lastrilla a Espirdo",
     "date": "2026-03-10",
     "source": "El Norte de Castilla",
@@ -1824,6 +1903,7 @@
   },
   {
     "id": "news-18ded63cbbc7",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/ciudadanos-critica-deterioro-parking-municipal-jose-zorrilla-20260310184528-nt.html",
     "title": "Ciudadanos critica «el deterioro» del parking municipal de José Zorrilla",
     "date": "2026-03-10",
     "source": "El Norte de Castilla",
@@ -1847,6 +1927,7 @@
   },
   {
     "id": "news-18bf5b957ba2",
+    "feedGuid": "https://www.elnortedecastilla.es/valladolid/provincia/cuatro-personas-prision-tras-desarticular-cuatro-puntos-20260310104217-nt.html",
     "title": "Cuatro personas a prisión tras desarticular cuatro puntos de venta de droga en Íscar y Cuéllar",
     "date": "2026-03-10",
     "source": "El Norte de Castilla",
@@ -1870,6 +1951,7 @@
   },
   {
     "id": "news-f6902f255eb8",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/junta-analiza-terreno-futuro-instituto-san-lorenzo-20260310135359-nt.html",
     "title": "La Junta analiza el terreno del futuro instituto de San Lorenzo antes de reactivar las obras",
     "date": "2026-03-10",
     "source": "El Norte de Castilla",
@@ -1893,6 +1975,7 @@
   },
   {
     "id": "news-42185a3d7a20",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/herido-leve-hombre-tras-embestido-ternero-pueblo-20260309205535-nt.html",
     "title": "Herido un hombre tras ser embestido por un ternero en un pueblo de Segovia",
     "date": "2026-03-10",
     "source": "El Norte de Castilla",
@@ -1916,6 +1999,7 @@
   },
   {
     "id": "news-53ff7e020adf",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/sego-desangra-ante-zona-baja-20260310131939-nt.html",
     "title": "La Sego se desangra ante la zona baja",
     "date": "2026-03-10",
     "source": "El Norte de Castilla",
@@ -1939,6 +2023,7 @@
   },
   {
     "id": "news-71303bf1fb60",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/nuevo-retraso-tren-madrugador-segovia-madrid-20260310124659-nt.html",
     "title": "Nuevo retraso en el tren madrugador entre Segovia y Madrid",
     "date": "2026-03-10",
     "source": "El Norte de Castilla",
@@ -1962,6 +2047,7 @@
   },
   {
     "id": "news-32c22fc4d632",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/galgo-sube-tejado-nave-industrial-segovia-obliga-20260310111936-nt.html",
     "title": "Un galgo sube al tejado de una nave industrial en Segovia y obliga a intervenir a los bomberos",
     "date": "2026-03-10",
     "source": "El Norte de Castilla",
@@ -1985,6 +2071,7 @@
   },
   {
     "id": "news-0a3ab08aae93",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/ayuntamiento-rechaza-recurso-cierre-garaje-calle-almendros-20260310073752-nt.html",
     "title": "El Ayuntamiento rechaza el recurso contra el cierre del garaje de la calle Los Almendros",
     "date": "2026-03-10",
     "source": "El Norte de Castilla",
@@ -2008,6 +2095,7 @@
   },
   {
     "id": "news-a9abac1e160b",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/dos-zonas-caras-castilla-leon-alquilar-casa-20260310073450-nt.html",
     "title": "Las dos zonas más caras de Castilla y León para alquilar una casa están en Segovia",
     "date": "2026-03-10",
     "source": "El Norte de Castilla",
@@ -2031,6 +2119,7 @@
   },
   {
     "id": "news-162e2e22dc14",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/alquiler-duplica-segovia-siete-anos-provincia-lidera-20260310073400-nt.html",
     "title": "El alquiler se duplica en Segovia en siete años y la provincia lidera las subidas en España",
     "date": "2026-03-10",
     "source": "El Norte de Castilla",
@@ -2054,6 +2143,7 @@
   },
   {
     "id": "news-c8ba0e538ffb",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/investigan-vecino-cuellar-pornografia-infantil-20260309205252-nt.html",
     "title": "Investigan a un vecino de Cuéllar por pornografía infantil",
     "date": "2026-03-09",
     "source": "El Norte de Castilla",
@@ -2077,6 +2167,7 @@
   },
   {
     "id": "news-a125aa340046",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/conductor-coche-murio-joven-anos-dio-positivo-20260309125657-nt.html",
     "title": "El conductor del coche en el que murió una joven de 17 años dio positivo en alcohol y drogas",
     "date": "2026-03-09",
     "source": "El Norte de Castilla",
@@ -2100,6 +2191,7 @@
   },
   {
     "id": "news-f304ad1781a4",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/hormigonera-vuelca-salida-circunvalacion-segovia-20260309135544-nt.html",
     "title": "Una hormigonera vuelca a la salida de la circunvalación de Segovia",
     "date": "2026-03-09",
     "source": "El Norte de Castilla",
@@ -2123,6 +2215,7 @@
   },
   {
     "id": "news-5e60050929fd",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/grupo-teatral-cuellar-nombre-biblioteca-congo-20260309114823-nt.html",
     "title": "El grupo teatral de Cuéllar que da nombre a una biblioteca del Congo",
     "date": "2026-03-09",
     "source": "El Norte de Castilla",
@@ -2146,6 +2239,7 @@
   },
   {
     "id": "news-6a6691ae5646",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/detenido-hombre-robar-565-euros-tabaco-valorado-20260309110803-nt.html",
     "title": "Detenido un hombre por robar 565 euros y tabaco valorado en 3.300 euros",
     "date": "2026-03-09",
     "source": "El Norte de Castilla",
@@ -2169,6 +2263,7 @@
   },
   {
     "id": "news-162273aefe77",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/arde-furgoneta-circunvalacion-segovia-20260309101350-nt.html",
     "title": "Arde una furgoneta en la circunvalación de Segovia",
     "date": "2026-03-09",
     "source": "El Norte de Castilla",
@@ -2192,6 +2287,7 @@
   },
   {
     "id": "news-47eeefd23020",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/real-sitio-reclama-mejoras-travesias-valsain-pradera-20260309095546-nt.html",
     "title": "El Real Sitio reclama mejoras en las travesías de Valsaín y La Pradera de Navalhorno",
     "date": "2026-03-09",
     "source": "El Norte de Castilla",
@@ -2215,6 +2311,7 @@
   },
   {
     "id": "news-f56a56601099",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/adultos-tdah-grandes-abandonados-20260309094950-nt.html",
     "title": "«Los adultos con TDAH son los grandes abandonados»",
     "date": "2026-03-09",
     "source": "El Norte de Castilla",
@@ -2238,6 +2335,7 @@
   },
   {
     "id": "news-d3a61c903544",
+    "feedGuid": "https://lavozdeelespinar.es/?p=33900",
     "title": "El Espinar celebra el 8M",
     "date": "2026-03-08",
     "source": "La Voz de El Espinar",
@@ -2260,6 +2358,7 @@
   },
   {
     "id": "news-c0d739c13225",
+    "feedGuid": "https://lavozdeelespinar.es/?p=33896",
     "title": "El Restaurante Plaza de San Rafael participa en el concurso del mejor cachopo del mundo",
     "date": "2026-03-08",
     "source": "La Voz de El Espinar",
@@ -2282,6 +2381,7 @@
   },
   {
     "id": "news-14207321612b",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/reivindica-feminismo-antifascista-acto-cargado-consignas-paz-20260308222053-nt.html",
     "title": "El 8M reivindica un feminismo antifascista en un acto cargado de consignas por la paz y la igualdad",
     "date": "2026-03-08",
     "source": "El Norte de Castilla",
@@ -2305,6 +2405,7 @@
   },
   {
     "id": "news-19e02e7df663",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/sego-mantiene-viva-maldicion-villaviciosa-20260308192920-nt.html",
     "title": "La Sego mantiene viva la maldición de Villaviciosa",
     "date": "2026-03-08",
     "source": "El Norte de Castilla",
@@ -2328,6 +2429,7 @@
   },
   {
     "id": "news-b1a589193c7f",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/proximos-dos-dias-golpe-doler-dentro-20260308202746-nt.html",
     "title": "«Estos próximos dos días este golpe nos tiene que doler muy dentro»",
     "date": "2026-03-08",
     "source": "El Norte de Castilla",
@@ -2351,6 +2453,7 @@
   },
   {
     "id": "news-7bfdc90e3e49",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/mejores-sego-derrota-ante-lealtad-20260308202238-nt.html",
     "title": "Los mejores de la Sego en la derrota ante el Lealtad",
     "date": "2026-03-08",
     "source": "El Norte de Castilla",
@@ -2374,6 +2477,7 @@
   },
   {
     "id": "news-0e90dce3b7b9",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/nava-retrocede-mala-punteria-20260307222759-nt.html",
     "title": "El Nava retrocede por mala puntería",
     "date": "2026-03-08",
     "source": "El Norte de Castilla",
@@ -2397,6 +2501,7 @@
   },
   {
     "id": "news-cccd7a5c5030",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/libertad-vigilada-adolescente-lanzar-objetos-dos-profesores-20260308105816-nt.html",
     "title": "Libertad vigilada para una adolescente por lanzar objetos a dos profesores",
     "date": "2026-03-08",
     "source": "El Norte de Castilla",
@@ -2420,6 +2525,7 @@
   },
   {
     "id": "news-cd8049f018ca",
+    "feedGuid": "https://www.elnortedecastilla.es/segovia/condenado-cinco-anos-carcel-agredir-sexualmente-manera-20260308105957-nt.html",
     "title": "Condenado a cinco años de cárcel por agredir sexualmente y de manera continuada a una menor",
     "date": "2026-03-08",
     "source": "El Norte de Castilla",
@@ -2443,6 +2549,7 @@
   },
   {
     "id": "news-2949bf5aefeb",
+    "feedGuid": "https://lavozdeelespinar.es/?p=33892",
     "title": "Se acerca la fecha marcada: 12 de agosto del 2026",
     "date": "2026-03-07",
     "source": "La Voz de El Espinar",
@@ -2465,6 +2572,7 @@
   },
   {
     "id": "news-5a673ff3fe11",
+    "feedGuid": "https://lavozdeelespinar.es/?p=33885",
     "title": "Cancelada la reunión convocada por la Asociación de Copropietarios de Los Ángeles de San Rafael",
     "date": "2026-03-06",
     "source": "La Voz de El Espinar",
@@ -2489,6 +2597,7 @@
   },
   {
     "id": "news-d6bef5479ff3",
+    "feedGuid": "https://lavozdeelespinar.es/?p=33882",
     "title": "Carlos Gil se alinea con la Plataforma Ciudadana contra la privatización del agua en El Espinar",
     "date": "2026-03-06",
     "source": "La Voz de El Espinar",
@@ -2511,6 +2620,7 @@
   },
   {
     "id": "news-a67ad3e61280",
+    "feedGuid": "https://lavozdeelespinar.es/?p=33887",
     "title": "El Nido llega a El Espinar el 21 de marzo con su directo más festivo y atrevido",
     "date": "2026-03-06",
     "source": "La Voz de El Espinar",
@@ -2533,6 +2643,7 @@
   },
   {
     "id": "news-f2761aa1fb4e",
+    "feedGuid": "https://lavozdeelespinar.es/?p=33879",
     "title": "VN Asesores explica los cambios en el sistema de cotización de los autónomos",
     "date": "2026-03-06",
     "source": "La Voz de El Espinar",
@@ -2555,6 +2666,7 @@
   },
   {
     "id": "news-56535adb0370",
+    "feedGuid": "",
     "title": "La Asociación de Copropietarios de Los Ángeles de San Rafael convoca una reunión este domingo",
     "date": "2026-03-05",
     "source": "La Voz de El Espinar",
@@ -2580,6 +2692,7 @@
   },
   {
     "id": "news-40f8b1c2c074",
+    "feedGuid": "https://lavozdeelespinar.es/?p=33877",
     "title": "Aprobada la Ordenanza que hace posible el uso de terrazas de bares y restaurantes en el espacio público",
     "date": "2026-03-05",
     "source": "La Voz de El Espinar",
@@ -2602,6 +2715,7 @@
   },
   {
     "id": "news-13516384f34d",
+    "feedGuid": "",
     "title": "Una década de trabajo por la conservación del milano real en El Espinar, presentada en un Congreso Internacional",
     "date": "2026-03-05",
     "source": "La Voz de El Espinar",
@@ -2624,6 +2738,7 @@
   },
   {
     "id": "news-3bd4f613d398",
+    "feedGuid": "",
     "title": "Usuarios de coches eléctricos denuncian averías constantes y prolongadas en los cargadores",
     "date": "2026-03-04",
     "source": "La Voz de El Espinar",
@@ -2648,6 +2763,7 @@
   },
   {
     "id": "news-461f4dbe3b85",
+    "feedGuid": "",
     "title": "Tercer certamen de microrrelatos de La Voz de El Espinar",
     "date": "2026-03-04",
     "source": "La Voz de El Espinar",
@@ -2670,6 +2786,7 @@
   },
   {
     "id": "news-92d88474e880",
+    "feedGuid": "",
     "title": "La Comisión Europea abre la puerta a evitar una nueva concesión en el peaje de la AP-6",
     "date": "2026-03-03",
     "source": "La Voz de El Espinar",
@@ -2692,6 +2809,7 @@
   },
   {
     "id": "news-713a615b85ac",
+    "feedGuid": "https://elespinar.es/?p=33013",
     "title": "Fiesta de los Gabarreros 2026",
     "date": "2026-02-26",
     "source": "Ayuntamiento de El Espinar",
@@ -2715,6 +2833,7 @@
   },
   {
     "id": "news-e86f4340ccd0",
+    "feedGuid": "https://elespinar.es/?p=32996",
     "title": "PROGRAMACION 8 DE MARZO 2026 “NI UN PASO ATRÁS”",
     "date": "2026-02-22",
     "source": "Ayuntamiento de El Espinar",
@@ -2738,6 +2857,7 @@
   },
   {
     "id": "news-1a18d34a17fe",
+    "feedGuid": "https://elespinar.es/?p=32965",
     "title": "🗳️ Consulta Miembros de Mesa y lugares de votación – Elecciones 2026",
     "date": "2026-02-19",
     "source": "Ayuntamiento de El Espinar",
@@ -2761,6 +2881,7 @@
   },
   {
     "id": "news-914ed9e91e75",
+    "feedGuid": "https://elespinar.es/?p=32955",
     "title": "SEGUIMOS ESPERANDO AL INFORME DE LA CHD",
     "date": "2026-02-19",
     "source": "Ayuntamiento de El Espinar",
@@ -2784,6 +2905,7 @@
   },
   {
     "id": "news-144b8c067568",
+    "feedGuid": "https://elespinar.es/?p=32951",
     "title": "Abierto el Registro Municipal de Colonias Felinas",
     "date": "2026-02-19",
     "source": "Ayuntamiento de El Espinar",
@@ -2807,6 +2929,7 @@
   },
   {
     "id": "news-3a22c939d2b2",
+    "feedGuid": "",
     "title": "Masamadre llega hasta la Sala Los Ángeles el próximo 13 de marzo",
     "date": "2026-02-12",
     "source": "La Voz de El Espinar",
@@ -2831,6 +2954,7 @@
   },
   {
     "id": "news-10a18e1ab6f2",
+    "feedGuid": "https://elespinar.es/?p=32943",
     "title": "Consulta pública: Reglamento de prestación del servicio de abastecimiento de agua, saneamiento y depuración",
     "date": "2026-02-12",
     "source": "Ayuntamiento de El Espinar",
@@ -2854,6 +2978,7 @@
   },
   {
     "id": "news-607edd27219d",
+    "feedGuid": "",
     "title": "El Pleno de El Espinar aprueba declarar ‘persona non grata’ al ministro Óscar Puente",
     "date": "2026-02-11",
     "source": "La Voz de El Espinar",
@@ -2876,6 +3001,7 @@
   },
   {
     "id": "news-d9138516296c",
+    "feedGuid": "",
     "title": "Cierra el Bar Álvarez en San Rafael: adiós a más de un siglo de negocio familiar",
     "date": "2026-02-11",
     "source": "La Voz de El Espinar",
@@ -2900,6 +3026,7 @@
   },
   {
     "id": "news-0562e3e1fc17",
+    "feedGuid": "",
     "title": "Crece la preocupación en la “Promoción Jardines” de Los Ángeles de San Rafael por nuevas ocupaciones y conflictos en la zona",
     "date": "2026-02-03",
     "source": "La Voz de El Espinar",
@@ -2926,6 +3053,7 @@
   },
   {
     "id": "news-d3191e77e055",
+    "feedGuid": "",
     "title": "Vecinos Núcleos de El Espinar denuncia el abandono de un jabalí mutilado en la N-603",
     "date": "2026-01-29",
     "source": "La Voz de El Espinar",
@@ -2951,6 +3079,7 @@
   },
   {
     "id": "news-ca13b1928cab",
+    "feedGuid": "",
     "title": "La CHD prorroga “unas semanas” la revisión de la presa de El Tejo y prepara un estudio que marcará su futuro",
     "date": "2026-01-29",
     "source": "La Voz de El Espinar",
@@ -2975,6 +3104,7 @@
   },
   {
     "id": "news-10aa56011e07",
+    "feedGuid": "",
     "title": "Horarios y actividades de la celebración de Santa Águeda 2026 en el municipio",
     "date": "2026-01-27",
     "source": "La Voz de El Espinar",
@@ -2997,6 +3127,7 @@
   },
   {
     "id": "news-6012f536ad36",
+    "feedGuid": "",
     "title": "Crónicas del Alba, el nuevo libro de Juan Andrés Saiz Garrido",
     "date": "2026-01-27",
     "source": "La Voz de El Espinar",
@@ -3019,6 +3150,7 @@
   },
   {
     "id": "news-51dbb0e7821e",
+    "feedGuid": "https://elespinar.es/?p=32930",
     "title": "Redacción de Ordenanza reguladora de la ocupación de terrenos de uso público con mesas, sillas, tribunas y otros elementos análogos con finalidad lucrativa",
     "date": "2026-01-16",
     "source": "Ayuntamiento de El Espinar",
@@ -3044,6 +3176,7 @@
   },
   {
     "id": "news-51a00dc0e3fc",
+    "feedGuid": "",
     "title": "La Sala Los Ángeles presenta una completa programación cultural para este invierno",
     "date": "2026-01-15",
     "source": "La Voz de El Espinar",
@@ -3068,6 +3201,7 @@
   },
   {
     "id": "news-23c67b50f4c8",
+    "feedGuid": "",
     "title": "2025 terminó siendo el más lluvioso desde al menos 1987",
     "date": "2026-01-10",
     "source": "La Voz de El Espinar",
@@ -3090,6 +3224,7 @@
   },
   {
     "id": "news-d3994abc4316",
+    "feedGuid": "https://elespinar.es/?p=32902",
     "title": "Nuevos Programas Públicos Mixtos de Empleo y Formación 2026",
     "date": "2026-01-09",
     "source": "Ayuntamiento de El Espinar",
@@ -3113,6 +3248,7 @@
   },
   {
     "id": "news-dd65ecd2d12f",
+    "feedGuid": "",
     "title": "La Comisión Europea investigará al Gobierno por la situación de las autopistas AP-6, AP-51 y AP-61",
     "date": "2026-01-08",
     "source": "La Voz de El Espinar",
@@ -3137,6 +3273,7 @@
   },
   {
     "id": "news-988d53192da6",
+    "feedGuid": "",
     "title": "Consuelo Cuenca: “No todo el mundo necesita un psicólogo”",
     "date": "2025-12-28",
     "source": "La Voz de El Espinar",
@@ -3161,6 +3298,7 @@
   },
   {
     "id": "news-1c99659a0110",
+    "feedGuid": "https://elespinar.es/?p=32891",
     "title": "2026 llega al Teatro de El Espinar con su nueva temporada de invierno",
     "date": "2025-12-22",
     "source": "Ayuntamiento de El Espinar",
@@ -3184,6 +3322,7 @@
   },
   {
     "id": "news-f317854227b8",
+    "feedGuid": "",
     "title": "El Pleno aprueba la subida del precio del agua y la privatización del servicio",
     "date": "2025-12-17",
     "source": "La Voz de El Espinar",
@@ -3206,6 +3345,7 @@
   },
   {
     "id": "news-9d7db3bac5aa",
+    "feedGuid": "",
     "title": "Las Cortes aprueban una propuesta para garantizar el abastecimiento de agua en El Espinar",
     "date": "2025-12-04",
     "source": "La Voz de El Espinar",
@@ -3228,6 +3368,7 @@
   },
   {
     "id": "news-c5e2c6f13d85",
+    "feedGuid": "",
     "title": "El Espinar amplía la gratuidad del transporte municipal",
     "date": "2025-12-03",
     "source": "La Voz de El Espinar",
@@ -3250,6 +3391,7 @@
   },
   {
     "id": "news-933e4a4c69d3",
+    "feedGuid": "",
     "title": "La Sala Teatro Los Ángeles impulsa la cultura de la localidad",
     "date": "2025-12-01",
     "source": "La Voz de El Espinar",
@@ -3274,6 +3416,7 @@
   },
   {
     "id": "news-8e7226378a44",
+    "feedGuid": "",
     "title": "La Junta impulsa nuevas inversiones en El Espinar para modernizar el punto limpio y mejorar infraestructuras en el entorno del Parque Nacional",
     "date": "2025-11-29",
     "source": "La Voz de El Espinar",
@@ -3298,6 +3441,7 @@
   },
   {
     "id": "news-2a1c1600527f",
+    "feedGuid": "",
     "title": "Caceras de El Espinar",
     "date": "2025-11-18",
     "source": "La Voz de El Espinar",
@@ -3320,6 +3464,7 @@
   },
   {
     "id": "news-2467eaa20161",
+    "feedGuid": "",
     "title": "El entorno del ganadero de la yegua muerta en El Baldío niega que hubiera maltrato",
     "date": "2025-11-13",
     "source": "La Voz de El Espinar",
@@ -3342,6 +3487,7 @@
   },
   {
     "id": "news-4f16a316d073",
+    "feedGuid": "",
     "title": "Gaba, dos décadas haciendo del monte un aula",
     "date": "2025-11-10",
     "source": "La Voz de El Espinar",
@@ -3364,6 +3510,7 @@
   },
   {
     "id": "news-4ef09eefdad9",
+    "feedGuid": "",
     "title": "Los transportistas segovianos dudan de las bonificaciones del peaje y reclaman su liberalización",
     "date": "2025-11-10",
     "source": "La Voz de El Espinar",
@@ -3388,6 +3535,7 @@
   },
   {
     "id": "news-59a0c251c86a",
+    "feedGuid": "",
     "title": "Vecinos de Los Ángeles de San Rafael denuncian ocupaciones ilegales",
     "date": "2025-11-08",
     "source": "La Voz de El Espinar",
@@ -3414,6 +3562,7 @@
   },
   {
     "id": "news-0d14beda6948",
+    "feedGuid": "",
     "title": "Antiguos miembros de Protección Civil de El Espinar denuncian “improvisación” y “politización” en la agrupación",
     "date": "2025-11-07",
     "source": "La Voz de El Espinar",
@@ -3436,6 +3585,7 @@
   },
   {
     "id": "news-25f78f046f98",
+    "feedGuid": "",
     "title": "Europa investigará la gestión del agua en Los Ángeles de San Rafael tras la denuncia de Vecinos Núcleos de El Espinar",
     "date": "2025-11-05",
     "source": "La Voz de El Espinar",
@@ -3461,6 +3611,7 @@
   },
   {
     "id": "news-1b5cfde82603",
+    "feedGuid": "",
     "title": "El Ayuntamiento de El Espinar anuncia los festivos locales para 2026",
     "date": "2025-11-05",
     "source": "La Voz de El Espinar",
@@ -3485,6 +3636,7 @@
   },
   {
     "id": "news-b9cb1f5fc3e5",
+    "feedGuid": "",
     "title": "Fuentes cercanas al servicio de fontanería cuestionan la privatización del agua",
     "date": "2025-11-04",
     "source": "La Voz de El Espinar",
@@ -3507,6 +3659,7 @@
   },
   {
     "id": "news-8469a552429a",
+    "feedGuid": "",
     "title": "Se retrasa el informe definitivo sobre el estado de la presa de El Tejo",
     "date": "2025-10-22",
     "source": "La Voz de El Espinar",
@@ -3529,6 +3682,7 @@
   },
   {
     "id": "news-978d660b08e2",
+    "feedGuid": "",
     "title": "Balance de las pandas y peñas de las fiestas de El Espinar 2025",
     "date": "2025-10-06",
     "source": "La Voz de El Espinar",
@@ -3551,6 +3705,7 @@
   },
   {
     "id": "news-5ef253e9733c",
+    "feedGuid": "",
     "title": "Cuatro días de recreación histórica en El Espinar del 9 al 12 de octubre",
     "date": "2025-10-05",
     "source": "La Voz de El Espinar",
@@ -3573,6 +3728,7 @@
   },
   {
     "id": "news-2ace8bac9591",
+    "feedGuid": "",
     "title": "El Espinar ya cuenta con oficina de Eurocaja Rural",
     "date": "2025-10-02",
     "source": "La Voz de El Espinar",
@@ -3597,6 +3753,7 @@
   },
   {
     "id": "news-97e252994c25",
+    "feedGuid": "",
     "title": "Muerte masiva de truchas en la presa de El Tejo",
     "date": "2025-10-02",
     "source": "La Voz de El Espinar",
@@ -3621,6 +3778,7 @@
   },
   {
     "id": "news-67a4f027cb5b",
+    "feedGuid": "",
     "title": "El Espinar espera con incertidumbre el informe definitivo de la presa de El Tejo",
     "date": "2025-10-01",
     "source": "La Voz de El Espinar",
@@ -3643,6 +3801,7 @@
   },
   {
     "id": "news-f413ffce0a2b",
+    "feedGuid": "",
     "title": "Finaliza la última fase del vaciado de la presa de El Tejo",
     "date": "2025-09-24",
     "source": "La Voz de El Espinar",
@@ -3667,6 +3826,7 @@
   },
   {
     "id": "news-606a8699ba38",
+    "feedGuid": "",
     "title": "Consulta el programa de las fiestas de San Rafael que tendrán lugar del 26 al 29 de septiembre",
     "date": "2025-09-23",
     "source": "La Voz de El Espinar",
@@ -3689,6 +3849,7 @@
   },
   {
     "id": "news-4cddd5742870",
+    "feedGuid": "",
     "title": "La Vuelta a España 2025 pasa por el municipio este sábado",
     "date": "2025-09-11",
     "source": "La Voz de El Espinar",
@@ -3711,6 +3872,7 @@
   },
   {
     "id": "news-cb83e12f3e7f",
+    "feedGuid": "",
     "title": "El Pleno de El Espinar aprueba las subvenciones a las AMPAS y debate la ampliación de Cercanías hasta Segovia",
     "date": "2025-09-10",
     "source": "La Voz de El Espinar",
@@ -3733,6 +3895,7 @@
   },
   {
     "id": "news-9eb0f9650ba2",
+    "feedGuid": "",
     "title": "La quinta “El Deskoloke” 2025 de El Espinar ultima los preparativos para las fiestas",
     "date": "2025-09-10",
     "source": "La Voz de El Espinar",
@@ -3755,6 +3918,7 @@
   },
   {
     "id": "news-99cf6ebddabe",
+    "feedGuid": "",
     "title": "El Festival de Narradores Orales de El Espinar celebra 25 años",
     "date": "2025-09-08",
     "source": "La Voz de El Espinar",
@@ -3777,6 +3941,7 @@
   },
   {
     "id": "news-7efb77ad234b",
+    "feedGuid": "",
     "title": "Consulta el programa de fiestas de El Espinar 2025",
     "date": "2025-09-05",
     "source": "La Voz de El Espinar",
@@ -3799,6 +3964,7 @@
   },
   {
     "id": "news-72a8bba4b5b1",
+    "feedGuid": "",
     "title": "La CHD marca la hoja de ruta para garantizar el agua en El Espinar",
     "date": "2025-09-04",
     "source": "La Voz de El Espinar",
@@ -3821,6 +3987,7 @@
   },
   {
     "id": "news-4e70dfc93517",
+    "feedGuid": "",
     "title": "El Espinar sigue sin noticias claras sobre el futuro de El Tejo y el coste de las bombas de Puente Alta",
     "date": "2025-09-02",
     "source": "La Voz de El Espinar",
@@ -3843,6 +4010,7 @@
   },
   {
     "id": "news-a65fc06e4a24",
+    "feedGuid": "",
     "title": "Corte de leña de las fiestas de Los Ángeles de San Rafael 2025",
     "date": "2025-09-01",
     "source": "La Voz de El Espinar",
@@ -3867,6 +4035,7 @@
   },
   {
     "id": "news-07bccf03b03a",
+    "feedGuid": "",
     "title": "Torneo de fútbol de las fiestas de Los Ángeles de San Rafael 2025",
     "date": "2025-09-01",
     "source": "La Voz de El Espinar",
@@ -3891,6 +4060,7 @@
   },
   {
     "id": "news-261e623176d1",
+    "feedGuid": "",
     "title": "Desfile de Gigantes y Cabezudos de las fiestas de Los Ángeles de San Rafael 2025",
     "date": "2025-09-01",
     "source": "La Voz de El Espinar",
@@ -3915,6 +4085,7 @@
   },
   {
     "id": "news-6fcc87a099ae",
+    "feedGuid": "",
     "title": "El concierto de la Rondalla en las fiestas de Los Ángeles de San Rafael 2025",
     "date": "2025-09-01",
     "source": "La Voz de El Espinar",
@@ -3939,6 +4110,7 @@
   },
   {
     "id": "news-412acbe4c287",
+    "feedGuid": "",
     "title": "Consulta el programa de fiestas de Los Ángeles de San Rafael 2025",
     "date": "2025-08-22",
     "source": "La Voz de El Espinar",
@@ -3963,6 +4135,7 @@
   },
   {
     "id": "news-ecf915bf1a69",
+    "feedGuid": "",
     "title": "Cinco espinariegos recorren 4.500 kilómetros por los parques nacionales del oeste de Estados Unidos",
     "date": "2025-08-13",
     "source": "La Voz de El Espinar",
@@ -3987,6 +4160,7 @@
   },
   {
     "id": "news-1380211685cd",
+    "feedGuid": "",
     "title": "El Festival de Narradores Orales de El Espinar celebra su 25 edición",
     "date": "2025-08-11",
     "source": "La Voz de El Espinar",
@@ -4009,6 +4183,7 @@
   },
   {
     "id": "news-f6531abcc2a3",
+    "feedGuid": "",
     "title": "El Ayuntamiento de El Espinar implementa medidas de ahorro de agua",
     "date": "2025-08-07",
     "source": "La Voz de El Espinar",
@@ -4031,6 +4206,7 @@
   },
   {
     "id": "news-5e11389c80bf",
+    "feedGuid": "",
     "title": "Actuaciones de la Orquesta de pulso y púa «Lorenzo Moya» para el mes de agosto",
     "date": "2025-08-07",
     "source": "La Voz de El Espinar",
@@ -4053,6 +4229,7 @@
   },
   {
     "id": "news-a2904f18d95c",
+    "feedGuid": "",
     "title": "Pedro Pablo Matesanz: “El Atlético es mi casa, y el fútbol, mi vida”",
     "date": "2025-08-06",
     "source": "La Voz de El Espinar",
@@ -4075,6 +4252,7 @@
   },
   {
     "id": "news-59860e641dbd",
+    "feedGuid": "",
     "title": "Las bombas que suministrarán agua desde Puente Alta hasta El Espinar tienen un gasto diario de unos 3.000 euros",
     "date": "2025-08-04",
     "source": "La Voz de El Espinar",
@@ -4097,6 +4275,7 @@
   },
   {
     "id": "news-c2af4d04a67f",
+    "feedGuid": "",
     "title": "La Plataforma Solución a la Travesía de San Rafael presenta dos nuevas denuncias ante la UE",
     "date": "2025-07-25",
     "source": "La Voz de El Espinar",
@@ -4119,6 +4298,7 @@
   },
   {
     "id": "news-24a57238824e",
+    "feedGuid": "",
     "title": "Programa de fiestas de verano de San Rafael 2025",
     "date": "2025-07-24",
     "source": "La Voz de El Espinar",
@@ -4141,6 +4321,7 @@
   },
   {
     "id": "news-51518ba1798b",
+    "feedGuid": "",
     "title": "Declaraciones de la delegada territorial de la Junta en Segovia y el alcalde de El Espinar sobre la actualidad de la presa de El Tejo",
     "date": "2025-07-21",
     "source": "La Voz de El Espinar",
@@ -4163,6 +4344,7 @@
   },
   {
     "id": "news-ec89b8c9aa0b",
+    "feedGuid": "",
     "title": "El Atlético Madrid inicia su pretemporada en Los Ángeles de San Rafael este lunes 21 de julio",
     "date": "2025-07-18",
     "source": "La Voz de El Espinar",
@@ -4187,6 +4369,7 @@
   },
   {
     "id": "news-8d2d05562939",
+    "feedGuid": "",
     "title": "El nivel de emergencia por riesgo de inundaciones en la presa de El Tejo desciende a nivel 1",
     "date": "2025-07-18",
     "source": "La Voz de El Espinar",
@@ -4209,6 +4392,7 @@
   },
   {
     "id": "news-da602ca0fecf",
+    "feedGuid": "",
     "title": "Ramón Rodríguez: secretario por amor al arte",
     "date": "2025-07-14",
     "source": "La Voz de El Espinar",
@@ -4231,6 +4415,7 @@
   },
   {
     "id": "news-c0d5ad8146b8",
+    "feedGuid": "",
     "title": "El Ayuntamiento señala que hay una avería en la tubería del sistema de abastecimiento desde Puente Alta",
     "date": "2025-07-10",
     "source": "La Voz de El Espinar",
@@ -4253,6 +4438,7 @@
   },
   {
     "id": "news-6e429b51b893",
+    "feedGuid": "",
     "title": "Aún quedan pruebas por realizar para la puesta en marcha definitiva del abastecimiento de Puente Alta",
     "date": "2025-07-10",
     "source": "La Voz de El Espinar",
@@ -4275,6 +4461,7 @@
   },
   {
     "id": "news-6375fe7cf8cd",
+    "feedGuid": "",
     "title": "Varios vecinos muestran su indignación por el retraso en los trabajos de desbroce",
     "date": "2025-07-10",
     "source": "La Voz de El Espinar",
@@ -4299,6 +4486,7 @@
   },
   {
     "id": "news-01e47c78b051",
+    "feedGuid": "",
     "title": "La CHD tilda de “irresponsabilidad” que el Ayuntamiento no haya buscado un abastecimiento alternativo a El Tejo",
     "date": "2025-07-09",
     "source": "La Voz de El Espinar",
@@ -4321,6 +4509,7 @@
   },
   {
     "id": "news-b694ca1e05bb",
+    "feedGuid": "",
     "title": "Desde Los Ángeles de San Rafael han lanzado una app para evitar que abandones la oposición",
     "date": "2025-07-07",
     "source": "La Voz de El Espinar",
@@ -4345,6 +4534,7 @@
   },
   {
     "id": "news-4d9e921bcc94",
+    "feedGuid": "",
     "title": "Unai Romairone compite este miércoles 9 de julio en el Campeonato Navarro de Aizkora",
     "date": "2025-07-07",
     "source": "La Voz de El Espinar",
@@ -4367,6 +4557,7 @@
   },
   {
     "id": "news-dab1e4b9ba31",
+    "feedGuid": "",
     "title": "La CHD confirma que el lunes 7 de julio entrará en servicio el suministro de agua a El Espinar desde Puente Alta",
     "date": "2025-07-03",
     "source": "La Voz de El Espinar",
@@ -4389,6 +4580,7 @@
   },
   {
     "id": "news-dd68fb3bac1c",
+    "feedGuid": "",
     "title": "La CHD pretende iniciar el suministro de agua a El Espinar desde Puente Alta el lunes 7 de julio",
     "date": "2025-07-02",
     "source": "La Voz de El Espinar",
@@ -4411,6 +4603,7 @@
   },
   {
     "id": "news-44d835d89f65",
+    "feedGuid": "",
     "title": "Calendario del verano 2025 en el municipio",
     "date": "2025-07-02",
     "source": "La Voz de El Espinar",
@@ -4433,6 +4626,7 @@
   },
   {
     "id": "news-ade4ef5f3dc5",
+    "feedGuid": "",
     "title": "El Ayuntamiento destina más de 35.000 euros en publicidad y deja fuera a La Voz de El Espinar",
     "date": "2025-07-01",
     "source": "La Voz de El Espinar",
@@ -4455,6 +4649,7 @@
   },
   {
     "id": "news-b4b4ef45369c",
+    "feedGuid": "",
     "title": "El Tejo cuenta con capacidad de abastecimiento para unos 30 días",
     "date": "2025-06-30",
     "source": "La Voz de El Espinar",
@@ -4477,6 +4672,7 @@
   },
   {
     "id": "news-d3a11ceb8569",
+    "feedGuid": "",
     "title": "Finaliza el segundo escalón del vaciado de El Tejo",
     "date": "2025-06-23",
     "source": "La Voz de El Espinar",
@@ -4499,6 +4695,7 @@
   },
   {
     "id": "news-a9531f2405fd",
+    "feedGuid": "",
     "title": "La CHD inicia el segundo escalón del vaciado desembalse de El Tejo",
     "date": "2025-06-17",
     "source": "La Voz de El Espinar",
@@ -4521,6 +4718,7 @@
   },
   {
     "id": "news-3f588925942d",
+    "feedGuid": "",
     "title": "La CHD pide tranquilidad y asegura que el suministro desde Puente Alta estará listo a principios de julio",
     "date": "2025-06-14",
     "source": "La Voz de El Espinar",
@@ -4543,6 +4741,7 @@
   },
   {
     "id": "news-da29692b75b1",
+    "feedGuid": "",
     "title": "El alcalde de El Espinar denuncia la falta de información en el proceso de vaciado de El Tejo",
     "date": "2025-06-11",
     "source": "La Voz de El Espinar",
@@ -4565,6 +4764,7 @@
   },
   {
     "id": "news-5f7ad66e3543",
+    "feedGuid": "",
     "title": "La CHD iniciará el lunes el segundo vaciado de la presa de El Tejo",
     "date": "2025-06-10",
     "source": "La Voz de El Espinar",
@@ -4587,6 +4787,7 @@
   },
   {
     "id": "news-801e4e66951b",
+    "feedGuid": "",
     "title": "Varios espinariegos llevan la ciencia a los bares segovianos de la mano de Pint of Science",
     "date": "2025-06-10",
     "source": "La Voz de El Espinar",
@@ -4609,6 +4810,7 @@
   },
   {
     "id": "news-7d56b19d02cb",
+    "feedGuid": "",
     "title": "El Ayuntamiento inicia los trámites para el cambio hacia la gestión privada del agua",
     "date": "2025-06-04",
     "source": "La Voz de El Espinar",
@@ -4631,6 +4833,7 @@
   },
   {
     "id": "news-9e1402a5f967",
+    "feedGuid": "",
     "title": "Finaliza la primera fase de vaciado de El Tejo mientras crece la tensión por el abastecimiento durante el verano",
     "date": "2025-06-02",
     "source": "La Voz de El Espinar",
@@ -4653,6 +4856,7 @@
   },
   {
     "id": "news-31ae37c60298",
+    "feedGuid": "",
     "title": "“Nos preocupa mucho quedarnos sin agua”",
     "date": "2025-06-02",
     "source": "La Voz de El Espinar",
@@ -4677,6 +4881,7 @@
   },
   {
     "id": "news-22011fd9b394",
+    "feedGuid": "",
     "title": "Javier Hernando: «No tiene sentido que se pongan ahora a vaciar cuando pueden empezar en septiembre»",
     "date": "2025-05-26",
     "source": "La Voz de El Espinar",
@@ -4701,6 +4906,7 @@
   },
   {
     "id": "news-45699b5062fe",
+    "feedGuid": "",
     "title": "La CHD iniciará el lunes 26 de mayo el vaciado de la presa de El Tejo",
     "date": "2025-05-20",
     "source": "La Voz de El Espinar",
@@ -4723,6 +4929,7 @@
   },
   {
     "id": "news-e73f1442bdd2",
+    "feedGuid": "",
     "title": "Ainhoa Salazar logra un tercer puesto en un concurso regional de prevención de riesgos",
     "date": "2025-05-06",
     "source": "La Voz de El Espinar",
@@ -4748,6 +4955,7 @@
   },
   {
     "id": "news-dfe2b27c9b4e",
+    "feedGuid": "",
     "title": "Un estudio universitario demuestra la viabilidad del suministro de agua a Los Ángeles desde el río Moros",
     "date": "2025-05-01",
     "source": "La Voz de El Espinar",
@@ -4770,6 +4978,7 @@
   },
   {
     "id": "news-4b59f877f431",
+    "feedGuid": "",
     "title": "Varios vecinos denuncian censura y bloqueos en las redes sociales del Ayuntamiento de El Espinar",
     "date": "2025-04-30",
     "source": "La Voz de El Espinar",
@@ -4794,6 +5003,7 @@
   },
   {
     "id": "news-b50e9f35e2e3",
+    "feedGuid": "",
     "title": "Colectivo Azálvaro lamenta el colapso de un nido de cigüeña blanca en la entrada a El Espinar",
     "date": "2025-04-30",
     "source": "La Voz de El Espinar",
@@ -4816,6 +5026,7 @@
   },
   {
     "id": "news-931c21e1f095",
+    "feedGuid": "",
     "title": "Continúa en duda el inicio del desembalse de El Tejo",
     "date": "2025-04-29",
     "source": "La Voz de El Espinar",
@@ -4838,6 +5049,7 @@
   },
   {
     "id": "news-ff2f9cb1aac6",
+    "feedGuid": "",
     "title": "Continúan las pruebas de apertura y cierre del desagüe en la presa de El Tejo",
     "date": "2025-04-22",
     "source": "La Voz de El Espinar",
@@ -4860,6 +5072,7 @@
   },
   {
     "id": "news-d3852a981322",
+    "feedGuid": "",
     "title": "Programación y horarios de la Semana Santa en El Espinar 2025",
     "date": "2025-04-14",
     "source": "La Voz de El Espinar",
@@ -4882,6 +5095,7 @@
   },
   {
     "id": "news-9fdf3a619921",
+    "feedGuid": "",
     "title": "La CHD realizará nuevas pruebas en la presa de El Tejo antes del vaciado previsto",
     "date": "2025-04-11",
     "source": "La Voz de El Espinar",
@@ -4904,6 +5118,7 @@
   },
   {
     "id": "news-b22902912948",
+    "feedGuid": "",
     "title": "Finalizan con éxito las pruebas de apertura y cierre de los desagües de fondo de El Tejo",
     "date": "2025-03-11",
     "source": "La Voz de El Espinar",
@@ -4926,6 +5141,7 @@
   },
   {
     "id": "news-7e488f423689",
+    "feedGuid": "",
     "title": "La CHD anuncia las pruebas de los desagües de la presa de El Tejo para el 10 de marzo",
     "date": "2025-03-04",
     "source": "La Voz de El Espinar",
@@ -4948,6 +5164,7 @@
   },
   {
     "id": "news-248de1f8666f",
+    "feedGuid": "",
     "title": "Los vecinos piden que se deje agua suficiente en la presa para que los helicópteros puedan acceder en caso de incendio",
     "date": "2025-03-03",
     "source": "La Voz de El Espinar",
@@ -4972,6 +5189,7 @@
   },
   {
     "id": "news-413c44471feb",
+    "feedGuid": "",
     "title": "Segundo certamen de microrrelatos de La Voz de El Espinar",
     "date": "2025-03-01",
     "source": "La Voz de El Espinar",
@@ -4994,6 +5212,7 @@
   },
   {
     "id": "news-cb233fb7e0b2",
+    "feedGuid": "",
     "title": "El Ayuntamiento saca a subasta 22 parcelas municipales en Los Ángeles de San Rafael",
     "date": "2025-02-28",
     "source": "La Voz de El Espinar",
@@ -5018,6 +5237,7 @@
   },
   {
     "id": "news-272921b34f1b",
+    "feedGuid": "",
     "title": "El Ayuntamiento convoca una reunión informativa sobre la presa de El Tejo",
     "date": "2025-02-26",
     "source": "La Voz de El Espinar",
@@ -5040,6 +5260,7 @@
   },
   {
     "id": "news-490ea3838efe",
+    "feedGuid": "",
     "title": "L@s Fuertes reúnen a más de 320 personas en su III Comida Solidaria",
     "date": "2025-02-25",
     "source": "La Voz de El Espinar",
@@ -5064,6 +5285,7 @@
   },
   {
     "id": "news-17c8b2d64cc2",
+    "feedGuid": "",
     "title": "No hay riesgo de rotura inminente en la presa de El Tejo y se anunciará en breve el inicio de su vaciado",
     "date": "2025-02-25",
     "source": "La Voz de El Espinar",
@@ -5086,6 +5308,7 @@
   },
   {
     "id": "news-b4a5304ac012",
+    "feedGuid": "",
     "title": "La Junta declara el nivel 2 de emergencia sobre la presa de El Tejo",
     "date": "2025-02-13",
     "source": "La Voz de El Espinar",
@@ -5108,6 +5331,7 @@
   },
   {
     "id": "news-6d7d11fd2d3c",
+    "feedGuid": "",
     "title": "Enrique Tapia, una vida tras la barra de La Serrata",
     "date": "2025-02-10",
     "source": "La Voz de El Espinar",
@@ -5130,6 +5354,7 @@
   },
   {
     "id": "news-8c23b0b64a51",
+    "feedGuid": "",
     "title": "La III Comida Solidaria de L@s Fuertes se celebrará el día 22 de febrero",
     "date": "2025-02-04",
     "source": "La Voz de El Espinar",
@@ -5152,6 +5377,7 @@
   },
   {
     "id": "news-1adf260f659f",
+    "feedGuid": "",
     "title": "Celebración de Santa Águeda en el municipio",
     "date": "2025-02-03",
     "source": "La Voz de El Espinar",
@@ -5174,6 +5400,7 @@
   },
   {
     "id": "news-ac1711d8833d",
+    "feedGuid": "",
     "title": "Encuentran con vida al hombre desaparecido en Los Ángeles de San Rafael",
     "date": "2025-01-18",
     "source": "La Voz de El Espinar",
@@ -5198,6 +5425,7 @@
   },
   {
     "id": "news-b3c04f48af91",
+    "feedGuid": "",
     "title": "Desaparecido un hombre en Los Ángeles de San Rafael",
     "date": "2025-01-17",
     "source": "La Voz de El Espinar",
@@ -5222,6 +5450,7 @@
   },
   {
     "id": "news-56e56af8d00f",
+    "feedGuid": "",
     "title": "El embalse de El Tejo será vaciado para su reparación",
     "date": "2025-01-17",
     "source": "La Voz de El Espinar",
@@ -5244,6 +5473,7 @@
   },
   {
     "id": "news-9404f88da438",
+    "feedGuid": "",
     "title": "Resumen climático del año en El Espinar",
     "date": "2025-01-11",
     "source": "La Voz de El Espinar",
@@ -5266,6 +5496,7 @@
   },
   {
     "id": "news-6e78d721d2d3",
+    "feedGuid": "",
     "title": "El deseo para 2025",
     "date": "2025-01-08",
     "source": "La Voz de El Espinar",
@@ -5288,6 +5519,7 @@
   },
   {
     "id": "news-7b35f5810872",
+    "feedGuid": "",
     "title": "El Espinar supera los 10.000 habitantes por primera vez en su historia",
     "date": "2025-01-07",
     "source": "La Voz de El Espinar",
@@ -5310,6 +5542,7 @@
   },
   {
     "id": "news-663cee0f5e1c",
+    "feedGuid": "",
     "title": "El Ayuntamiento de El Espinar aprueba un presupuesto de 13,3 millones para el 2025",
     "date": "2025-01-07",
     "source": "La Voz de El Espinar",
@@ -5332,6 +5565,7 @@
   },
   {
     "id": "news-2f098104b08b",
+    "feedGuid": "",
     "title": "Papá Noel en su visita al municipio",
     "date": "2024-12-25",
     "source": "La Voz de El Espinar",
@@ -5354,6 +5588,7 @@
   },
   {
     "id": "news-548e0a49e204",
+    "feedGuid": "",
     "title": "La Vuelta a España 2025 pasará por El Espinar",
     "date": "2024-12-20",
     "source": "La Voz de El Espinar",
@@ -5376,6 +5611,7 @@
   },
   {
     "id": "news-d2c8d8e8af44",
+    "feedGuid": "",
     "title": "David Santos: “Gracias a mi hermana estoy bien ahora”",
     "date": "2024-12-04",
     "source": "La Voz de El Espinar",
@@ -5398,6 +5634,7 @@
   },
   {
     "id": "news-291488141471",
+    "feedGuid": "",
     "title": "Enrique, el frutero",
     "date": "2024-12-04",
     "source": "La Voz de El Espinar",
@@ -5420,6 +5657,7 @@
   },
   {
     "id": "news-ef2a6006eb54",
+    "feedGuid": "",
     "title": "Eliana Gutiérrez presenta el sábado 7 de diciembre “Martín multitarea»",
     "date": "2024-12-03",
     "source": "La Voz de El Espinar",
@@ -5444,6 +5682,7 @@
   },
   {
     "id": "news-d40fd58d7b23",
+    "feedGuid": "",
     "title": "El grupo de Tejedoras decora 6 zonas de La Estación con sus adornos navideños",
     "date": "2024-12-02",
     "source": "La Voz de El Espinar",
@@ -5466,6 +5705,7 @@
   },
   {
     "id": "news-d60819e64fb3",
+    "feedGuid": "",
     "title": "El relato de los espinariegos desplazados hasta las zonas afectadas por la DANA",
     "date": "2024-12-01",
     "source": "La Voz de El Espinar",
@@ -5488,6 +5728,7 @@
   },
   {
     "id": "news-5d58c43942c9",
+    "feedGuid": "",
     "title": "Hallado el cuerpo sin vida de Teodoro González",
     "date": "2024-11-11",
     "source": "La Voz de El Espinar",
@@ -5510,6 +5751,7 @@
   },
   {
     "id": "news-5ea598e8a985",
+    "feedGuid": "",
     "title": "“Relatos de la Plaza de El Espinar”",
     "date": "2024-11-04",
     "source": "La Voz de El Espinar",
@@ -5532,6 +5774,7 @@
   },
   {
     "id": "news-831dac14beb5",
+    "feedGuid": "",
     "title": "“Empezamos a ver las ventajas después de las obras”",
     "date": "2024-11-04",
     "source": "La Voz de El Espinar",
@@ -5554,6 +5797,7 @@
   },
   {
     "id": "news-1aec9e082468",
+    "feedGuid": "",
     "title": "Programa de fiestas en honor a San Rafael Arcángel",
     "date": "2024-09-24",
     "source": "La Voz de El Espinar",
@@ -5576,6 +5820,7 @@
   },
   {
     "id": "news-8c4000d93356",
+    "feedGuid": "",
     "title": "El Drink Team cumple 25 años",
     "date": "2024-09-06",
     "source": "La Voz de El Espinar",
@@ -5598,6 +5843,7 @@
   },
   {
     "id": "news-34e426e79c09",
+    "feedGuid": "",
     "title": "Repaso del verano y programación de otoño de la Rondalla",
     "date": "2024-09-05",
     "source": "La Voz de El Espinar",
@@ -5620,6 +5866,7 @@
   },
   {
     "id": "news-dcb575b5ef2a",
+    "feedGuid": "",
     "title": "Programa de Fiestas de El Espinar 2024",
     "date": "2024-09-02",
     "source": "La Voz de El Espinar",
@@ -5642,6 +5889,7 @@
   },
   {
     "id": "news-6c8d5ef167b2",
+    "feedGuid": "",
     "title": "Fallece ahogada una menor de 15 años en el pantano de Los Ángeles de San Rafael",
     "date": "2024-08-23",
     "source": "La Voz de El Espinar",
@@ -5666,6 +5914,7 @@
   },
   {
     "id": "news-d118301e1434",
+    "feedGuid": "",
     "title": "Las obras en la pasarela de Los Ángeles obligan al corte de la carretera la noche del 27 al 28 de agosto",
     "date": "2024-08-23",
     "source": "La Voz de El Espinar",
@@ -5690,6 +5939,7 @@
   },
   {
     "id": "news-66fa9ab3f57b",
+    "feedGuid": "",
     "title": "Desfile de Cabezudos de las Fiestas de Los Ángeles de San Rafael 2024",
     "date": "2024-08-22",
     "source": "La Voz de El Espinar",
@@ -5714,6 +5964,7 @@
   },
   {
     "id": "news-dc48ea63cfbc",
+    "feedGuid": "",
     "title": "Programa de Fiestas de Los Ángeles de San Rafael",
     "date": "2024-08-20",
     "source": "La Voz de El Espinar",
@@ -5738,6 +5989,7 @@
   },
   {
     "id": "news-27c91c699066",
+    "feedGuid": "",
     "title": "Controlado y extinguido un incendio en dos parcelas de Los Ángeles de San Rafael",
     "date": "2024-08-10",
     "source": "La Voz de El Espinar",
@@ -5762,6 +6014,7 @@
   },
   {
     "id": "news-9493f40b824c",
+    "feedGuid": "",
     "title": "El municipio triplica su población durante el periodo estival",
     "date": "2024-08-05",
     "source": "La Voz de El Espinar",
@@ -5784,6 +6037,7 @@
   },
   {
     "id": "news-8f262e9e4536",
+    "feedGuid": "",
     "title": "Programa de Fiestas de San Rafael 2024",
     "date": "2024-07-20",
     "source": "La Voz de El Espinar",
@@ -5806,6 +6060,7 @@
   },
   {
     "id": "news-739475c70e99",
+    "feedGuid": "",
     "title": "Calendario del verano 2024 en El Espinar",
     "date": "2024-07-04",
     "source": "La Voz de El Espinar",
@@ -5828,6 +6083,7 @@
   },
   {
     "id": "news-de6d97d10db8",
+    "feedGuid": "",
     "title": "Tres detenidos por la estafa en la venta de un coche a un vecino de Los Ángeles de San Rafael",
     "date": "2024-07-02",
     "source": "La Voz de El Espinar",
@@ -5852,6 +6108,7 @@
   },
   {
     "id": "news-7bb47d2f2304",
+    "feedGuid": "",
     "title": "Controlado un conato de incendio en Los Ángeles de San Rafael",
     "date": "2024-06-07",
     "source": "La Voz de El Espinar",
@@ -5876,6 +6133,7 @@
   },
   {
     "id": "news-998a7bd63b33",
+    "feedGuid": "",
     "title": "La AP-6 se cortará al tráfico la noche del 4 al 5 de junio por la realización de un simulacro",
     "date": "2024-05-31",
     "source": "La Voz de El Espinar",
@@ -5898,6 +6156,7 @@
   },
   {
     "id": "news-788c170ed176",
+    "feedGuid": "",
     "title": "Transportes mejorará el acceso desde la N-603 al centro de conservación de carreteras de San Rafael",
     "date": "2024-05-10",
     "source": "La Voz de El Espinar",
@@ -5923,6 +6182,7 @@
   },
   {
     "id": "news-0022ad832715",
+    "feedGuid": "",
     "title": "Sale a licitación la mejora y ordenación de La Panera con un presupuesto de 150.000 euros",
     "date": "2024-05-08",
     "source": "La Voz de El Espinar",
@@ -5945,6 +6205,7 @@
   },
   {
     "id": "news-80c34816051e",
+    "feedGuid": "",
     "title": "El CD Jabalines se desvincula de las actividades que realizaba con la Federación de Baloncesto de Castilla y León",
     "date": "2024-05-03",
     "source": "La Voz de El Espinar",
@@ -5967,6 +6228,7 @@
   },
   {
     "id": "news-4fd472501a11",
+    "feedGuid": "",
     "title": "La Selección Española de Fútbol Femenina Sub-14 entrena en Los Ángeles hasta el jueves 25",
     "date": "2024-04-22",
     "source": "La Voz de El Espinar",
@@ -5989,6 +6251,7 @@
   },
   {
     "id": "news-a738ded9d901",
+    "feedGuid": "",
     "title": "El inicio de las obras en un puente de la N-603 a la altura de Los Ángeles de San Rafael implicará afecciones al tráfico",
     "date": "2024-04-06",
     "source": "La Voz de El Espinar",
@@ -6014,6 +6277,7 @@
   },
   {
     "id": "news-c06b51103cf7",
+    "feedGuid": "",
     "title": "Natalia Roca, la primera árbitra de baloncesto de nuestro municipio",
     "date": "2024-03-13",
     "source": "La Voz de El Espinar",
@@ -6036,6 +6300,7 @@
   },
   {
     "id": "news-6b17ea7e7687",
+    "feedGuid": "",
     "title": "Resultados del primer concurso de microrrelato de La Voz de El Espinar",
     "date": "2024-03-06",
     "source": "La Voz de El Espinar",
@@ -6058,6 +6323,7 @@
   },
   {
     "id": "news-b274340963ac",
+    "feedGuid": "",
     "title": "La Selección Española de Fútbol Femenina Sub-16 entrena en Los Ángeles de San Rafael",
     "date": "2024-02-11",
     "source": "La Voz de El Espinar",
@@ -6082,6 +6348,7 @@
   },
   {
     "id": "news-caadeab9ec6d",
+    "feedGuid": "",
     "title": "Primer certamen de microrrelato de La Voz de El Espinar",
     "date": "2024-02-09",
     "source": "La Voz de El Espinar",
@@ -6104,6 +6371,7 @@
   },
   {
     "id": "news-f1b41e5fa927",
+    "feedGuid": "",
     "title": "La Plataforma “Solución Travesía de San Rafael” no descarta movilizaciones en las calles",
     "date": "2024-02-08",
     "source": "La Voz de El Espinar",
@@ -6126,6 +6394,7 @@
   },
   {
     "id": "news-89c0af4f7815",
+    "feedGuid": "",
     "title": "Se acerca la festividad de Santa Águeda en El Espinar",
     "date": "2024-02-01",
     "source": "La Voz de El Espinar",
@@ -6148,6 +6417,7 @@
   },
   {
     "id": "news-0b79b9fc095b",
+    "feedGuid": "",
     "title": "Aprobado un presupuesto de 14,7 millones para el 2024, el más alto de la historia del municipio",
     "date": "2023-12-30",
     "source": "La Voz de El Espinar",
@@ -6170,6 +6440,7 @@
   },
   {
     "id": "news-43fee1b25c07",
+    "feedGuid": "",
     "title": "Accidente en el Portachuelo",
     "date": "2023-12-20",
     "source": "La Voz de El Espinar",
@@ -6195,6 +6466,7 @@
   },
   {
     "id": "news-d58b3850c766",
+    "feedGuid": "",
     "title": "Detenidos cuatro vecinos de Los Ángeles de San Rafael por un presunto caso de tráfico de drogas",
     "date": "2023-12-14",
     "source": "La Voz de El Espinar",
@@ -6220,6 +6492,7 @@
   },
   {
     "id": "news-ea3d852f7994",
+    "feedGuid": "",
     "title": "Fiestas de Los Ángeles de San Rafael 2023",
     "date": "2023-12-14",
     "source": "La Voz de El Espinar",
@@ -6244,6 +6517,7 @@
   },
   {
     "id": "news-1f085a7bdb3d",
+    "feedGuid": "",
     "title": "Hallazgo de dos Águilas Imperiales fallecidas por electrocución con la ayuda de perros ecodetectores",
     "date": "2023-12-08",
     "source": "La Voz de El Espinar",
@@ -6266,6 +6540,7 @@
   },
   {
     "id": "news-7d9dc929667a",
+    "feedGuid": "",
     "title": "Finalizan los trabajos en el puente de la N-603",
     "date": "2023-12-05",
     "source": "La Voz de El Espinar",
@@ -6290,6 +6565,7 @@
   },
   {
     "id": "news-31308f2a70a3",
+    "feedGuid": "",
     "title": "La DGT activa el próximo lunes 4 diciembre un nuevo semáforo foto rojo en la N-VI en San Rafael",
     "date": "2023-11-28",
     "source": "La Voz de El Espinar",
@@ -6314,6 +6590,7 @@
   },
   {
     "id": "news-97ce4aa1630a",
+    "feedGuid": "",
     "title": "El líder de la banda juvenil desarticulada se había mudado recientemente a Los Ángeles de San Rafael",
     "date": "2023-07-13",
     "source": "La Voz de El Espinar",
@@ -6338,6 +6615,7 @@
   },
   {
     "id": "news-f1a9e9d78341",
+    "feedGuid": "",
     "title": "Cortada la carretera entre la rotonda del matadero y el cruce del Portachuelo",
     "date": "2023-07-11",
     "source": "La Voz de El Espinar",
@@ -6360,6 +6638,7 @@
   },
   {
     "id": "news-5589c299f5ea",
+    "feedGuid": "",
     "title": "Conoce las 8 candidaturas que se presentan a las elecciones municipales del 28 de mayo en El Espinar",
     "date": "2023-04-26",
     "source": "La Voz de El Espinar",
