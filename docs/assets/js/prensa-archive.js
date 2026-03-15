@@ -169,6 +169,9 @@
 
   async function init() {
     try {
+      if (window.LASRTheme && typeof window.LASRTheme.initThemeToggle === 'function') {
+        window.LASRTheme.initThemeToggle();
+      }
       await loadPressNews();
       setupFilters();
       applyCurrentFilters();
