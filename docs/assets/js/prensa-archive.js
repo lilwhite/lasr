@@ -113,7 +113,8 @@
 
   function applyCurrentFilters() {
     const filters = readFilters();
-    const baseItems = filters.source ? allNews : archiveNews;
+    const hasNeutralFilters = !filters.source && !filters.category && !filters.year && !filters.query;
+    const baseItems = hasNeutralFilters ? archiveNews : allNews;
     const filtered = window.PressUtils.applyFilters(baseItems, filters);
     renderList(filtered);
   }
