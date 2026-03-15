@@ -217,7 +217,7 @@ Ver `docs/DEPLOY.md` para instrucciones detalladas.
 ## Notas para agentes
 
 - Este documento sirve como base para generar visualizaciones (diagramas, infografías, mapas de actores, líneas temporales)
-- Mantener consistencia terminológica: EUCC, TSJCyL, Tribunal Supremo, Ayuntamiento de El Espinar
+- Mantener consistencia terminológica: EUC, TSJCyL, Tribunal Supremo, Ayuntamiento de El Espinar
 - Actualizar la línea temporal conforme evolucione la situación
 - No inventar hechos no presentes en fuentes verificables
 - Separar claramente opiniones/hechos de interpretaciones
