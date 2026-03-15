@@ -999,6 +999,30 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--color-primary-dark);
 }
 
+.press-meta-type {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.16rem 0.52rem;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: var(--font-weight-semibold);
+}
+
+.press-meta-type-local {
+    background-color: rgba(45, 90, 90, 0.12);
+    color: #2d5a5a;
+}
+
+.press-meta-type-provincial {
+    background-color: rgba(31, 88, 104, 0.12);
+    color: #1f5868;
+}
+
+.press-meta-type-institucional {
+    background-color: rgba(112, 89, 62, 0.14);
+    color: #70593e;
+}
+
 .press-row-title {
     font-size: var(--font-size-xl);
     color: var(--color-text);
