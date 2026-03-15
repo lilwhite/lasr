@@ -311,6 +311,28 @@
         ]
       },
       {
+        "titulo": "Documentación de la urbanización",
+        "descripcion": "Documentos propios que regulan la organización, conservación y funcionamiento de la urbanización Los Ángeles de San Rafael.",
+        "items": [
+          {
+            "titulo": "Estatutos de la Comunidad de Propietarios",
+            "descripcion": "Normativa interna que regula la organización, derechos y obligaciones de los propietarios dentro de la urbanización.",
+            "tipo": "documento",
+            "url": "/documentacion-relevante/estatutos-comunidad.pdf",
+            "fecha": "Documento base de funcionamiento de la comunidad.",
+            "cta": "Ver estatutos"
+          },
+          {
+            "titulo": "Estatutos de la Entidad Urbanística de Conservación (EUC)",
+            "descripcion": "Reglamento que regula la entidad encargada de la conservación y mantenimiento urbanístico de la urbanización.",
+            "tipo": "documento",
+            "url": "/documentacion-relevante/estatutos-euc.pdf",
+            "fecha": "Entidad jurídica encargada de la conservación de infraestructuras.",
+            "cta": "Ver estatutos"
+          }
+        ]
+      },
+      {
         "key": "prensa",
         "titulo": "Prensa",
         "descripcion": "Cobertura periodística relevante para seguimiento vecinal y urbanístico.",
