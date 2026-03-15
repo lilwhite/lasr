@@ -1453,6 +1453,19 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: var(--font-weight-medium);
 }
 
+.update-card {
+    max-width: 840px;
+    margin: 0 auto;
+}
+
+.release-list {
+    margin: var(--space-sm) 0 0;
+    padding-left: 1.2rem;
+    color: var(--color-text-light);
+    display: grid;
+    gap: 0.4rem;
+}
+
 /* ============================================
    Footer
    ============================================ */

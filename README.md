@@ -79,6 +79,17 @@ El portal se despliega automáticamente mediante **GitHub Actions**:
 2. Las ramas de trabajo y PRs hacia `dev` ejecutan validaciones sin publicar
 3. Solo `main` publica la web pública final en GitHub Pages
 
+### Releases y changelog automático
+
+Cada push a `main` ejecuta el workflow de release automático:
+
+1. Calcula la siguiente versión semántica (incremento patch sobre la última `v*`)
+2. Actualiza `CHANGELOG.md`
+3. Actualiza `docs/assets/build-meta.json` (versión y fecha)
+4. Publica tag y GitHub Release con notas en castellano
+
+Fuente de verdad de cambios: **`CHANGELOG.md`**.
+
 ### Activar GitHub Pages
 
 ```
