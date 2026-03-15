@@ -56,7 +56,7 @@
         "contenido": "El Ayuntamiento no asume los servicios públicos correspondientes. Los vecinos pagan impuestos municipales (IBI, basura) pero no reciben los mismos servicios que el casco urbano."
       },
       {
-        "titulo": "EUCC",
+        "titulo": "EUC",
         "icono": "document",
         "contenido": "La Entidad Urbanística de Conservación continúa asumiendo funciones de conservación y servicios. Esta situación se mantiene en el tiempo y genera dudas sobre su encaje como solución prolongada."
       },
@@ -88,12 +88,12 @@
       },
       {
         "fecha": "2013-2017",
-        "titulo": "Período EUCC",
+        "titulo": "Período EUC",
         "descripcion": "Período posterior al fallo en el que continuó la gestión de conservación mediante entidades de propietarios y acuerdos administrativos."
       },
       {
         "fecha": "2017",
-        "titulo": "Fin del período EUCC",
+        "titulo": "Fin del período EUC",
         "descripcion": "Debía completarse la recepción municipal. La situación no se normaliza."
       },
       {
@@ -165,7 +165,7 @@
         "estado": "pendiente"
       },
       {
-        "titulo": "Disolución EUCC",
+        "titulo": "Disolución EUC",
         "descripcion": "La continuidad prolongada de la Entidad Urbanística de Conservación sigue siendo una cuestión discutida en relación con la recepción municipal.",
         "estado": "pendiente"
       },
@@ -236,7 +236,7 @@
         "icono": "home",
         "opciones": [
           "Convocar asamblea de propietarios",
-          "Solicitar acceso a documentación de la EUCC",
+          "Solicitar acceso a documentación de la EUC",
           "Crear plataforma vecinal organizada",
           "Compartir costes jurídicos"
         ]
@@ -268,7 +268,7 @@
           },
           {
             "titulo": "Régimen de Entidades Urbanísticas de Conservación",
-            "descripcion": "Referencia normativa sobre funciones y límites de las EUCC.",
+            "descripcion": "Referencia normativa sobre funciones y límites de las EUC.",
             "tipo": "normativa",
             "url": "",
             "fecha": "Pendiente de incorporar"
@@ -321,7 +321,7 @@
         "respuesta": "Sí. Puedes informarte, participar en la organización vecinal, compartir información con otros vecinos, y considerar acciones colectivas. También puedes contactar con representantes políticos para exigir soluciones."
       },
       {
-        "pregunta": "¿Qué es la EUCC?",
+        "pregunta": "¿Qué es la EUC?",
         "respuesta": "La Entidad Urbanística de Conservación es una figura jurídica prevista en la normativa urbanística para asumir tareas de conservación. Según el criterio recogido en la sentencia, no debe operar como sustitución permanente de las responsabilidades municipales."
       },
       {

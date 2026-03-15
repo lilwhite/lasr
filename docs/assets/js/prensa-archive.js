@@ -72,12 +72,16 @@
       return `
         <article class="press-row">
           <div class="press-row-main">
-            <p class="press-row-meta">${date} · ${source} · ${category}</p>
+            <div class="press-row-meta" aria-label="Metadatos de la noticia">
+              <span class="press-meta-date">${date}</span>
+              <span class="press-meta-chip">${source}</span>
+              <span class="press-meta-chip">${category}</span>
+            </div>
             <h3 class="press-row-title">${title}</h3>
             ${excerpt ? `<p class="press-row-excerpt">${excerpt}</p>` : ''}
           </div>
           <div class="press-row-action">
-            <a href="${escapeHtml(safeUrl)}" class="doc-link" target="_blank" rel="noopener noreferrer">Ver fuente</a>
+            <a href="${escapeHtml(safeUrl)}" class="press-source-link" target="_blank" rel="noopener noreferrer">Ver fuente</a>
           </div>
         </article>
       `;
