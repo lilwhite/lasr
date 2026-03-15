@@ -16,6 +16,7 @@
 
     <title>Archivo de prensa - Los Ángeles de San Rafael</title>
 
+    <script src="../assets/js/theme-init.js"></script>
     <link rel="stylesheet" href="../assets/css/styles.css">
 
     <!-- Google tag (gtag.js) -->
@@ -28,9 +29,15 @@
             <a href="../index.html" class="logo">
                 <span class="logo-text">LASR</span>
             </a>
-            <nav class="doc-top-actions" aria-label="Acciones">
-                <a href="../index.html#documentos" class="btn btn-secondary doc-back-btn">Volver al portal</a>
-            </nav>
+            <div class="header-controls">
+                <button class="theme-toggle" data-theme-toggle type="button" aria-label="Cambiar tema" aria-pressed="false">
+                    <span class="theme-toggle-icon" aria-hidden="true">☀️</span>
+                    <span class="theme-toggle-label">Claro</span>
+                </button>
+                <nav class="doc-top-actions" aria-label="Acciones">
+                    <a href="../index.html#documentos" class="btn btn-secondary doc-back-btn">Volver al portal</a>
+                </nav>
+            </div>
         </div>
     </header>
 
@@ -105,6 +112,7 @@
         </div>
     </footer>
 
+    <script src="../assets/js/theme.js"></script>
     <script src="../assets/js/press-utils.js"></script>
     <script src="../assets/js/prensa-archive.js"></script>
 </body>
