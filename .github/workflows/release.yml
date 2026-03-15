@@ -50,7 +50,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add CHANGELOG.md docs/assets/build-meta.json docs/assets/content.json release-notes.md release-version.txt
+          git add CHANGELOG.md docs/CHANGELOG.md docs/assets/build-meta.json docs/assets/content.json release-notes.md release-version.txt
           git commit -m "chore(release): actualizar changelog y metadata"
           git push origin main
 
