@@ -11,6 +11,7 @@ from typing import Dict, List, Tuple
 
 ROOT = Path(__file__).resolve().parents[1]
 CHANGELOG_PATH = ROOT / "CHANGELOG.md"
+DOCS_CHANGELOG_PATH = ROOT / "docs/CHANGELOG.md"
 BUILD_META_PATH = ROOT / "docs/assets/build-meta.json"
 CONTENT_PATH = ROOT / "docs/assets/content.json"
 
@@ -100,6 +101,14 @@ def update_changelog(new_version: str, date_iso: str, changes: List[str]) -> Non
     CHANGELOG_PATH.write_text(updated, encoding="utf-8")
 
 
+def sync_docs_changelog() -> None:
+    if not CHANGELOG_PATH.exists():
+        return
+    DOCS_CHANGELOG_PATH.write_text(
+        CHANGELOG_PATH.read_text(encoding="utf-8"), encoding="utf-8"
+    )
+
+
 def update_build_meta(new_version: str, date_iso: str) -> None:
     updated_date = datetime.fromisoformat(date_iso).strftime("%d/%m/%Y")
     payload = {
@@ -160,6 +169,7 @@ def main() -> None:
     changes = summarize_prs(prs)
 
     update_changelog(new_version, today, changes)
+    sync_docs_changelog()
     update_build_meta(new_version, today)
     update_content_release_section(new_version, today, changes)
 
