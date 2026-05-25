@@ -1,19 +1,34 @@
 /**
  * Documentacion - Renderizador Markdown
+ * Mantiene los .md como fuente de verdad.
  */
 
 (function () {
   'use strict';
 
   const documents = [
-    { file: 'documentacion_relevante.md', slug: 'documentacion-relevante', title: 'Documentacion relevante', category: 'referencia', order: 0 },
-    { file: 'CHANGELOG.md', slug: 'actualizaciones', title: 'Historial de cambios', category: 'portal', order: 99, hideInSidebar: true }
+    { file: 'urbanizacion_los_angeles_san_rafael.md', slug: 'documento-principal', title: 'Documento principal', category: 'principal', order: 0 },
+    { file: 'contexto_general.md', slug: 'contexto-general', title: 'Contexto general', category: 'analisis', order: 1 },
+    { file: 'timeline_conflicto.md', slug: 'linea-temporal', title: 'Linea temporal', category: 'cronologia', order: 2 },
+    { file: 'problemas_detectados.md', slug: 'problemas-detectados', title: 'Problemas detectados', category: 'analisis', order: 3 },
+    { file: 'actores.md', slug: 'actores', title: 'Actores', category: 'referencia', order: 4 },
+    { file: 'opciones_legales.md', slug: 'opciones-legales', title: 'Opciones legales', category: 'legal', order: 5 },
+    { file: 'preguntas_abiertas.md', slug: 'preguntas-abiertas', title: 'Preguntas abiertas', category: 'analisis', order: 6 },
+    { file: 'documentacion_relevante.md', slug: 'documentacion-relevante', title: 'Documentacion relevante', category: 'referencia', order: 7 }
   ];
 
-  const routeAliases = {};
+  const routeAliases = {
+    'cronologia': 'linea-temporal',
+    'recepcion-urbanizacion': 'contexto-general',
+    'sentencia-tsjcyl': 'opciones-legales'
+  };
 
   function getRootPrefix() {
     return document.body.dataset.docRoot || '.';
+  }
+
+  function getRepoSourceBase() {
+    return document.body.dataset.repoBase || 'https://github.com/tu-usuario/tu-repo/blob/main/docs/';
   }
 
   function getSlugFromPage() {
@@ -28,83 +43,11 @@
     const maybeSlug = parts[parts.length - 1];
     if (maybeSlug && maybeSlug !== 'doc.html') return maybeSlug;
 
-    return 'documentacion-relevante';
+    return 'documento-principal';
   }
 
   function canonicalSlug(slug) {
     return routeAliases[slug] || slug;
-  }
-
-  function escapeHtml(text) {
-    const div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
-  }
-
-  function sanitizeUrl(url, options = {}) {
-    if (typeof url !== 'string') return '';
-    const trimmed = url.trim();
-    if (!trimmed) return '';
-
-    const allowRelative = options.allowRelative === true;
-    const allowHash = options.allowHash === true;
-    const allowMailto = options.allowMailto === true;
-
-    if (allowHash && trimmed.startsWith('#')) return trimmed;
-
-    if (allowRelative && !trimmed.includes(':') && !trimmed.startsWith('//')) {
-      return trimmed;
-    }
-
-    try {
-      const parsed = new URL(trimmed, window.location.origin);
-      if (parsed.protocol === 'http:' || parsed.protocol === 'https:') {
-        return parsed.href;
-      }
-      if (allowMailto && parsed.protocol === 'mailto:') {
-        return parsed.href;
-      }
-    } catch (error) {
-      return '';
-    }
-
-    return '';
-  }
-
-  function sanitizeRenderedHtml(html) {
-    const template = document.createElement('template');
-    template.innerHTML = html;
-
-    const blockedSelectors = 'script, iframe, object, embed, form, input, button, link, meta, base';
-    template.content.querySelectorAll(blockedSelectors).forEach((node) => node.remove());
-
-    const nodes = template.content.querySelectorAll('*');
-    nodes.forEach((node) => {
-      Array.from(node.attributes).forEach((attr) => {
-        const name = attr.name.toLowerCase();
-        const value = attr.value || '';
-
-        if (name.startsWith('on')) {
-          node.removeAttribute(attr.name);
-          return;
-        }
-
-        if (name === 'href' || name === 'src' || name === 'xlink:href') {
-          const safe = sanitizeUrl(value, { allowRelative: true, allowHash: true, allowMailto: true });
-          if (!safe) {
-            node.removeAttribute(attr.name);
-            return;
-          }
-          node.setAttribute(attr.name, safe);
-        }
-      });
-
-      if (node.tagName === 'A' && node.getAttribute('target') === '_blank') {
-        node.setAttribute('rel', 'noopener noreferrer');
-      }
-    });
-
-    return template.innerHTML;
   }
 
   function parseFrontmatter(content) {
@@ -139,23 +82,8 @@
     document.body.innerHTML = `
       <header class="header doc-header-top" id="header">
         <div class="header-container">
-          <div class="header-branding">
-            <button class="theme-toggle" data-theme-toggle type="button" aria-label="Activar modo oscuro" aria-pressed="false" title="Cambiar tema">
-              <span class="theme-toggle-track" aria-hidden="true">
-                <span class="theme-toggle-icon theme-toggle-icon-sun">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.4"/><path d="M12 2v2.4M12 19.6V22M4.93 4.93l1.7 1.7M17.37 17.37l1.7 1.7M2 12h2.4M19.6 12H22M4.93 19.07l1.7-1.7M17.37 6.63l1.7-1.7"/></svg>
-                </span>
-                <span class="theme-toggle-icon theme-toggle-icon-moon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
-                </span>
-                <span class="theme-toggle-thumb"></span>
-              </span>
-            </button>
-            <a href="${getRootPrefix()}/index.html" class="logo"><span class="logo-text">LASR</span></a>
-          </div>
-          <div class="header-controls">
-            <nav class="doc-top-actions" aria-label="Acciones"><a class="btn btn-secondary doc-back-btn" href="${getRootPrefix()}/index.html#documentos">Volver al portal</a></nav>
-          </div>
+          <a href="${getRootPrefix()}/index.html" class="logo"><span class="logo-text">LASR</span></a>
+          <nav class="doc-top-actions" aria-label="Acciones"><a class="btn btn-secondary doc-back-btn" href="${getRootPrefix()}/index.html#documentacion">Volver al portal</a></nav>
         </div>
       </header>
       <main class="doc-page">
@@ -181,21 +109,12 @@
             </header>
             <div class="doc-body" id="docBody"></div>
             <section class="doc-related" id="docRelated"></section>
+            <footer class="doc-footer">
+              <a href="#" class="doc-source" id="docSource" target="_blank" rel="noopener">Ver archivo fuente en GitHub</a>
+            </footer>
           </article>
         </div>
       </main>
-      <footer class="footer">
-        <div class="container">
-          <p class="footer-text"><strong>Los Angeles de San Rafael</strong> — Portal informativo vecinal</p>
-          <p class="footer-disclaimer">Este portal tiene caracter informativo y divulgativo. No constituye asesoramiento juridico.</p>
-          <p class="footer-links">
-            <a id="footerRepoLink" href="https://github.com/lilwhite/lasr" target="_blank" rel="noopener noreferrer">Ver repositorio</a>
-            <span>·</span>
-            <a id="footerLicenseLink" href="https://github.com/lilwhite/lasr/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">Licencia MIT</a>
-          </p>
-          <p class="footer-copy">© 2026 — Informacion actualizada a <span id="lastUpdatedDate">10/03/2026</span></p>
-        </div>
-      </footer>
     `;
   }
 
@@ -206,46 +125,12 @@
       date: document.getElementById('docDate'),
       category: document.getElementById('docCategory'),
       body: document.getElementById('docBody'),
+      source: document.getElementById('docSource'),
       sidebar: document.getElementById('sidebarNav'),
       breadcrumb: document.getElementById('breadcrumbTitle'),
       toc: document.getElementById('sidebarToc'),
       related: document.getElementById('docRelated')
     };
-  }
-
-  async function updateFooterMeta() {
-    const root = getRootPrefix();
-    const repoLink = document.getElementById('footerRepoLink');
-    const licenseLink = document.getElementById('footerLicenseLink');
-    const dateNode = document.getElementById('lastUpdatedDate');
-
-    try {
-        const cfgRes = await fetch(`${root}/assets/config.json`);
-        if (cfgRes.ok) {
-          const cfg = await cfgRes.json();
-          if (repoLink && cfg?.project?.repositoryUrl) {
-            const safeRepoUrl = sanitizeUrl(cfg.project.repositoryUrl);
-            if (safeRepoUrl) repoLink.href = safeRepoUrl;
-          }
-          if (licenseLink && cfg?.project?.licenseUrl) {
-            const safeLicenseUrl = sanitizeUrl(cfg.project.licenseUrl);
-            if (safeLicenseUrl) licenseLink.href = safeLicenseUrl;
-          }
-          if (licenseLink && cfg?.project?.license) licenseLink.textContent = `Licencia ${cfg.project.license}`;
-        }
-    } catch (e) {
-      console.warn('No se pudo cargar config del sitio', e);
-    }
-
-    try {
-      const metaRes = await fetch(`${root}/assets/build-meta.json`);
-      if (metaRes.ok) {
-        const meta = await metaRes.json();
-        if (dateNode && meta?.updatedDate) dateNode.textContent = meta.updatedDate;
-      }
-    } catch (e) {
-      console.warn('No se pudo cargar build-meta', e);
-    }
   }
 
   function linkForSlug(slug) {
@@ -257,16 +142,15 @@
   function renderSidebar(elements, currentSlug) {
     const sorted = [...documents].sort((a, b) => a.order - b.order);
     elements.sidebar.innerHTML = sorted
-      .filter((doc) => !doc.hideInSidebar)
       .map((doc) => {
         const active = doc.slug === currentSlug ? 'active' : '';
-        return `<li><a class="sidebar-link ${active}" href="${linkForSlug(doc.slug)}">${escapeHtml(doc.title)}</a></li>`;
+        return `<li><a class="sidebar-link ${active}" href="${linkForSlug(doc.slug)}">${doc.title}</a></li>`;
       })
       .join('');
   }
 
   function addHeadingAnchors(container) {
-    const headings = container.querySelectorAll('h2, h3, h4');
+    const headings = container.querySelectorAll('h2, h3');
     headings.forEach((h, idx) => {
       if (!h.id) {
         const slug = h.textContent.toLowerCase().replace(/[^a-z0-9\s-]/g, '').trim().replace(/\s+/g, '-');
@@ -276,48 +160,6 @@
     return headings;
   }
 
-  function buildTocTree(headings) {
-    const root = { level: 1, children: [] };
-    const stack = [root];
-
-    headings.forEach((heading) => {
-      const level = Number(heading.tagName.substring(1));
-      const node = {
-        id: heading.id,
-        title: (heading.textContent || '').trim(),
-        level,
-        children: []
-      };
-
-      while (stack.length > 1 && stack[stack.length - 1].level >= level) {
-        stack.pop();
-      }
-
-      stack[stack.length - 1].children.push(node);
-      stack.push(node);
-    });
-
-    return root.children;
-  }
-
-  function renderTocList(nodes, depth) {
-    if (!nodes.length) return '';
-    return `
-      <ul class="doc-toc-list depth-${depth}">
-        ${nodes
-          .map(
-            (node) => `
-              <li class="doc-toc-item level-${node.level}">
-                <a class="doc-toc-link" href="#${node.id}">${escapeHtml(node.title)}</a>
-                ${renderTocList(node.children, depth + 1)}
-              </li>
-            `
-          )
-          .join('')}
-      </ul>
-    `;
-  }
-
   function renderToc(elements) {
     const headings = addHeadingAnchors(elements.body);
     if (!headings.length) {
@@ -325,13 +167,11 @@
       return;
     }
 
-    const tocTree = buildTocTree(Array.from(headings));
-    elements.toc.innerHTML = `
-      <nav class="doc-toc" aria-label="Tabla de contenidos">
-        <h3 class="doc-toc-title">Índice</h3>
-        ${renderTocList(tocTree, 1)}
-      </nav>
-    `;
+    const links = Array.from(headings)
+      .map((h) => `<li><a href="#${h.id}">${h.textContent}</a></li>`)
+      .join('');
+
+    elements.toc.innerHTML = `<h3 class="sidebar-title">Indice</h3><ul class="sidebar-nav">${links}</ul>`;
   }
 
   function renderRelated(elements, currentDoc) {
@@ -349,74 +189,14 @@
       <h3 class="sidebar-title">Documentos relacionados</h3>
       <div class="cards">
         ${related
-          .map((d) => `<a class="doc-card" href="${linkForSlug(d.slug)}"><h4 class="doc-title">${escapeHtml(d.title)}</h4><p class="doc-description">${escapeHtml(d.category)}</p></a>`)
+          .map((d) => `<a class="doc-card" href="${linkForSlug(d.slug)}"><h4 class="doc-title">${d.title}</h4><p class="doc-description">${d.category}</p></a>`)
           .join('')}
       </div>
     `;
   }
 
-  function sanitizeTableLinks(table) {
-    const links = table.querySelectorAll('a[href]');
-    links.forEach((link) => {
-      const href = link.getAttribute('href') || '';
-      const text = (link.textContent || '').trim();
-      const looksLikeRawUrl = /^https?:\/\//i.test(text);
-      const longRawText = text.length > 45;
-
-      if ((looksLikeRawUrl || text === href) && longRawText) {
-        link.dataset.originalText = text;
-        link.textContent = 'Abrir fuente';
-        link.classList.add('table-link-clean');
-      }
-
-      if (href.length > 60) {
-        link.classList.add('table-link-long');
-      }
-    });
-  }
-
-  function highlightUrlColumn(table) {
-    const headers = Array.from(table.querySelectorAll('thead th'));
-    if (!headers.length) return;
-
-    const urlIndex = headers.findIndex((th) => /^(url|enlace)$/i.test((th.textContent || '').trim()));
-    if (urlIndex === -1) return;
-
-    table.classList.add('has-url-column');
-    const rows = table.querySelectorAll('tr');
-    rows.forEach((row) => {
-      const cells = row.querySelectorAll('th, td');
-      if (cells[urlIndex]) {
-        cells[urlIndex].classList.add('url-column-cell');
-      }
-    });
-  }
-
-  function enhanceTables(container) {
-    const tables = container.querySelectorAll('table');
-    tables.forEach((table) => {
-      table.classList.add('markdown-table');
-      sanitizeTableLinks(table);
-      highlightUrlColumn(table);
-
-      if (!table.parentElement.classList.contains('table-container')) {
-        const wrapper = document.createElement('div');
-        wrapper.className = 'table-container';
-        table.parentNode.insertBefore(wrapper, table);
-        wrapper.appendChild(table);
-      }
-    });
-  }
-
-  function buildDocumentPath(root, currentDoc) {
-    return `${root}/${currentDoc.file}`;
-  }
-
   async function load() {
     ensureShell();
-    if (window.LASRTheme && typeof window.LASRTheme.initThemeToggle === 'function') {
-      window.LASRTheme.initThemeToggle();
-    }
     const elements = getElements();
 
     const slug = canonicalSlug(getSlugFromPage());
@@ -424,56 +204,36 @@
     const root = getRootPrefix();
 
     try {
-      const docPath = buildDocumentPath(root, currentDoc);
-      const response = await fetch(docPath);
-      if (!response.ok) {
-        throw new Error(`Documento no encontrado (${response.status}): ${docPath}`);
-      }
+      const response = await fetch(`${root}/${currentDoc.file}`);
+      if (!response.ok) throw new Error('Documento no encontrado');
 
       const raw = await response.text();
       const parsed = parseFrontmatter(raw);
 
       const html = window.marked ? window.marked.parse(parsed.body) : parsed.body;
-      elements.body.innerHTML = sanitizeRenderedHtml(html);
-      enhanceTables(elements.body);
-
-      if (currentDoc.slug === 'actualizaciones') {
-        elements.body.classList.add('changelog-body');
-      }
+      elements.body.innerHTML = html;
 
       elements.title.textContent = parsed.frontmatter.title || currentDoc.title;
       elements.breadcrumb.textContent = parsed.frontmatter.title || currentDoc.title;
       elements.description.textContent = parsed.frontmatter.description || '';
       elements.date.textContent = formatDate(parsed.frontmatter.updated);
       elements.category.textContent = parsed.frontmatter.category || currentDoc.category;
+      elements.source.href = `${getRepoSourceBase()}${currentDoc.file}`;
+
       renderSidebar(elements, currentDoc.slug);
       renderToc(elements);
       renderRelated(elements, currentDoc);
 
       document.title = `${parsed.frontmatter.title || currentDoc.title} - Los Angeles de San Rafael`;
     } catch (err) {
-      const fallbackUrl = currentDoc.slug === 'actualizaciones' ? `${root}/CHANGELOG.md` : '';
-      elements.body.innerHTML = `
-        <div class="error">
-          <p><strong>No se pudo cargar este documento.</strong></p>
-          <p>Revisa la conexión o inténtalo de nuevo en unos minutos.</p>
-          ${fallbackUrl ? `<p><a href="${escapeHtml(fallbackUrl)}" target="_blank" rel="noopener noreferrer">Abrir versión de respaldo del historial</a></p>` : ''}
-        </div>
-      `;
+      elements.body.innerHTML = '<p class="error">Error al cargar el documento.</p>';
       console.error(err);
     }
   }
 
-  if (window.LASRTheme && typeof window.LASRTheme.applyTheme === 'function') {
-    window.LASRTheme.applyTheme(window.LASRTheme.preferredTheme());
-  }
-
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', async () => {
-      await load();
-      await updateFooterMeta();
-    });
+    document.addEventListener('DOMContentLoaded', load);
   } else {
-    load().then(updateFooterMeta);
+    load();
   }
 })();
