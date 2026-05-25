@@ -1,0 +1,51 @@
+name: Actualizar prensa
+
+on:
+  schedule:
+    # Cada día a las 07:00 UTC (09:00 hora peninsular)
+    - cron: '0 7 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fetch-prensa:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: dev
+
+      - name: Instalar dependencias Python
+        run: |
+          python3 -m pip install --quiet requests
+
+      - name: Ejecutar fetch de prensa
+        run: |
+          python3 scripts/prensa/fetch_press.py \
+            --config docs/data/prensa/sources.json \
+            --output docs/data/prensa/curated_news.json \
+            --timeout 15
+
+      - name: Comprobar si hay cambios
+        id: changes
+        run: |
+          if git diff --quiet docs/data/prensa/curated_news.json; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "Sin cambios en prensa, nada que commitear."
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "Cambios detectados en curated_news.json."
+          fi
+
+      - name: Commit y push a dev
+        if: steps.changes.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/data/prensa/curated_news.json
+          git commit -m "chore(prensa): actualización automática diaria $(date +'%Y-%m-%d')"
+          git push origin dev
