@@ -393,13 +393,13 @@
   },
   "portal": {
     "ultimas_actualizaciones": {
-      "version": "v1.1.4",
-      "fecha": "2026-05-25",
+      "version": "v1.1.5",
+      "fecha": "2026-05-26",
       "cambios": [
+        "chore(workflow): activar actualización automática diaria de prensa",
         "docs(prensa): actualizar archivo curado a mayo 2026",
         "docs(prensa): promocionar actualización del archivo curado",
-        "fix(ui): promover ajuste de badges de sentencia",
-        "chore(release): promover dev a main con mejoras de prensa y release"
+        "fix(ui): promover ajuste de badges de sentencia"
       ]
     }
   }
