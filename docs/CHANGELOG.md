@@ -4,6 +4,16 @@ Este archivo recoge los cambios relevantes publicados en `main`.
 
 Formato basado en versiones semánticas (`vMAJOR.MINOR.PATCH`).
 
+## [v1.1.5] - 2026-05-26
+
+### Resumen
+- chore(workflow): activar actualización automática diaria de prensa (#50)
+- docs(prensa): actualizar archivo curado a mayo 2026 (#48)
+- docs(prensa): promocionar actualización del archivo curado (#45)
+- fix(ui): promover ajuste de badges de sentencia (#43)
+- chore(release): promover dev a main con mejoras de prensa y release (#41)
+- chore(workflow): adopt dev-main workflow and local Docker validation (#17)
+
 ## [v1.1.4] - 2026-05-25
 
 ### Resumen
