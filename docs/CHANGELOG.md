@@ -4,6 +4,16 @@ Este archivo recoge los cambios relevantes publicados en `main`.
 
 Formato basado en versiones semánticas (`vMAJOR.MINOR.PATCH`).
 
+## [v1.1.7] - 2026-05-27
+
+### Resumen
+- chore(release): promover correcciones del buscador de parcelas v1.1.7 (#54)
+- chore(release): promover buscador de parcelas a producción v1.1.6 (#52)
+- chore(workflow): activar actualización automática diaria de prensa (#50)
+- docs(prensa): actualizar archivo curado a mayo 2026 (#48)
+- docs(prensa): promocionar actualización del archivo curado (#45)
+- fix(ui): promover ajuste de badges de sentencia (#43)
+
 ## [v1.1.6] - 2026-05-27
 
 ### Resumen
