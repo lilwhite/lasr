@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Buscador de parcelas catastrales — Los Ángeles de San Rafael, El Espinar (Segovia)">
+    <meta name="author" content="Portal vecinal Los Ángeles de San Rafael">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' https://www.googletagmanager.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://unpkg.com; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://unpkg.com https://*.tile.openstreetmap.org https://*.basemaps.cartocdn.com; frame-src 'none'; form-action 'self'">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="Permissions-Policy" content="geolocation=(), camera=(), microphone=()">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Buscador de Parcelas — Los Ángeles de San Rafael">
+    <meta property="og:description" content="Consulta y localiza en el mapa las 2.112 parcelas catastrales de la urbanización">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://lilwhite.github.io/lasr/parcelas/">
+
+    <title>Buscador de Parcelas — Los Ángeles de San Rafael</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%232D5A5A' width='100' height='100' rx='10'/%3E%3Ctext x='50' y='65' font-family='Arial' font-size='50' font-weight='bold' fill='white' text-anchor='middle'%3EL%3C/text%3E%3C/svg%3E">
+
+    <script src="../assets/js/theme-init.js"></script>
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7CKX4GC8L5"></script>
+    <script src="../assets/js/ga4.js"></script>
+
+    <style>
+        /* ── Layout buscador ── */
+        .parcelas-layout {
+            display: flex;
+            height: calc(100vh - var(--header-height) - var(--info-panel-h, 0px));
+            min-height: 400px;
+        }
+
+        .parcelas-panel {
+            width: 340px;
+            min-width: 260px;
+            display: flex;
+            flex-direction: column;
+            background: var(--color-surface);
+            border-right: 1px solid var(--color-border);
+            overflow: hidden;
+        }
+
+        .parcelas-search-box {
+            padding: 12px;
+            border-bottom: 1px solid var(--color-border-light);
+        }
+        .parcelas-search-box input {
+            width: 100%;
+            padding: 9px 12px;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            font-size: var(--font-size-sm);
+            font-family: var(--font-family);
+            background: var(--color-bg);
+            color: var(--color-text);
+            transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+        }
+        .parcelas-search-box input:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(45,90,90,0.12);
+        }
+        .parcelas-search-info {
+            font-size: var(--font-size-xs);
+            color: var(--color-text-muted);
+            margin-top: 6px;
+        }
+
+        .parcelas-results {
+            overflow-y: auto;
+            flex: 1;
+        }
+        .result-item {
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--color-border-light);
+            cursor: pointer;
+            transition: background var(--transition-fast);
+        }
+        .result-item:hover  { background: var(--color-surface-alt); }
+        .result-item.active {
+            background: var(--theme-overlay-primary-10);
+            border-left: 3px solid var(--color-primary);
+        }
+        .result-ref  { font-size: 0.7rem; font-family: monospace; color: var(--color-text-muted); }
+        .result-dir  { font-size: var(--font-size-sm); font-weight: var(--font-weight-medium); margin: 2px 0; color: var(--color-text); }
+        .result-area { font-size: var(--font-size-xs); color: var(--color-text-muted); }
+        .result-no   { padding: 24px; text-align: center; color: var(--color-text-muted); font-size: var(--font-size-sm); }
+
+        #parcelas-map { flex: 1; z-index: 0; }
+
+        /* Popup Leaflet */
+        .popup-ref  { font-size: 0.7rem; font-family: monospace; color: var(--color-text-muted); }
+        .popup-dir  { font-weight: var(--font-weight-semibold); margin: 4px 0 2px; font-size: var(--font-size-sm); }
+        .popup-area { font-size: var(--font-size-xs); color: var(--color-text-light); }
+        .popup-link {
+            display: inline-block;
+            margin-top: 6px;
+            font-size: var(--font-size-xs);
+            color: var(--color-primary);
+            text-decoration: none;
+        }
+        .popup-link:hover { text-decoration: underline; }
+
+        /* ── Panel informativo colapsable ── */
+        #info-panel {
+            background: var(--color-surface);
+            border-bottom: 2px solid var(--color-border);
+            font-size: var(--font-size-sm);
+            position: relative;
+            z-index: 10;
+        }
+        #info-tabs {
+            display: flex;
+            align-items: stretch;
+            border-bottom: 1px solid var(--color-border-light);
+            overflow-x: auto;
+        }
+        .info-tab-btn {
+            padding: 10px 18px;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-medium);
+            font-family: var(--font-family);
+            color: var(--color-text-muted);
+            white-space: nowrap;
+            transition: color var(--transition-fast), border-color var(--transition-fast);
+        }
+        .info-tab-btn.active { color: var(--color-primary); border-bottom-color: var(--color-primary); }
+        .info-tab-btn:hover  { color: var(--color-primary); }
+
+        #info-toggle-btn {
+            margin-left: auto;
+            padding: 10px 14px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: var(--font-size-xs);
+            color: var(--color-text-muted);
+            font-family: var(--font-family);
+            white-space: nowrap;
+        }
+        #info-toggle-btn:hover { color: var(--color-primary); }
+
+        #info-body { display: none; padding: 16px 20px 14px; }
+        #info-body.open { display: block; }
+
+        .info-tab-panel { display: none; }
+        .info-tab-panel.active { display: block; }
+
+        /* Stats grid */
+        .info-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+        .info-stat-card {
+            background: var(--color-surface-alt);
+            border: 1px solid var(--color-border-light);
+            border-radius: var(--radius-md);
+            padding: 10px 14px;
+        }
+        .info-stat-label { font-size: var(--font-size-xs); color: var(--color-text-muted); margin-bottom: 2px; }
+        .info-stat-value { font-size: 1.15rem; font-weight: var(--font-weight-bold); color: var(--color-primary); }
+        .info-stat-sub   { font-size: 0.7rem; color: var(--color-text-muted); margin-top: 1px; }
+
+        /* Cajas informativas */
+        .info-box {
+            background: var(--color-surface-alt);
+            border-left: 4px solid var(--color-primary);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            padding: 12px 16px;
+            margin-bottom: 12px;
+            font-size: var(--font-size-sm);
+            line-height: 1.65;
+            color: var(--color-text);
+        }
+        .info-box strong { color: var(--color-primary); }
+        .info-box a { color: var(--color-primary); }
+
+        .info-highlight {
+            background: var(--theme-overlay-accent-10);
+            border: 1px solid var(--color-accent);
+            border-radius: var(--radius-md);
+            padding: 10px 14px;
+            font-size: var(--font-size-sm);
+            line-height: 1.65;
+            margin-bottom: 12px;
+        }
+        .info-highlight b { color: var(--color-warning); }
+
+        .info-nota { font-size: 0.7rem; color: var(--color-text-muted); margin-top: 10px; }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            .parcelas-layout { flex-direction: column; }
+            .parcelas-panel  { width: 100%; height: 40vh; border-right: none; border-bottom: 1px solid var(--color-border); }
+            #parcelas-map    { height: 60vh; }
+            .info-stats-grid { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header doc-header-top" id="header">
+        <div class="header-container">
+            <div class="header-branding">
+                <button class="theme-toggle" data-theme-toggle type="button" aria-label="Activar modo oscuro" aria-pressed="false" title="Cambiar tema">
+                    <span class="theme-toggle-track" aria-hidden="true">
+                        <span class="theme-toggle-icon theme-toggle-icon-sun">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.4"/><path d="M12 2v2.4M12 19.6V22M4.93 4.93l1.7 1.7M17.37 17.37l1.7 1.7M2 12h2.4M19.6 12H22M4.93 19.07l1.7-1.7M17.37 6.63l1.7-1.7"/></svg>
+                        </span>
+                        <span class="theme-toggle-icon theme-toggle-icon-moon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+                        </span>
+                        <span class="theme-toggle-thumb"></span>
+                    </span>
+                </button>
+                <a href="../index.html" class="logo">
+                    <span class="logo-text">LASR</span>
+                </a>
+            </div>
+            <div class="header-controls">
+                <nav class="doc-top-actions" aria-label="Acciones">
+                    <a href="../index.html#parcelas" class="btn btn-secondary doc-back-btn">Volver al portal</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Panel informativo colapsable -->
+    <div id="info-panel">
+        <div id="info-tabs">
+            <button class="info-tab-btn active" data-tab="datos">Datos del censo</button>
+            <button class="info-tab-btn" data-tab="lph">Art. 16.2 LPH</button>
+            <button class="info-tab-btn" data-tab="situacion">Situación</button>
+            <button class="info-tab-btn" data-tab="actuar">Cómo actuar</button>
+            <button id="info-toggle-btn" title="Mostrar/ocultar">▲ Ocultar</button>
+        </div>
+        <div id="info-body" class="open">
+
+            <!-- Pestaña: Datos -->
+            <div class="info-tab-panel active" id="tab-datos">
+                <div class="info-stats-grid">
+                    <div class="info-stat-card">
+                        <div class="info-stat-label">Unidades residenciales ASR</div>
+                        <div class="info-stat-value">2.112</div>
+                        <div class="info-stat-sub">El Espinar · datos Catastro 2026</div>
+                    </div>
+                    <div class="info-stat-card">
+                        <div class="info-stat-label">Superficie total ASR</div>
+                        <div class="info-stat-value">1.502.841 m²</div>
+                        <div class="info-stat-sub">Media: 711,6 m² por unidad</div>
+                    </div>
+                    <div class="info-stat-card">
+                        <div class="info-stat-label">Umbral 25% — por número</div>
+                        <div class="info-stat-value">528 propietarios</div>
+                        <div class="info-stat-sub">Condición alternativa art. 16.2 LPH</div>
+                    </div>
+                    <div class="info-stat-card">
+                        <div class="info-stat-label">Umbral 25% — por cuotas</div>
+                        <div class="info-stat-value">375.710 m²</div>
+                        <div class="info-stat-sub">25% del total de m² de parcela</div>
+                    </div>
+                </div>
+                <p class="info-nota">Fuente: WFS INSPIRE Catastro + DNPRC · Mayo 2026 · El umbral por cuotas es una estimación basada en superficies catastrales.</p>
+            </div>
+
+            <!-- Pestaña: LPH -->
+            <div class="info-tab-panel" id="tab-lph">
+                <div class="info-box">
+                    <strong>Ley de Propiedad Horizontal — Artículo 16.2</strong><br><br>
+                    «La convocatoria de las Juntas la hará el presidente y, en su defecto, los promotores de la reunión,
+                    indicando los asuntos a tratar, el lugar, día y hora en que se celebrará en primera o, en su caso,
+                    en segunda convocatoria, practicándose las citaciones en la forma establecida en el artículo 9.<br><br>
+                    Cualquier propietario podrá pedir que la Junta de propietarios estudie y se pronuncie sobre
+                    cualquier tema de interés para la comunidad; a tal efecto dirigirá escrito, en el que especifique
+                    claramente los asuntos que pide sean tratados, al presidente, quien los incluirá en el orden del día
+                    de la siguiente Junta que se celebre.<br><br>
+                    <strong>Si a la reunión no asistiese el presidente ni el secretario-administrador</strong>, la Junta
+                    podrá ser convocada por el <strong>25 por ciento de los propietarios o número de propietarios
+                    que representen, a su vez, el 25 por ciento de las cuotas de participación.</strong>»
+                </div>
+                <div class="info-highlight">
+                    <b>Aplicación a ASR:</b> Para solicitar la convocatoria de una Junta Extraordinaria basta cumplir
+                    <b>UNA</b> de estas dos condiciones (son alternativas, no acumulativas):<br><br>
+                    &nbsp;&nbsp;① <b>528 propietarios</b> que firmen la solicitud (25% de 2.112 unidades), o<br>
+                    &nbsp;&nbsp;② Propietarios cuyos m² de parcela sumen al menos <b>375.710 m²</b> (25% de 1.502.841 m²).<br><br>
+                    El cálculo del umbral de m² está basado en la superficie catastral de cada parcela (fuente: WFS INSPIRE Catastro, mayo 2026).
+                </div>
+            </div>
+
+            <!-- Pestaña: Situación -->
+            <div class="info-tab-panel" id="tab-situacion">
+                <div class="info-box">
+                    <strong>¿Qué es la Comunidad de Propietarios de Los Ángeles de San Rafael?</strong><br><br>
+                    La Comunidad de Propietarios del Complejo Urbanístico Residencial Los Ángeles de San Rafael (ASR)
+                    es la entidad jurídica que gestiona los servicios y elementos comunes de la urbanización, integrada
+                    por la totalidad de parcelas de las Fases 1 y 2. Su existencia está reconocida judicialmente.
+                    La web oficial de la Comunidad es
+                    <a href="https://www.comunidadasr.es" target="_blank" rel="noopener">www.comunidadasr.es</a>.
+                </div>
+                <div class="info-box">
+                    <strong>Servicios que gestiona la Comunidad (según Informe de Gestión 2025)</strong><br><br>
+                    · Mantenimiento de viales, desbroce y jardinería<br>
+                    · Piscina e instalaciones deportivas (uso cedido por contrato desde 2000)<br>
+                    · Servicio de conserjería 24 horas<br>
+                    · 1.231 casilleros postales (bloques de 50 buzones en el edificio «El Fuerte»)<br>
+                    · Autobús circular interno (líneas 1 y 2 del Ayto. de El Espinar)<br>
+                    · Plan invernal de inclemencias (quitanieves Unimog)<br>
+                    · Plan de renovación de alumbrado en calles de la urbanización
+                </div>
+                <div class="info-box">
+                    <strong>Antecedente judicial: Sentencia AP Segovia 185/2017 (31 julio 2017)</strong><br><br>
+                    La Asociación de Copropietarios impugnó la Junta General Ordinaria de 2 de julio de 2015.
+                    La Audiencia Provincial de Segovia estimó <em>parcialmente</em> el recurso de la Comunidad:<br><br>
+                    · <strong>Validó</strong> los puntos 1 (información de gestión), 2 (cuentas 2014) y 4 (presupuesto 2015).<br>
+                    · <strong>Anuló</strong> únicamente el punto 3 (liquidación y regularización de saldos 1999-2014),
+                    por no haberse aprobado previamente las cuentas de cada ejercicio anulado.<br>
+                    · <strong>Confirmó la existencia legal de la Comunidad</strong> y la legitimación de su presidente.<br><br>
+                    <span style="font-size:0.7rem;color:var(--color-text-muted)">Fuente: Sentencia nº 185/2017, Sección 1ª Audiencia Provincial de Segovia, Rollo 217/2017.</span>
+                </div>
+                <div class="info-box">
+                    <strong>Situación a febrero de 2026 (Nota Informativa de la Comunidad)</strong><br><br>
+                    · Las cuotas anuales de 2026 no se modifican; se prorrogan los presupuestos de 2025.<br>
+                    · Se realizó un cambio de entidad financiera para la gestión de cobros (proceso SEPA).
+                    Durante la migración se emitieron recibos duplicados en algunos casos; la Comunidad
+                    informó que los importes cobrados por error serían compensados en la siguiente remesa.<br>
+                    · Las cuentas del ejercicio 2025 están siendo auditadas por la empresa AUDRIA S.L.
+                </div>
+            </div>
+
+            <!-- Pestaña: Cómo actuar -->
+            <div class="info-tab-panel" id="tab-actuar">
+                <div class="info-box">
+                    <strong>Derecho a solicitar una Junta Extraordinaria (art. 16.2 LPH)</strong><br><br>
+                    Cualquier propietario o grupo de propietarios que represente el <strong>25% de las cuotas
+                    o el 25% del número total</strong> puede exigir por escrito al Presidente la convocatoria
+                    de una Junta Extraordinaria. El Presidente está obligado a convocarla; si no lo hace,
+                    cualquiera de los solicitantes puede acudir al Juzgado de Primera Instancia para que
+                    sea el juez quien la convoque (art. 16.2 LPH, párrafo final).
+                </div>
+                <div class="info-highlight">
+                    <b>Umbrales aplicables a ASR (estimación basada en datos catastrales, mayo 2026):</b><br><br>
+                    &nbsp;&nbsp;① <b>528 propietarios</b> firmantes (25% de 2.112 unidades), <b>O</b><br>
+                    &nbsp;&nbsp;② Propietarios con parcelas que sumen al menos <b>375.710 m²</b> (25% de 1.502.841 m²).<br><br>
+                    Basta cumplir <b>UNA</b> de las dos condiciones.
+                </div>
+                <div class="info-box">
+                    <strong>Pasos para solicitar la Junta Extraordinaria</strong><br><br>
+                    <b>1. Reunir adhesiones.</b> Recoge firmas de otros propietarios interesados. Cada firmante
+                    debe indicar su nombre, dirección de la parcela y referencia catastral. No existe
+                    un plazo legal para esta fase; las adhesiones no caducan.<br><br>
+                    <b>2. Redactar el escrito de solicitud.</b> Debe dirigirse al Presidente de la Comunidad
+                    (consulta los datos de contacto en <a href="https://www.comunidadasr.es" target="_blank" rel="noopener">www.comunidadasr.es</a>) e incluir:<br>
+                    &nbsp;&nbsp;· Identificación de los firmantes y sus parcelas<br>
+                    &nbsp;&nbsp;· Orden del día propuesto (los asuntos concretos a tratar)<br>
+                    &nbsp;&nbsp;· Fecha y lugar propuestos para la celebración<br>
+                    &nbsp;&nbsp;· Relación de m² totales representados (para acreditar el 25%)<br><br>
+                    <b>3. Enviar con acuse de recibo.</b> Utiliza burofax o carta certificada con acuse de recibo
+                    para dejar constancia fehaciente de la entrega y fecha. Guarda el resguardo original.<br><br>
+                    <b>4. Plazo de respuesta.</b> La LPH no fija un plazo concreto para que el Presidente convoque,
+                    pero la jurisprudencia considera razonable un plazo de 30 días. Si no convoca,
+                    cualquier solicitante puede instar la convocatoria judicial ante el Juzgado de Primera
+                    Instancia de Segovia.<br><br>
+                    <b>5. Celebración.</b> La Junta debe convocarse con al menos 6 días de antelación (art. 16.3 LPH),
+                    indicando lugar, día, hora y orden del día.
+                </div>
+                <div class="info-box">
+                    <strong>Contacto de la Comunidad de Propietarios</strong><br><br>
+                    · Web oficial: <a href="https://www.comunidadasr.es" target="_blank" rel="noopener">www.comunidadasr.es</a><br>
+                    · Teléfono información Junta de Castilla y León: <strong>012</strong>
+                </div>
+                <p class="info-nota">Esta información es de carácter divulgativo. Para cualquier actuación legal se recomienda consultar con un abogado especializado en Propiedad Horizontal.</p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Buscador + Mapa -->
+    <div class="parcelas-layout">
+        <div class="parcelas-panel">
+            <div class="parcelas-search-box">
+                <input type="text" id="parcelas-search" placeholder="Calle, número o referencia catastral…" autocomplete="off">
+                <div class="parcelas-search-info" id="parcelas-search-info">2.112 unidades disponibles</div>
+            </div>
+            <div class="parcelas-results" id="parcelas-results"></div>
+        </div>
+        <div id="parcelas-map"></div>
+    </div>
+
+    <script src="../assets/js/theme.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="../assets/js/parcelas.js"></script>
+</body>
+</html>
