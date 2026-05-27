@@ -118,8 +118,6 @@
 
     // ── Panel informativo ──────────────────────────────────────────────────
     function updateLayoutHeight() {
-        const h = document.getElementById('info-panel').offsetHeight;
-        document.documentElement.style.setProperty('--info-panel-h', h + 'px');
         map.invalidateSize();
     }
 
