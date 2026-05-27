@@ -1,0 +1,29 @@
+============================================================
+RESUMEN CATASTRAL — URBANIZACIÓN LOS ÁNGELES DE SAN RAFAEL
+============================================================
+
+PARCELAS / UNIDADES EN EL BBOX CONSULTADO
+  Total registros:                   4533
+
+UNIDADES ASR (municipio=El Espinar + uso=Residencial)
+  Total unidades ASR:                2112
+  Total m² ASR:                     1,502,841 m²
+  m² medio por unidad:                  711.6 m²
+
+REGISTROS SIN DATOS DNPRC
+  Sin uso / sin respuesta:             10
+  Con error en consulta:                0
+
+UMBRAL ART. 16.2 LPH — 25% (condición alternativa)
+  Por número de propietarios:       528.0 propietarios
+  Por cuotas (m²):                    375,710 m²
+
+CUOTA DE LA PARCELA DEL SOLICITANTE
+  Superficie parcela:                1243 m²
+  Cuota sobre total ASR:              0.0827 %
+
+NOTA: Las cuotas de participación de ASR son proporcionales
+a la superficie de cada parcela (según nota simple registral).
+El umbral del 25% puede alcanzarse POR NÚMERO de propietarios
+O POR CUOTAS — basta cumplir UNA de las dos condiciones.
+============================================================
