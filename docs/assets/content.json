@@ -393,13 +393,13 @@
   },
   "portal": {
     "ultimas_actualizaciones": {
-      "version": "v1.1.7",
-      "fecha": "2026-05-27",
+      "version": "v1.1.8",
+      "fecha": "2026-06-02",
       "cambios": [
+        "chore(release): promover fix de despliegue de prensa a producción",
         "chore(release): promover correcciones del buscador de parcelas v1.1.7",
         "chore(release): promover buscador de parcelas a producción v1.1.6",
-        "chore(workflow): activar actualización automática diaria de prensa",
-        "docs(prensa): actualizar archivo curado a mayo 2026"
+        "chore(workflow): activar actualización automática diaria de prensa"
       ]
     }
   }
