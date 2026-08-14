@@ -32,8 +32,10 @@ Autoalojada en `docs/assets/fonts/` (WOFF2, subset latino, `font-display: swap`)
 
 ## Firma visual
 
-1. **Perfil de la sierra**: SVG de dos capas (`.hero-ridge`, tokens `--ridge-back`/`--ridge-front`) cerrando el hero. En oscuro las siluetas son más oscuras que el cielo (noche), no una inversión. Es LA firma: no repetirla en cada sección ni convertirla en decoración ubicua.
-2. **Los hechos** (`.hechos`): 10+ / 1 / 0 como `<dl>` con filete superior de 1px, número en Bricolage 800 verde pino. Sin tarjetas, sin sombras. Vive en «Situación actual», nunca en el hero.
+1. **Los hechos** (`.hechos`): 10+ / 1 / 0 como `<dl>` con un único filete superior continuo sobre el bloque, número en Bricolage 800 verde pino. Sin tarjetas, sin sombras. Vive en «Situación actual», nunca en el hero.
+2. La silueta de sierra en SVG se probó como firma del hero y **el usuario la descartó** (ago 2026) — no reintroducirla. El hero cierra plano; la personalidad la llevan la tipografía y la paleta.
+
+El titular del hero es el nombre de la urbanización, «Los Ángeles de San Rafael» (decisión del usuario); el mensaje de la sentencia vive en el subtexto y en los hechos.
 
 ## Reglas de componentes
 
