@@ -13,8 +13,8 @@
     function markerColors() {
         const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
         return {
-            color:       isDark ? '#87aeb0' : '#2D5A5A',
-            fillColor:   isDark ? '#4a7c7c' : '#4A7C7C',
+            color:       isDark ? '#8fbf9f' : '#2F5C43',
+            fillColor:   isDark ? '#9bb5a4' : '#5E7D6B',
             activeColor: isDark ? '#d08181' : '#A64B4B',
             activeFill:  isDark ? '#e09999' : '#c86060',
         };

@@ -326,7 +326,6 @@
             if (isPressGroup && pressItems.length === 0) {
                 groupCards = `
                     <div class="doc-card fade-in">
-                        <span class="doc-type prensa">Prensa</span>
                         <h3 class="doc-title">Sin noticias relevantes publicadas</h3>
                         <p class="doc-description">Estamos actualizando la recopilación periodística. Vuelve en próximos días para consultar nuevas referencias.</p>
                         <p class="doc-meta">Estado: pendiente de actualización</p>
@@ -362,6 +361,8 @@
 
             iterableItems.forEach((doc, cardIndex) => {
                 const typeClass = (doc.tipo || 'documento').toLowerCase();
+                const groupTitleLower = (group.titulo || '').toString().trim().toLowerCase();
+                const isRedundantChip = groupTitleLower.includes(typeClass.replace(/o$/, ''));
                 const safeDocUrl = sanitizeExternalUrl(doc.url || '');
                 const linkLabel = (doc.cta || 'Ver fuente').toString().trim() || 'Ver fuente';
                 const linkHtml = safeDocUrl
@@ -376,7 +377,7 @@
 
                 groupCards += `
                     <div class="doc-card ${isPressGroup ? 'press-featured-card' : ''} ${isEucReferenceCard ? 'is-euc-reference' : ''} fade-in" style="animation-delay: ${(groupIndex * 0.08) + (cardIndex * 0.04)}s">
-                        <span class="doc-type ${typeClass}">${escapeHtml(doc.tipo || 'Documento')}</span>
+                        ${isRedundantChip ? '' : `<span class="doc-type ${typeClass}">${escapeHtml(doc.tipo || 'Documento')}</span>`}
                         ${doc.source ? `<span class="press-source-badge">${escapeHtml(doc.source)}</span>` : ''}
                         <h3 class="doc-title">${escapeHtml(doc.titulo)}</h3>
                         <p class="doc-description press-excerpt">${escapeHtml(doc.descripcion || '')}</p>
@@ -463,11 +464,14 @@
         let html = '';
         
         data.opciones.forEach(opcion => {
+            const isShareCard = /difundir|compartir/i.test(opcion.titulo || '');
+            const shareText = encodeURIComponent('Portal informativo de Los Ángeles de San Rafael: https://lasr-info.es');
             html += `
                 <div class="contact-card fade-in">
                     <h3 class="contact-card-title">${escapeHtml(opcion.titulo)}</h3>
                     <p class="contact-card-text">${escapeHtml(opcion.descripcion)}</p>
-                    ${opcion.email ? `<span class="contact-email">${escapeHtml(opcion.email)}</span>` : ''}
+                    ${opcion.email ? `<a href="mailto:${escapeHtml(opcion.email)}" class="contact-email">${escapeHtml(opcion.email)}</a>` : ''}
+                    ${isShareCard ? `<a href="https://wa.me/?text=${shareText}" class="btn btn-secondary contact-share" target="_blank" rel="noopener noreferrer">Compartir por WhatsApp</a>` : ''}
                 </div>
             `;
         });

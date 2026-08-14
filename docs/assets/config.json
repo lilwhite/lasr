@@ -30,10 +30,10 @@
     ]
   },
   "colors": {
-    "primary": "#2D5A5A",
-    "secondary": "#4A7C7C",
-    "accent": "#D4A574",
-    "background": "#F8F6F3",
+    "primary": "#2F5C43",
+    "secondary": "#5E7D6B",
+    "accent": "#B27C2F",
+    "background": "#F2F2EB",
     "surface": "#FFFFFF",
     "text": "#333333",
     "textLight": "#666666",

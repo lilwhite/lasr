@@ -19,7 +19,7 @@
     <title>Los Ángeles de San Rafael - Portal Informativo</title>
     
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%232D5A5A' width='100' height='100' rx='10'/%3E%3Ctext x='50' y='65' font-family='Arial' font-size='50' font-weight='bold' fill='white' text-anchor='middle'%3EL%3C/text%3E%3C/svg%3E">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%232F5C43' width='100' height='100' rx='10'/%3E%3Ctext x='50' y='65' font-family='Arial' font-size='50' font-weight='bold' fill='white' text-anchor='middle'%3EL%3C/text%3E%3C/svg%3E">
     
     <script src="assets/js/theme-init.js"></script>
     <!-- Styles -->
@@ -30,6 +30,14 @@
     <script src="assets/js/ga4.js"></script>
 </head>
 <body>
+    <!-- impeccable:direction-contract
+    THESIS: la sierra explica el conflicto: un lugar real que merece que su urbanización se cumpla. Rechaza el hero genérico de título centrado + tarjetas de estadísticas.
+    OWN-WORLD: granito y pinar de Guadarrama: fondo hueso-piedra #F2F2EB, pino #2F5C43, sol #B27C2F; Bricolage Grotesque en titulares, Atkinson Hyperlegible en texto; perfil de sierra en SVG como firma.
+    STORY: el vecino entiende en un vistazo que hay una sentencia firme sin cumplir, y sabe dónde mirar su situación y su parcela.
+    FIRST VIEWPORT: titular a la izquierda en dos líneas, subtexto corto, dos acciones (situación / parcela), silueta de la sierra cerrando el viewport por abajo.
+    FORM: dirección «Sierra vecinal», elegida por el usuario entre tres propuestas (ago 2026).
+    FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
+    -->
     <!-- Header -->
     <header class="header" id="header">
         <div class="header-container">
@@ -76,29 +84,18 @@
     <main>
         <!-- Hero Section -->
         <section class="hero" id="inicio">
-            <div class="hero-content">
-                <h1 class="hero-title">Los Ángeles de San Rafael</h1>
-                <p class="hero-subtitle">Información clara y transparente para los vecinos</p>
-                <p class="hero-description">
-                    Un espacio informativo sobre la situación urbanística y jurídica de nuestra urbanización. 
-                    Aquí encontrarás respuestas a tus preguntas y podrás entender cómo se ha llegado hasta aquí.
-                </p>
-                <a href="#situacion" class="btn btn-primary">Ver la situación actual</a>
-            </div>
-            <div class="hero-stats">
-                <div class="stat-card">
-                    <span class="stat-number">10+</span>
-                    <span class="stat-label">Años desde la sentencia</span>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-number">1</span>
-                    <span class="stat-label">Sentencia firme</span>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-number">0</span>
-                    <span class="stat-label">Cumplimiento efectivo</span>
+            <div class="hero-inner">
+                <h1 class="hero-title"><span class="hero-line">Una sentencia firme.</span> <span class="hero-line">Diez años sin cumplirse.</span></h1>
+                <p class="hero-description">Qué pasó en Los Ángeles de San Rafael, qué dice la sentencia y qué podemos hacer los propietarios.</p>
+                <div class="hero-actions">
+                    <a href="#situacion" class="btn btn-primary">Ver la situación actual</a>
+                    <a href="parcelas/" class="btn btn-secondary">Buscar mi parcela</a>
                 </div>
             </div>
+            <svg class="hero-ridge" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                <path class="ridge-back" d="M0 120 L0 66 L130 34 L250 58 L400 16 L540 48 L690 24 L830 56 L980 12 L1130 46 L1270 28 L1440 52 L1440 120 Z"/>
+                <path class="ridge-front" d="M0 120 L0 94 L160 66 L330 86 L520 56 L730 88 L920 60 L1120 90 L1290 70 L1440 86 L1440 120 Z"/>
+            </svg>
         </section>
 
         <!-- Situación Actual -->
@@ -106,7 +103,22 @@
             <div class="container">
                 <h2 class="section-title">Situación actual</h2>
                 <p class="section-description">Resumen del estado actual del conflicto urbanístico y administrativo.</p>
-                
+
+                <dl class="hechos" aria-label="El conflicto en cifras">
+                    <div class="hecho">
+                        <dt>Años desde la sentencia</dt>
+                        <dd>10+</dd>
+                    </div>
+                    <div class="hecho">
+                        <dt>Sentencia firme del TSJCyL</dt>
+                        <dd>1</dd>
+                    </div>
+                    <div class="hecho">
+                        <dt>Cumplimiento efectivo</dt>
+                        <dd>0</dd>
+                    </div>
+                </dl>
+
                 <div class="grid grid-2" id="situacionContent">
                     <!-- Content loaded via JS -->
                 </div>
@@ -183,20 +195,20 @@
                 <h2 class="section-title">Buscador de parcelas</h2>
                 <p class="section-description">Consulta y localiza en el mapa las 2.112 parcelas catastrales de la urbanización. Datos del Catastro, mayo 2026.</p>
 
-                <div class="grid grid-2" style="margin-bottom: var(--space-xl);">
+                <div class="grid grid-2 parcelas-grid">
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Herramienta de consulta catastral</h3>
                         </div>
                         <div class="card-body">
                             <p>Busca por calle, número o referencia catastral y visualiza la ubicación exacta de cada parcela sobre el mapa. Incluye datos de superficie y enlace directo a la Sede Electrónica del Catastro.</p>
-                            <ul style="margin: var(--space-md) 0; padding-left: var(--space-lg); color: var(--color-text-light); font-size: var(--font-size-sm); line-height: 1.7;">
+                            <ul class="feature-list">
                                 <li>2.112 unidades residenciales indexadas</li>
                                 <li>Superficie catastral de cada parcela</li>
                                 <li>Mapa interactivo con OpenStreetMap</li>
                                 <li>Enlace a ficha completa en Catastro</li>
                             </ul>
-                            <a href="parcelas/" class="btn btn-primary" style="margin-top: var(--space-sm);">Abrir buscador de parcelas →</a>
+                            <a href="parcelas/" class="btn btn-primary">Abrir buscador de parcelas →</a>
                         </div>
                     </div>
                     <div class="card">
@@ -205,17 +217,17 @@
                         </div>
                         <div class="card-body">
                             <p>Los datos catastrales permiten calcular los umbrales necesarios para convocar una Junta Extraordinaria de propietarios:</p>
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-md); margin: var(--space-md) 0;">
-                                <div style="background: var(--color-surface-alt); border: 1px solid var(--color-border-light); border-radius: var(--radius-md); padding: var(--space-md); text-align: center;">
-                                    <div style="font-size: 1.4rem; font-weight: var(--font-weight-bold); color: var(--color-primary);">528</div>
-                                    <div style="font-size: var(--font-size-xs); color: var(--color-text-muted); margin-top: 4px;">propietarios<br>(25% del total)</div>
+                            <div class="umbral-grid">
+                                <div class="umbral-tile">
+                                    <div class="umbral-value">528</div>
+                                    <div class="umbral-label">propietarios<br>(25% del total)</div>
                                 </div>
-                                <div style="background: var(--color-surface-alt); border: 1px solid var(--color-border-light); border-radius: var(--radius-md); padding: var(--space-md); text-align: center;">
-                                    <div style="font-size: 1.4rem; font-weight: var(--font-weight-bold); color: var(--color-primary);">375.710 m²</div>
-                                    <div style="font-size: var(--font-size-xs); color: var(--color-text-muted); margin-top: 4px;">en cuotas<br>(25% de superficie)</div>
+                                <div class="umbral-tile">
+                                    <div class="umbral-value">375.710 m²</div>
+                                    <div class="umbral-label">en cuotas<br>(25% de superficie)</div>
                                 </div>
                             </div>
-                            <p style="font-size: var(--font-size-xs); color: var(--color-text-muted);">Basta cumplir <strong>una</strong> de las dos condiciones. Fuente: WFS INSPIRE Catastro, mayo 2026.</p>
+                            <p class="umbral-note">Basta cumplir <strong>una</strong> de las dos condiciones. Fuente: WFS INSPIRE Catastro, mayo 2026.</p>
                         </div>
                     </div>
                 </div>
@@ -226,7 +238,7 @@
         <section class="section" id="documentos">
             <div class="container">
                 <h2 class="section-title">Documentación</h2>
-                <p class="section-description">Cobertura periodística relevante para seguimiento vecinal y urbanístico.</p>
+                <p class="section-description">Normativa, documentación oficial y prensa del conflicto, reunidas en un solo lugar.</p>
                 
                 <div class="documentos-groups" id="documentosContent">
                     <!-- Content loaded via JS -->

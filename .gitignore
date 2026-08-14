@@ -33,3 +33,6 @@ skills-lock.json
 .agents/cache/
 .agents/tmp/
 .agents/.cache/
+
+# Impeccable (capturas de revisión locales)
+.impeccable/
