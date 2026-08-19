@@ -15,6 +15,9 @@ parties:
     role: apelante
   - actor: ACTOR-AYUNTAMIENTO-EL-ESPINAR
     role: apelada
+official:
+  repository: CENDOJ — Centro de Documentación Judicial
+  url: https://www.poderjudicial.es/search/indexAN.jsp
 file: private-sources/pdf/src-2011-tsjcyl-271.pdf
 sha256: c99090f31358e91811bf8f51a489741c61a1d3b9e83eed04ed96f1b751a5b16c
 originalFilename: "Sentencia TSCyL Junio 2010.pdf"

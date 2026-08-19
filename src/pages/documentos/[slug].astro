@@ -1,4 +1,5 @@
 ---
+import OriginalAccess from '../../components/OriginalAccess.astro';
 import { render } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import Card from '../../components/Card.astro';
@@ -62,15 +63,9 @@ const pdfLinkable = canLinkPdf(source);
         {d.sha256 && <tr><th scope="row">SHA-256</th><td><code style="word-break:break-all">{d.sha256}</code></td></tr>}
       </tbody>
     </table>
-    {pdfLinkable ? (
-      <p><a href={`/${d.file}`}>Descargar documento</a></p>
-    ) : (
-      <p class="muted">
-        El documento original no está publicado: se encuentra pendiente de revisión de privacidad.
-        Los metadatos y el hash permiten identificarlo de forma inequívoca.
-      </p>
-    )}
   </Card>
+
+  <OriginalAccess source={source} />
 
   <section class="prose">
     <Content />

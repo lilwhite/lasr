@@ -12,6 +12,9 @@ parties:
     role: órgano aprobante
   - actor: ACTOR-CIBR
     role: promotora
+official:
+  repository: Archivo de Planeamiento Urbanístico de Castilla y León
+  url: https://servicios.jcyl.es/PlanPublica/
 file: private-sources/pdf/src-1966-plan-parcial-carrascal.pdf
 sha256: b0c63cf7a57f6dd095d40caa895aa6a957a2a05e702a950da183126be5a89d14
 originalFilename: "PLAN PARCIAL LOS ÁNGELES DE SAN RAFAEL FINCA EL CARRASCAL.pdf"

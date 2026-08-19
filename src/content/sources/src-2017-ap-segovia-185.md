@@ -14,6 +14,10 @@ parties:
     role: apelante
   - actor: ACTOR-ASOCIACION-COPROPIETARIOS-LASR
     role: apelada
+official:
+  repository: CENDOJ — Centro de Documentación Judicial
+  ref: "Roj: SAP SG 290/2017"
+  url: https://www.poderjudicial.es/search/indexAN.jsp
 file: private-sources/pdf/src-2017-ap-segovia-185.pdf
 sha256: 174c3ebd1ed238aa1f0ae26f0659f89cb988e76645f8a577a50271fabf11c506
 originalFilename: "Setencia 185-2017 Audiencia Provincial Segoviapdf_260817_215849.pdf"

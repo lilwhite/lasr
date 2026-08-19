@@ -61,6 +61,12 @@ const sources = defineCollection({
     rollo: z.string().optional(),
     procedure: procRef.optional(),
     parties: z.array(party).optional(),
+    // Origen público del documento, si lo tiene. Ver CONTENT_MODEL §3.1.
+    official: z.object({
+      repository: z.string(),
+      ref: z.string().optional(),
+      url: z.string().url().optional(),
+    }).strict().optional(),
     file: z.string().nullable(),
     sha256: z.string().regex(/^[0-9a-f]{64}$/).optional(),
     originalFilename: z.string().optional(),

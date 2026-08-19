@@ -84,6 +84,19 @@ Un Source **no** tiene `status` editorial ni `basis`: el documento es el que es.
 
 **Registro documental.** `docs/document_registry.json` (fuente de verdad) y su volcado legible `docs/DOCUMENT_REGISTRY.md` recogen los ficheros originales que **no** dan lugar a un Source, con su `sha256` como clave: duplicados exactos de un documento ya fichado (`duplicate-of`), copias parciales (`fragment-of`), anexos y acuses (`annex-of`), normativa y doctrina (`reference-material`) y fragmentos no atribuibles a ningún documento conocido (`unidentified`). Cada entrada lleva la evidencia de la identificación. Sin este registro, `inventory.py` mostraría esos ficheros como pendientes indefinidamente, porque su `sha256` no coincide con ninguna ficha. En el Source afectado se añade además una línea en su bloque `**Captura**`/`**Versiones**` remitiendo al registro.
 
+**Origen público (`official`).** Algunos documentos existen además en un repositorio oficial de acceso libre: sentencias en el CENDOJ, planeamiento en el Archivo de Planeamiento de la Junta de Castilla y León, disposiciones en el BOCyL. Cuando conste, se declara:
+
+```yaml
+official:
+  repository: CENDOJ            # nombre del repositorio público
+  ref: "SAP SG 290/2017"        # opcional: la referencia con la que localizarlo (ROJ, ECLI, nº de boletín)
+  url: https://www.poderjudicial.es/search/indexAN.jsp   # opcional: dirección pública
+```
+
+Es la vía para que un vecino pueda consultar el original aunque nuestra copia no sea publicable, y **no exige revisión de privacidad**: quien publica es el organismo, no nosotros.
+
+Dos cautelas. La `url` solo se rellena si se ha comprobado que funciona; si el repositorio no admite enlace directo a un documento concreto, se enlaza su buscador y la `ref` es lo que permite encontrarlo. Y `official` describe **dónde está el documento oficial**, no que nuestra copia sea publicable: eso lo sigue decidiendo `publicationStatus` con su `privacyReview`.
+
 **Sources sin fichero (stubs).** Muchos documentos se conocen solo porque otro documento los cita (p. ej. la sentencia 217/2015 del TSJ, que el corpus conoce solo por la carta con la que la EUC comunicó sus efectos). En la v1 estos documentos se representan como **Events** con citas al documento que los menciona. Si más adelante conviene citarlos como fuente (p. ej. al conseguir el PDF), se crea su Source con `file: null` hasta tener el fichero. No crear stubs preventivamente.
 
 ### 3.2 AtomicNote
