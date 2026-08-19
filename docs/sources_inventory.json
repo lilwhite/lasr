@@ -149,8 +149,8 @@
         "textChars": 0,
         "hasTextLayer": false,
         "docTypeGuess": "comunicacion",
-        "canonical": "carta-cp-gestion-20140407.pdf",
-        "status": "ya-existente"
+        "canonical": "src-2014-cp-lasr-gestion.pdf",
+        "status": "procesado"
       },
       {
         "kind": "master",
@@ -263,8 +263,8 @@
         "textChars": 626,
         "hasTextLayer": true,
         "docTypeGuess": "desconocido",
-        "canonical": "informacion-propietarios-201903.pdf",
-        "status": "ya-existente"
+        "canonical": "src-2019-cp-lasr-informacion.pdf",
+        "status": "procesado"
       },
       {
         "kind": "master",
@@ -658,36 +658,6 @@
       },
       {
         "kind": "work",
-        "name": "carta-cp-gestion-20140407.pdf",
-        "relpath": "carta-cp-gestion-20140407.pdf",
-        "ext": ".pdf",
-        "size": 1013456,
-        "sha256": "a662c4ac546b72049e734a7237f63ee1d4813d1e7fa2aa40613df8be88e2af9f",
-        "pages": 16,
-        "textChars": 0,
-        "hasTextLayer": false,
-        "docTypeGuess": "comunicacion",
-        "inMaster": true,
-        "sourceId": null,
-        "status": "pendiente-de-analisis"
-      },
-      {
-        "kind": "work",
-        "name": "informacion-propietarios-201903.pdf",
-        "relpath": "informacion-propietarios-201903.pdf",
-        "ext": ".pdf",
-        "size": 1032093,
-        "sha256": "594f49f1d529ae2caa1892095e00b7ab86f9ee9e9aa66bfcd1e8adef936359ba",
-        "pages": 14,
-        "textChars": 626,
-        "hasTextLayer": true,
-        "docTypeGuess": "desconocido",
-        "inMaster": true,
-        "sourceId": null,
-        "status": "pendiente-de-analisis"
-      },
-      {
-        "kind": "work",
         "name": "informe-tecnico-ayto.pdf",
         "relpath": "informe-tecnico-ayto.pdf",
         "ext": ".pdf",
@@ -1052,6 +1022,21 @@
       },
       {
         "kind": "work",
+        "name": "src-2014-cp-lasr-gestion.pdf",
+        "relpath": "src-2014-cp-lasr-gestion.pdf",
+        "ext": ".pdf",
+        "size": 1013456,
+        "sha256": "a662c4ac546b72049e734a7237f63ee1d4813d1e7fa2aa40613df8be88e2af9f",
+        "pages": 16,
+        "textChars": 0,
+        "hasTextLayer": false,
+        "docTypeGuess": "desconocido",
+        "inMaster": true,
+        "sourceId": "SRC-2014-CP-LASR-GESTION",
+        "status": "procesado"
+      },
+      {
+        "kind": "work",
         "name": "src-2015-euc-acta-2.pdf",
         "relpath": "src-2015-euc-acta-2.pdf",
         "ext": ".pdf",
@@ -1168,6 +1153,21 @@
         "docTypeGuess": "desconocido",
         "inMaster": true,
         "sourceId": "SRC-2017-TSJCYL-141",
+        "status": "procesado"
+      },
+      {
+        "kind": "work",
+        "name": "src-2019-cp-lasr-informacion.pdf",
+        "relpath": "src-2019-cp-lasr-informacion.pdf",
+        "ext": ".pdf",
+        "size": 1032093,
+        "sha256": "594f49f1d529ae2caa1892095e00b7ab86f9ee9e9aa66bfcd1e8adef936359ba",
+        "pages": 14,
+        "textChars": 626,
+        "hasTextLayer": true,
+        "docTypeGuess": "desconocido",
+        "inMaster": true,
+        "sourceId": "SRC-2019-CP-LASR-INFORMACION",
         "status": "procesado"
       },
       {
