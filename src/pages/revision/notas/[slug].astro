@@ -45,7 +45,7 @@ const citedProcedures = [...new Set(citedSources.flatMap((s) => (s.data.procedur
 
 <ReviewLayout title={d.id}>
   <p class="eyebrow">Nota {position} de {total}</p>
-  <p class="meta-id">{d.id} · <a href={entityRoute(note)}>ver página pública</a></p>
+  <p class="meta-id">{d.id} · <a href={url(entityRoute(note))}>ver página pública</a></p>
 
   <h1 class="claim">{d.title}</h1>
 

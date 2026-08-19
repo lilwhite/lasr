@@ -1,5 +1,6 @@
 ---
 import { resolve, entityRoute, entityLabel } from '../lib/graph';
+import { url } from '../lib/url';
 import { isVisible } from '../lib/policy';
 
 interface Props {
@@ -14,7 +15,7 @@ const text = label ?? entityLabel(entry);
 ---
 
 {visible ? (
-  <a href={entityRoute(entry)}>{text}</a>
+  <a href={url(entityRoute(entry))}>{text}</a>
 ) : (
   <span class="unpublished" title="Contenido no publicado">{text}</span>
 )}
