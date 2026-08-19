@@ -9,20 +9,18 @@ versionan ni se publican.
 
 | Fichero canónico | SHA-256 (8) | Págs. | Texto | Source | Estado | ¿En maestra? |
 |---|---|---|---|---|---|---|
-| `apelacion-asc-20120716.pdf` | `d0723282` | 19 | sí | — | pendiente-de-analisis | sí |
-| `apelaciones-ayto-cp-20120626.pdf` | `8eb33b94` | 52 | no | — | pendiente-de-analisis | sí |
 | `informe-tecnico-ayto.pdf` | `4339fcab` | 218 | no | — | pendiente-de-analisis | sí |
 | `plan-parcial-el-carrascal.pdf` | `b0c63cf7` | 138 | no | — | pendiente-de-analisis | sí |
 | `sentencia-13072010-aud-segovia-junta-2006-doc.pdf` | `83ea0e10` | 3 | no | — | fragmento-registrado | sí |
 | `sentencia-aud-139-2005-anul-asamblea-14032004.pdf` | `fa4cddd8` | 5 | no | — | duplicado-registrado | sí |
 | `sentencia-audiencia-segovia-220104.pdf` | `99981b78` | 10 | no | — | duplicado-registrado | sí |
 | `solicitud-de-amparo-2.pdf` | `e3e3ea37` | 1 | no | — | anexo-registrado | sí |
-| `solicitud-de-amparo.pdf` | `748746b2` | 24 | no | — | pendiente-de-analisis | sí |
 | `src-1996-asc-cp-acuerdo.pdf` | `cc049c4a` | 3 | no | SRC-1996-ASC-CP-ACUERDO | procesado | NO |
 | `src-2002-jpi1-segovia-158.pdf` | `722e48cc` | 4 | no | SRC-2002-JPI1-SEGOVIA-158 | procesado | sí |
 | `src-2003-ap-segovia-323.pdf` | `7b80e5ec` | 10 | no | SRC-2003-AP-SEGOVIA-323 | procesado | sí |
 | `src-2005-jpi3-segovia-139.pdf` | `2abb87bb` | 5 | no | SRC-2005-JPI3-SEGOVIA-139 | procesado | sí |
 | `src-2009-asc-burofax.pdf` | `f45053f0` | 3 | no | SRC-2009-ASC-BUROFAX | procesado | sí |
+| `src-2009-cp-lasr-amparo.pdf` | `748746b2` | 24 | no | SRC-2009-CP-LASR-AMPARO | procesado | sí |
 | `src-2009-ts-335.pdf` | `b0adf450` | 12 | no | SRC-2009-TS-335 | procesado | sí |
 | `src-2010-ap-segovia-156.pdf` | `27931a85` | 6 | sí | SRC-2010-AP-SEGOVIA-156 | procesado | sí |
 | `src-2010-jpi1-segovia-34.pdf` | `20cebd2c` | 11 | no | SRC-2010-JPI1-SEGOVIA-34 | procesado | sí |
@@ -31,6 +29,8 @@ versionan ni se publican.
 | `src-2011-jca-segovia-6.pdf` | `b3f347ad` | 23 | sí | SRC-2011-JCA-SEGOVIA-6 | procesado | sí |
 | `src-2011-jpi5-segovia-70.pdf` | `8ce35d9a` | 13 | no | SRC-2011-JPI5-SEGOVIA-70 | procesado | sí |
 | `src-2011-tsjcyl-271.pdf` | `c99090f3` | 26 | sí | SRC-2011-TSJCYL-271 | procesado | sí |
+| `src-2012-asc-oposicion-apelacion.pdf` | `d0723282` | 19 | sí | SRC-2012-ASC-OPOSICION-APELACION | procesado | sí |
+| `src-2012-cp-ayto-apelaciones.pdf` | `8eb33b94` | 52 | no | SRC-2012-CP-AYTO-APELACIONES | procesado | sí |
 | `src-2012-jca-segovia-auto-ejecucion.pdf` | `62a3a998` | 15 | sí | SRC-2012-JCA-SEGOVIA-AUTO-EJECUCION | procesado | sí |
 | `src-2012-tsjcyl-581.pdf` | `e05219b1` | 22 | no | SRC-2012-TSJCYL-581 | procesado | sí |
 | `src-2013-ayto-el-espinar-recepcion.pdf` | `5fbf1408` | 17 | no | SRC-2013-AYTO-EL-ESPINAR-RECEPCION | procesado | sí |
@@ -59,8 +59,8 @@ versionan ni se publican.
 | `2º Sentencia 13072010 Aud Segovia Junta 2006.doc.pdf` | `83ea0e10` | 3 | no | sentencia | fragmento-registrado | sentencia-13072010-aud-segovia-junta-2006-doc.pdf |
 | `37633481_112_DOCSLEG_LCyL_1998_191.pdf` | `a922439b` | 27 | sí | desconocido | material-de-referencia | — |
 | `Acta 1ª Asamb EUCpdf · versión 1_260817_221152.pdf` | `38b6e5e8` | 7 | no | acta | procesado | src-2015-euc-acta-2.pdf |
-| `Apelacion Asoc.Auto recep.Ayto.16-7-2012.pdf` | `d0723282` | 19 | sí | escrito-de-parte | ya-existente | apelacion-asc-20120716.pdf |
-| `Apelación Ayto.y Cdad.26-6-2012.pdf` | `8eb33b94` | 52 | no | escrito-de-parte | ya-existente | apelaciones-ayto-cp-20120626.pdf |
+| `Apelacion Asoc.Auto recep.Ayto.16-7-2012.pdf` | `d0723282` | 19 | sí | escrito-de-parte | procesado | src-2012-asc-oposicion-apelacion.pdf |
+| `Apelación Ayto.y Cdad.26-6-2012.pdf` | `8eb33b94` | 52 | no | escrito-de-parte | procesado | src-2012-cp-ayto-apelaciones.pdf |
 | `Auto Recepción.pdf` | `62a3a998` | 15 | sí | auto | procesado | src-2012-jca-segovia-auto-ejecucion.pdf |
 | `Auto_55_2011_Audiencia_Provincial_Segovia.pdf` | `0603c438` | 4 | no | auto | procesado | src-2011-ap-segovia-auto-55.pdf |
 | `Burofax Solicitud Asamblea.pdf` | `f45053f0` | 3 | no | escrito-de-parte | procesado | src-2009-asc-burofax.pdf |
@@ -80,7 +80,7 @@ versionan ni se publican.
 | `SENTENCIA TSJ 30-4-2019pdf · versión 1_260817_215148.pdf` | `cbb52769` | 20 | sí | sentencia | procesado | src-2019-tsjcyl-114.pdf |
 | `SENTENCIA TSJ RECEPCION DE LOS ANGELES DE SRpdf ·_260817_214607.pdf` | `e05219b1` | 22 | no | sentencia | procesado | src-2012-tsjcyl-581.pdf |
 | `SENTENCIA110203.pdf` | `722e48cc` | 4 | no | sentencia | procesado | src-2002-jpi1-segovia-158.pdf |
-| `SOLICITUD de AMPARO.pdf` | `748746b2` | 24 | no | escrito-de-parte | ya-existente | solicitud-de-amparo.pdf |
+| `SOLICITUD de AMPARO.pdf` | `748746b2` | 24 | no | escrito-de-parte | procesado | src-2009-cp-lasr-amparo.pdf |
 | `SOLICITUD de AMPARO2.pdf` | `e3e3ea37` | 1 | no | escrito-de-parte | anexo-registrado | solicitud-de-amparo-2.pdf |
 | `Sentencia 13072010 Aud Segovia Junta 06.pdf` | `27931a85` | 6 | sí | sentencia | procesado | src-2010-ap-segovia-156.pdf |
 | `Sentencia Acuerdo Aquagest.pdf` | `fa4cddd8` | 5 | no | sentencia | duplicado-registrado | sentencia-aud-139-2005-anul-asamblea-14032004.pdf |

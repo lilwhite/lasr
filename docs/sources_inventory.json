@@ -79,8 +79,8 @@
         "textChars": 1278,
         "hasTextLayer": true,
         "docTypeGuess": "escrito-de-parte",
-        "canonical": "apelacion-asc-20120716.pdf",
-        "status": "ya-existente"
+        "canonical": "src-2012-asc-oposicion-apelacion.pdf",
+        "status": "procesado"
       },
       {
         "kind": "master",
@@ -93,8 +93,8 @@
         "textChars": 0,
         "hasTextLayer": false,
         "docTypeGuess": "escrito-de-parte",
-        "canonical": "apelaciones-ayto-cp-20120626.pdf",
-        "status": "ya-existente"
+        "canonical": "src-2012-cp-ayto-apelaciones.pdf",
+        "status": "procesado"
       },
       {
         "kind": "master",
@@ -375,8 +375,8 @@
         "textChars": 0,
         "hasTextLayer": false,
         "docTypeGuess": "escrito-de-parte",
-        "canonical": "solicitud-de-amparo.pdf",
-        "status": "ya-existente"
+        "canonical": "src-2009-cp-lasr-amparo.pdf",
+        "status": "procesado"
       },
       {
         "kind": "master",
@@ -628,36 +628,6 @@
     "files": [
       {
         "kind": "work",
-        "name": "apelacion-asc-20120716.pdf",
-        "relpath": "apelacion-asc-20120716.pdf",
-        "ext": ".pdf",
-        "size": 252921,
-        "sha256": "d0723282148fc92bcde8182498604a8ad38ea0c04c95d59b6cfda57b8a638cb4",
-        "pages": 19,
-        "textChars": 1278,
-        "hasTextLayer": true,
-        "docTypeGuess": "escrito-de-parte",
-        "inMaster": true,
-        "sourceId": null,
-        "status": "pendiente-de-analisis"
-      },
-      {
-        "kind": "work",
-        "name": "apelaciones-ayto-cp-20120626.pdf",
-        "relpath": "apelaciones-ayto-cp-20120626.pdf",
-        "ext": ".pdf",
-        "size": 2890987,
-        "sha256": "8eb33b9403cd9e7fcfa5b173cb04bad22c53f462d12129e4f3fef9406580212a",
-        "pages": 52,
-        "textChars": 0,
-        "hasTextLayer": false,
-        "docTypeGuess": "escrito-de-parte",
-        "inMaster": true,
-        "sourceId": null,
-        "status": "pendiente-de-analisis"
-      },
-      {
-        "kind": "work",
         "name": "informe-tecnico-ayto.pdf",
         "relpath": "informe-tecnico-ayto.pdf",
         "ext": ".pdf",
@@ -752,21 +722,6 @@
       },
       {
         "kind": "work",
-        "name": "solicitud-de-amparo.pdf",
-        "relpath": "solicitud-de-amparo.pdf",
-        "ext": ".pdf",
-        "size": 1284365,
-        "sha256": "748746b2dd71b5370af501a57ecff46cc86eaff2b748f6d9f58ca83f223393d8",
-        "pages": 24,
-        "textChars": 0,
-        "hasTextLayer": false,
-        "docTypeGuess": "escrito-de-parte",
-        "inMaster": true,
-        "sourceId": null,
-        "status": "pendiente-de-analisis"
-      },
-      {
-        "kind": "work",
         "name": "src-1996-asc-cp-acuerdo.pdf",
         "relpath": "src-1996-asc-cp-acuerdo.pdf",
         "ext": ".pdf",
@@ -838,6 +793,21 @@
         "docTypeGuess": "comunicacion",
         "inMaster": true,
         "sourceId": "SRC-2009-ASC-BUROFAX",
+        "status": "procesado"
+      },
+      {
+        "kind": "work",
+        "name": "src-2009-cp-lasr-amparo.pdf",
+        "relpath": "src-2009-cp-lasr-amparo.pdf",
+        "ext": ".pdf",
+        "size": 1284365,
+        "sha256": "748746b2dd71b5370af501a57ecff46cc86eaff2b748f6d9f58ca83f223393d8",
+        "pages": 24,
+        "textChars": 0,
+        "hasTextLayer": false,
+        "docTypeGuess": "escrito-de-parte",
+        "inMaster": true,
+        "sourceId": "SRC-2009-CP-LASR-AMPARO",
         "status": "procesado"
       },
       {
@@ -958,6 +928,36 @@
         "docTypeGuess": "desconocido",
         "inMaster": true,
         "sourceId": "SRC-2011-TSJCYL-271",
+        "status": "procesado"
+      },
+      {
+        "kind": "work",
+        "name": "src-2012-asc-oposicion-apelacion.pdf",
+        "relpath": "src-2012-asc-oposicion-apelacion.pdf",
+        "ext": ".pdf",
+        "size": 252921,
+        "sha256": "d0723282148fc92bcde8182498604a8ad38ea0c04c95d59b6cfda57b8a638cb4",
+        "pages": 19,
+        "textChars": 1278,
+        "hasTextLayer": true,
+        "docTypeGuess": "escrito-de-parte",
+        "inMaster": true,
+        "sourceId": "SRC-2012-ASC-OPOSICION-APELACION",
+        "status": "procesado"
+      },
+      {
+        "kind": "work",
+        "name": "src-2012-cp-ayto-apelaciones.pdf",
+        "relpath": "src-2012-cp-ayto-apelaciones.pdf",
+        "ext": ".pdf",
+        "size": 2890987,
+        "sha256": "8eb33b9403cd9e7fcfa5b173cb04bad22c53f462d12129e4f3fef9406580212a",
+        "pages": 52,
+        "textChars": 0,
+        "hasTextLayer": false,
+        "docTypeGuess": "escrito-de-parte",
+        "inMaster": true,
+        "sourceId": "SRC-2012-CP-AYTO-APELACIONES",
         "status": "procesado"
       },
       {
