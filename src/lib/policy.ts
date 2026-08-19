@@ -93,6 +93,8 @@ export const DOC_TYPE_LABEL: Record<string, string> = {
   presupuesto: 'Presupuesto',
   circular: 'Circular',
   informe: 'Informe',
+  'escrito-de-parte': 'Escrito de parte',
+  'instrumento-urbanistico': 'Instrumento urbanístico',
 };
 
 export const EVENT_TYPE_LABEL: Record<string, string> = {

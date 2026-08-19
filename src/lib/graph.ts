@@ -67,6 +67,32 @@ function checkAll(owner: string, ids: readonly string[] | undefined, field: stri
   }
 }
 
+type CitationLike = { source: string; pdfPages: number[] };
+
+/**
+ * Una cita no puede apuntar a una página que el documento no tiene. Es el
+ * fallo típico al transcribir citas desde una caché de OCR: una página en
+ * blanco que el volcado omite desplaza toda la numeración posterior, y el
+ * error solo se nota al cotejar contra el PDF. Solo se comprueba cuando el
+ * Source declara `pages` (es opcional).
+ */
+function checkPdfPages(
+  owner: string,
+  citations: readonly CitationLike[] | undefined,
+  field: string,
+  errors: string[],
+) {
+  for (const c of citations ?? []) {
+    const pages = (byId.get(c.source)?.data as { pages?: number } | undefined)?.pages;
+    if (typeof pages !== 'number') continue;
+    for (const p of c.pdfPages) {
+      if (p > pages) {
+        errors.push(`${owner} → ${field}: cita la página ${p} de ${c.source}, que tiene ${pages}`);
+      }
+    }
+  }
+}
+
 {
   const errors: string[] = [];
   for (const entry of byId.values()) {
@@ -87,11 +113,14 @@ function checkAll(owner: string, ids: readonly string[] | undefined, field: stri
     for (const r of (d as { relations?: { target: string }[] }).relations ?? []) {
       checkAll(owner, [r.target], 'relations.target', errors);
     }
-    for (const c of (d as { citations?: { source: string }[] }).citations ?? []) {
+    const citations = (d as { citations?: CitationLike[] }).citations;
+    for (const c of citations ?? []) {
       checkAll(owner, [c.source], 'citations.source', errors);
     }
-    for (const ev of (d as { dateEvidence?: { citations: { source: string }[] }[] }).dateEvidence ?? []) {
+    checkPdfPages(owner, citations, 'citations.pdfPages', errors);
+    for (const ev of (d as { dateEvidence?: { citations: CitationLike[] }[] }).dateEvidence ?? []) {
       for (const c of ev.citations) checkAll(owner, [c.source], 'dateEvidence.citations.source', errors);
+      checkPdfPages(owner, ev.citations, 'dateEvidence.citations.pdfPages', errors);
     }
   }
   if (errors.length > 0) {

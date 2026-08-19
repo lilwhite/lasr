@@ -48,7 +48,8 @@ id: SRC-2012-TSJCYL-581           # obligatorio, único, ver §8
 title: >-                          # título editorial legible
   Sentencia 581/2012 del TSJ de Castilla y León …
 docType: sentencia                 # sentencia | auto | estatutos | acta | convenio | comunicacion |
-                                   # resolucion-administrativa | presupuesto | circular | informe
+                                   # resolucion-administrativa | presupuesto | circular | informe |
+                                   # escrito-de-parte | instrumento-urbanistico
 date: 2012-12-21                   # fecha del documento (no de notificación)
 issuer: ACTOR-TSJCYL-SALA-CA-BURGOS  # actor que emite el documento
 resolutionNumber: "581/2012"       # opcional (resoluciones)
@@ -74,6 +75,14 @@ Cuerpo: descripción del documento, calidad del escaneo, observaciones de captur
 ```
 
 Un Source **no** tiene `status` editorial ni `basis`: el documento es el que es. Lo que se revisa es su publicabilidad (`privacyReview`).
+
+**Un Source es un fichero, 1:1.** Un PDF da lugar como mucho a un Source, y un Source apunta como mucho a un PDF. La razón es operativa: `sha256` identifica un fichero, y `scripts/inventory.py` cruza documentos y fichas por ese hash; dos Sources compartiendo `sha256` harían desaparecer uno del inventario en silencio. Cuando un solo fichero contiene varios documentos (p. ej. dos escritos de apelación encuadernados juntos), se ficha **un** Source: las partes van en `parties[]`, la estructura interna se explica en el cuerpo y cada `locator` indica de qué pieza procede la cita, igual que con los documentos transcritos (§6). Cuando un documento llega partido en varios ficheros (un escrito y su acuse de registro), se ficha el principal y el resto se anota en el registro documental.
+
+**Notas sobre `docType`.** `escrito-de-parte` cubre todo escrito procesal dirigido a un órgano (demanda, apelación, recurso de amparo): la distinción entre ellos vive en `procedure`, `issuer` y el cuerpo, no en una taxonomía paralela. Sus notas son casi siempre `type: claim` (§9.4). Una comunicación entre partes privadas, aunque sea fehaciente (burofax), es `comunicacion`, no `escrito-de-parte`. `instrumento-urbanistico` cubre el planeamiento (planes parciales y generales, proyectos de urbanización).
+
+**La legislación no es un Source.** Un Source es un documento primario *del caso*: tiene emisor dentro del relato, procedimiento y privacidad que revisar. Una norma no tiene nada de eso, y citar `pdfPages` de un ejemplar cualquiera de una ley es peor trazabilidad que citar artículo y boletín — más aún cuando existen versiones consolidadas sucesivas del mismo texto. El corpus cita norma a través de la resolución que la aplica. Los ejemplares de normativa que aparezcan entre los documentos originales se anotan como material de referencia en el registro documental.
+
+**Registro documental.** `docs/document_registry.json` (fuente de verdad) y su volcado legible `docs/DOCUMENT_REGISTRY.md` recogen los ficheros originales que **no** dan lugar a un Source, con su `sha256` como clave: duplicados exactos de un documento ya fichado (`duplicate-of`), copias parciales (`fragment-of`), anexos y acuses (`annex-of`), normativa y doctrina (`reference-material`) y fragmentos no atribuibles a ningún documento conocido (`unidentified`). Cada entrada lleva la evidencia de la identificación. Sin este registro, `inventory.py` mostraría esos ficheros como pendientes indefinidamente, porque su `sha256` no coincide con ninguna ficha. En el Source afectado se añade además una línea en su bloque `**Captura**`/`**Versiones**` remitiendo al registro.
 
 **Sources sin fichero (stubs).** Muchos documentos se conocen solo porque otro documento los cita (p. ej. el auto de 24.2.2012, citado por la STSJ 581/2012, cuyo PDF no tenemos). En la v1 estos documentos se representan como **Events** con citas al documento que los menciona. Si más adelante conviene citarlos como fuente (p. ej. al conseguir el PDF), se crea su Source con `file: null` hasta tener el fichero. No crear stubs preventivamente.
 
@@ -381,7 +390,10 @@ Reglas:
 ```
 docs/CONTENT_MODEL.md              # este documento
 docs/SOURCES_INVENTORY.md          # inventario y correspondencia de nombres (versionado)
+docs/DOCUMENT_REGISTRY.md          # ficheros que no dan lugar a Source (versionado)
+docs/document_registry.json        # el mismo registro, fuente de verdad editada a mano
 private-sources/pdf/               # originales; EXCLUIDO de Git vía .gitignore
+private-sources/text/              # caché de texto/OCR, generada por scripts/ocr.py; EXCLUIDA
 src/content/
   sources/    src-2012-tsjcyl-581.md …
   notes/      note-2012-tsjcyl-581-001.md …

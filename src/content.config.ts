@@ -53,6 +53,7 @@ const sources = defineCollection({
     docType: z.enum([
       'sentencia', 'auto', 'estatutos', 'acta', 'convenio', 'comunicacion',
       'resolucion-administrativa', 'presupuesto', 'circular', 'informe',
+      'escrito-de-parte', 'instrumento-urbanistico',
     ]),
     date: z.date(),
     issuer: actorRef,
