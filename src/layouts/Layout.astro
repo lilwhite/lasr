@@ -1,0 +1,91 @@
+---
+import '../styles/global.css';
+import { PREVIEW } from '../lib/policy';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title} · LASR-Web</title>
+    {description && <meta name="description" content={description} />}
+  </head>
+  <body>
+    {PREVIEW && (
+      <div class="preview-banner" role="status">
+        Vista de trabajo: se muestra contenido en borrador y documentos aún no publicables.
+      </div>
+    )}
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="/">LASR‑Web</a>
+        <nav aria-label="Principal">
+          <a href="/">Inicio</a>
+          <a href="/temas/recepcion-de-la-urbanizacion/">Recepción</a>
+          {PREVIEW && <a href="/revision/" class="nav-review">Revisión</a>}
+        </nav>
+      </div>
+    </header>
+    <main class="container">
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div class="container">
+        <p class="muted">
+          LASR‑Web documenta la historia jurídica y administrativa de Los Ángeles de San Rafael a
+          partir de documentación primaria. Cada afirmación enlaza con su fuente.
+          <strong>No es asesoramiento jurídico.</strong>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style>
+  .preview-banner {
+    background: var(--warn-bg);
+    color: var(--warn);
+    font-size: 0.85rem;
+    text-align: center;
+    padding: 0.35rem 1rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .site-header {
+    background: var(--surface);
+    border-bottom: 2px solid var(--stamp);
+  }
+  .header-inner {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-block: 0.8rem;
+  }
+  .brand {
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+  }
+  .brand:hover { color: var(--stamp-strong); }
+  nav { display: flex; gap: 1rem; font-size: 0.95rem; }
+  nav a { text-decoration: none; color: var(--ink-soft); }
+  nav a:hover { color: var(--stamp); text-decoration: underline; }
+  nav a.nav-review { color: var(--warn); font-weight: 600; }
+  main { padding-block: 2rem 3rem; min-height: 60vh; }
+  .site-footer {
+    border-top: 1px solid var(--line);
+    background: var(--surface);
+    padding-block: 1.2rem;
+    font-size: 0.88rem;
+  }
+</style>

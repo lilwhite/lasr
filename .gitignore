@@ -1,0 +1,11 @@
+# Documentos originales: NUNCA se versionan (pueden contener datos personales)
+private-sources/
+
+# Astro / Node
+node_modules/
+dist/
+.astro/
+
+# Sistema
+.DS_Store
+Thumbs.db

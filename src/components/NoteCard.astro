@@ -1,0 +1,46 @@
+---
+/**
+ * Presentación estándar de una AtomicNote en listas: afirmación + insignias de
+ * estado sistemáticas + citas. La política de etiquetado vive en lib/policy.
+ */
+import Badge from './Badge.astro';
+import Citation from './Citation.astro';
+import { entityRoute, type Note } from '../lib/graph';
+import { editorialBadge, evidenceBadge, showEvidenceBadge, basisBadge, NOTE_TYPE_LABEL } from '../lib/policy';
+
+interface Props {
+  note: Note;
+  /** Mostrar las citas de la nota (por defecto sí). */
+  citations?: boolean;
+}
+const { note, citations = true } = Astro.props;
+---
+
+<article class="note-card">
+  <div class="badge-row">
+    <Badge label={NOTE_TYPE_LABEL[note.data.type]} tone="neutral" />
+    <Badge {...basisBadge(note.data.basis)} />
+    <Badge {...editorialBadge(note.data.editorialStatus)} />
+    {showEvidenceBadge(note.data.evidenceStatus) && <Badge {...evidenceBadge(note.data.evidenceStatus)} />}
+  </div>
+  <p class="note-title"><a href={entityRoute(note)}>{note.data.title}</a></p>
+  {citations && note.data.citations.map((c) => <Citation citation={c} />)}
+</article>
+
+<style>
+  .note-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 0.9rem 1.1rem;
+    margin: 0.8rem 0;
+  }
+  .note-card .badge-row { margin-top: 0; }
+  .note-title {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    margin: 0.4rem 0 0.5rem;
+  }
+  .note-title a { color: var(--ink); text-decoration: none; }
+  .note-title a:hover { color: var(--stamp-strong); text-decoration: underline; }
+</style>

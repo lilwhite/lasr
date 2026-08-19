@@ -1,0 +1,76 @@
+---
+import Badge from './Badge.astro';
+import EntityLink from './EntityLink.astro';
+import { eventSortKey, eventDateText, type Event } from '../lib/graph';
+import { visibleOnly, editorialBadge, EVENT_TYPE_LABEL } from '../lib/policy';
+
+interface Props {
+  events: Event[];
+}
+const { events } = Astro.props;
+const sorted = visibleOnly(events).sort((a, b) => eventSortKey(a) - eventSortKey(b));
+---
+
+<ol class="timeline">
+  {sorted.map((e) => (
+    <li class="tl-item">
+      <div class="tl-date">
+        {eventDateText(e)}
+        {e.data.dateStatus === 'disputed' && <Badge label="Fecha disputada" tone="alert" />}
+      </div>
+      <div class="tl-body">
+        <span class="tl-type">{EVENT_TYPE_LABEL[e.data.type]}</span>
+        <EntityLink id={e.data.id} />
+        {e.data.editorialStatus === 'draft' && <Badge {...editorialBadge(e.data.editorialStatus)} />}
+      </div>
+    </li>
+  ))}
+</ol>
+
+<style>
+  .timeline {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+    border-left: 2px solid var(--line);
+  }
+  .tl-item {
+    position: relative;
+    padding: 0 0 1.1rem 1.3rem;
+    margin: 0;
+  }
+  .tl-item::before {
+    content: '';
+    position: absolute;
+    left: -6px;
+    top: 0.45rem;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--stamp);
+    border: 2px solid var(--paper);
+  }
+  .tl-date {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .tl-body {
+    display: flex;
+    gap: 0.5rem;
+    align-items: baseline;
+    flex-wrap: wrap;
+    margin-top: 0.1rem;
+  }
+  .tl-type {
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--stamp);
+  }
+</style>

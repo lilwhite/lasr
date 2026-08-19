@@ -1,0 +1,30 @@
+---
+import type { BadgeTone } from '../lib/policy';
+
+interface Props {
+  label: string;
+  tone?: BadgeTone;
+}
+const { label, tone = 'neutral' } = Astro.props;
+---
+
+<span class:list={['badge', `badge--${tone}`]}>{label}</span>
+
+<style>
+  .badge {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    padding: 0.14rem 0.5rem;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    white-space: nowrap;
+  }
+  .badge--neutral { background: var(--stamp-soft); color: var(--info); border-color: #d4ddeb; }
+  .badge--info { background: var(--info-bg); color: var(--info); border-color: #ccd7e6; }
+  .badge--ok { background: var(--ok-bg); color: var(--ok); border-color: #c8ddd0; }
+  .badge--warn { background: var(--warn-bg); color: var(--warn); border-color: #ecdba6; }
+  .badge--alert { background: var(--alert-bg); color: var(--alert); border-color: #eccbc3; }
+</style>

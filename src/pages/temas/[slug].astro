@@ -1,0 +1,124 @@
+---
+import { render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Timeline from '../../components/Timeline.astro';
+import NoteCard from '../../components/NoteCard.astro';
+import EntityLink from '../../components/EntityLink.astro';
+import Badge from '../../components/Badge.astro';
+import { graph, entitySlug, topicMembers, sourceShortLabel } from '../../lib/graph';
+import { visibleOnly, ACTOR_TYPE_LABEL, DOC_TYPE_LABEL } from '../../lib/policy';
+
+export async function getStaticPaths() {
+  return visibleOnly(graph.topics).map((t) => ({
+    params: { slug: entitySlug(t) },
+    props: { topic: t },
+  }));
+}
+
+const { topic } = Astro.props;
+const { Content } = await render(topic);
+const members = topicMembers(topic.data.id);
+
+const events = visibleOnly(members.events);
+const notes = visibleOnly(members.notes);
+const sources = visibleOnly(members.sources);
+const procedures = visibleOnly(members.procedures);
+const questions = visibleOnly(members.questions);
+const actors = visibleOnly(members.actors);
+
+const keyNotes = notes.filter((n) => ['ruling', 'obligation', 'agreement', 'legal-principle'].includes(n.data.type));
+const otherNotes = notes.filter((n) => !keyNotes.includes(n));
+const rootProcedures = procedures.filter((p) => p.data.parent === null);
+const childrenOf = (id: string) => procedures.filter((p) => p.data.parent === id);
+---
+
+<Layout title={topic.data.title} description={topic.data.summary}>
+  <p class="eyebrow">Tema</p>
+  <h1>{topic.data.title}</h1>
+  <p class="muted">{topic.data.summary}</p>
+  <p class="meta-id">{topic.data.id}</p>
+
+  <section class="prose">
+    <Content />
+  </section>
+
+  <h2>Cronología</h2>
+  <Timeline events={events} />
+
+  <h2>Lo que establecen las resoluciones y acuerdos</h2>
+  {keyNotes.map((n) => <NoteCard note={n} />)}
+
+  {otherNotes.length > 0 && (
+    <>
+      <h2>Hechos y alegaciones documentadas</h2>
+      {otherNotes.map((n) => <NoteCard note={n} />)}
+    </>
+  )}
+
+  {questions.length > 0 && (
+    <>
+      <h2>Preguntas de vecino</h2>
+      <ul class="entity-list">
+        {questions.map((q) => (
+          <li>
+            <EntityLink id={q.data.id} />
+          </li>
+        ))}
+      </ul>
+    </>
+  )}
+
+  <h2>Documentos</h2>
+  <ul class="entity-list">
+    {sources.map((s) => (
+      <li>
+        <div class="badge-row" style="margin:0 0 0.2rem">
+          <Badge label={DOC_TYPE_LABEL[s.data.docType]} tone="neutral" />
+          <span class="meta-id">{sourceShortLabel(s)}</span>
+        </div>
+        <EntityLink id={s.data.id} />
+      </li>
+    ))}
+  </ul>
+
+  {rootProcedures.length > 0 && (
+    <>
+      <h2>Procedimientos</h2>
+      <ul class="entity-list">
+        {rootProcedures.map((p) => (
+          <li>
+            <EntityLink id={p.data.id} />
+            {childrenOf(p.data.id).length > 0 && (
+              <ul>
+                {childrenOf(p.data.id).map((c) => (
+                  <li>
+                    <EntityLink id={c.data.id} />
+                    {childrenOf(c.data.id).length > 0 && (
+                      <ul>
+                        {childrenOf(c.data.id).map((g) => (
+                          <li><EntityLink id={g.data.id} /></li>
+                        ))}
+                      </ul>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </li>
+        ))}
+      </ul>
+    </>
+  )}
+
+  <h2>Actores</h2>
+  <ul class="entity-list">
+    {actors.map((a) => (
+      <li>
+        <div class="badge-row" style="margin:0 0 0.2rem">
+          <Badge label={ACTOR_TYPE_LABEL[a.data.type]} tone="neutral" />
+        </div>
+        <EntityLink id={a.data.id} />
+      </li>
+    ))}
+  </ul>
+</Layout>

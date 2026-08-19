@@ -1,0 +1,52 @@
+---
+/**
+ * Layout del área de revisión editorial. SOLO se usa en páginas bajo
+ * /revision/, cuyas rutas no se generan en builds públicas (getStaticPaths
+ * vacío cuando !PREVIEW).
+ */
+import Layout from './Layout.astro';
+
+interface Props {
+  title: string;
+}
+const { title } = Astro.props;
+---
+
+<Layout title={`Revisión · ${title}`}>
+  <div class="review-band" role="note">
+    <span class="review-mark">⚠ Área de revisión</span>
+    <span>— herramienta editorial interna; no forma parte del sitio público.</span>
+  </div>
+  <nav class="review-nav" aria-label="Revisión">
+    <a href="/revision/">Dashboard</a>
+    <a href="/revision/notas/">Notas</a>
+  </nav>
+  <slot />
+</Layout>
+
+<style>
+  .review-band {
+    background: repeating-linear-gradient(
+      -45deg,
+      var(--warn-bg),
+      var(--warn-bg) 12px,
+      #f3e3b3 12px,
+      #f3e3b3 24px
+    );
+    border: 1px solid #e4cf8f;
+    border-radius: 6px;
+    color: var(--warn);
+    font-size: 0.9rem;
+    padding: 0.55rem 0.9rem;
+    margin-bottom: 0.8rem;
+  }
+  .review-mark { font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
+  .review-nav {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.92rem;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 0.6rem;
+    margin-bottom: 1.2rem;
+  }
+</style>

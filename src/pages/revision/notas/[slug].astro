@@ -1,0 +1,160 @@
+---
+import { render } from 'astro:content';
+import ReviewLayout from '../../../layouts/ReviewLayout.astro';
+import Badge from '../../../components/Badge.astro';
+import EntityLink from '../../../components/EntityLink.astro';
+import {
+  notesOrdered, entitySlug, entityRoute, resolve, inverseRelations, questionsAnsweredBy,
+  sourceShortLabel, type Source, type Note,
+} from '../../../lib/graph';
+import {
+  PREVIEW, editorialBadge, evidenceBadge, basisBadge, NOTE_TYPE_LABEL, RELATION_LABEL,
+} from '../../../lib/policy';
+
+export async function getStaticPaths() {
+  if (!PREVIEW) return [];
+  const ordered = notesOrdered();
+  return ordered.map((n, i) => ({
+    params: { slug: entitySlug(n) },
+    props: {
+      note: n,
+      prev: i > 0 ? ordered[i - 1] : null,
+      next: i < ordered.length - 1 ? ordered[i + 1] : null,
+      position: i + 1,
+      total: ordered.length,
+    },
+  }));
+}
+
+interface Props {
+  note: Note;
+  prev: Note | null;
+  next: Note | null;
+  position: number;
+  total: number;
+}
+const { note, prev, next, position, total } = Astro.props;
+const d = note.data;
+const { Content } = await render(note);
+const inverse = inverseRelations(d.id);
+const questions = questionsAnsweredBy(d.id);
+const citedSources = [...new Set(d.citations.map((c) => c.source))].map((id) => resolve(id) as Source);
+const citedProcedures = [...new Set(citedSources.flatMap((s) => (s.data.procedure ? [s.data.procedure] : [])))];
+---
+
+<ReviewLayout title={d.id}>
+  <p class="eyebrow">Nota {position} de {total}</p>
+  <p class="meta-id">{d.id} · <a href={entityRoute(note)}>ver página pública</a></p>
+
+  <h1 class="claim">{d.title}</h1>
+
+  <section class="prose">
+    <Content />
+  </section>
+
+  <h2>Clasificación</h2>
+  <table class="classify">
+    <tbody>
+      <tr><th scope="row">type</th><td><Badge label={NOTE_TYPE_LABEL[d.type]} tone="neutral" /> <code>{d.type}</code></td></tr>
+      <tr><th scope="row">basis</th><td><Badge {...basisBadge(d.basis)} /> <code>{d.basis}</code></td></tr>
+      <tr><th scope="row">editorialStatus</th><td><Badge {...editorialBadge(d.editorialStatus)} /> <code>{d.editorialStatus}</code></td></tr>
+      <tr><th scope="row">evidenceStatus</th><td><Badge {...evidenceBadge(d.evidenceStatus)} /> <code>{d.evidenceStatus}</code></td></tr>
+    </tbody>
+  </table>
+
+  <h2>Evidencia</h2>
+  <p class="muted">
+    Comprobación: la fuente existe · la cita corresponde a la página indicada · la nota representa
+    fielmente la fuente · sin conclusiones no sustentadas · type y basis correctos.
+  </p>
+  {d.citations.map((c) => {
+    const src = resolve(c.source) as Source;
+    return (
+      <div class="evidence">
+        <p class="ev-source">
+          <a href={`/documentos/${entitySlug(src)}/`}>{sourceShortLabel(src)}</a>
+          <span class="muted"> — {src.data.title}</span>
+        </p>
+        <p class="ev-loc">
+          pág. PDF {c.pdfPages.join(', ')}
+          {c.printedPages && <> · pág. impresa {c.printedPages.join(', ')}</>}
+          {c.locator && <> · {c.locator}</>}
+        </p>
+        {c.quote ? (
+          <blockquote class="ev-quote">«{c.quote}»</blockquote>
+        ) : (
+          <p class="muted">Sin extracto literal almacenado.</p>
+        )}
+      </div>
+    );
+  })}
+
+  <h2>Contexto</h2>
+  <ul class="entity-list">
+    {d.topics.map((t) => <li><span class="muted">Topic:</span> <EntityLink id={t} /></li>)}
+    {d.events.map((e) => <li><span class="muted">Event:</span> <EntityLink id={e} /></li>)}
+    {d.actors.map((a) => <li><span class="muted">Actor:</span> <EntityLink id={a} /></li>)}
+    {citedProcedures.map((p) => <li><span class="muted">Procedure (del Source citado):</span> <EntityLink id={p} /></li>)}
+    {questions.map((q) => <li><span class="muted">Responde a:</span> <EntityLink id={q.data.id} /></li>)}
+    {d.relations.map((r) => (
+      <li>
+        <span class="muted">{RELATION_LABEL[r.type].direct}:</span> <EntityLink id={r.target} />
+        {r.note && <p class="muted" style="margin:0.2rem 0 0; font-size:0.88rem">{r.note}</p>}
+      </li>
+    ))}
+    {inverse.map((r) => (
+      <li>
+        <span class="muted">{RELATION_LABEL[r.type].inverse}:</span> <EntityLink id={r.from.data.id} />
+        {r.note && <p class="muted" style="margin:0.2rem 0 0; font-size:0.88rem">{r.note}</p>}
+      </li>
+    ))}
+  </ul>
+
+  <nav class="pager" aria-label="Navegación entre notas">
+    {prev ? (
+      <a href={`/revision/notas/${entitySlug(prev)}/`} rel="prev">← {prev.data.id}</a>
+    ) : (
+      <span class="muted">← (primera nota)</span>
+    )}
+    <a href="/revision/notas/">Listado</a>
+    {next ? (
+      <a href={`/revision/notas/${entitySlug(next)}/`} rel="next">{next.data.id} →</a>
+    ) : (
+      <span class="muted">(última nota) →</span>
+    )}
+  </nav>
+</ReviewLayout>
+
+<style>
+  .claim { font-size: clamp(1.3rem, 3vw, 1.7rem); }
+  .classify th { width: 10rem; font-family: var(--mono); font-size: 0.8rem; font-weight: 400; color: var(--ink-soft); }
+  .evidence {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--stamp);
+    border-radius: 6px;
+    padding: 0.8rem 1rem;
+    margin: 0.8rem 0;
+  }
+  .ev-source { margin: 0; font-weight: 600; }
+  .ev-loc { margin: 0.2rem 0; font-family: var(--mono); font-size: 0.8rem; color: var(--ink-soft); }
+  .ev-quote {
+    font-family: var(--serif);
+    font-size: 1rem;
+    color: var(--ink);
+    border-left: none;
+    padding: 0;
+    margin: 0.5rem 0 0.1rem;
+  }
+  .pager {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    border-top: 1px solid var(--line);
+    margin-top: 2rem;
+    padding-top: 1rem;
+    font-size: 0.92rem;
+    font-family: var(--mono);
+  }
+</style>

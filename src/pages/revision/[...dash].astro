@@ -1,0 +1,139 @@
+---
+import ReviewLayout from '../../layouts/ReviewLayout.astro';
+import Card from '../../components/Card.astro';
+import { graph } from '../../lib/graph';
+import { PREVIEW } from '../../lib/policy';
+
+export async function getStaticPaths() {
+  // El área de revisión no existe en builds públicas
+  return PREVIEW ? [{ params: { dash: undefined } }] : [];
+}
+
+const count = <T,>(items: T[], pred: (x: T) => boolean) => items.filter(pred).length;
+
+const notes = graph.notes;
+const noteStats = {
+  total: notes.length,
+  draft: count(notes, (n) => n.data.editorialStatus === 'draft'),
+  reviewed: count(notes, (n) => n.data.editorialStatus === 'reviewed'),
+  verified: count(notes, (n) => n.data.editorialStatus === 'verified'),
+  disputed: count(notes, (n) => n.data.evidenceStatus === 'disputed'),
+  incomplete: count(notes, (n) => n.data.evidenceStatus === 'incomplete'),
+  unassessed: count(notes, (n) => n.data.evidenceStatus === 'unassessed'),
+};
+
+const events = graph.events;
+const eventStats = {
+  total: events.length,
+  draft: count(events, (e) => e.data.editorialStatus === 'draft'),
+  reviewed: count(events, (e) => e.data.editorialStatus === 'reviewed'),
+  verified: count(events, (e) => e.data.editorialStatus === 'verified'),
+  dateDisputed: count(events, (e) => e.data.dateStatus === 'disputed'),
+};
+
+const sources = graph.sources;
+const sourceStats = {
+  total: sources.length,
+  privacyPending: count(sources, (s) => s.data.privacyReview.status === 'pending'),
+  privacyApproved: count(sources, (s) => s.data.privacyReview.status === 'approved'),
+  needsRedaction: count(sources, (s) => s.data.privacyReview.status === 'needs-redaction'),
+  private: count(sources, (s) => s.data.publicationStatus === 'private'),
+  metadataOnly: count(sources, (s) => s.data.publicationStatus === 'metadata-only'),
+  public: count(sources, (s) => s.data.publicationStatus === 'public'),
+};
+
+const questions = graph.questions;
+const questionStats = {
+  total: questions.length,
+  draft: count(questions, (q) => q.data.editorialStatus === 'draft'),
+  reviewed: count(questions, (q) => q.data.editorialStatus === 'reviewed'),
+  verified: count(questions, (q) => q.data.editorialStatus === 'verified'),
+};
+
+const procedures = graph.procedures;
+const procStats = {
+  total: procedures.length,
+  draft: count(procedures, (p) => p.data.editorialStatus === 'draft'),
+  reviewed: count(procedures, (p) => p.data.editorialStatus === 'reviewed'),
+};
+---
+
+<ReviewLayout title="Dashboard">
+  <h1>Dashboard de revisión</h1>
+  <p class="muted">
+    Estado editorial del corpus. La promoción <code>draft → reviewed</code> se hace editando el
+    Markdown en Git tras comprobar cada cita contra el PDF.
+  </p>
+
+  <Card title="Atomic Notes">
+    <div class="stat-grid">
+      <a class="stat" href="/revision/notas/"><strong>{noteStats.total}</strong><span>total</span></a>
+      <a class="stat stat--warn" href="/revision/notas/?editorial=draft"><strong>{noteStats.draft}</strong><span>draft</span></a>
+      <a class="stat stat--info" href="/revision/notas/?editorial=reviewed"><strong>{noteStats.reviewed}</strong><span>reviewed</span></a>
+      <a class="stat stat--ok" href="/revision/notas/?editorial=verified"><strong>{noteStats.verified}</strong><span>verified</span></a>
+      <a class="stat stat--warn" href="/revision/notas/?evidence=unassessed"><strong>{noteStats.unassessed}</strong><span>evidencia sin evaluar</span></a>
+      <a class="stat stat--alert" href="/revision/notas/?evidence=disputed"><strong>{noteStats.disputed}</strong><span>evidencia disputada</span></a>
+      <a class="stat stat--warn" href="/revision/notas/?evidence=incomplete"><strong>{noteStats.incomplete}</strong><span>evidencia incompleta</span></a>
+    </div>
+  </Card>
+
+  <Card title="Sources">
+    <div class="stat-grid">
+      <div class="stat"><strong>{sourceStats.total}</strong><span>total</span></div>
+      <div class="stat stat--warn"><strong>{sourceStats.privacyPending}</strong><span>privacidad pendiente</span></div>
+      <div class="stat stat--ok"><strong>{sourceStats.privacyApproved}</strong><span>privacidad aprobada</span></div>
+      <div class="stat stat--alert"><strong>{sourceStats.needsRedaction}</strong><span>requiere anonimizar</span></div>
+      <div class="stat"><strong>{sourceStats.private}</strong><span>private</span></div>
+      <div class="stat"><strong>{sourceStats.metadataOnly}</strong><span>metadata-only</span></div>
+      <div class="stat"><strong>{sourceStats.public}</strong><span>public</span></div>
+    </div>
+  </Card>
+
+  <Card title="Events">
+    <div class="stat-grid">
+      <div class="stat"><strong>{eventStats.total}</strong><span>total</span></div>
+      <div class="stat stat--warn"><strong>{eventStats.draft}</strong><span>draft</span></div>
+      <div class="stat stat--info"><strong>{eventStats.reviewed}</strong><span>reviewed</span></div>
+      <div class="stat stat--ok"><strong>{eventStats.verified}</strong><span>verified</span></div>
+      <div class="stat stat--alert"><strong>{eventStats.dateDisputed}</strong><span>fecha disputada</span></div>
+    </div>
+  </Card>
+
+  <Card title="Questions · Topics · Procedures">
+    <div class="stat-grid">
+      <div class="stat"><strong>{questionStats.total}</strong><span>questions</span></div>
+      <div class="stat stat--warn"><strong>{questionStats.draft}</strong><span>questions draft</span></div>
+      <div class="stat stat--info"><strong>{questionStats.reviewed}</strong><span>questions reviewed</span></div>
+      <div class="stat"><strong>{graph.topics.length}</strong><span>topics</span></div>
+      <div class="stat"><strong>{procStats.total}</strong><span>procedures</span></div>
+      <div class="stat stat--warn"><strong>{procStats.draft}</strong><span>procedures draft</span></div>
+    </div>
+  </Card>
+</ReviewLayout>
+
+<style>
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+    gap: 0.6rem;
+  }
+  .stat {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.1rem;
+    padding: 0.6rem 0.8rem;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: var(--paper);
+    text-decoration: none;
+    color: var(--ink);
+  }
+  a.stat:hover { border-color: var(--stamp); }
+  .stat strong { font-size: 1.5rem; font-family: var(--serif); line-height: 1; }
+  .stat span { font-size: 0.78rem; color: var(--ink-soft); }
+  .stat--warn strong { color: var(--warn); }
+  .stat--alert strong { color: var(--alert); }
+  .stat--ok strong { color: var(--ok); }
+  .stat--info strong { color: var(--info); }
+</style>

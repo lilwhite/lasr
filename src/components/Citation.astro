@@ -1,0 +1,62 @@
+---
+/**
+ * Referencia documental renderizada EXCLUSIVAMENTE desde el objeto `citation`
+ * estructurado (CONTENT_MODEL §6). Nunca se escriben referencias a mano.
+ */
+import { resolve, entityRoute, sourceShortLabel, type Source } from '../lib/graph';
+import { isVisible } from '../lib/policy';
+
+interface Props {
+  citation: {
+    source: string;
+    pdfPages: number[];
+    printedPages?: number[];
+    locator?: string;
+    quote?: string;
+  };
+}
+const { citation } = Astro.props;
+const source = resolve(citation.source) as Source;
+const label = sourceShortLabel(source);
+const pages = `pág. PDF ${citation.pdfPages.join(', ')}`;
+const printed = citation.printedPages ? `pág. impresa ${citation.printedPages.join(', ')}` : null;
+const visible = isVisible(source);
+---
+
+<div class="citation">
+  <span class="cite-line">
+    {visible ? <a href={entityRoute(source)}>{label}</a> : <span>{label}</span>}
+    <span class="sep">·</span>
+    <span>{pages}</span>
+    {printed && <><span class="sep">·</span><span>{printed}</span></>}
+    {citation.locator && <><span class="sep">·</span><span>{citation.locator}</span></>}
+  </span>
+  {citation.quote && (
+    <details>
+      <summary>Ver extracto literal</summary>
+      <blockquote>«{citation.quote}»</blockquote>
+    </details>
+  )}
+</div>
+
+<style>
+  .citation {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+    border-left: 3px solid var(--stamp);
+    padding: 0.15rem 0 0.15rem 0.6rem;
+    margin: 0.3rem 0;
+  }
+  .sep { margin-inline: 0.3rem; color: var(--line); }
+  details { margin-top: 0.15rem; }
+  summary { cursor: pointer; font-family: var(--sans); font-size: 0.78rem; }
+  blockquote {
+    font-family: var(--serif);
+    font-size: 0.92rem;
+    margin: 0.3rem 0 0.2rem;
+    border-left: none;
+    padding-left: 0;
+    color: var(--ink);
+  }
+</style>
