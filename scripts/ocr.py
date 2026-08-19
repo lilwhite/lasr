@@ -80,6 +80,32 @@ def useful_chars(text: str) -> int:
     return len(re.sub(r"\s", "", text))
 
 
+# Palabras funcionales que aparecen en cualquier página de castellano. Se mide
+# su DENSIDAD, no su presencia: basta un pie de página legible para que una
+# página por lo demás ilegible contenga alguna.
+_MUESTRA = (" de ", " la ", " el ", " que ", " en ", " los ", " las ", " del ",
+            " por ", " se ", " a ", " no ", " con ", " para ")
+
+# Calibrado sobre este corpus: las páginas legibles puntúan entre 1,1 y 5,4;
+# la capa de texto codificada de la sentencia 22/2017 puntúa 0,18.
+SPANISH_DENSITY = 0.6
+
+
+def looks_like_spanish(text: str) -> bool:
+    """¿Es esta capa de texto castellano legible, o basura con forma de texto?
+
+    Algunos PDF traen una fuente con codificación no estándar: `pdftotext`
+    devuelve texto, pero desplazado carácter a carácter (")$//2" por "FALLO") y
+    sin los dígitos. Parece texto y no lo es. Si se acepta, se sobrescribe en
+    silencio el OCR bueno de ese documento y las citas dejan de verificarse.
+    """
+    if not text.strip():
+        return False
+    low = " " + text.lower() + " "
+    hits = sum(low.count(w) for w in _MUESTRA)
+    return hits / max(len(text) / 100, 1) >= SPANISH_DENSITY
+
+
 def ocr_page(path: Path, page: int) -> tuple[str, str]:
     """Rasteriza y OCRea una página. Devuelve (texto, etiqueta del marcador)."""
     # Directorio temporal propio: pdftoppm escribe ficheros con el prefijo que
@@ -112,7 +138,11 @@ def render_page(args: tuple[str, int, bool]) -> tuple[int, str, str]:
     if not force_ocr:
         text = embedded_text(path, page)
         if useful_chars(text) >= TEXT_THRESHOLD:
-            return page, text, "texto embebido"
+            if looks_like_spanish(text):
+                return page, text, "texto embebido"
+            # Capa de texto ilegible: se rasteriza igualmente y se deja constancia.
+            ocr_text, label = ocr_page(path, page)
+            return page, ocr_text, f"{label} — capa de texto ilegible"
     text, label = ocr_page(path, page)
     return page, text, label
 
