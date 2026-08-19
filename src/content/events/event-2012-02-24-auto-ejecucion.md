@@ -7,6 +7,13 @@ type: order-issued
 actors: [ACTOR-JCA-1-SEGOVIA]
 procedure: PROC-2011-JCA-SEGOVIA-ETJ-20
 citations:
+  - source: SRC-2012-JCA-SEGOVIA-AUTO-EJECUCION
+    pdfPages: [1]
+    locator: "Encabezamiento"
+    quote: "En Segovia, 24 de febrero de dos mil doce"
+  - source: SRC-2012-JCA-SEGOVIA-AUTO-EJECUCION
+    pdfPages: [14, 15]
+    locator: "Parte dispositiva"
   - source: SRC-2012-TSJCYL-581
     pdfPages: [2]
     locator: "Antecedente de hecho Primero (parte dispositiva transcrita)"
@@ -15,4 +22,4 @@ topics: [TOPIC-RECEPCION]
 editorialStatus: draft
 ---
 
-Auto del JCA nº 1 de Segovia que declara que la sentencia firme de 3.6.2011 no había sido ejecutada en sus propios términos y fija las actividades para su correcta ejecución. No disponemos de su PDF: se conoce por su transcripción en la STSJ 581/2012, que lo confirmó.
+Auto del JCA nº 1 de Segovia que declara que la sentencia firme de 3.6.2011 no había sido ejecutada en sus propios términos y fija las actividades para su correcta ejecución. Disponemos de su texto: `SRC-2012-JCA-SEGOVIA-AUTO-EJECUCION`. Su parte dispositiva coincide literalmente con la que la STSJ 581/2012 transcribía, y la fecha de 24 de febrero de 2012 —que este evento ya llevaba incorporada a su identificador— queda confirmada por el encabezamiento del propio auto. El 28 de febrero sellado en la portada es la fecha de notificación, no la del auto.
