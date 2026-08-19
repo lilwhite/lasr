@@ -26,6 +26,7 @@ export const FOOTER_NAV: NavItem[] = [
   { path: '/historia/', label: 'Historia de la urbanización' },
   { path: '/actores/', label: 'Quién es quién' },
   { path: '/procedimientos/', label: 'Procedimientos judiciales' },
+  { path: '/notas/', label: 'Todas las afirmaciones' },
   { path: '/aviso-legal/', label: 'Aviso legal y protección de datos' },
 ];
 
@@ -33,5 +34,4 @@ export const FOOTER_NAV: NavItem[] = [
 export const STATIC_ROUTES: string[] = [
   ...NAV.map((n) => n.path),
   ...FOOTER_NAV.map((n) => n.path),
-  '/notas/',
 ];
