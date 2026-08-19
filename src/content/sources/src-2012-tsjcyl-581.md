@@ -23,7 +23,12 @@ originalFilename: "SENTENCIA TSJ RECEPCION DE LOS ANGELES DE SRpdf ·_260817_214
 pages: 22
 language: es
 topics: [TOPIC-RECEPCION]
-relations: []
+relations:
+  - type: executes
+    target: SRC-2011-TSJCYL-271
+    note: >-
+      Resuelve las apelaciones contra los autos dictados en la pieza de
+      ejecución de esta sentencia firme de 3.6.2011.
 publicationStatus: private
 privacyReview:
   status: pending
