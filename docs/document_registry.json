@@ -86,6 +86,24 @@
       "target": null,
       "evidence": "El mismo texto legal que la entrada anterior, en el texto consolidado del BOE a 14.5.2024 (3 páginas).",
       "note": "Que existan dos ejemplares del mismo texto en distinto estado de consolidación ilustra por qué citar la página de un ejemplar sería peor trazabilidad que citar artículo y boletín."
+    },
+    {
+      "sha256": "a26d48f4355f475ec62b80995ce975983186cf2c558d9ac57ebdd037bcb93d17",
+      "filename": "EMPADRONADO Sí o No.pdf",
+      "location": "master",
+      "reason": "reference-material",
+      "target": null,
+      "evidence": "Nota de una página, sin membrete, fecha ni firma, que resume la normativa general del Padrón Municipal (RD 1690/1986 y art. 15 LRBRL) y el efecto del empadronamiento sobre la financiación municipal. Los metadatos del PDF la atribuyen a un particular y la fechan el 18 de agosto de 2026.",
+      "note": "Material divulgativo elaborado por un vecino, no documento del caso: no tiene emisor dentro del relato, ni procedimiento, ni contenido específico sobre Los Ángeles de San Rafael. La normativa que resume se cita, cuando haga falta, a través de la resolución que la aplique."
+    },
+    {
+      "sha256": "ef881c49ee1e8b3f13b9458eb0fb759c3e7dfeeacbe3a548de95beaf0d883608",
+      "filename": "POBLACIÓN LASR + LAV.pdf",
+      "location": "master",
+      "reason": "reference-material",
+      "target": null,
+      "evidence": "Tabla de una página que compara los núcleos de El Espinar por población a 31.12.2025 y por dotaciones municipales (edificio municipal, colegio, consultorio, instalaciones deportivas, centro cívico, de jóvenes y de mayores, biblioteca y reparto de correo). Declara como origen de la población los datos publicados por el Ayuntamiento el 5.1.2026 y, para Los Ángeles de Vegas de Matute, el INE a 31.12.2024. Metadatos del PDF: mismo particular, 18 de agosto de 2026.",
+      "note": "Compilación de un vecino, no documento primario: la columna de dotaciones no declara fuente y contiene celdas marcadas con interrogante. Su contenido es relevante —Los Ángeles de San Rafael figura como tercer núcleo del término por población (1.853 habitantes) y sin la mayoría de las dotaciones que sí tienen núcleos menores—, pero para incorporarlo al corpus haría falta la publicación municipal de 5.1.2026, que sí sería Source. Queda anotado como pista."
     }
   ]
 }

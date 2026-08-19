@@ -69,12 +69,14 @@ versionan ni se publican.
 | `Carta EUCpdf · versión 1_260817_221402.pdf` | `a2a3b4fd` | 1 | no | comunicacion | procesado | src-2015-euc-convocatoria.pdf |
 | `Circular y sentencia 1852017 .pdf` | `699d86a1` | 22 | sí | sentencia | procesado | src-2026-cp-lasr-circular-001.pdf |
 | `Desestimacion a Oscar contra Ayto..pdf` | `b3f347ad` | 23 | sí | desconocido | procesado | src-2011-jca-segovia-6.pdf |
+| `EMPADRONADO Sí o No.pdf` | `a26d48f4` | 1 | sí | desconocido | material-de-referencia | — |
 | `EXTRACTO LEY 1 1998 de 04 06 98 TEXTO CONSOLIDADO 14052024.pdf` | `87a03ad8` | 3 | no | desconocido | material-de-referencia | — |
 | `Estatutos EUC.pdf` | `a5775585` | 17 | no | estatutos | duplicado-registrado | — |
 | `Estatutos EUCpdf · versión 1_260817_221018.pdf` | `5fbf1408` | 17 | no | estatutos | procesado | src-2013-ayto-el-espinar-recepcion.pdf |
 | `INFORMACION PROPIETARIOS MARZO 2019.pdf` | `594f49f1` | 14 | sí | desconocido | procesado | src-2019-cp-lasr-informacion.pdf |
 | `Informe técnico Los A. San Rafael.pdf` | `4339fcab` | 218 | no | informe | procesado | src-2013-ayto-informe-viales.pdf |
 | `PLAN PARCIAL LOS ÁNGELES DE SAN RAFAEL FINCA EL CARRASCAL.pdf` | `b0c63cf7` | 138 | no | instrumento-urbanistico | procesado | src-1966-plan-parcial-carrascal.pdf |
+| `POBLACIÓN LASR + LAV.pdf` | `ef881c49` | 1 | no | desconocido | material-de-referencia | — |
 | `Presup 2015 EUCpdf · versión 1_260817_221311.pdf` | `309a3f15` | 1 | no | presupuesto | procesado | src-2015-euc-presupuesto.pdf |
 | `SENTENCIA 160317pdf · versión 1_260817_220222.pdf` | `bf4ec6cd` | 10 | no | sentencia | procesado | src-2017-jpi4-segovia-39.pdf |
 | `SENTENCIA TSJ 30-4-2019pdf · versión 1_260817_215148.pdf` | `cbb52769` | 20 | sí | sentencia | procesado | src-2019-tsjcyl-114.pdf |
@@ -108,8 +110,10 @@ normativa. El detalle y la evidencia de cada uno, en `docs/DOCUMENT_REGISTRY.md`
 |---|---|---|---|
 | `2º Sentencia 13072010 Aud Segovia Junta 2006.doc.pdf` | `83ea0e10` | fragmento-registrado | SRC-2010-AP-SEGOVIA-156 |
 | `37633481_112_DOCSLEG_LCyL_1998_191.pdf` | `a922439b` | material-de-referencia | — |
+| `EMPADRONADO Sí o No.pdf` | `a26d48f4` | material-de-referencia | — |
 | `EXTRACTO LEY 1 1998 de 04 06 98 TEXTO CONSOLIDADO 14052024.pdf` | `87a03ad8` | material-de-referencia | — |
 | `Estatutos EUC.pdf` | `a5775585` | duplicado-registrado | SRC-2013-AYTO-EL-ESPINAR-RECEPCION |
+| `POBLACIÓN LASR + LAV.pdf` | `ef881c49` | material-de-referencia | — |
 | `SOLICITUD de AMPARO2.pdf` | `e3e3ea37` | anexo-registrado | SRC-2009-CP-LASR-AMPARO |
 | `Sentencia Acuerdo Aquagest.pdf` | `fa4cddd8` | duplicado-registrado | SRC-2005-JPI3-SEGOVIA-139 |
 | `Sentencia Audiencia Sego 220104.pdf` | `99981b78` | duplicado-registrado | SRC-2003-AP-SEGOVIA-323 |
