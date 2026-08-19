@@ -1,0 +1,91 @@
+{
+  "_comment": [
+    "Registro de ficheros originales que NO dan lugar a un Source. Editado a mano;",
+    "scripts/inventory.py lo lee para no mostrarlos indefinidamente como pendientes.",
+    "La clave es el sha256: sobrevive a renombrados. Ver docs/CONTENT_MODEL.md §3.1.",
+    "reason: duplicate-of | fragment-of | annex-of | reference-material | unidentified"
+  ],
+  "entries": [
+    {
+      "sha256": "271c089333f177c0ab932a34a3350a617f2baff7861144c4dca9c3e5d1bf22aa",
+      "filename": "Sentencia Burgos Recepcion YA 21-12-2012.pdf",
+      "location": "master",
+      "reason": "duplicate-of",
+      "target": "SRC-2012-TSJCYL-581",
+      "evidence": "Mismo número de páginas (22) y texto idéntico en la pág. PDF 3 (antecedente Segundo, recurso de apelación de 16.3.2012).",
+      "note": "Escaneo independiente, también sin capa de texto. No se copia a private-sources/pdf/."
+    },
+    {
+      "sha256": "a5775585a286f62b268987bb0ab9b5fe8931639e4465e2201cf6da0521198386",
+      "filename": "Estatutos EUC.pdf",
+      "location": "master",
+      "reason": "duplicate-of",
+      "target": "SRC-2013-AYTO-EL-ESPINAR-RECEPCION",
+      "evidence": "Mismo número de páginas (17) y texto idéntico en la pág. PDF 5 (autorización de uso gratuito de las instalaciones de agua).",
+      "note": "El nombre del fichero es engañoso en las dos copias: no son los estatutos de la EUC, sino la comunicación del Ayuntamiento que los lleva como Anexo 2."
+    },
+    {
+      "sha256": "fa4cddd82cde26726a43cf7f09702375acc1b61618b53fd61b169ddf2801e2e4",
+      "filename": "Sentencia Acuerdo Aquagest.pdf",
+      "location": "master+work",
+      "reason": "duplicate-of",
+      "target": "SRC-2005-JPI3-SEGOVIA-139",
+      "evidence": "Mismo número de páginas (5) y texto idéntico en la pág. PDF 3.",
+      "note": "Copiado como private-sources/pdf/sentencia-aud-139-2005-anul-asamblea-14032004.pdf. Ni el nombre original ni el de trabajo describen bien el documento: no es una sentencia sobre Aquagest ni de la Audiencia, sino la del JPI nº 3."
+    },
+    {
+      "sha256": "99981b78adc5e0920ae64dc61515442df83b6ad74c31fffa916cc27aba46bd06",
+      "filename": "Sentencia Audiencia Sego 220104.pdf",
+      "location": "master+work",
+      "reason": "duplicate-of",
+      "target": "SRC-2003-AP-SEGOVIA-323",
+      "evidence": "Mismo número de páginas (10) y texto idéntico en la pág. PDF 4.",
+      "note": "Copia recibida por fax el 22.1.2004; la fichada es la versión unificada notificada ese mismo día. Ya documentado en el cuerpo del Source."
+    },
+    {
+      "sha256": "83ea0e103f57672b46be1ac8e107b0e14199887fbc86f2be56f54a3465650edf",
+      "filename": "2º Sentencia 13072010 Aud Segovia Junta 2006.doc.pdf",
+      "location": "master+work",
+      "reason": "fragment-of",
+      "target": "SRC-2010-AP-SEGOVIA-156",
+      "evidence": "Sus 3 páginas reproducen las págs. 4-6 del texto de la sentencia; la frase \"permitan la individualización de los gastos como pretende la Comunidad\" aparece en ambos.",
+      "note": "Ya documentado en el cuerpo del Source."
+    },
+    {
+      "sha256": "09407afd6745fed84ef8ecbfd883aac30dd8b947312473920c9a5d57038edeb9",
+      "filename": "documento_imagen.pdf",
+      "location": "master",
+      "reason": "fragment-of",
+      "target": "SRC-2011-TSJCYL-271",
+      "evidence": "Página suelta con pie \"Página 10 de 38\" y fecha de junio de 2011. Cuatro frases suyas aparecen en el texto de la STSJ 271/2011: \"dando lugar al P.O 753/2008\", \"Etapas de Realización\", \"Modo de ejecución de las obras de urbanización\" y \"27 de julio de 2009\".",
+      "note": "Procede del original notificado, de 38 páginas; la copia fichada es la versión CENDOJ, con maquetación distinta (26 páginas). El dato de las 38 páginas del original solo consta aquí."
+    },
+    {
+      "sha256": "e3e3ea37c85320c4ba7a859336fc39e8f3770a4bce5e6d2fce9fa8d88a1afbb3",
+      "filename": "SOLICITUD de AMPARO2.pdf",
+      "location": "master+work",
+      "reason": "annex-of",
+      "target": "SRC-2009-CP-LASR-AMPARO",
+      "evidence": "Página única con sello del Registro General del Tribunal Constitucional (24-25 de julio de 2009) y referencia al art. 1512 LEC.",
+      "note": "Acuse de registro del recurso de amparo. Se ficha el escrito principal; esta página se documenta en el cuerpo de su Source."
+    },
+    {
+      "sha256": "a922439b929cd7b1f5ecf277fd472dd6053c1ced3bdef1dd0ad08634941a918e",
+      "filename": "37633481_112_DOCSLEG_LCyL_1998_191.pdf",
+      "location": "master",
+      "reason": "reference-material",
+      "target": null,
+      "evidence": "Ley 1/1998, de 4 de junio, de Régimen Local de Castilla y León, en versión de base de datos jurídica (27 páginas, con capa de texto).",
+      "note": "Normativa aplicable, no documentación del caso: no es Source (CONTENT_MODEL §3.1). El corpus cita la norma a través de la resolución que la aplica."
+    },
+    {
+      "sha256": "87a03ad8861a4f745cc0b698f517726e78033d2317500a07d3d5e682e1076b59",
+      "filename": "EXTRACTO LEY 1 1998 de 04 06 98 TEXTO CONSOLIDADO 14052024.pdf",
+      "location": "master",
+      "reason": "reference-material",
+      "target": null,
+      "evidence": "El mismo texto legal que la entrada anterior, en el texto consolidado del BOE a 14.5.2024 (3 páginas).",
+      "note": "Que existan dos ejemplares del mismo texto en distinto estado de consolidación ilustra por qué citar la página de un ejemplar sería peor trazabilidad que citar artículo y boletín."
+    }
+  ]
+}

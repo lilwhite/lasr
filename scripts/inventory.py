@@ -26,9 +26,12 @@ WORK = REPO / "private-sources" / "pdf"
 SOURCES_DIR = REPO / "src" / "content" / "sources"
 JSON_OUT = REPO / "docs" / "sources_inventory.json"
 MD_OUT = REPO / "docs" / "SOURCES_INVENTORY.md"
+REGISTRY_IN = REPO / "docs" / "document_registry.json"
+REGISTRY_MD = REPO / "docs" / "DOCUMENT_REGISTRY.md"
 
 DOC_TYPE_HINTS = [
     (r"sentencia|setencia", "sentencia"),
+    (r"solicitud|apelaci|amparo|recurso|demanda", "escrito-de-parte"),
     (r"auto", "auto"),
     (r"estatutos", "estatutos"),
     (r"acta|asamb", "acta"),
@@ -37,7 +40,7 @@ DOC_TYPE_HINTS = [
     (r"circular", "circular"),
     (r"carta|burofax|comunicaci", "comunicacion"),
     (r"informe", "informe"),
-    (r"solicitud", "solicitud"),
+    (r"plan parcial|plan general|proyecto de urbanizaci", "instrumento-urbanistico"),
 ]
 
 
@@ -58,15 +61,27 @@ def pdf_pages(path: Path) -> int | None:
         return None
 
 
-def text_chars(path: Path, pages: int = 5) -> int:
-    try:
-        out = subprocess.run(
-            ["pdftotext", "-l", str(pages), str(path), "-"],
-            capture_output=True, text=True, timeout=120,
-        )
-        return len(re.sub(r"\s", "", out.stdout))
-    except Exception:
-        return 0
+def text_chars(path: Path, pages: int | None = None) -> int:
+    """Caracteres útiles por página, muestreando principio, medio y final.
+
+    Mirar solo las primeras páginas engaña con los documentos escaneados que
+    llevan una portada generada por ordenador: el plan parcial tiene texto en
+    la página 1 y las otras 137 son imagen.
+    """
+    if pages is None:
+        pages = pdf_pages(path) or 1
+    sample = sorted({1, max(1, pages // 2), pages})
+    total = 0
+    for n in sample:
+        try:
+            out = subprocess.run(
+                ["pdftotext", "-f", str(n), "-l", str(n), str(path), "-"],
+                capture_output=True, text=True, timeout=120,
+            )
+            total += len(re.sub(r"\s", "", out.stdout))
+        except Exception:
+            pass
+    return total // len(sample)
 
 
 def guess_type(name: str) -> str:
@@ -92,8 +107,8 @@ def scan(folder: Path, kind: str) -> list[dict]:
         }
         if entry["ext"] == ".pdf":
             entry["pages"] = pdf_pages(p)
-            entry["textChars"] = text_chars(p)
-            entry["hasTextLayer"] = entry["textChars"] > 100
+            entry["textChars"] = text_chars(p, entry["pages"])
+            entry["hasTextLayer"] = entry["textChars"] > 180
         entry["docTypeGuess"] = guess_type(p.name)
         items.append(entry)
     return items
@@ -112,12 +127,58 @@ def parse_sources() -> dict[str, dict]:
     return out
 
 
+REGISTRY_STATUS = {
+    "duplicate-of": "duplicado-registrado",
+    "fragment-of": "fragmento-registrado",
+    "annex-of": "anexo-registrado",
+    "reference-material": "material-de-referencia",
+    "unidentified": "sin-identificar-registrado",
+}
+
+
+def load_registry() -> dict[str, dict]:
+    """sha256 -> entrada de docs/document_registry.json.
+
+    Sin este registro, un re-escaneo de un documento ya fichado aparecería como
+    pendiente para siempre: su sha256 no coincide con el de ninguna ficha.
+    """
+    if not REGISTRY_IN.exists():
+        return {}
+    data = json.loads(REGISTRY_IN.read_text(encoding="utf-8"))
+    return {e["sha256"]: e for e in data.get("entries", [])}
+
+
+def write_registry_md(registry: dict[str, dict]) -> None:
+    lines = [
+        "# Registro de documentos no fichables",
+        "",
+        "Generado por `scripts/inventory.py` a partir de `docs/document_registry.json`,",
+        "que es la fuente de verdad y se edita a mano. Recoge los ficheros originales que",
+        "**no** dan lugar a un `Source`, con la evidencia de por qué. Ver `docs/CONTENT_MODEL.md` §3.1.",
+        "",
+        "| Fichero | SHA-256 (8) | Motivo | Documento | Evidencia |",
+        "|---|---|---|---|---|",
+    ]
+    for e in sorted(registry.values(), key=lambda x: (x["reason"], x["filename"])):
+        lines.append(
+            f"| `{e['filename']}` | `{e['sha256'][:8]}` | {e['reason']} | "
+            f"{e['target'] or '—'} | {e['evidence']} |"
+        )
+    lines += ["", "## Notas", ""]
+    for e in sorted(registry.values(), key=lambda x: x["filename"]):
+        if e.get("note"):
+            lines.append(f"- **`{e['filename']}`** — {e['note']}")
+    lines.append("")
+    REGISTRY_MD.write_text("\n".join(lines), encoding="utf-8")
+
+
 def main() -> None:
     if not MASTER.is_dir():
         sys.exit(f"Carpeta maestra no accesible: {MASTER}")
     master = scan(MASTER, "master")
     work = scan(WORK, "work")
     sources_by_sha = parse_sources()
+    registry = load_registry()
 
     work_by_sha: dict[str, list[dict]] = {}
     for w in work:
@@ -131,7 +192,11 @@ def main() -> None:
     for m in master:
         matches = work_by_sha.get(m["sha256"], [])
         m["canonical"] = matches[0]["name"] if matches else None
-        if len(master_by_sha[m["sha256"]]) > 1:
+        reg = registry.get(m["sha256"])
+        if reg:
+            m["status"] = REGISTRY_STATUS[reg["reason"]]
+            m["registryTarget"] = reg["target"]
+        elif len(master_by_sha[m["sha256"]]) > 1:
             m["status"] = "duplicado-exacto-en-maestra"
         elif matches:
             m["status"] = "procesado" if m["sha256"] in sources_by_sha else "ya-existente"
@@ -153,12 +218,21 @@ def main() -> None:
         src = sources_by_sha.get(w["sha256"])
         w["inMaster"] = w["sha256"] in master_by_sha
         w["sourceId"] = src["id"] if src else None
-        w["status"] = "procesado" if src else "pendiente-de-analisis"
+        reg = registry.get(w["sha256"])
+        if src:
+            w["status"] = "procesado"
+        elif reg:
+            w["status"] = REGISTRY_STATUS[reg["reason"]]
+            w["registryTarget"] = reg["target"]
+        else:
+            w["status"] = "pendiente-de-analisis"
 
     data = {
         "master": {"path": str(MASTER), "files": master},
         "work": {"path": str(WORK), "files": work},
+        "registry": sorted(registry.values(), key=lambda e: e["filename"]),
     }
+    write_registry_md(registry)
     JSON_OUT.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8")
 
     # --- Markdown ---
@@ -196,6 +270,21 @@ def main() -> None:
         )
     lines += [
         "",
+        "## No fichables (registro documental)",
+        "",
+        "Ficheros que no dan lugar a un `Source`: duplicados, fragmentos, anexos y",
+        "normativa. El detalle y la evidencia de cada uno, en `docs/DOCUMENT_REGISTRY.md`.",
+        "",
+        "| Fichero | SHA-256 (8) | Motivo | Documento |",
+        "|---|---|---|---|",
+    ]
+    for e in sorted(registry.values(), key=lambda x: x["filename"]):
+        lines.append(
+            f"| `{e['filename']}` | `{e['sha256'][:8]}` | {REGISTRY_STATUS[e['reason']]} | "
+            f"{e['target'] or '—'} |"
+        )
+    lines += [
+        "",
         "Los nombres canónicos siguen la convención del proyecto: `src-<año>-<órgano>-<número>.pdf`",
         "cuando el documento tiene Source verificado; nombre descriptivo provisional en caso contrario.",
         "El estado `procesado` significa que existe un Source con ese SHA-256 en `src/content/sources/`.",
@@ -212,6 +301,8 @@ def main() -> None:
     print(f"Trabajo: {len(work)} ficheros; sin copia en maestra: {missing}")
     news = [m["name"] for m in master if m["status"] in ("nuevo", "posible-duplicado")]
     print(f"Candidatos a copiar: {news}")
+    pending = [w["name"] for w in work if w["status"] == "pendiente-de-analisis"]
+    print(f"Pendientes de analizar ({len(pending)}): {pending}")
 
 
 if __name__ == "__main__":
