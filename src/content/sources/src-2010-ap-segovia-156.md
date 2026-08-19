@@ -38,4 +38,4 @@ Sentencia civil (rollo 195/2010) que desestima la apelación de la Comunidad de 
 
 Aplica la doctrina de la STS de 29.5.2009 sobre individualización de gastos comunes y descarta la falta de legitimación por morosidad.
 
-**Versiones**: el corpus contiene además una copia escaneada parcial de esta misma sentencia (fichero `sentencia-13072010-aud-segovia-junta-2006-doc.pdf`, 3 págs. = págs. 4-6 del texto; nombre original "2º Sentencia 13072010 Aud Segovia Junta 2006.doc.pdf"). No se crea un Source separado para esa copia parcial.
+**Versiones**: el corpus contiene además una copia escaneada parcial de esta misma sentencia (fichero `sentencia-13072010-aud-segovia-junta-2006-doc.pdf`, 3 págs. = págs. 4-6 del texto; nombre original "2º Sentencia 13072010 Aud Segovia Junta 2006.doc.pdf"). No se crea un Source separado para esa copia parcial; queda anotada en `docs/DOCUMENT_REGISTRY.md`.

@@ -37,4 +37,4 @@ Fundamentos centrales: la convocatoria se hizo coincidir conscientemente con las
 
 Es la resolución citada en pleitos posteriores como "sentencia del JPI nº 3 de Segovia de 5.10.2005" (errata de fecha; ver `NOTE-2017-JPI4-SEGOVIA-39-005`).
 
-**Versiones**: el corpus contiene una segunda copia escaneada de este mismo documento con distinto SHA-256 (fichero `sentencia-aud-139-2005-anul-asamblea-14032004.pdf`, nombre original "Sentencia Aud 139_2005 Anul Asamblea 14032004.pdf"). Pese a que ese nombre sugiere "Audiencia", su contenido es idéntico a esta sentencia del JPI nº 3; no se crea Source separado. Si existió apelación de esta sentencia, su resolución no consta en el corpus.
+**Versiones**: el corpus contiene una segunda copia escaneada de este mismo documento con distinto SHA-256 (fichero `sentencia-aud-139-2005-anul-asamblea-14032004.pdf`, nombre original "Sentencia Aud 139_2005 Anul Asamblea 14032004.pdf"). Pese a que ese nombre sugiere "Audiencia", su contenido es idéntico a esta sentencia del JPI nº 3; no se crea Source separado. Anotado en `docs/DOCUMENT_REGISTRY.md`. Si existió apelación de esta sentencia, su resolución no consta en el corpus.

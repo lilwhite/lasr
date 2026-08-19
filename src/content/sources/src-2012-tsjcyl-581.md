@@ -36,3 +36,5 @@ privacyReview:
 Sentencia que resuelve las apelaciones contra los autos de 24.2.2012 y 14.5.2012, dictados en la pieza de ejecución de la sentencia firme de 3.6.2011 (PO 28/2009). Confirma la recepción de las fases I y II sin nuevo procedimiento y la constitución de una entidad de conservación por un máximo de cuatro años, y revoca el auto de 14.5.2012 en el extremo que imponía a esa entidad la prestación de los servicios públicos, declarando que su coste corresponde al Ayuntamiento desde la recepción.
 
 **Captura**: escaneo sin capa de texto ni paginación impresa visible; las citas usan páginas físicas del PDF. Fecha de notificación estampada: 2.1.2013 (pág. 1).
+
+**Versiones**: la carpeta maestra contiene un segundo escaneo de esta misma sentencia (fichero original "Sentencia Burgos Recepcion YA 21-12-2012.pdf", sha `271c0893`), con las mismas 22 páginas y texto idéntico en la pág. PDF 3. No se ficha por separado ni se copia a la carpeta de trabajo; queda anotado en `docs/DOCUMENT_REGISTRY.md`.

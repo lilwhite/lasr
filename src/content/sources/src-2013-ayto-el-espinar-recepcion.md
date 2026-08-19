@@ -35,3 +35,5 @@ Documento primario capital del corpus: carta del Alcalde a cada propietario (15.
 La carta abre además un plazo de 15 días hábiles de alegaciones sobre la propuesta de estatutos (art. 193 RUCyL). El nombre original del fichero ("Estatutos EUC") solo describe el Anexo 2.
 
 **Captura**: escaneo sin capa de texto; el documento certificado tiene paginación impresa propia ("Página n de 16") desplazada una unidad respecto a la física (pág. impresa 1 = pág. PDF 2). **Discrepancias internas**: la certificación fecha la sentencia del TSJ como "3 de julio 2011" (pág. PDF 2), errata por 3 de junio de 2011 —origen del mismo error transcrito en la STSJ 16/2019—; y el Anexo 1 aparece sin fecha de firma ("a ... de ... de 2013", pág. PDF 4).
+
+**Versiones**: la carpeta maestra contiene un segundo escaneo del mismo documento (fichero original "Estatutos EUC.pdf", sha `a5775585`), con las mismas 17 páginas y texto idéntico en la pág. PDF 5. Ambas copias arrastran el nombre engañoso. No se ficha por separado ni se copia a la carpeta de trabajo; queda anotado en `docs/DOCUMENT_REGISTRY.md`.
