@@ -9,7 +9,6 @@ versionan ni se publican.
 
 | Fichero canónico | SHA-256 (8) | Págs. | Texto | Source | Estado | ¿En maestra? |
 |---|---|---|---|---|---|---|
-| `informe-tecnico-ayto.pdf` | `4339fcab` | 218 | no | — | pendiente-de-analisis | sí |
 | `sentencia-13072010-aud-segovia-junta-2006-doc.pdf` | `83ea0e10` | 3 | no | — | fragmento-registrado | sí |
 | `sentencia-aud-139-2005-anul-asamblea-14032004.pdf` | `fa4cddd8` | 5 | no | — | duplicado-registrado | sí |
 | `sentencia-audiencia-segovia-220104.pdf` | `99981b78` | 10 | no | — | duplicado-registrado | sí |
@@ -34,6 +33,7 @@ versionan ni se publican.
 | `src-2012-jca-segovia-auto-ejecucion.pdf` | `62a3a998` | 15 | sí | SRC-2012-JCA-SEGOVIA-AUTO-EJECUCION | procesado | sí |
 | `src-2012-tsjcyl-581.pdf` | `e05219b1` | 22 | no | SRC-2012-TSJCYL-581 | procesado | sí |
 | `src-2013-ayto-el-espinar-recepcion.pdf` | `5fbf1408` | 17 | no | SRC-2013-AYTO-EL-ESPINAR-RECEPCION | procesado | sí |
+| `src-2013-ayto-informe-viales.pdf` | `4339fcab` | 218 | no | SRC-2013-AYTO-INFORME-VIALES | procesado | sí |
 | `src-2013-cp-lasr-carta-recepcion.pdf` | `20227811` | 8 | no | SRC-2013-CP-LASR-CARTA-RECEPCION | procesado | sí |
 | `src-2014-cp-lasr-gestion.pdf` | `a662c4ac` | 16 | no | SRC-2014-CP-LASR-GESTION | procesado | sí |
 | `src-2015-euc-acta-2.pdf` | `38b6e5e8` | 7 | no | SRC-2015-EUC-ACTA-2 | procesado | sí |
@@ -73,7 +73,7 @@ versionan ni se publican.
 | `Estatutos EUC.pdf` | `a5775585` | 17 | no | estatutos | duplicado-registrado | — |
 | `Estatutos EUCpdf · versión 1_260817_221018.pdf` | `5fbf1408` | 17 | no | estatutos | procesado | src-2013-ayto-el-espinar-recepcion.pdf |
 | `INFORMACION PROPIETARIOS MARZO 2019.pdf` | `594f49f1` | 14 | sí | desconocido | procesado | src-2019-cp-lasr-informacion.pdf |
-| `Informe técnico Los A. San Rafael.pdf` | `4339fcab` | 218 | no | informe | ya-existente | informe-tecnico-ayto.pdf |
+| `Informe técnico Los A. San Rafael.pdf` | `4339fcab` | 218 | no | informe | procesado | src-2013-ayto-informe-viales.pdf |
 | `PLAN PARCIAL LOS ÁNGELES DE SAN RAFAEL FINCA EL CARRASCAL.pdf` | `b0c63cf7` | 138 | no | instrumento-urbanistico | procesado | src-1966-plan-parcial-carrascal.pdf |
 | `Presup 2015 EUCpdf · versión 1_260817_221311.pdf` | `309a3f15` | 1 | no | presupuesto | procesado | src-2015-euc-presupuesto.pdf |
 | `SENTENCIA 160317pdf · versión 1_260817_220222.pdf` | `bf4ec6cd` | 10 | no | sentencia | procesado | src-2017-jpi4-segovia-39.pdf |

@@ -277,8 +277,8 @@
         "textChars": 0,
         "hasTextLayer": false,
         "docTypeGuess": "informe",
-        "canonical": "informe-tecnico-ayto.pdf",
-        "status": "ya-existente"
+        "canonical": "src-2013-ayto-informe-viales.pdf",
+        "status": "procesado"
       },
       {
         "kind": "master",
@@ -626,21 +626,6 @@
   "work": {
     "path": "/mnt/d/wsl_project/personal/lasr_v2/private-sources/pdf",
     "files": [
-      {
-        "kind": "work",
-        "name": "informe-tecnico-ayto.pdf",
-        "relpath": "informe-tecnico-ayto.pdf",
-        "ext": ".pdf",
-        "size": 64628737,
-        "sha256": "4339fcab95abd29d22d667e9ea99adde2734357cf6be42dd057986bcf12fea20",
-        "pages": 218,
-        "textChars": 0,
-        "hasTextLayer": false,
-        "docTypeGuess": "informe",
-        "inMaster": true,
-        "sourceId": null,
-        "status": "pendiente-de-analisis"
-      },
       {
         "kind": "work",
         "name": "sentencia-13072010-aud-segovia-junta-2006-doc.pdf",
@@ -1003,6 +988,21 @@
         "docTypeGuess": "desconocido",
         "inMaster": true,
         "sourceId": "SRC-2013-AYTO-EL-ESPINAR-RECEPCION",
+        "status": "procesado"
+      },
+      {
+        "kind": "work",
+        "name": "src-2013-ayto-informe-viales.pdf",
+        "relpath": "src-2013-ayto-informe-viales.pdf",
+        "ext": ".pdf",
+        "size": 64628737,
+        "sha256": "4339fcab95abd29d22d667e9ea99adde2734357cf6be42dd057986bcf12fea20",
+        "pages": 218,
+        "textChars": 0,
+        "hasTextLayer": false,
+        "docTypeGuess": "informe",
+        "inMaster": true,
+        "sourceId": "SRC-2013-AYTO-INFORME-VIALES",
         "status": "procesado"
       },
       {
