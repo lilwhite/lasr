@@ -10,11 +10,11 @@ versionan ni se publican.
 | Fichero canónico | SHA-256 (8) | Págs. | Texto | Source | Estado | ¿En maestra? |
 |---|---|---|---|---|---|---|
 | `informe-tecnico-ayto.pdf` | `4339fcab` | 218 | no | — | pendiente-de-analisis | sí |
-| `plan-parcial-el-carrascal.pdf` | `b0c63cf7` | 138 | no | — | pendiente-de-analisis | sí |
 | `sentencia-13072010-aud-segovia-junta-2006-doc.pdf` | `83ea0e10` | 3 | no | — | fragmento-registrado | sí |
 | `sentencia-aud-139-2005-anul-asamblea-14032004.pdf` | `fa4cddd8` | 5 | no | — | duplicado-registrado | sí |
 | `sentencia-audiencia-segovia-220104.pdf` | `99981b78` | 10 | no | — | duplicado-registrado | sí |
 | `solicitud-de-amparo-2.pdf` | `e3e3ea37` | 1 | no | — | anexo-registrado | sí |
+| `src-1966-plan-parcial-carrascal.pdf` | `b0c63cf7` | 138 | no | SRC-1966-PLAN-PARCIAL-CARRASCAL | procesado | sí |
 | `src-1996-asc-cp-acuerdo.pdf` | `cc049c4a` | 3 | no | SRC-1996-ASC-CP-ACUERDO | procesado | NO |
 | `src-2002-jpi1-segovia-158.pdf` | `722e48cc` | 4 | no | SRC-2002-JPI1-SEGOVIA-158 | procesado | sí |
 | `src-2003-ap-segovia-323.pdf` | `7b80e5ec` | 10 | no | SRC-2003-AP-SEGOVIA-323 | procesado | sí |
@@ -74,7 +74,7 @@ versionan ni se publican.
 | `Estatutos EUCpdf · versión 1_260817_221018.pdf` | `5fbf1408` | 17 | no | estatutos | procesado | src-2013-ayto-el-espinar-recepcion.pdf |
 | `INFORMACION PROPIETARIOS MARZO 2019.pdf` | `594f49f1` | 14 | sí | desconocido | procesado | src-2019-cp-lasr-informacion.pdf |
 | `Informe técnico Los A. San Rafael.pdf` | `4339fcab` | 218 | no | informe | ya-existente | informe-tecnico-ayto.pdf |
-| `PLAN PARCIAL LOS ÁNGELES DE SAN RAFAEL FINCA EL CARRASCAL.pdf` | `b0c63cf7` | 138 | no | instrumento-urbanistico | ya-existente | plan-parcial-el-carrascal.pdf |
+| `PLAN PARCIAL LOS ÁNGELES DE SAN RAFAEL FINCA EL CARRASCAL.pdf` | `b0c63cf7` | 138 | no | instrumento-urbanistico | procesado | src-1966-plan-parcial-carrascal.pdf |
 | `Presup 2015 EUCpdf · versión 1_260817_221311.pdf` | `309a3f15` | 1 | no | presupuesto | procesado | src-2015-euc-presupuesto.pdf |
 | `SENTENCIA 160317pdf · versión 1_260817_220222.pdf` | `bf4ec6cd` | 10 | no | sentencia | procesado | src-2017-jpi4-segovia-39.pdf |
 | `SENTENCIA TSJ 30-4-2019pdf · versión 1_260817_215148.pdf` | `cbb52769` | 20 | sí | sentencia | procesado | src-2019-tsjcyl-114.pdf |

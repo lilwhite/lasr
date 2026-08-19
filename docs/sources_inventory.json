@@ -291,8 +291,8 @@
         "textChars": 53,
         "hasTextLayer": false,
         "docTypeGuess": "instrumento-urbanistico",
-        "canonical": "plan-parcial-el-carrascal.pdf",
-        "status": "ya-existente"
+        "canonical": "src-1966-plan-parcial-carrascal.pdf",
+        "status": "procesado"
       },
       {
         "kind": "master",
@@ -643,21 +643,6 @@
       },
       {
         "kind": "work",
-        "name": "plan-parcial-el-carrascal.pdf",
-        "relpath": "plan-parcial-el-carrascal.pdf",
-        "ext": ".pdf",
-        "size": 24028680,
-        "sha256": "b0c63cf7a57f6dd095d40caa895aa6a957a2a05e702a950da183126be5a89d14",
-        "pages": 138,
-        "textChars": 53,
-        "hasTextLayer": false,
-        "docTypeGuess": "desconocido",
-        "inMaster": true,
-        "sourceId": null,
-        "status": "pendiente-de-analisis"
-      },
-      {
-        "kind": "work",
         "name": "sentencia-13072010-aud-segovia-junta-2006-doc.pdf",
         "relpath": "sentencia-13072010-aud-segovia-junta-2006-doc.pdf",
         "ext": ".pdf",
@@ -719,6 +704,21 @@
         "sourceId": null,
         "status": "anexo-registrado",
         "registryTarget": "SRC-2009-CP-LASR-AMPARO"
+      },
+      {
+        "kind": "work",
+        "name": "src-1966-plan-parcial-carrascal.pdf",
+        "relpath": "src-1966-plan-parcial-carrascal.pdf",
+        "ext": ".pdf",
+        "size": 24028680,
+        "sha256": "b0c63cf7a57f6dd095d40caa895aa6a957a2a05e702a950da183126be5a89d14",
+        "pages": 138,
+        "textChars": 53,
+        "hasTextLayer": false,
+        "docTypeGuess": "desconocido",
+        "inMaster": true,
+        "sourceId": "SRC-1966-PLAN-PARCIAL-CARRASCAL",
+        "status": "procesado"
       },
       {
         "kind": "work",
