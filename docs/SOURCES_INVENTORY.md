@@ -12,7 +12,6 @@ versionan ni se publican.
 | `apelacion-asc-20120716.pdf` | `d0723282` | 19 | sí | — | pendiente-de-analisis | sí |
 | `apelaciones-ayto-cp-20120626.pdf` | `8eb33b94` | 52 | no | — | pendiente-de-analisis | sí |
 | `auto-55-2011-ap-segovia.pdf` | `0603c438` | 4 | no | — | pendiente-de-analisis | sí |
-| `auto-ejecucion-jca1-2012.pdf` | `62a3a998` | 15 | sí | — | pendiente-de-analisis | sí |
 | `burofax-solicitud-asamblea.pdf` | `f45053f0` | 3 | no | — | pendiente-de-analisis | sí |
 | `carta-cp-gestion-20140407.pdf` | `a662c4ac` | 16 | no | — | pendiente-de-analisis | sí |
 | `carta-cp-recepcion-20130610.pdf` | `20227811` | 8 | no | — | pendiente-de-analisis | sí |
@@ -35,6 +34,8 @@ versionan ni se publican.
 | `src-2011-ap-segovia-171.pdf` | `1bb7bace` | 7 | sí | SRC-2011-AP-SEGOVIA-171 | procesado | NO |
 | `src-2011-jca-segovia-6.pdf` | `b3f347ad` | 23 | sí | SRC-2011-JCA-SEGOVIA-6 | procesado | sí |
 | `src-2011-jpi5-segovia-70.pdf` | `8ce35d9a` | 13 | no | SRC-2011-JPI5-SEGOVIA-70 | procesado | sí |
+| `src-2011-tsjcyl-271.pdf` | `c99090f3` | 26 | sí | SRC-2011-TSJCYL-271 | procesado | sí |
+| `src-2012-jca-segovia-auto-ejecucion.pdf` | `62a3a998` | 15 | sí | SRC-2012-JCA-SEGOVIA-AUTO-EJECUCION | procesado | sí |
 | `src-2012-tsjcyl-581.pdf` | `e05219b1` | 22 | no | SRC-2012-TSJCYL-581 | procesado | sí |
 | `src-2013-ayto-el-espinar-recepcion.pdf` | `5fbf1408` | 17 | no | SRC-2013-AYTO-EL-ESPINAR-RECEPCION | procesado | sí |
 | `src-2015-euc-acta-2.pdf` | `38b6e5e8` | 7 | no | SRC-2015-EUC-ACTA-2 | procesado | sí |
@@ -48,7 +49,6 @@ versionan ni se publican.
 | `src-2019-tsjcyl-16.pdf` | `a0b5ce9b` | 34 | no | SRC-2019-TSJCYL-16 | procesado | sí |
 | `src-2020-audria-informe-2018.pdf` | `06068431` | 37 | sí | SRC-2020-AUDRIA-INFORME-2018 | procesado | NO |
 | `src-2026-cp-lasr-circular-001.pdf` | `699d86a1` | 22 | sí | SRC-2026-CP-LASR-CIRCULAR-001 | procesado | sí |
-| `stsj-271-2011-cendoj.pdf` | `c99090f3` | 26 | sí | — | pendiente-de-analisis | sí |
 
 ## Carpeta maestra (LASR-DOC)
 
@@ -61,7 +61,7 @@ versionan ni se publican.
 | `Acta 1ª Asamb EUCpdf · versión 1_260817_221152.pdf` | `38b6e5e8` | 7 | no | acta | procesado | src-2015-euc-acta-2.pdf |
 | `Apelacion Asoc.Auto recep.Ayto.16-7-2012.pdf` | `d0723282` | 19 | sí | escrito-de-parte | ya-existente | apelacion-asc-20120716.pdf |
 | `Apelación Ayto.y Cdad.26-6-2012.pdf` | `8eb33b94` | 52 | no | escrito-de-parte | ya-existente | apelaciones-ayto-cp-20120626.pdf |
-| `Auto Recepción.pdf` | `62a3a998` | 15 | sí | auto | ya-existente | auto-ejecucion-jca1-2012.pdf |
+| `Auto Recepción.pdf` | `62a3a998` | 15 | sí | auto | procesado | src-2012-jca-segovia-auto-ejecucion.pdf |
 | `Auto_55_2011_Audiencia_Provincial_Segovia.pdf` | `0603c438` | 4 | no | auto | ya-existente | auto-55-2011-ap-segovia.pdf |
 | `Burofax Solicitud Asamblea.pdf` | `f45053f0` | 3 | no | escrito-de-parte | ya-existente | burofax-solicitud-asamblea.pdf |
 | `Carta Comunidad ASR Marzo 2014.pdf` | `a662c4ac` | 16 | no | comunicacion | ya-existente | carta-cp-gestion-20140407.pdf |
@@ -91,7 +91,7 @@ versionan ni se publican.
 | `Sentencia Burgos Recepcion YA 21-12-2012.pdf` | `271c0893` | 22 | no | sentencia | duplicado-registrado | — |
 | `Sentencia ContAmvoAsamblea EUC3-2-2017-1_503pd_260817_220519.pdf` | `258e3fba` | 25 | sí | sentencia | procesado | src-2017-jca-segovia-22.pdf |
 | `Sentencia Recurso Apelacion EUCpdf · versión 1_260817_214950.pdf` | `a0b5ce9b` | 34 | no | sentencia | procesado | src-2019-tsjcyl-16.pdf |
-| `Sentencia TSCyL Junio 2010.pdf` | `c99090f3` | 26 | sí | sentencia | ya-existente | stsj-271-2011-cendoj.pdf |
+| `Sentencia TSCyL Junio 2010.pdf` | `c99090f3` | 26 | sí | sentencia | procesado | src-2011-tsjcyl-271.pdf |
 | `Sentencia_323_2003_unificada.pdf` | `7b80e5ec` | 10 | no | sentencia | procesado | src-2003-ap-segovia-323.pdf |
 | `Sentencia_34-2010.pdf` | `20cebd2c` | 11 | no | sentencia | procesado | src-2010-jpi1-segovia-34.pdf |
 | `Sentencia_Tribunal_Supremo_335-2009.pdf` | `b0adf450` | 12 | no | sentencia | procesado | src-2009-ts-335.pdf |

@@ -107,8 +107,8 @@
         "textChars": 895,
         "hasTextLayer": true,
         "docTypeGuess": "auto",
-        "canonical": "auto-ejecucion-jca1-2012.pdf",
-        "status": "ya-existente"
+        "canonical": "src-2012-jca-segovia-auto-ejecucion.pdf",
+        "status": "procesado"
       },
       {
         "kind": "master",
@@ -533,8 +533,8 @@
         "textChars": 2265,
         "hasTextLayer": true,
         "docTypeGuess": "sentencia",
-        "canonical": "stsj-271-2011-cendoj.pdf",
-        "status": "ya-existente"
+        "canonical": "src-2011-tsjcyl-271.pdf",
+        "status": "procesado"
       },
       {
         "kind": "master",
@@ -666,21 +666,6 @@
         "pages": 4,
         "textChars": 0,
         "hasTextLayer": false,
-        "docTypeGuess": "auto",
-        "inMaster": true,
-        "sourceId": null,
-        "status": "pendiente-de-analisis"
-      },
-      {
-        "kind": "work",
-        "name": "auto-ejecucion-jca1-2012.pdf",
-        "relpath": "auto-ejecucion-jca1-2012.pdf",
-        "ext": ".pdf",
-        "size": 258352,
-        "sha256": "62a3a99853bbc911fe5171f994b39a1301b7b641344689c3920cbdc6bd5e7fb4",
-        "pages": 15,
-        "textChars": 895,
-        "hasTextLayer": true,
         "docTypeGuess": "auto",
         "inMaster": true,
         "sourceId": null,
@@ -1022,6 +1007,36 @@
       },
       {
         "kind": "work",
+        "name": "src-2011-tsjcyl-271.pdf",
+        "relpath": "src-2011-tsjcyl-271.pdf",
+        "ext": ".pdf",
+        "size": 313515,
+        "sha256": "c99090f31358e91811bf8f51a489741c61a1d3b9e83eed04ed96f1b751a5b16c",
+        "pages": 26,
+        "textChars": 2265,
+        "hasTextLayer": true,
+        "docTypeGuess": "desconocido",
+        "inMaster": true,
+        "sourceId": "SRC-2011-TSJCYL-271",
+        "status": "procesado"
+      },
+      {
+        "kind": "work",
+        "name": "src-2012-jca-segovia-auto-ejecucion.pdf",
+        "relpath": "src-2012-jca-segovia-auto-ejecucion.pdf",
+        "ext": ".pdf",
+        "size": 258352,
+        "sha256": "62a3a99853bbc911fe5171f994b39a1301b7b641344689c3920cbdc6bd5e7fb4",
+        "pages": 15,
+        "textChars": 895,
+        "hasTextLayer": true,
+        "docTypeGuess": "auto",
+        "inMaster": true,
+        "sourceId": "SRC-2012-JCA-SEGOVIA-AUTO-EJECUCION",
+        "status": "procesado"
+      },
+      {
+        "kind": "work",
         "name": "src-2012-tsjcyl-581.pdf",
         "relpath": "src-2012-tsjcyl-581.pdf",
         "ext": ".pdf",
@@ -1214,21 +1229,6 @@
         "inMaster": true,
         "sourceId": "SRC-2026-CP-LASR-CIRCULAR-001",
         "status": "procesado"
-      },
-      {
-        "kind": "work",
-        "name": "stsj-271-2011-cendoj.pdf",
-        "relpath": "stsj-271-2011-cendoj.pdf",
-        "ext": ".pdf",
-        "size": 313515,
-        "sha256": "c99090f31358e91811bf8f51a489741c61a1d3b9e83eed04ed96f1b751a5b16c",
-        "pages": 26,
-        "textChars": 2265,
-        "hasTextLayer": true,
-        "docTypeGuess": "desconocido",
-        "inMaster": true,
-        "sourceId": null,
-        "status": "pendiente-de-analisis"
       }
     ]
   },
