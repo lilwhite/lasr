@@ -1,4 +1,5 @@
 ---
+import { url } from '../../../lib/url';
 import { render } from 'astro:content';
 import ReviewLayout from '../../../layouts/ReviewLayout.astro';
 import Badge from '../../../components/Badge.astro';
@@ -116,7 +117,7 @@ const citedProcedures = [...new Set(citedSources.flatMap((s) => (s.data.procedur
     ) : (
       <span class="muted">← (primera nota)</span>
     )}
-    <a href="/revision/notas/">Listado</a>
+    <a href={url("/revision/notas/")}>Listado</a>
     {next ? (
       <a href={`/revision/notas/${entitySlug(next)}/`} rel="next">{next.data.id} →</a>
     ) : (

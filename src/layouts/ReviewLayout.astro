@@ -1,4 +1,5 @@
 ---
+import { url } from '../lib/url';
 /**
  * Layout del área de revisión editorial. SOLO se usa en páginas bajo
  * /revision/, cuyas rutas no se generan en builds públicas (getStaticPaths
@@ -12,14 +13,14 @@ interface Props {
 const { title } = Astro.props;
 ---
 
-<Layout title={`Revisión · ${title}`}>
+<Layout title={`Revisión · ${title}`} description="Herramienta editorial interna de LASR-Web." noindex={true}>
   <div class="review-band" role="note">
     <span class="review-mark">⚠ Área de revisión</span>
     <span>— herramienta editorial interna; no forma parte del sitio público.</span>
   </div>
   <nav class="review-nav" aria-label="Revisión">
-    <a href="/revision/">Dashboard</a>
-    <a href="/revision/notas/">Notas</a>
+    <a href={url("/revision/")}>Dashboard</a>
+    <a href={url("/revision/notas/")}>Notas</a>
   </nav>
   <slot />
 </Layout>

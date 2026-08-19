@@ -1,0 +1,17 @@
+---
+/**
+ * Cuerpo Markdown con las referencias del corpus convertidas en enlaces.
+ * Sustituye a `<Content />`: ver src/lib/prose.ts.
+ */
+import { proseHtml, sections } from '../lib/prose';
+import type { Entity } from '../lib/graph';
+
+interface Props {
+  entry: Entity;
+  /** Si se indica, solo esa sección del cuerpo (sin su encabezado). */
+  section?: string;
+}
+const { entry, section } = Astro.props;
+const html = section ? (sections(entry).get(section) ?? '') : proseHtml(entry);
+---
+{html && <div class="prose" set:html={html} />}

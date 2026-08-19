@@ -1,28 +1,83 @@
-/* LASR-Web — tokens y base (diseño provisional, estética de expediente) */
+/**
+ * LASR-Web — sistema de diseño.
+ *
+ * Ver docs/WEB_DESIGN.md. Dos ideas gobiernan todo lo que sigue:
+ *
+ *  1. Dos registros tipográficos. La narrativa va en serif; el aparato
+ *     documental —páginas, números de resolución, fechas, identificadores— va
+ *     en monoespaciada. Esa distinción ES la arquitectura de información: capa
+ *     de divulgación y capa de evidencia, hechas visibles.
+ *  2. Un solo acento. `--stamp` para estructura y enlaces, `--marca` para el
+ *     aparato. El verde de sierra aparece una vez, en el motivo de portada.
+ */
+
+/* Latin cubre el castellano completo; no hace falta latin-ext. */
+@import '@fontsource/ibm-plex-serif/latin-400.css';
+@import '@fontsource/ibm-plex-serif/latin-600.css';
+@import '@fontsource/ibm-plex-sans/latin-400.css';
+@import '@fontsource/ibm-plex-sans/latin-600.css';
+@import '@fontsource/ibm-plex-mono/latin-400.css';
 
 :root {
-  --paper: #f2f1ec;
-  --surface: #fffefb;
-  --ink: #23252b;
-  --ink-soft: #5d6270;
-  --line: #ddd9cf;
-  --stamp: #2b568f;        /* tinta de sello judicial: único acento */
-  --stamp-strong: #1e4270;
-  --stamp-soft: #e9eef7;
-  --warn: #7d5a00;
-  --warn-bg: #f9efd2;
-  --alert: #9c3222;
-  --alert-bg: #f8e9e5;
-  --ok: #2e6b46;
-  --ok-bg: #e5f0e9;
-  --info: #38547a;
-  --info-bg: #e8edf4;
+  /* ---- Color ---------------------------------------------------------- */
+  --paper: #f7f7f5;
+  --surface: #ffffff;
+  --surface-sunk: #f1f2f0;
+  --ink: #16202a;
+  --ink-soft: #55636f;
+  --ink-faint: #7c8791;
+  --line: #dcdfdd;
+  --line-strong: #c3c8c6;
 
-  --serif: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
-  --sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-  --mono: ui-monospace, 'Cascadia Mono', Menlo, Consolas, monospace;
+  --stamp: #24506e;          /* acento principal: enlaces y estructura */
+  --stamp-strong: #16384f;
+  --stamp-soft: #eaeff4;
 
-  --measure: 46rem;
+  --marca: #8c6a22;          /* aparato documental: ecos del subrayado del expediente */
+  --marca-soft: #f6f0e2;
+
+  --sierra: #3d5a4a;         /* SOLO el motivo territorial de portada */
+
+  --warn: #7a5600;
+  --warn-bg: #fbf2dc;
+  --alert: #97301f;
+  --alert-bg: #f9eae6;
+  --ok: #2c6444;
+  --ok-bg: #e7f0ea;
+
+  /* ---- Tipografía ----------------------------------------------------- */
+  --serif: 'IBM Plex Serif', Georgia, 'Times New Roman', serif;
+  --sans: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, 'Cascadia Mono', Menlo, monospace;
+
+  --t-xs: 0.75rem;
+  --t-sm: 0.8125rem;
+  --t-base: 1.0625rem;
+  --t-md: 1.1875rem;
+  --t-lg: clamp(1.25rem, 1.05rem + 0.9vw, 1.5rem);
+  --t-xl: clamp(1.5rem, 1.15rem + 1.6vw, 2rem);
+  --t-2xl: clamp(1.9rem, 1.35rem + 2.6vw, 3rem);
+
+  /* ---- Espacio -------------------------------------------------------- */
+  --s-1: 0.25rem;
+  --s-2: 0.5rem;
+  --s-3: 0.75rem;
+  --s-4: 1rem;
+  --s-5: 1.5rem;
+  --s-6: 2rem;
+  --s-7: 3rem;
+  --s-8: 4rem;
+  --s-9: 6rem;
+
+  /* ---- Trazo y forma -------------------------------------------------- */
+  --radius: 4px;
+  --rule: 1px solid var(--line);
+  --rule-strong: 1px solid var(--line-strong);
+
+  /* ---- Medidas -------------------------------------------------------- */
+  --measure: 42rem;   /* prosa: ~68 caracteres */
+  --wide: 72rem;      /* índices y portada */
+  --rail: 15rem;      /* columna del aparato documental */
 }
 
 * { box-sizing: border-box; }
@@ -30,11 +85,15 @@
 html {
   color-scheme: light;
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  *, *::before, *::after { animation: none !important; transition: none !important; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 body {
@@ -42,105 +101,133 @@ body {
   background: var(--paper);
   color: var(--ink);
   font-family: var(--sans);
-  font-size: 1.0625rem;
-  line-height: 1.65;
+  font-size: var(--t-base);
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
+/* ---- Titulares: serif, la voz narrativa ------------------------------- */
 h1, h2, h3, h4 {
   font-family: var(--serif);
   font-weight: 600;
-  line-height: 1.25;
+  line-height: 1.2;
   color: var(--ink);
   text-wrap: balance;
+  margin: 0;
 }
 
-h1 { font-size: clamp(1.6rem, 3.5vw, 2.2rem); margin: 0 0 0.5rem; }
-h2 { font-size: 1.35rem; margin: 2.2rem 0 0.8rem; }
-h3 { font-size: 1.1rem; margin: 1.4rem 0 0.5rem; }
+h1 { font-size: var(--t-xl); letter-spacing: -0.011em; }
+h2 { font-size: var(--t-lg); margin-block: var(--s-7) var(--s-3); letter-spacing: -0.008em; }
+h3 { font-size: var(--t-md); margin-block: var(--s-5) var(--s-2); }
+h4 { font-size: var(--t-base); margin-block: var(--s-4) var(--s-1); }
 
-p { margin: 0.7rem 0; }
+p { margin-block: var(--s-3); text-wrap: pretty; }
 
 a {
   color: var(--stamp);
   text-decoration-thickness: 1px;
-  text-underline-offset: 2px;
+  text-underline-offset: 0.16em;
+  text-decoration-color: color-mix(in srgb, var(--stamp) 35%, transparent);
+  transition: text-decoration-color 120ms ease, color 120ms ease;
 }
-a:hover { color: var(--stamp-strong); }
-a:focus-visible, button:focus-visible, summary:focus-visible {
+a:hover { color: var(--stamp-strong); text-decoration-color: currentColor; }
+
+:where(a, button, summary, input, select, [tabindex]):focus-visible {
   outline: 2px solid var(--stamp);
   outline-offset: 2px;
   border-radius: 2px;
 }
 
+blockquote {
+  margin: var(--s-4) 0;
+  padding-left: var(--s-4);
+  border-left: 2px solid var(--line-strong);
+  color: var(--ink-soft);
+  font-family: var(--serif);
+}
+
+hr { border: 0; border-top: var(--rule); margin-block: var(--s-6); }
+
+ul, ol { padding-left: 1.3em; margin-block: var(--s-3); }
+li { margin-block: var(--s-1); }
+li::marker { color: var(--ink-faint); }
+
+table { border-collapse: collapse; width: 100%; font-size: var(--t-sm); }
+th, td { text-align: left; padding: var(--s-2) var(--s-3); border-bottom: var(--rule); vertical-align: top; }
+th { font-weight: 600; color: var(--ink-soft); }
+
+/* ---- El aparato documental -------------------------------------------- */
+/* Monoespaciada, versalita óptica, ocre. Es el registro "verificable". */
+.apparatus,
+.meta-id,
 code {
   font-family: var(--mono);
-  font-size: 0.85em;
-  background: var(--stamp-soft);
+  font-size: var(--t-xs);
+  letter-spacing: 0.01em;
+  font-variant-numeric: tabular-nums;
+}
+
+.apparatus { color: var(--marca); }
+.meta-id { color: var(--ink-faint); }
+
+code {
+  background: var(--surface-sunk);
   padding: 0.1em 0.35em;
-  border-radius: 3px;
-}
-
-blockquote {
-  margin: 1rem 0;
-  padding: 0.2rem 0 0.2rem 1rem;
-  border-left: 3px solid var(--line);
+  border-radius: 2px;
   color: var(--ink-soft);
 }
 
-hr { border: 0; border-top: 1px solid var(--line); margin: 2rem 0; }
-
-ul, ol { padding-left: 1.4rem; }
-li { margin: 0.25rem 0; }
-
-table { border-collapse: collapse; width: 100%; font-size: 0.95rem; }
-th, td { text-align: left; padding: 0.4rem 0.6rem; border-bottom: 1px solid var(--line); vertical-align: top; }
-
-/* Utilidades compartidas */
-.container {
-  max-width: var(--measure);
-  margin-inline: auto;
-  padding-inline: 1.1rem;
-}
-
-.muted { color: var(--ink-soft); }
-
-.meta-id {
+/* Referencia a otra entidad dentro de la prosa (generada por prose.ts). */
+a.ref {
   font-family: var(--mono);
-  font-size: 0.78rem;
-  color: var(--ink-soft);
-  letter-spacing: 0.02em;
+  font-size: 0.85em;
+  color: var(--marca);
+  text-decoration-color: color-mix(in srgb, var(--marca) 40%, transparent);
+  white-space: nowrap;
 }
+a.ref:hover { color: #6f5319; }
+
+/* ---- Contenedores ------------------------------------------------------ */
+.container { max-width: var(--wide); margin-inline: auto; padding-inline: var(--s-4); }
+.prose { max-width: var(--measure); }
+.prose > :first-child { margin-top: 0; }
+
+@media (min-width: 40em) {
+  .container { padding-inline: var(--s-5); }
+}
+
+/* ---- Utilidades -------------------------------------------------------- */
+.muted { color: var(--ink-soft); }
+.lede { font-size: var(--t-md); line-height: 1.55; color: var(--ink-soft); text-wrap: pretty; }
 
 .eyebrow {
   font-family: var(--sans);
-  font-size: 0.78rem;
+  font-size: var(--t-xs);
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.09em;
-  color: var(--stamp);
-  margin: 0 0 0.35rem;
+  letter-spacing: 0.1em;
+  color: var(--ink-faint);
+  margin: 0 0 var(--s-2);
 }
 
-.badge-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-  margin: 0.6rem 0;
-  align-items: center;
-}
+.stack > * + * { margin-top: var(--s-4); }
+.badge-row { display: flex; flex-wrap: wrap; gap: var(--s-2); align-items: center; }
 
-.entity-list {
-  list-style: none;
-  padding: 0;
-  margin: 0.5rem 0;
+.skip-link {
+  position: absolute;
+  left: var(--s-3);
+  top: calc(-1 * var(--s-9));
+  z-index: 10;
+  background: var(--surface);
+  color: var(--ink);
+  padding: var(--s-2) var(--s-3);
+  border: var(--rule-strong);
+  border-radius: var(--radius);
+  transition: top 120ms ease;
 }
-.entity-list li {
-  padding: 0.45rem 0;
-  border-bottom: 1px solid var(--line);
-}
-.entity-list li:last-child { border-bottom: none; }
+.skip-link:focus { top: var(--s-3); }
 
-/* Cuerpos Markdown renderizados */
-.prose { max-width: var(--measure); }
-.prose :is(h2, h3) { margin-top: 1.6rem; }
+.entity-list { list-style: none; padding: 0; margin: var(--s-3) 0; }
+.entity-list > li { padding-block: var(--s-3); border-bottom: var(--rule); }
+.entity-list > li:last-child { border-bottom: none; }

@@ -1,124 +1,243 @@
 ---
-import { render } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
+import Prose from '../../components/Prose.astro';
 import Timeline from '../../components/Timeline.astro';
 import NoteCard from '../../components/NoteCard.astro';
-import EntityLink from '../../components/EntityLink.astro';
-import Badge from '../../components/Badge.astro';
-import { graph, entitySlug, topicMembers, sourceShortLabel } from '../../lib/graph';
-import { visibleOnly, ACTOR_TYPE_LABEL, DOC_TYPE_LABEL } from '../../lib/policy';
+import StateLine from '../../components/StateLine.astro';
+import EmptySection from '../../components/EmptySection.astro';
+import {
+  graph, entitySlug, entityRoute, topicMembers, topicActorsDerived,
+  topicProceduresDerived, topicSourcesRanked, sourceShortLabel, formatDate,
+} from '../../lib/graph';
+import { assertSections, TOPIC_SECTIONS, sections } from '../../lib/prose';
+import { url } from '../../lib/url';
+import { AREAS } from '../../lib/areas';
+import { ACTOR_TYPE_LABEL, DOC_TYPE_LABEL, readerFlags, PREVIEW } from '../../lib/policy';
 
 export async function getStaticPaths() {
-  return visibleOnly(graph.topics).map((t) => ({
-    params: { slug: entitySlug(t) },
-    props: { topic: t },
-  }));
+  return graph.topics.map((t) => ({ params: { slug: entitySlug(t) }, props: { topic: t } }));
 }
 
 const { topic } = Astro.props;
-const { Content } = await render(topic);
-const members = topicMembers(topic.data.id);
+const d = topic.data;
 
-const events = visibleOnly(members.events);
-const notes = visibleOnly(members.notes);
-const sources = visibleOnly(members.sources);
-const procedures = visibleOnly(members.procedures);
-const questions = visibleOnly(members.questions);
-const actors = visibleOnly(members.actors);
+// El contrato de secciones se hace cumplir aquí: si el cuerpo trae una sección
+// que la plantilla genera desde el grafo, el build falla. Ver WEB_DESIGN §5.
+assertSections(topic, TOPIC_SECTIONS);
+const body = sections(topic);
 
-const keyNotes = notes.filter((n) => ['ruling', 'obligation', 'agreement', 'legal-principle'].includes(n.data.type));
-const otherNotes = notes.filter((n) => !keyNotes.includes(n));
-const rootProcedures = procedures.filter((p) => p.data.parent === null);
-const childrenOf = (id: string) => procedures.filter((p) => p.data.parent === id);
+const area = AREAS[d.area];
+const members = topicMembers(d.id);
+
+const events = members.events;
+const notes = members.notes;
+const questions = members.questions;
+// Si el etiquetado no declara actores ni procedimientos, se derivan de los
+// miembros del tema: TOPIC-EUC tenía 25 afirmaciones y ninguno declarado.
+const actorsDeclared = members.actors;
+const actors = actorsDeclared.length > 0 ? actorsDeclared : topicActorsDerived(d.id);
+const actorsAreDerived = actorsDeclared.length === 0 && actors.length > 0;
+const procsDeclared = members.procedures;
+const procs = procsDeclared.length > 0 ? procsDeclared : topicProceduresDerived(d.id);
+const procsAreDerived = procsDeclared.length === 0 && procs.length > 0;
+
+const keyNotes = notes.filter((n) =>
+  ['ruling', 'obligation', 'agreement', 'legal-principle'].includes(n.data.type));
+const disputed = notes.filter((n) => readerFlags(n).length > 0);
+const topSources = topicSourcesRanked(d.id).slice(0, 6);
+
+// Índice de la página: solo las secciones que existen de verdad.
+const toc = [
+  ['en-30-segundos', 'En 30 segundos', body.has('En 30 segundos')],
+  ['por-que-importa', 'Por qué importa', body.has('Por qué importa')],
+  ['situacion', 'Situación documentada', body.has('Situación documentada')],
+  ['discusion', 'Qué está en discusión', body.has('Qué está en discusión') || disputed.length > 0],
+  ['cronologia', 'Cronología', events.length > 0],
+  ['preguntas', 'Preguntas', questions.length > 0],
+  ['procedimientos', 'Procedimientos', procs.length > 0],
+  ['actores', 'Quién interviene', actors.length > 0],
+  ['documentos', 'Documentos', topSources.length > 0],
+].filter(([, , show]) => show) as [string, string, boolean][];
 ---
 
-<Layout title={topic.data.title} description={topic.data.summary}>
-  <p class="eyebrow">Tema</p>
-  <h1>{topic.data.title}</h1>
-  <p class="muted">{topic.data.summary}</p>
-  <p class="meta-id">{topic.data.id}</p>
+<Layout title={d.title} description={d.summary} canonicalPath={entityRoute(topic)} ogType="article">
+  <nav class="breadcrumbs" aria-label="Migas de pan">
+    <a href={url('/')}>Inicio</a>
+    <span aria-hidden="true">›</span>
+    <a href={url('/temas/')}>{area.label}</a>
+  </nav>
 
-  <section class="prose">
-    <Content />
+  <header class="topic-head">
+    <h1>{d.title}</h1>
+    <p class="lede">{d.summary}</p>
+    <StateLine entry={topic} />
+    {toc.length > 1 && (
+      <nav class="toc" aria-label="Secciones de esta página">
+        <ul>{toc.map(([id, label]) => <li><a href={`#${id}`}>{label}</a></li>)}</ul>
+      </nav>
+    )}
+    {PREVIEW && <p class="meta-id">{d.id}</p>}
+  </header>
+
+  {body.has('En 30 segundos') && (
+    <section id="en-30-segundos" class="summary-box">
+      <h2>En 30 segundos</h2>
+      <Prose entry={topic} section="En 30 segundos" />
+    </section>
+  )}
+
+  {body.has('Por qué importa') && (
+    <section id="por-que-importa">
+      <h2>Por qué importa</h2>
+      <Prose entry={topic} section="Por qué importa" />
+    </section>
+  )}
+
+  {body.has('Situación documentada') && (
+    <section id="situacion">
+      <h2>Situación documentada</h2>
+      <Prose entry={topic} section="Situación documentada" />
+      {keyNotes.length > 0 && (
+        <div class="claims">
+          <h3>Lo que establecen las resoluciones y acuerdos</h3>
+          {keyNotes.map((n) => <NoteCard note={n} />)}
+        </div>
+      )}
+    </section>
+  )}
+
+  <section id="discusion">
+    <h2>Qué está en discusión</h2>
+    <Prose entry={topic} section="Qué está en discusión" />
+    {disputed.length > 0 && (
+      <div class="claims">
+        <h3>Afirmaciones con evidencia controvertida o incompleta</h3>
+        {disputed.map((n) => <NoteCard note={n} />)}
+      </div>
+    )}
+    {!body.has('Qué está en discusión') && disputed.length === 0 && (
+      <EmptySection>No hay puntos marcados como controvertidos en este tema.</EmptySection>
+    )}
   </section>
 
-  <h2>Cronología</h2>
-  <Timeline events={events} />
-
-  <h2>Lo que establecen las resoluciones y acuerdos</h2>
-  {keyNotes.map((n) => <NoteCard note={n} />)}
-
-  {otherNotes.length > 0 && (
-    <>
-      <h2>Hechos y alegaciones documentadas</h2>
-      {otherNotes.map((n) => <NoteCard note={n} />)}
-    </>
+  {events.length > 0 && (
+    <section id="cronologia">
+      <h2>Cronología</h2>
+      <p class="section-lede">Toca cualquier fecha para ver qué ocurrió y de dónde lo sabemos.</p>
+      <Timeline events={events} />
+    </section>
   )}
 
   {questions.length > 0 && (
-    <>
-      <h2>Preguntas de vecino</h2>
+    <section id="preguntas">
+      <h2>Preguntas</h2>
       <ul class="entity-list">
         {questions.map((q) => (
+          <li><a href={url(entityRoute(q))}>{q.data.question}</a></li>
+        ))}
+      </ul>
+    </section>
+  )}
+
+  {procs.length > 0 && (
+    <section id="procedimientos">
+      <h2>Procedimientos</h2>
+      {procsAreDerived && PREVIEW && (
+        <EmptySection hint="derivado: falta etiquetado en los procedimientos">
+          Derivados de los documentos del tema.
+        </EmptySection>
+      )}
+      <ul class="entity-list">
+        {procs.map((p) => (
           <li>
-            <EntityLink id={q.data.id} />
+            <a href={url(entityRoute(p))}>{p.data.title}</a>
+            <span class="apparatus"> {p.data.number}</span>
           </li>
         ))}
       </ul>
-    </>
+    </section>
   )}
 
-  <h2>Documentos</h2>
-  <ul class="entity-list">
-    {sources.map((s) => (
-      <li>
-        <div class="badge-row" style="margin:0 0 0.2rem">
-          <Badge label={DOC_TYPE_LABEL[s.data.docType]} tone="neutral" />
-          <span class="meta-id">{sourceShortLabel(s)}</span>
-        </div>
-        <EntityLink id={s.data.id} />
-      </li>
-    ))}
-  </ul>
-
-  {rootProcedures.length > 0 && (
-    <>
-      <h2>Procedimientos</h2>
+  {actors.length > 0 && (
+    <section id="actores">
+      <h2>Quién interviene</h2>
+      {actorsAreDerived && PREVIEW && (
+        <EmptySection hint="derivado: falta etiquetado en los actores">
+          Derivados de las afirmaciones y documentos del tema.
+        </EmptySection>
+      )}
       <ul class="entity-list">
-        {rootProcedures.map((p) => (
+        {actors.map((a) => (
           <li>
-            <EntityLink id={p.data.id} />
-            {childrenOf(p.data.id).length > 0 && (
-              <ul>
-                {childrenOf(p.data.id).map((c) => (
-                  <li>
-                    <EntityLink id={c.data.id} />
-                    {childrenOf(c.data.id).length > 0 && (
-                      <ul>
-                        {childrenOf(c.data.id).map((g) => (
-                          <li><EntityLink id={g.data.id} /></li>
-                        ))}
-                      </ul>
-                    )}
-                  </li>
-                ))}
-              </ul>
+            <a href={url(entityRoute(a))}>{a.data.name}</a>
+            <span class="muted"> · {ACTOR_TYPE_LABEL[a.data.type]}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+
+  {topSources.length > 0 && (
+    <section id="documentos">
+      <h2>Documentos fundamentales</h2>
+      <p class="section-lede">Los más citados de este tema. Ninguno es descargable todavía:
+        la revisión de privacidad sigue pendiente.</p>
+      <ul class="entity-list">
+        {topSources.map(({ source, noteCount }) => (
+          <li>
+            <a href={url(entityRoute(source))}>{sourceShortLabel(source)}</a>
+            <span class="muted"> · {DOC_TYPE_LABEL[source.data.docType]} ·
+              {' '}{formatDate(source.data.date, 'day')}</span>
+            {noteCount > 0 && (
+              <span class="apparatus"> · sostiene {noteCount} afirmacion{noteCount === 1 ? '' : 'es'}</span>
             )}
           </li>
         ))}
       </ul>
-    </>
+      <p class="explore">
+        <a href={url('/documentos/')}>Ver todos los documentos</a>
+      </p>
+    </section>
   )}
-
-  <h2>Actores</h2>
-  <ul class="entity-list">
-    {actors.map((a) => (
-      <li>
-        <div class="badge-row" style="margin:0 0 0.2rem">
-          <Badge label={ACTOR_TYPE_LABEL[a.data.type]} tone="neutral" />
-        </div>
-        <EntityLink id={a.data.id} />
-      </li>
-    ))}
-  </ul>
 </Layout>
+
+<style>
+  .breadcrumbs {
+    font-size: var(--t-sm);
+    color: var(--ink-faint);
+    display: flex;
+    gap: var(--s-2);
+    flex-wrap: wrap;
+    margin-bottom: var(--s-4);
+  }
+  .topic-head { max-width: var(--measure); }
+  .topic-head h1 { margin-bottom: var(--s-3); }
+
+  .toc { margin-block: var(--s-4); }
+  .toc ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-2) var(--s-4);
+  }
+  .toc a { font-size: var(--t-sm); color: var(--ink-soft); }
+
+  section { max-width: var(--measure); }
+  .section-lede { font-size: var(--t-sm); color: var(--ink-soft); margin-top: 0; }
+
+  .summary-box {
+    background: var(--surface);
+    border: var(--rule);
+    border-left: 3px solid var(--stamp);
+    border-radius: var(--radius);
+    padding: var(--s-4) var(--s-5);
+    margin-block: var(--s-6);
+  }
+  .summary-box h2 { margin-top: 0; }
+
+  .claims { margin-top: var(--s-5); }
+  .claims h3 { margin-bottom: var(--s-2); }
+  .explore { font-size: var(--t-sm); }
+</style>

@@ -1,76 +1,165 @@
 ---
-import Badge from './Badge.astro';
-import EntityLink from './EntityLink.astro';
-import { eventSortKey, eventDateText, type Event } from '../lib/graph';
-import { visibleOnly, editorialBadge, EVENT_TYPE_LABEL } from '../lib/policy';
+/**
+ * Cronología con divulgación progresiva.
+ *
+ * Plegado: fecha, tipo y título. Desplegado: el resumen del acontecimiento, su
+ * procedencia y las afirmaciones que lo sitúan. Con `<details>` nativo: sin
+ * JavaScript, accesible por teclado y compatible con la búsqueda del navegador.
+ *
+ * La incertidumbre de fecha se marca con TEXTO, no con color: 44 de los 48
+ * acontecimientos tienen fecha firme y un código cromático para los otros
+ * cuatro convertiría esto en un árbol de Navidad.
+ */
+import Citation from './Citation.astro';
+import { url } from '../lib/url';
+import {
+  eventSortKey, eventDateText, entityRoute, notesOfEvent, formatDate, type Event,
+} from '../lib/graph';
+import { EVENT_TYPE_LABEL } from '../lib/policy';
+import { proseHtml } from '../lib/prose';
 
 interface Props {
   events: Event[];
+  /** Agrupa por década. Solo tiene sentido en la cronología general. */
+  groupBy?: 'none' | 'decade';
 }
-const { events } = Astro.props;
-const sorted = visibleOnly(events).sort((a, b) => eventSortKey(a) - eventSortKey(b));
+const { events, groupBy = 'none' } = Astro.props;
+const sorted = [...events].sort((a, b) => eventSortKey(a) - eventSortKey(b));
+
+function decadeOf(e: Event): string {
+  const k = eventSortKey(e);
+  if (!Number.isFinite(k) || k === Number.MAX_SAFE_INTEGER) return 'Sin fecha';
+  return `${Math.floor(new Date(k).getUTCFullYear() / 10) * 10}s`;
+}
+
+/** Fecha corta para el resumen; el texto largo va en la nota de incertidumbre. */
+function shortDate(e: Event): string {
+  return e.data.date ? formatDate(e.data.date, e.data.datePrecision ?? 'day') : 'Fecha discutida';
+}
+function uncertainty(e: Event): string | null {
+  if (e.data.dateStatus === 'disputed') return `Fecha discutida: ${eventDateText(e)}`;
+  if (e.data.dateStatus === 'estimated') return 'Fecha aproximada';
+  if (e.data.dateStatus === 'unknown') return 'Fecha sin documentar';
+  if (e.data.datePrecision && e.data.datePrecision !== 'day') return 'Fecha aproximada';
+  return null;
+}
+
+const groups =
+  groupBy === 'decade'
+    ? [...sorted.reduce((m, e) => {
+        const d = decadeOf(e);
+        m.set(d, [...(m.get(d) ?? []), e]);
+        return m;
+      }, new Map<string, Event[]>())]
+    : [['', sorted] as [string, Event[]]];
 ---
 
-<ol class="timeline">
-  {sorted.map((e) => (
-    <li class="tl-item">
-      <div class="tl-date">
-        {eventDateText(e)}
-        {e.data.dateStatus === 'disputed' && <Badge label="Fecha disputada" tone="alert" />}
-      </div>
-      <div class="tl-body">
-        <span class="tl-type">{EVENT_TYPE_LABEL[e.data.type]}</span>
-        <EntityLink id={e.data.id} />
-        {e.data.editorialStatus === 'draft' && <Badge {...editorialBadge(e.data.editorialStatus)} />}
-      </div>
-    </li>
+<div class="tl">
+  {groups.map(([label, list]) => (
+    <section class="tl-group">
+      {label && <h3 class="tl-decade">{label}</h3>}
+      <ol class="tl-list">
+        {list.map((e) => {
+          const notes = notesOfEvent(e.data.id);
+          const inc = uncertainty(e);
+          return (
+            <li class="tl-item">
+              <details>
+                <summary>
+                  <span class="tl-date apparatus">{shortDate(e)}</span>
+                  <span class="tl-main">
+                    <span class="tl-type">{EVENT_TYPE_LABEL[e.data.type]}</span>
+                    <span class="tl-title">{e.data.title}</span>
+                    {inc && <span class="tl-uncertain">⚠ {inc}</span>}
+                  </span>
+                </summary>
+                <div class="tl-detail">
+                  <div class="prose tl-body" set:html={proseHtml(e)} />
+                  {e.data.citations.map((c) => <Citation citation={c} />)}
+                  {notes.length > 0 && (
+                    <details class="tl-notes">
+                      <summary>{notes.length === 1
+                        ? 'Ver la afirmación que se apoya en esto'
+                        : `Ver las ${notes.length} afirmaciones que se apoyan en esto`}</summary>
+                      <ul>
+                        {notes.map((n) => (
+                          <li><a href={url(entityRoute(n))}>{n.data.title}</a></li>
+                        ))}
+                      </ul>
+                    </details>
+                  )}
+                  <p class="tl-more">
+                    <a href={url(entityRoute(e))}>Ficha completa del acontecimiento</a>
+                  </p>
+                </div>
+              </details>
+            </li>
+          );
+        })}
+      </ol>
+    </section>
   ))}
-</ol>
+</div>
 
 <style>
-  .timeline {
-    list-style: none;
-    padding: 0;
-    margin: 1rem 0;
-    border-left: 2px solid var(--line);
-  }
-  .tl-item {
-    position: relative;
-    padding: 0 0 1.1rem 1.3rem;
-    margin: 0;
-  }
-  .tl-item::before {
-    content: '';
-    position: absolute;
-    left: -6px;
-    top: 0.45rem;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: var(--stamp);
-    border: 2px solid var(--paper);
-  }
-  .tl-date {
+  .tl-decade {
     font-family: var(--mono);
-    font-size: 0.78rem;
-    color: var(--ink-soft);
-    display: flex;
-    gap: 0.5rem;
-    align-items: center;
-    flex-wrap: wrap;
+    font-size: var(--t-sm);
+    font-weight: 400;
+    color: var(--ink-faint);
+    letter-spacing: 0.08em;
+    margin-block: var(--s-6) var(--s-2);
+    padding-bottom: var(--s-1);
+    border-bottom: var(--rule);
   }
-  .tl-body {
-    display: flex;
-    gap: 0.5rem;
-    align-items: baseline;
-    flex-wrap: wrap;
-    margin-top: 0.1rem;
+  .tl-list { list-style: none; margin: 0; padding: 0; }
+  .tl-item { border-top: var(--rule); margin: 0; }
+  .tl-item:last-child { border-bottom: var(--rule); }
+
+  summary {
+    cursor: pointer;
+    padding-block: var(--s-3);
+    display: grid;
+    gap: var(--s-1);
+    list-style: none;
   }
+  summary::-webkit-details-marker { display: none; }
+  summary::before {
+    content: '+';
+    float: right;
+    font-family: var(--mono);
+    color: var(--ink-faint);
+    margin-left: var(--s-3);
+  }
+  details[open] > summary::before { content: '–'; }
+  summary:hover .tl-title { color: var(--stamp-strong); }
+
+  .tl-date { color: var(--ink-faint); }
   .tl-type {
-    font-size: 0.72rem;
+    font-size: var(--t-xs);
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--stamp);
+    letter-spacing: 0.09em;
+    color: var(--marca);
+    margin-right: var(--s-2);
+  }
+  .tl-title { font-family: var(--serif); line-height: 1.35; text-wrap: pretty; }
+  .tl-uncertain {
+    display: block;
+    font-size: var(--t-xs);
+    color: var(--alert);
+    margin-top: var(--s-1);
+  }
+
+  .tl-detail { padding: 0 0 var(--s-5); }
+  .tl-body { font-size: var(--t-sm); }
+  .tl-notes { margin-block: var(--s-3); }
+  .tl-notes summary { font-size: var(--t-sm); color: var(--ink-soft); padding-block: var(--s-1); }
+  .tl-notes ul { font-size: var(--t-sm); }
+  .tl-more { font-size: var(--t-sm); margin-bottom: 0; }
+
+  /* En pantalla ancha, la fecha se alinea en su propia columna. */
+  @media (min-width: 46em) {
+    summary { grid-template-columns: 10rem 1fr; gap: var(--s-4); align-items: baseline; }
   }
 </style>

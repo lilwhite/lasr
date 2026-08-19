@@ -1,46 +1,66 @@
 ---
 /**
- * Presentación estándar de una AtomicNote en listas: afirmación + insignias de
- * estado sistemáticas + citas. La política de etiquetado vive en lib/policy.
+ * Una afirmación con su procedencia.
+ *
+ * El título de una nota mide 205 caracteres de media: es una frase completa,
+ * no un titular. Va como párrafo a tamaño de cuerpo y NUNCA se trunca — la
+ * afirmación es el contenido.
  */
-import Badge from './Badge.astro';
 import Citation from './Citation.astro';
 import { entityRoute, type Note } from '../lib/graph';
-import { editorialBadge, evidenceBadge, showEvidenceBadge, basisBadge, NOTE_TYPE_LABEL } from '../lib/policy';
+import { url } from '../lib/url';
+import { readerFlags, NOTE_TYPE_LABEL } from '../lib/policy';
 
-interface Props {
-  note: Note;
-  /** Mostrar las citas de la nota (por defecto sí). */
-  citations?: boolean;
-}
+interface Props { note: Note; citations?: boolean }
 const { note, citations = true } = Astro.props;
+const flags = readerFlags(note);
 ---
-
-<article class="note-card">
-  <div class="badge-row">
-    <Badge label={NOTE_TYPE_LABEL[note.data.type]} tone="neutral" />
-    <Badge {...basisBadge(note.data.basis)} />
-    <Badge {...editorialBadge(note.data.editorialStatus)} />
-    {showEvidenceBadge(note.data.evidenceStatus) && <Badge {...evidenceBadge(note.data.evidenceStatus)} />}
-  </div>
-  <p class="note-title"><a href={entityRoute(note)}>{note.data.title}</a></p>
-  {citations && note.data.citations.map((c) => <Citation citation={c} />)}
+<article class="note">
+  <p class="note-kind">{NOTE_TYPE_LABEL[note.data.type]}</p>
+  <p class="note-claim"><a href={url(entityRoute(note))}>{note.data.title}</a></p>
+  {flags.length > 0 && (
+    <p class="note-flags">
+      {flags.map((f) => (
+        <span class={`flag flag--${f.tone}`}><span aria-hidden="true">{f.icon}</span> {f.label}</span>
+      ))}
+    </p>
+  )}
+  {citations && note.data.citations.slice(0, 1).map((c) => <Citation citation={c} />)}
 </article>
 
 <style>
-  .note-card {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 6px;
-    padding: 0.9rem 1.1rem;
-    margin: 0.8rem 0;
+  .note {
+    border-top: var(--rule);
+    padding-block: var(--s-4);
   }
-  .note-card .badge-row { margin-top: 0; }
-  .note-title {
+  .note-kind {
+    margin: 0;
+    font-family: var(--sans);
+    font-size: var(--t-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    color: var(--ink-faint);
+  }
+  .note-claim {
+    margin: var(--s-1) 0 0;
     font-family: var(--serif);
-    font-size: 1.05rem;
-    margin: 0.4rem 0 0.5rem;
+    font-size: var(--t-base);
+    line-height: 1.45;
+    text-wrap: pretty;
   }
-  .note-title a { color: var(--ink); text-decoration: none; }
-  .note-title a:hover { color: var(--stamp-strong); text-decoration: underline; }
+  .note-claim a { color: var(--ink); text-decoration-color: var(--line-strong); }
+  .note-claim a:hover { color: var(--stamp-strong); text-decoration-color: currentColor; }
+  .note-flags { margin: var(--s-2) 0 0; display: flex; flex-wrap: wrap; gap: var(--s-2); }
+  .flag {
+    font-size: var(--t-xs);
+    font-family: var(--sans);
+    padding: 0.1rem 0.45rem;
+    border-radius: var(--radius);
+    border: 1px solid currentColor;
+  }
+  .flag--alert { color: var(--alert); background: var(--alert-bg); }
+  .flag--warn { color: var(--warn); background: var(--warn-bg); }
+  .flag--ok { color: var(--ok); background: var(--ok-bg); }
+  .flag--neutral, .flag--info { color: var(--ink-soft); background: var(--surface-sunk); }
 </style>

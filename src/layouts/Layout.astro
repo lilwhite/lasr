@@ -1,12 +1,33 @@
 ---
 import '../styles/global.css';
-import { PREVIEW } from '../lib/policy';
+import { PREVIEW, EDITORIAL_UNIFORM } from '../lib/policy';
+import { NAV, FOOTER_NAV } from '../lib/nav';
+import { url, canonicalURL, isCurrent } from '../lib/url';
 
 interface Props {
   title: string;
-  description?: string;
+  /** Obligatoria: es lo que se ve al compartir el enlace por WhatsApp. */
+  description: string;
+  /** Ruta canónica sin base; por defecto, la actual. */
+  canonicalPath?: string;
+  ogType?: 'website' | 'article';
+  noindex?: boolean;
+  /** Ancho del contenido principal. */
+  width?: 'prose' | 'wide';
 }
-const { title, description } = Astro.props;
+
+const {
+  title,
+  description,
+  canonicalPath,
+  ogType = 'website',
+  noindex = false,
+  width = 'wide',
+} = Astro.props;
+
+const path = canonicalPath ?? Astro.url.pathname.replace(import.meta.env.BASE_URL ?? '/', '/');
+const canonical = canonicalURL(path, Astro.site);
+const fullTitle = path === '/' ? 'Los Ángeles de San Rafael' : `${title} · Los Ángeles de San Rafael`;
 ---
 
 <!doctype html>
@@ -14,78 +35,174 @@ const { title, description } = Astro.props;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title} · LASR-Web</title>
-    {description && <meta name="description" content={description} />}
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#16202a" />
+    <link rel="icon" href={url('/favicon.svg')} type="image/svg+xml" />
+
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content="Los Ángeles de San Rafael — guía documental" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:image" content={canonicalURL('/og.png', Astro.site)} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    {(noindex || PREVIEW) && <meta name="robots" content="noindex" />}
   </head>
+
   <body>
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
     {PREVIEW && (
-      <div class="preview-banner" role="status">
-        Vista de trabajo: se muestra contenido en borrador y documentos aún no publicables.
+      <div class="editorial-band" role="status">
+        Modo editorial: se muestran identificadores internos y el área de revisión.
       </div>
     )}
+
     <header class="site-header">
       <div class="container header-inner">
-        <a class="brand" href="/">LASR‑Web</a>
+        <a class="brand" href={url('/')}>
+          <span class="brand-name">Los Ángeles de San&nbsp;Rafael</span>
+          <span class="brand-kicker">guía documental</span>
+        </a>
         <nav aria-label="Principal">
-          <a href="/">Inicio</a>
-          <a href="/temas/recepcion-de-la-urbanizacion/">Recepción</a>
-          {PREVIEW && <a href="/revision/" class="nav-review">Revisión</a>}
+          <ul>
+            {NAV.filter((n) => n.path !== '/').map((n) => (
+              <li>
+                <a
+                  href={url(n.path)}
+                  aria-current={isCurrent(n.path, Astro.url.pathname) ? 'page' : undefined}
+                >{n.label}</a>
+              </li>
+            ))}
+            {PREVIEW && <li><a class="nav-editorial" href={url('/revision/')}>Revisión</a></li>}
+          </ul>
         </nav>
       </div>
     </header>
-    <main class="container">
+
+    <main id="contenido" class={width === 'prose' ? 'container main-prose' : 'container'}>
       <slot />
     </main>
+
     <footer class="site-footer">
-      <div class="container">
-        <p class="muted">
-          LASR‑Web documenta la historia jurídica y administrativa de Los Ángeles de San Rafael a
-          partir de documentación primaria. Cada afirmación enlaza con su fuente.
-          <strong>No es asesoramiento jurídico.</strong>
-        </p>
+      <div class="container footer-inner">
+        <div class="footer-about">
+          <p>
+            Esta web reconstruye la historia documental de Los Ángeles de San Rafael a partir de
+            sentencias, autos, actas, acuerdos y comunicaciones. Cada afirmación indica de qué
+            documento sale y en qué página.
+          </p>
+          {EDITORIAL_UNIFORM && (
+            <p class="footer-state">
+              <strong>Todo el contenido está en revisión.</strong> Se publica porque es verificable
+              contra su fuente, no porque esté cerrado.
+              <a href={url('/metodologia/')}>Cómo trabajamos</a>
+            </p>
+          )}
+          <p class="footer-disclaimer">No es asesoramiento jurídico.</p>
+        </div>
+        <nav class="footer-nav" aria-label="Secundaria">
+          <ul>
+            {FOOTER_NAV.map((n) => <li><a href={url(n.path)}>{n.label}</a></li>)}
+          </ul>
+        </nav>
       </div>
     </footer>
   </body>
 </html>
 
 <style>
-  .preview-banner {
+  .editorial-band {
     background: var(--warn-bg);
     color: var(--warn);
-    font-size: 0.85rem;
+    font-size: var(--t-xs);
     text-align: center;
-    padding: 0.35rem 1rem;
-    border-bottom: 1px solid var(--line);
+    padding: var(--s-1) var(--s-4);
+    border-bottom: var(--rule);
   }
+
   .site-header {
     background: var(--surface);
-    border-bottom: 2px solid var(--stamp);
+    border-bottom: 1px solid var(--line-strong);
   }
   .header-inner {
     display: flex;
+    flex-wrap: wrap;
     align-items: baseline;
     justify-content: space-between;
-    gap: 1rem;
-    padding-block: 0.8rem;
+    gap: var(--s-2) var(--s-5);
+    padding-block: var(--s-4);
   }
-  .brand {
+
+  .brand { text-decoration: none; color: var(--ink); display: block; }
+  .brand-name {
+    display: block;
     font-family: var(--serif);
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--ink);
-    text-decoration: none;
-    letter-spacing: 0.01em;
+    font-size: var(--t-md);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
   }
-  .brand:hover { color: var(--stamp-strong); }
-  nav { display: flex; gap: 1rem; font-size: 0.95rem; }
-  nav a { text-decoration: none; color: var(--ink-soft); }
-  nav a:hover { color: var(--stamp); text-decoration: underline; }
-  nav a.nav-review { color: var(--warn); font-weight: 600; }
-  main { padding-block: 2rem 3rem; min-height: 60vh; }
+  .brand-kicker {
+    display: block;
+    font-family: var(--mono);
+    font-size: var(--t-xs);
+    color: var(--ink-faint);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-top: 0.15rem;
+  }
+  .brand:hover .brand-name { color: var(--stamp-strong); }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-2) var(--s-5);
+    margin: 0;
+    padding: 0;
+  }
+  nav a {
+    text-decoration: none;
+    color: var(--ink-soft);
+    font-size: var(--t-sm);
+    padding-block: var(--s-1);
+    border-bottom: 2px solid transparent;
+  }
+  nav a:hover { color: var(--stamp); }
+  nav a[aria-current='page'] { color: var(--ink); border-bottom-color: var(--stamp); }
+  nav a.nav-editorial { color: var(--warn); }
+
+  main { padding-block: var(--s-6) var(--s-9); min-height: 60vh; }
+  .main-prose { max-width: calc(var(--measure) + 2 * var(--s-5)); }
+
   .site-footer {
-    border-top: 1px solid var(--line);
+    border-top: 1px solid var(--line-strong);
     background: var(--surface);
-    padding-block: 1.2rem;
-    font-size: 0.88rem;
+    padding-block: var(--s-6);
+    font-size: var(--t-sm);
+    color: var(--ink-soft);
+  }
+  .footer-inner {
+    display: grid;
+    gap: var(--s-5);
+  }
+  .footer-about { max-width: var(--measure); }
+  .footer-about p { margin-block: 0 var(--s-3); }
+  .footer-state { color: var(--ink); }
+  .footer-state a { margin-left: 0.4em; }
+  .footer-disclaimer { font-family: var(--mono); font-size: var(--t-xs); color: var(--ink-faint); }
+
+  .footer-nav ul { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s-2); }
+  .footer-nav a { color: var(--ink-soft); }
+
+  @media (min-width: 52em) {
+    .footer-inner { grid-template-columns: 1fr auto; gap: var(--s-7); }
   }
 </style>
