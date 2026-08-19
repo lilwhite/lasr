@@ -121,8 +121,8 @@
         "textChars": 0,
         "hasTextLayer": false,
         "docTypeGuess": "auto",
-        "canonical": "auto-55-2011-ap-segovia.pdf",
-        "status": "ya-existente"
+        "canonical": "src-2011-ap-segovia-auto-55.pdf",
+        "status": "procesado"
       },
       {
         "kind": "master",
@@ -163,8 +163,8 @@
         "textChars": 0,
         "hasTextLayer": false,
         "docTypeGuess": "comunicacion",
-        "canonical": "carta-euc-20160128.pdf",
-        "status": "ya-existente"
+        "canonical": "src-2016-euc-carta.pdf",
+        "status": "procesado"
       },
       {
         "kind": "master",
@@ -658,21 +658,6 @@
       },
       {
         "kind": "work",
-        "name": "auto-55-2011-ap-segovia.pdf",
-        "relpath": "auto-55-2011-ap-segovia.pdf",
-        "ext": ".pdf",
-        "size": 3166381,
-        "sha256": "0603c438182ee2cc907c0ea76d85b8daed9999cfbf63ed9daef61af8a349a12d",
-        "pages": 4,
-        "textChars": 0,
-        "hasTextLayer": false,
-        "docTypeGuess": "auto",
-        "inMaster": true,
-        "sourceId": null,
-        "status": "pendiente-de-analisis"
-      },
-      {
-        "kind": "work",
         "name": "burofax-solicitud-asamblea.pdf",
         "relpath": "burofax-solicitud-asamblea.pdf",
         "ext": ".pdf",
@@ -709,21 +694,6 @@
         "size": 3522528,
         "sha256": "2022781139f01fad3dfe335d8d60a604c5ab55e1642fb289e2953a59c41b136d",
         "pages": 8,
-        "textChars": 0,
-        "hasTextLayer": false,
-        "docTypeGuess": "comunicacion",
-        "inMaster": true,
-        "sourceId": null,
-        "status": "pendiente-de-analisis"
-      },
-      {
-        "kind": "work",
-        "name": "carta-euc-20160128.pdf",
-        "relpath": "carta-euc-20160128.pdf",
-        "ext": ".pdf",
-        "size": 276554,
-        "sha256": "ebde03b4e0b05849135e75d06859e17cf154b27c6038bb21dc30f74ab698019e",
-        "pages": 2,
         "textChars": 0,
         "hasTextLayer": false,
         "docTypeGuess": "comunicacion",
@@ -867,8 +837,8 @@
         "hasTextLayer": false,
         "docTypeGuess": "convenio",
         "inMaster": false,
-        "sourceId": null,
-        "status": "pendiente-de-analisis"
+        "sourceId": "SRC-1996-ASC-CP-ACUERDO",
+        "status": "procesado"
       },
       {
         "kind": "work",
@@ -973,6 +943,21 @@
         "docTypeGuess": "desconocido",
         "inMaster": false,
         "sourceId": "SRC-2011-AP-SEGOVIA-171",
+        "status": "procesado"
+      },
+      {
+        "kind": "work",
+        "name": "src-2011-ap-segovia-auto-55.pdf",
+        "relpath": "src-2011-ap-segovia-auto-55.pdf",
+        "ext": ".pdf",
+        "size": 3166381,
+        "sha256": "0603c438182ee2cc907c0ea76d85b8daed9999cfbf63ed9daef61af8a349a12d",
+        "pages": 4,
+        "textChars": 0,
+        "hasTextLayer": false,
+        "docTypeGuess": "auto",
+        "inMaster": true,
+        "sourceId": "SRC-2011-AP-SEGOVIA-AUTO-55",
         "status": "procesado"
       },
       {
@@ -1108,6 +1093,21 @@
         "docTypeGuess": "presupuesto",
         "inMaster": true,
         "sourceId": "SRC-2015-EUC-PRESUPUESTO",
+        "status": "procesado"
+      },
+      {
+        "kind": "work",
+        "name": "src-2016-euc-carta.pdf",
+        "relpath": "src-2016-euc-carta.pdf",
+        "ext": ".pdf",
+        "size": 276554,
+        "sha256": "ebde03b4e0b05849135e75d06859e17cf154b27c6038bb21dc30f74ab698019e",
+        "pages": 2,
+        "textChars": 0,
+        "hasTextLayer": false,
+        "docTypeGuess": "comunicacion",
+        "inMaster": true,
+        "sourceId": "SRC-2016-EUC-CARTA",
         "status": "procesado"
       },
       {

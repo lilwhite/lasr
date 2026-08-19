@@ -11,11 +11,9 @@ versionan ni se publican.
 |---|---|---|---|---|---|---|
 | `apelacion-asc-20120716.pdf` | `d0723282` | 19 | sí | — | pendiente-de-analisis | sí |
 | `apelaciones-ayto-cp-20120626.pdf` | `8eb33b94` | 52 | no | — | pendiente-de-analisis | sí |
-| `auto-55-2011-ap-segovia.pdf` | `0603c438` | 4 | no | — | pendiente-de-analisis | sí |
 | `burofax-solicitud-asamblea.pdf` | `f45053f0` | 3 | no | — | pendiente-de-analisis | sí |
 | `carta-cp-gestion-20140407.pdf` | `a662c4ac` | 16 | no | — | pendiente-de-analisis | sí |
 | `carta-cp-recepcion-20130610.pdf` | `20227811` | 8 | no | — | pendiente-de-analisis | sí |
-| `carta-euc-20160128.pdf` | `ebde03b4` | 2 | no | — | pendiente-de-analisis | sí |
 | `informacion-propietarios-201903.pdf` | `594f49f1` | 14 | sí | — | pendiente-de-analisis | sí |
 | `informe-tecnico-ayto.pdf` | `4339fcab` | 218 | no | — | pendiente-de-analisis | sí |
 | `plan-parcial-el-carrascal.pdf` | `b0c63cf7` | 138 | no | — | pendiente-de-analisis | sí |
@@ -24,7 +22,7 @@ versionan ni se publican.
 | `sentencia-audiencia-segovia-220104.pdf` | `99981b78` | 10 | no | — | duplicado-registrado | sí |
 | `solicitud-de-amparo-2.pdf` | `e3e3ea37` | 1 | no | — | anexo-registrado | sí |
 | `solicitud-de-amparo.pdf` | `748746b2` | 24 | no | — | pendiente-de-analisis | sí |
-| `src-1996-asc-cp-acuerdo.pdf` | `cc049c4a` | 3 | no | — | pendiente-de-analisis | NO |
+| `src-1996-asc-cp-acuerdo.pdf` | `cc049c4a` | 3 | no | SRC-1996-ASC-CP-ACUERDO | procesado | NO |
 | `src-2002-jpi1-segovia-158.pdf` | `722e48cc` | 4 | no | SRC-2002-JPI1-SEGOVIA-158 | procesado | sí |
 | `src-2003-ap-segovia-323.pdf` | `7b80e5ec` | 10 | no | SRC-2003-AP-SEGOVIA-323 | procesado | sí |
 | `src-2005-jpi3-segovia-139.pdf` | `2abb87bb` | 5 | no | SRC-2005-JPI3-SEGOVIA-139 | procesado | sí |
@@ -32,6 +30,7 @@ versionan ni se publican.
 | `src-2010-ap-segovia-156.pdf` | `27931a85` | 6 | sí | SRC-2010-AP-SEGOVIA-156 | procesado | sí |
 | `src-2010-jpi1-segovia-34.pdf` | `20cebd2c` | 11 | no | SRC-2010-JPI1-SEGOVIA-34 | procesado | sí |
 | `src-2011-ap-segovia-171.pdf` | `1bb7bace` | 7 | sí | SRC-2011-AP-SEGOVIA-171 | procesado | NO |
+| `src-2011-ap-segovia-auto-55.pdf` | `0603c438` | 4 | no | SRC-2011-AP-SEGOVIA-AUTO-55 | procesado | sí |
 | `src-2011-jca-segovia-6.pdf` | `b3f347ad` | 23 | sí | SRC-2011-JCA-SEGOVIA-6 | procesado | sí |
 | `src-2011-jpi5-segovia-70.pdf` | `8ce35d9a` | 13 | no | SRC-2011-JPI5-SEGOVIA-70 | procesado | sí |
 | `src-2011-tsjcyl-271.pdf` | `c99090f3` | 26 | sí | SRC-2011-TSJCYL-271 | procesado | sí |
@@ -41,6 +40,7 @@ versionan ni se publican.
 | `src-2015-euc-acta-2.pdf` | `38b6e5e8` | 7 | no | SRC-2015-EUC-ACTA-2 | procesado | sí |
 | `src-2015-euc-convocatoria.pdf` | `a2a3b4fd` | 1 | no | SRC-2015-EUC-CONVOCATORIA | procesado | sí |
 | `src-2015-euc-presupuesto.pdf` | `309a3f15` | 1 | no | SRC-2015-EUC-PRESUPUESTO | procesado | sí |
+| `src-2016-euc-carta.pdf` | `ebde03b4` | 2 | no | SRC-2016-EUC-CARTA | procesado | sí |
 | `src-2017-ap-segovia-185.pdf` | `174c3ebd` | 9 | sí | SRC-2017-AP-SEGOVIA-185 | procesado | sí |
 | `src-2017-jca-segovia-22.pdf` | `258e3fba` | 25 | sí | SRC-2017-JCA-SEGOVIA-22 | procesado | sí |
 | `src-2017-jpi4-segovia-39.pdf` | `bf4ec6cd` | 10 | no | SRC-2017-JPI4-SEGOVIA-39 | procesado | sí |
@@ -62,10 +62,10 @@ versionan ni se publican.
 | `Apelacion Asoc.Auto recep.Ayto.16-7-2012.pdf` | `d0723282` | 19 | sí | escrito-de-parte | ya-existente | apelacion-asc-20120716.pdf |
 | `Apelación Ayto.y Cdad.26-6-2012.pdf` | `8eb33b94` | 52 | no | escrito-de-parte | ya-existente | apelaciones-ayto-cp-20120626.pdf |
 | `Auto Recepción.pdf` | `62a3a998` | 15 | sí | auto | procesado | src-2012-jca-segovia-auto-ejecucion.pdf |
-| `Auto_55_2011_Audiencia_Provincial_Segovia.pdf` | `0603c438` | 4 | no | auto | ya-existente | auto-55-2011-ap-segovia.pdf |
+| `Auto_55_2011_Audiencia_Provincial_Segovia.pdf` | `0603c438` | 4 | no | auto | procesado | src-2011-ap-segovia-auto-55.pdf |
 | `Burofax Solicitud Asamblea.pdf` | `f45053f0` | 3 | no | escrito-de-parte | ya-existente | burofax-solicitud-asamblea.pdf |
 | `Carta Comunidad ASR Marzo 2014.pdf` | `a662c4ac` | 16 | no | comunicacion | ya-existente | carta-cp-gestion-20140407.pdf |
-| `Carta EUC 28_01_16.pdf` | `ebde03b4` | 2 | no | comunicacion | ya-existente | carta-euc-20160128.pdf |
+| `Carta EUC 28_01_16.pdf` | `ebde03b4` | 2 | no | comunicacion | procesado | src-2016-euc-carta.pdf |
 | `Carta EUCpdf · versión 1_260817_221402.pdf` | `a2a3b4fd` | 1 | no | comunicacion | procesado | src-2015-euc-convocatoria.pdf |
 | `Circular y sentencia 1852017 .pdf` | `699d86a1` | 22 | sí | sentencia | procesado | src-2026-cp-lasr-circular-001.pdf |
 | `Desestimacion a Oscar contra Ayto..pdf` | `b3f347ad` | 23 | sí | desconocido | procesado | src-2011-jca-segovia-6.pdf |
