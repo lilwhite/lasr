@@ -2,7 +2,7 @@
 
 Especificación canónica del modelo de conocimiento de LASR-Web. Cualquier contenido de `src/content/` debe ajustarse a este documento. Si el modelo cambia, se cambia primero aquí.
 
-**Estado**: v1, validado contra dos documentos piloto reales (STSJ CyL 581/2012 y STSJ CyL 114/2019).
+**Estado**: v1, instanciada con el corpus documental completo de la carpeta maestra (ver §12).
 
 ---
 
@@ -84,7 +84,7 @@ Un Source **no** tiene `status` editorial ni `basis`: el documento es el que es.
 
 **Registro documental.** `docs/document_registry.json` (fuente de verdad) y su volcado legible `docs/DOCUMENT_REGISTRY.md` recogen los ficheros originales que **no** dan lugar a un Source, con su `sha256` como clave: duplicados exactos de un documento ya fichado (`duplicate-of`), copias parciales (`fragment-of`), anexos y acuses (`annex-of`), normativa y doctrina (`reference-material`) y fragmentos no atribuibles a ningún documento conocido (`unidentified`). Cada entrada lleva la evidencia de la identificación. Sin este registro, `inventory.py` mostraría esos ficheros como pendientes indefinidamente, porque su `sha256` no coincide con ninguna ficha. En el Source afectado se añade además una línea en su bloque `**Captura**`/`**Versiones**` remitiendo al registro.
 
-**Sources sin fichero (stubs).** Muchos documentos se conocen solo porque otro documento los cita (p. ej. el auto de 24.2.2012, citado por la STSJ 581/2012, cuyo PDF no tenemos). En la v1 estos documentos se representan como **Events** con citas al documento que los menciona. Si más adelante conviene citarlos como fuente (p. ej. al conseguir el PDF), se crea su Source con `file: null` hasta tener el fichero. No crear stubs preventivamente.
+**Sources sin fichero (stubs).** Muchos documentos se conocen solo porque otro documento los cita (p. ej. la sentencia 217/2015 del TSJ, que el corpus conoce solo por la carta con la que la EUC comunicó sus efectos). En la v1 estos documentos se representan como **Events** con citas al documento que los menciona. Si más adelante conviene citarlos como fuente (p. ej. al conseguir el PDF), se crea su Source con `file: null` hasta tener el fichero. No crear stubs preventivamente.
 
 ### 3.2 AtomicNote
 
@@ -406,18 +406,19 @@ src/content/
 
 ## 12. Ejemplos reales (piloto)
 
-El modelo está instanciado con contenido real verificado contra los dos PDFs piloto:
+El modelo está instanciado con el corpus documental completo de la carpeta maestra: **36 Sources, 150 notas atómicas, 48 Events, 21 Actors, 11 Procedures, 4 Topics y 10 Questions**. Todo el contenido está en `editorialStatus: draft`: nada se ha promocionado todavía a `reviewed`.
 
-- **Sources**: `SRC-2012-TSJCYL-581` (STSJ CyL 581/2012, 21.12.2012, recepción y conservación) y `SRC-2019-TSJCYL-114` (STSJ CyL 114/2019, 26.4.2019, periodo transitorio del agua).
-- **Procedures**: `PROC-2009-JCA-SEGOVIA-PO-28` → `PROC-2011-JCA-SEGOVIA-ETJ-20` → `PROC-2018-JCA-SEGOVIA-INC-16` (cadena `parent`).
-- **Events**: 9, de la solicitud de recepción (10.7.2008) a la STSJ 114/2019.
-- **Actors**: 7, incluyendo las cuatro entidades vecinales/municipales, dos tribunales y una empresa.
-- **AtomicNotes**: 15 (`NOTE-2012-TSJCYL-581-001…010`, `NOTE-2019-TSJCYL-114-001…005`), todas `basis: documented`, `editorialStatus: draft`, `evidenceStatus: consistent`, con citación a página verificada.
-- **Topic**: `TOPIC-RECEPCION` con cuerpo MOC.
-- **Questions**: `QUESTION-RECEPCION-001…004`.
+Cobertura documental: los 42 PDF de la carpeta maestra están procesados (33), o registrados en `docs/DOCUMENT_REGISTRY.md` como duplicado (4), fragmento (2), anexo (1) o material de referencia (2). `scripts/inventory.py` no muestra ningún pendiente.
 
-Casos límite que el piloto ya ejercita:
-- Discrepancia interna de fechas en la STSJ 114/2019 (acuerdo homologado fechado 3.6.2013 en unas páginas y 3.6.2018 en otras) → `EVENT-ACUERDO-TRANSACCIONAL-AGUA-001`, con `dateStatus: disputed`, ambas candidatas trazadas en `dateEvidence` e ID sin fecha.
-- Afirmaciones contenidas en un auto transcrito dentro de la sentencia → locator "(transcripción del auto 177/2018)".
-- Alegación de parte no asumida por el tribunal → `NOTE-2012-TSJCYL-581-010` (`claim`).
-- Resoluciones citadas cuyo PDF no tenemos (autos de 2012, sentencia de 3.6.2011) → representadas como Events, no como Sources stub.
+Arco temporal cubierto: de la memoria del Plan Parcial (agosto de 1966) a la circular de la Comunidad de Propietarios de 2026.
+
+Casos límite que el corpus ejercita:
+
+- **Fechas contradictorias entre documentos** → `EVENT-ACUERDO-TRANSACCIONAL-AGUA-001` (acuerdo fechado 3.6.2013 y 3.6.2018 dentro de la misma sentencia) y `EVENT-2012-05-14-AUTO-COMPLEMENTO` (auto fechado el 14 de mayo por la sentencia de apelación y el 4 de mayo por los escritos de las partes). Ambos con `dateStatus: disputed`, ambas candidatas en `dateEvidence` y el identificador congelado en lo que se supo al crearlo.
+- **Afirmaciones contenidas en un documento transcrito dentro de otro** → locator "(transcripción del auto 177/2018)", "(transcripción de la SAP Madrid de 4.11.2002)", "(transcripción del convenio entre el Ayuntamiento y las promotoras)".
+- **Alegación de parte no asumida por el tribunal** → `NOTE-2012-TSJCYL-581-010` y todas las notas de los Sources con `docType: escrito-de-parte`.
+- **Documentos cuyo PDF no tenemos** → representados como Events con citas al documento que los menciona: el auto de complemento de 2012, la STSJ 217/2015, las resoluciones madrileñas de 2000 y 2002.
+- **Un fichero con varios documentos dentro** → `SRC-2012-CP-AYTO-APELACIONES` (dos recursos de apelación), resuelto con un Source y `locator` diferenciado.
+- **Copias distintas del mismo documento** → cuatro duplicados y dos fragmentos con sha256 propio, anotados en el Source afectado y en el registro documental.
+- **Paginación impresa distinta de la física** → `printedPages` en las citas del informe jurídico de 2014 y de los recursos de 2012.
+- **Extracción de texto poco fiable** → Sources escaneados con bloque `**Captura**` que indica qué páginas son OCR; `SRC-2017-JCA-SEGOVIA-22`, con capa de texto codificada que pierde todos los dígitos; y dos documentos de más de cien páginas con cobertura selectiva declarada en el propio Source.
