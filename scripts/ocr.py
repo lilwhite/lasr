@@ -124,8 +124,44 @@ def load_manifest() -> dict:
 
 
 def save_manifest(manifest: dict) -> None:
+    """Guarda fusionando con lo que haya en disco.
+
+    Dos ejecuciones concurrentes (lo normal: los documentos largos en segundo
+    plano mientras se procesan los cortos) cargan el manifiesto al arrancar y
+    lo escriben al terminar. Sin fusionar, el último en escribir borra las
+    entradas del otro y esos documentos se vuelven a OCRear al renombrarlos.
+    """
     CACHE.mkdir(parents=True, exist_ok=True)
+    merged = load_manifest()
+    merged.update(manifest)
+    manifest.update(merged)
+    MANIFEST.write_text(json.dumps(merged, indent=2, ensure_ascii=False), encoding="utf-8")
+
+
+def reindex() -> dict:
+    """Reconstruye el manifiesto leyendo la cabecera de cada .txt de la caché.
+
+    Cada volcado lleva su sha256 y su número de páginas en la cabecera, así que
+    el manifiesto es reconstruible sin volver a procesar ningún PDF.
+    """
+    manifest = load_manifest()
+    for txt in sorted(CACHE.glob("*.txt")):
+        head = txt.read_text(encoding="utf-8", errors="replace")[:600]
+        m_sha = re.search(r"^# sha256: ([0-9a-f]{64})$", head, re.M)
+        m_pages = re.search(r"^# páginas: (\d+)", head, re.M)
+        m_name = re.search(r"^# (.+\.pdf)$", head, re.M)
+        if not m_sha:
+            continue
+        entry = manifest.setdefault(m_sha.group(1), {})
+        entry["stem"] = txt.stem
+        entry.setdefault("originalName", m_name.group(1) if m_name else txt.stem + ".pdf")
+        if m_pages:
+            entry.setdefault("pages", int(m_pages.group(1)))
+        entry.setdefault("engine", f"tesseract-{LANG}")
+        entry.setdefault("dpi", DPI)
+        entry.setdefault("forceOcr", False)
     MANIFEST.write_text(json.dumps(manifest, indent=2, ensure_ascii=False), encoding="utf-8")
+    return manifest
 
 
 def process(path: Path, manifest: dict, args) -> str:
@@ -211,12 +247,18 @@ def main() -> int:
     parser.add_argument("--force", action="store_true", help="re-procesa aunque esté en caché")
     parser.add_argument("--force-ocr", action="store_true", help="ignora la capa de texto y rasteriza siempre")
     parser.add_argument("--dry-run", action="store_true", help="solo informa de lo que haría")
+    parser.add_argument("--reindex", action="store_true", help="reconstruye el manifiesto desde las cabeceras de la caché y sale")
     args = parser.parse_args()
 
     for tool in ("pdfinfo", "pdftotext", "pdftoppm", "tesseract"):
         if not shutil.which(tool):
             print(f"Falta la herramienta '{tool}'.", file=sys.stderr)
             return 1
+
+    if args.reindex:
+        manifest = reindex()
+        print(f"Manifiesto reconstruido: {len(manifest)} entradas.")
+        return 0
 
     targets = [Path(p).resolve() for p in args.pdfs] if args.pdfs else sorted(WORK.glob("*.pdf"))
     if not targets:
