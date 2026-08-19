@@ -10,7 +10,7 @@ parties:
     role: recurrente
   - actor: ACTOR-AYUNTAMIENTO-EL-ESPINAR
     role: demandada
-topics: [TOPIC-RECEPCION]
+topics: [TOPIC-RECEPCION, TOPIC-EUC]
 editorialStatus: draft
 ---
 

@@ -6,6 +6,7 @@ summary: >-
   Qué es la EUC de las fases I y II, por qué se creó por mandato judicial, qué
   obligaciones tenía, qué pasó con sus estatutos y presupuestos, y por qué se
   denegó su disolución.
+area: comunidad-y-recepcion
 relatedTopics: [TOPIC-RECEPCION]
 ---
 

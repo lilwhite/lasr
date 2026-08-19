@@ -20,7 +20,7 @@ sha256: 258e3fba7ca08124a939064f2e75281076853cd9529fc60cc35a2adb57b70ccb
 originalFilename: "Sentencia ContAmvoAsamblea EUC3-2-2017-1_503pd_260817_220519.pdf"
 pages: 25
 language: es
-topics: [TOPIC-RECEPCION]
+topics: [TOPIC-RECEPCION, TOPIC-EUC]
 relations: []
 publicationStatus: private
 privacyReview:

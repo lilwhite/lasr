@@ -7,6 +7,7 @@ summary: >-
   historia de las autorizaciones desde 1971, las titularidades privadas de las
   instalaciones, el acuerdo transaccional de 2013 y el litigio sobre su
   prórroga.
+area: comunidad-y-recepcion
 relatedTopics: [TOPIC-RECEPCION]
 ---
 

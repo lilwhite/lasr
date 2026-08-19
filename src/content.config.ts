@@ -166,6 +166,8 @@ const topics = defineCollection({
     slug: urlSlug,
     title: z.string(),
     summary: z.string(),
+    // Agrupación editorial de navegación, no jerarquía: ver CONTENT_MODEL §3.6.
+    area: z.enum(['comunidad-y-recepcion', 'desanexion']),
     relatedTopics: z.array(topicRef).default([]),
   }).strict(),
 });
@@ -182,4 +184,15 @@ const questions = defineCollection({
   }).strict(),
 });
 
-export const collections = { sources, notes, events, actors, procedures, topics, questions };
+const pages = defineCollection({
+  loader: byFilename({ pattern: '**/*.md', base: './src/content/pages' }),
+  schema: z.object({
+    slug: urlSlug,
+    title: z.string(),
+    summary: z.string(),
+    updated: z.date(),
+    editorialStatus,
+  }).strict(),
+});
+
+export const collections = { sources, notes, events, actors, procedures, topics, questions, pages };

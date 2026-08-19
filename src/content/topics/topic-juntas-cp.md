@@ -6,6 +6,7 @@ summary: >-
   La historia de impugnaciones judiciales de las juntas y cuentas de la
   Comunidad de Propietarios de Los Ángeles de San Rafael, desde los años
   noventa hasta después de la recepción.
+area: comunidad-y-recepcion
 relatedTopics: [TOPIC-RECEPCION, TOPIC-EUC]
 ---
 

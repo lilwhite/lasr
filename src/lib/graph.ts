@@ -141,7 +141,7 @@ export function slugify(text: string): string {
     .replace(/^-+|-+$/g, '');
 }
 
-const ROUTE_PREFIX: Record<Kind, { base: string; strip: RegExp }> = {
+export const ROUTE_PREFIX: Record<Kind, { base: string; strip: RegExp }> = {
   topics: { base: '/temas', strip: /^TOPIC-/ },
   sources: { base: '/documentos', strip: /^SRC-/ },
   notes: { base: '/notas', strip: /^NOTE-/ },
@@ -176,12 +176,77 @@ export function entityLabel(idOrEntry: string | Entity): string {
   return (d.title ?? d.name ?? d.question ?? d.id) as string;
 }
 
-/** Etiqueta corta de un Source para citas: "TSJ CyL 581/2012". */
+/**
+ * Etiqueta corta de un Source para citas: "STSJ CyL 581/2012", "Acta, 2015".
+ *
+ * El respaldo importa: 19 de los 36 documentos no tienen número de resolución
+ * (actas, cartas, convenios, el plan parcial). Devolver el identificador crudo
+ * pondría "SRC-1966-PLAN-PARCIAL-CARRASCAL" delante de un vecino.
+ */
 export function sourceShortLabel(source: Source): string {
   const n = source.data.resolutionNumber;
   if (n && source.data.id.includes('TSJCYL')) return `STSJ CyL ${n}`;
-  if (n) return `${source.data.docType} ${n}`;
-  return source.data.id;
+  if (n) return `${DOC_TYPE_SHORT[source.data.docType] ?? source.data.docType} ${n}`;
+  const year = source.data.date instanceof Date ? source.data.date.getUTCFullYear() : null;
+  const tipo = DOC_TYPE_SHORT[source.data.docType] ?? source.data.docType;
+  return year ? `${tipo}, ${year}` : tipo;
+}
+
+/** Nombres de tipo documental en la forma en que se leen dentro de una cita. */
+const DOC_TYPE_SHORT: Record<string, string> = {
+  sentencia: 'Sentencia',
+  auto: 'Auto',
+  estatutos: 'Estatutos',
+  acta: 'Acta',
+  convenio: 'Convenio',
+  comunicacion: 'Comunicación',
+  'resolucion-administrativa': 'Resolución',
+  presupuesto: 'Presupuesto',
+  circular: 'Circular',
+  informe: 'Informe',
+  'escrito-de-parte': 'Escrito de parte',
+  'instrumento-urbanistico': 'Plan parcial',
+};
+
+/** ¿Existe una entidad con ese ID? A diferencia de `resolve`, no lanza. */
+export function hasEntity(id: string): boolean {
+  return byId.has(id);
+}
+
+/**
+ * Etiqueta breve para una referencia embebida en la prosa.
+ *
+ * No sirve `entityLabel`: los títulos de nota miden 205 caracteres de media y
+ * los de acontecimiento 88. Dentro de una frase hay que dar la referencia, no
+ * el enunciado entero.
+ */
+export function entityShortLabel(idOrEntry: string | Entity): string {
+  const entry = typeof idOrEntry === 'string' ? resolve(idOrEntry) : idOrEntry;
+  const k = kindOf.get(entry.data.id)!;
+  const d = entry.data as Record<string, any>;
+  switch (k) {
+    case 'sources':
+      return sourceShortLabel(entry as Source);
+    case 'events': {
+      const e = entry as Event;
+      return e.data.date ? formatDate(e.data.date, e.data.datePrecision ?? 'day') : entityLabel(e);
+    }
+    case 'notes': {
+      const first = (d.citations ?? [])[0];
+      if (first && byId.has(first.source)) {
+        const src = sourceShortLabel(byId.get(first.source) as Source);
+        const pg = (first.pdfPages ?? [])[0];
+        return pg ? `${src}, pág. ${pg}` : src;
+      }
+      return 'afirmación documentada';
+    }
+    case 'actors':
+      return d.name as string;
+    case 'procedures':
+      return d.number as string;
+    default:
+      return entityLabel(entry);
+  }
 }
 
 /* ----------------------------- */
@@ -310,4 +375,66 @@ export function eventDateText(e: Event): string {
 /** Notas en orden estable por ID (para revisión secuencial). */
 export function notesOrdered(): Note[] {
   return [...graph.notes].sort((a, b) => a.data.id.localeCompare(b.data.id));
+}
+
+/* --------------------------------------------- */
+/* Consultas derivadas para la capa de presentación */
+/* --------------------------------------------- */
+
+/** Afirmaciones que sitúan un acontecimiento. Se hacía a mano en la plantilla. */
+export function notesOfEvent(eventId: string): Note[] {
+  return graph.notes.filter((n) => n.data.events.includes(eventId));
+}
+
+/** Todo lo que menciona a un actor, agrupado. Se hacía a mano en la plantilla. */
+export function actorMentions(actorId: string) {
+  const inParties = (d: { parties?: { actor: string }[] }) =>
+    (d.parties ?? []).some((p) => p.actor === actorId);
+  return {
+    notes: graph.notes.filter((n) => n.data.actors.includes(actorId)),
+    events: graph.events.filter((e) => e.data.actors.includes(actorId)),
+    sources: graph.sources.filter((s) => s.data.issuer === actorId || inParties(s.data)),
+    procedures: graph.procedures.filter((p) => p.data.organ === actorId || inParties(p.data)),
+  };
+}
+
+/**
+ * Actores de un tema, derivados de sus miembros cuando el etiquetado no los
+ * declara. `TOPIC-EUC` tiene 25 afirmaciones y ningún actor etiquetado: sin
+ * este respaldo su página mostraría un encabezado sobre el vacío.
+ */
+export function topicActorsDerived(topicId: string): Actor[] {
+  const m = topicMembers(topicId);
+  const ids = new Set<string>();
+  for (const n of m.notes) n.data.actors.forEach((a) => ids.add(a));
+  for (const e of m.events) e.data.actors.forEach((a) => ids.add(a));
+  for (const s of m.sources) {
+    ids.add(s.data.issuer);
+    (s.data.parties ?? []).forEach((p) => ids.add(p.actor));
+  }
+  return graph.actors.filter((a) => ids.has(a.data.id));
+}
+
+/** Procedimientos de un tema, derivados de sus miembros. Mismo motivo. */
+export function topicProceduresDerived(topicId: string): Procedure[] {
+  const m = topicMembers(topicId);
+  const ids = new Set<string>();
+  for (const e of m.events) if (e.data.procedure) ids.add(e.data.procedure);
+  for (const s of m.sources) if (s.data.procedure) ids.add(s.data.procedure);
+  // Arrastra los ascendientes, para que el árbol tenga raíz.
+  for (const id of [...ids]) {
+    let cur = byId.get(id) as Procedure | undefined;
+    while (cur?.data.parent) {
+      ids.add(cur.data.parent);
+      cur = byId.get(cur.data.parent) as Procedure | undefined;
+    }
+  }
+  return graph.procedures.filter((p) => ids.has(p.data.id));
+}
+
+/** Documentos de un tema ordenados por cuántas afirmaciones los citan. */
+export function topicSourcesRanked(topicId: string): { source: Source; noteCount: number }[] {
+  return topicMembers(topicId)
+    .sources.map((source) => ({ source, noteCount: notesCiting(source.data.id).length }))
+    .sort((a, b) => b.noteCount - a.noteCount);
 }

@@ -12,7 +12,7 @@ parties:
     role: demandada
   - actor: ACTOR-EUC-LASR
     role: codemandada
-topics: [TOPIC-RECEPCION]
+topics: [TOPIC-RECEPCION, TOPIC-EUC]
 editorialStatus: draft
 ---
 

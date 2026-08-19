@@ -6,6 +6,7 @@ summary: >-
   Cómo y por qué el Ayuntamiento de El Espinar quedó obligado a recepcionar
   las fases I y II de Los Ángeles de San Rafael, quién debe conservar la
   urbanización y quién debe prestar y costear los servicios públicos.
+area: comunidad-y-recepcion
 relatedTopics: []
 ---
 

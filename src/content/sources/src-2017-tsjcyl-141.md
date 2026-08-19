@@ -22,7 +22,7 @@ sha256: 8d514f6a9a62c1a2da90150a276bb9d4072fd08b325a2e3c121bc19f6edde959
 originalFilename: "Sentencia Apelación EUC  TSJCy L 622017PDF ·_260817_214816.pdf"
 pages: 26
 language: es
-topics: [TOPIC-RECEPCION]
+topics: [TOPIC-RECEPCION, TOPIC-EUC]
 relations:
   - type: confirms
     target: SRC-2017-JCA-SEGOVIA-22

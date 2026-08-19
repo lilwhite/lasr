@@ -15,7 +15,7 @@ citations:
     quote: "se nos abrirá la posibilidad de volver a la idea inicial con la que se formó nuestro núcleo, esto es, la posibilidad de independizarnos … habremos de acudir a la constitución de una Entidad Local Menor"
 actors: [ACTOR-EUC-LASR, ACTOR-CP-LASR]
 events: [EVENT-2015-07-02-ASAMBLEA-EUC-PRESUPUESTO]
-topics: [TOPIC-EUC]
+topics: [TOPIC-EUC, TOPIC-DESANEXION]
 relations: []
 ---
 

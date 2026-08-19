@@ -20,7 +20,7 @@ sha256: a0b5ce9be459a7dfbfc11b490522e4f70b5cc1146cd4ef8080dca5d84e01ea72
 originalFilename: "Sentencia Recurso Apelacion EUCpdf · versión 1_260817_214950.pdf"
 pages: 34
 language: es
-topics: [TOPIC-RECEPCION]
+topics: [TOPIC-RECEPCION, TOPIC-EUC]
 relations:
   - type: cites
     target: SRC-2012-TSJCYL-581

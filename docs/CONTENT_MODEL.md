@@ -227,6 +227,10 @@ fuentes, actores y preguntas relevantes, y lista las incógnitas abiertas.
 
 La pertenencia inversa (qué notas/eventos/fuentes tocan un Topic) **no se mantiene a mano** en el Topic: se computa en build a partir de los arrays `topics:` de las demás entidades. El cuerpo del Topic es curación editorial, no un índice exhaustivo.
 
+**Campo `area`.** Cada Topic declara a cuál de las dos grandes áreas de la interfaz pertenece: `comunidad-y-recepcion` o `desanexion`. Es **agrupación editorial de navegación**: no crea jerarquía, no altera la pertenencia inversa y no hace que las afirmaciones de un tema cuenten en otro. Una afirmación aparece en todos los contextos que le correspondan sin duplicarse. Ver `docs/WEB_DESIGN.md` §2.2.
+
+**Contrato de secciones del cuerpo.** El cuerpo de un Topic solo puede contener las secciones que no son derivables del grafo: `## En 30 segundos`, `## Por qué importa`, `## Situación documentada` y `## Qué está en discusión`. Las demás —cronología, preguntas, procedimientos, actores, documentos— las genera la plantilla desde las colecciones, y escribirlas a mano hace **fallar el build**. La razón es concreta: hasta ahora los temas llevaban esas listas escritas a mano *y* la plantilla las generaba, de modo que había dos versiones destinadas a divergir.
+
 ### 3.7 Question
 
 ```yaml
@@ -243,6 +247,27 @@ editorialStatus: draft
 Cuerpo (opcional): síntesis breve que hilvana las notas de answeredBy.
 No duplica el contenido de las notas; la respuesta ES el conjunto de notas.
 ```
+
+### 3.8 Page
+
+Prosa divulgativa que no se deriva de ninguna colección: la portada, la historia, la metodología y el aviso legal.
+
+```yaml
+---
+slug: metodologia            # kebab-case, estable: define la URL
+title: Cómo verificamos la información
+summary: >-                  # entradilla y `<meta name="description">` por defecto
+  De dónde salen los documentos, cómo se extraen las afirmaciones y qué
+  significa que algo esté documentado, discutido o incompleto.
+updated: 2026-08-19
+editorialStatus: draft
+---
+Cuerpo Markdown.
+```
+
+Vive en `src/content/pages/`. Es contenido, no plantilla: se revisa igual que el resto, admite las referencias entre backticks que se convierten en enlaces, y mantiene el texto editorial fuera de los ficheros `.astro`.
+
+**Ninguna cifra se escribe aquí.** Los recuentos del corpus se inyectan desde el grafo; escribirlos a mano garantizaría que quedaran desfasados.
 
 ## 4. Schemas
 
