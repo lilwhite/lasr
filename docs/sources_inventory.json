@@ -135,8 +135,8 @@
         "textChars": 0,
         "hasTextLayer": false,
         "docTypeGuess": "escrito-de-parte",
-        "canonical": "burofax-solicitud-asamblea.pdf",
-        "status": "ya-existente"
+        "canonical": "src-2009-asc-burofax.pdf",
+        "status": "procesado"
       },
       {
         "kind": "master",
@@ -603,8 +603,8 @@
         "textChars": 0,
         "hasTextLayer": false,
         "docTypeGuess": "comunicacion",
-        "canonical": "carta-cp-recepcion-20130610.pdf",
-        "status": "ya-existente"
+        "canonical": "src-2013-cp-lasr-carta-recepcion.pdf",
+        "status": "procesado"
       },
       {
         "kind": "master",
@@ -658,42 +658,12 @@
       },
       {
         "kind": "work",
-        "name": "burofax-solicitud-asamblea.pdf",
-        "relpath": "burofax-solicitud-asamblea.pdf",
-        "ext": ".pdf",
-        "size": 2284111,
-        "sha256": "f45053f05fc960f6d6918368bc6fc34e52c14ab983ad907e8d7d309c1195b05c",
-        "pages": 3,
-        "textChars": 0,
-        "hasTextLayer": false,
-        "docTypeGuess": "escrito-de-parte",
-        "inMaster": true,
-        "sourceId": null,
-        "status": "pendiente-de-analisis"
-      },
-      {
-        "kind": "work",
         "name": "carta-cp-gestion-20140407.pdf",
         "relpath": "carta-cp-gestion-20140407.pdf",
         "ext": ".pdf",
         "size": 1013456,
         "sha256": "a662c4ac546b72049e734a7237f63ee1d4813d1e7fa2aa40613df8be88e2af9f",
         "pages": 16,
-        "textChars": 0,
-        "hasTextLayer": false,
-        "docTypeGuess": "comunicacion",
-        "inMaster": true,
-        "sourceId": null,
-        "status": "pendiente-de-analisis"
-      },
-      {
-        "kind": "work",
-        "name": "carta-cp-recepcion-20130610.pdf",
-        "relpath": "carta-cp-recepcion-20130610.pdf",
-        "ext": ".pdf",
-        "size": 3522528,
-        "sha256": "2022781139f01fad3dfe335d8d60a604c5ab55e1642fb289e2953a59c41b136d",
-        "pages": 8,
         "textChars": 0,
         "hasTextLayer": false,
         "docTypeGuess": "comunicacion",
@@ -887,6 +857,21 @@
       },
       {
         "kind": "work",
+        "name": "src-2009-asc-burofax.pdf",
+        "relpath": "src-2009-asc-burofax.pdf",
+        "ext": ".pdf",
+        "size": 2284111,
+        "sha256": "f45053f05fc960f6d6918368bc6fc34e52c14ab983ad907e8d7d309c1195b05c",
+        "pages": 3,
+        "textChars": 0,
+        "hasTextLayer": false,
+        "docTypeGuess": "comunicacion",
+        "inMaster": true,
+        "sourceId": "SRC-2009-ASC-BUROFAX",
+        "status": "procesado"
+      },
+      {
+        "kind": "work",
         "name": "src-2009-ts-335.pdf",
         "relpath": "src-2009-ts-335.pdf",
         "ext": ".pdf",
@@ -1048,6 +1033,21 @@
         "docTypeGuess": "desconocido",
         "inMaster": true,
         "sourceId": "SRC-2013-AYTO-EL-ESPINAR-RECEPCION",
+        "status": "procesado"
+      },
+      {
+        "kind": "work",
+        "name": "src-2013-cp-lasr-carta-recepcion.pdf",
+        "relpath": "src-2013-cp-lasr-carta-recepcion.pdf",
+        "ext": ".pdf",
+        "size": 3522528,
+        "sha256": "2022781139f01fad3dfe335d8d60a604c5ab55e1642fb289e2953a59c41b136d",
+        "pages": 8,
+        "textChars": 0,
+        "hasTextLayer": false,
+        "docTypeGuess": "comunicacion",
+        "inMaster": true,
+        "sourceId": "SRC-2013-CP-LASR-CARTA-RECEPCION",
         "status": "procesado"
       },
       {

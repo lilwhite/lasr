@@ -11,9 +11,7 @@ versionan ni se publican.
 |---|---|---|---|---|---|---|
 | `apelacion-asc-20120716.pdf` | `d0723282` | 19 | sí | — | pendiente-de-analisis | sí |
 | `apelaciones-ayto-cp-20120626.pdf` | `8eb33b94` | 52 | no | — | pendiente-de-analisis | sí |
-| `burofax-solicitud-asamblea.pdf` | `f45053f0` | 3 | no | — | pendiente-de-analisis | sí |
 | `carta-cp-gestion-20140407.pdf` | `a662c4ac` | 16 | no | — | pendiente-de-analisis | sí |
-| `carta-cp-recepcion-20130610.pdf` | `20227811` | 8 | no | — | pendiente-de-analisis | sí |
 | `informacion-propietarios-201903.pdf` | `594f49f1` | 14 | sí | — | pendiente-de-analisis | sí |
 | `informe-tecnico-ayto.pdf` | `4339fcab` | 218 | no | — | pendiente-de-analisis | sí |
 | `plan-parcial-el-carrascal.pdf` | `b0c63cf7` | 138 | no | — | pendiente-de-analisis | sí |
@@ -26,6 +24,7 @@ versionan ni se publican.
 | `src-2002-jpi1-segovia-158.pdf` | `722e48cc` | 4 | no | SRC-2002-JPI1-SEGOVIA-158 | procesado | sí |
 | `src-2003-ap-segovia-323.pdf` | `7b80e5ec` | 10 | no | SRC-2003-AP-SEGOVIA-323 | procesado | sí |
 | `src-2005-jpi3-segovia-139.pdf` | `2abb87bb` | 5 | no | SRC-2005-JPI3-SEGOVIA-139 | procesado | sí |
+| `src-2009-asc-burofax.pdf` | `f45053f0` | 3 | no | SRC-2009-ASC-BUROFAX | procesado | sí |
 | `src-2009-ts-335.pdf` | `b0adf450` | 12 | no | SRC-2009-TS-335 | procesado | sí |
 | `src-2010-ap-segovia-156.pdf` | `27931a85` | 6 | sí | SRC-2010-AP-SEGOVIA-156 | procesado | sí |
 | `src-2010-jpi1-segovia-34.pdf` | `20cebd2c` | 11 | no | SRC-2010-JPI1-SEGOVIA-34 | procesado | sí |
@@ -37,6 +36,7 @@ versionan ni se publican.
 | `src-2012-jca-segovia-auto-ejecucion.pdf` | `62a3a998` | 15 | sí | SRC-2012-JCA-SEGOVIA-AUTO-EJECUCION | procesado | sí |
 | `src-2012-tsjcyl-581.pdf` | `e05219b1` | 22 | no | SRC-2012-TSJCYL-581 | procesado | sí |
 | `src-2013-ayto-el-espinar-recepcion.pdf` | `5fbf1408` | 17 | no | SRC-2013-AYTO-EL-ESPINAR-RECEPCION | procesado | sí |
+| `src-2013-cp-lasr-carta-recepcion.pdf` | `20227811` | 8 | no | SRC-2013-CP-LASR-CARTA-RECEPCION | procesado | sí |
 | `src-2015-euc-acta-2.pdf` | `38b6e5e8` | 7 | no | SRC-2015-EUC-ACTA-2 | procesado | sí |
 | `src-2015-euc-convocatoria.pdf` | `a2a3b4fd` | 1 | no | SRC-2015-EUC-CONVOCATORIA | procesado | sí |
 | `src-2015-euc-presupuesto.pdf` | `309a3f15` | 1 | no | SRC-2015-EUC-PRESUPUESTO | procesado | sí |
@@ -63,7 +63,7 @@ versionan ni se publican.
 | `Apelación Ayto.y Cdad.26-6-2012.pdf` | `8eb33b94` | 52 | no | escrito-de-parte | ya-existente | apelaciones-ayto-cp-20120626.pdf |
 | `Auto Recepción.pdf` | `62a3a998` | 15 | sí | auto | procesado | src-2012-jca-segovia-auto-ejecucion.pdf |
 | `Auto_55_2011_Audiencia_Provincial_Segovia.pdf` | `0603c438` | 4 | no | auto | procesado | src-2011-ap-segovia-auto-55.pdf |
-| `Burofax Solicitud Asamblea.pdf` | `f45053f0` | 3 | no | escrito-de-parte | ya-existente | burofax-solicitud-asamblea.pdf |
+| `Burofax Solicitud Asamblea.pdf` | `f45053f0` | 3 | no | escrito-de-parte | procesado | src-2009-asc-burofax.pdf |
 | `Carta Comunidad ASR Marzo 2014.pdf` | `a662c4ac` | 16 | no | comunicacion | ya-existente | carta-cp-gestion-20140407.pdf |
 | `Carta EUC 28_01_16.pdf` | `ebde03b4` | 2 | no | comunicacion | procesado | src-2016-euc-carta.pdf |
 | `Carta EUCpdf · versión 1_260817_221402.pdf` | `a2a3b4fd` | 1 | no | comunicacion | procesado | src-2015-euc-convocatoria.pdf |
@@ -96,7 +96,7 @@ versionan ni se publican.
 | `Sentencia_34-2010.pdf` | `20cebd2c` | 11 | no | sentencia | procesado | src-2010-jpi1-segovia-34.pdf |
 | `Sentencia_Tribunal_Supremo_335-2009.pdf` | `b0adf450` | 12 | no | sentencia | procesado | src-2009-ts-335.pdf |
 | `Setencia 185-2017 Audiencia Provincial Segoviapdf_260817_215849.pdf` | `174c3ebd` | 9 | sí | sentencia | procesado | src-2017-ap-segovia-185.pdf |
-| `carta recepción comunidad 180613 (2)-1.pdf` | `20227811` | 8 | no | comunicacion | ya-existente | carta-cp-recepcion-20130610.pdf |
+| `carta recepción comunidad 180613 (2)-1.pdf` | `20227811` | 8 | no | comunicacion | procesado | src-2013-cp-lasr-carta-recepcion.pdf |
 | `documento_imagen.pdf` | `09407afd` | 1 | no | desconocido | fragmento-registrado | — |
 
 ## No fichables (registro documental)
