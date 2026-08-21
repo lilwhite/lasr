@@ -2,11 +2,12 @@
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import Prose from '../components/Prose.astro';
+import { canPublish } from '../lib/policy';
 
 export async function getStaticPaths() {
   const pages = await getCollection('pages');
   return pages
-    .filter((p) => p.data.slug !== 'inicio')
+    .filter((p) => p.data.slug !== 'inicio' && canPublish(p))
     .map((page) => ({ params: { slug: page.data.slug }, props: { page } }));
 }
 const { page } = Astro.props;

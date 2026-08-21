@@ -1,9 +1,10 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { graph, entityRoute, procedureChildren } from '../../lib/graph';
+import { published } from '../../lib/policy';
+import { entityRoute, procedureChildren } from '../../lib/graph';
 import { url } from '../../lib/url';
 
-const roots = graph.procedures.filter((p) => p.data.parent === null);
+const roots = published.procedures.filter((p) => p.data.parent === null);
 ---
 <Layout title="Procedimientos" description="Los procedimientos judiciales y administrativos que jalonan la historia de Los Ángeles de San Rafael, con sus piezas e incidentes.">
   <header class="head">
