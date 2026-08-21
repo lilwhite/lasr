@@ -187,13 +187,15 @@ Las teselas de OpenStreetMap son las más discretas y las más reveladoras: mien
 
 **Acción.** Triar por lotes y aceptar en `legal-baseline.json` lo que resulte no ser una persona física, para que el escáner no lo vuelva a levantar.
 
-### LEGAL-PDF-001 · Metadatos conservados en el PDF que sigue publicado
-**Dónde:** `docs/documentacion-relevante/estatutos-comunidad.pdf`
-**Qué:** cuatro metadatos de documento (creador, productor y afines). Es el vector de fuga que nadie mira: un PDF exportado desde un procesador de textos puede nombrar a quien lo escribió aunque el texto visible esté anonimizado. El fichero es además un escaneo sin capa de texto, así que su contenido **no ha sido inspeccionado**.
+### LEGAL-PDF-001 · El escaneo de los estatutos — RESUELTO
+**Dónde:** el PDF de estatutos de la Comunidad que publicaba el portal.
+**Qué:** un escaneo sin capa de texto, con metadatos del programa y del equipo que lo generó. Su contenido no había sido inspeccionado por nadie: la herramienta se negaba a darlo por limpio, y con razón.
 
-**Acción.** Revisión humana página a página antes de mantenerlo publicado, y saneado de metadatos.
+**Acción tomada.** Leído página a página. **No contiene datos de ninguna persona física**: la única entidad nombrada es la mercantil urbanizadora. Se ha transcrito a texto —veinticuatro artículos y la disposición transitoria— y el PDF se ha eliminado.
 
-**Estado:** declarado `needs-human-review` en el manifiesto.
+Con ello desaparecen los metadatos, el contenido pasa a ser buscable y accesible con lector de pantalla, y cada artículo se puede citar por su número. Dos pasajes que el escaneo cortaba físicamente quedan señalados como ilegibles en vez de completados por conjetura.
+
+**Resuelto:** 21 de agosto de 2026.
 
 ### LEGAL-PRIVACY-007 · Precisión del censo catastral
 **Dónde:** `docs/assets/js/parcelas.js`

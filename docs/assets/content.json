@@ -316,11 +316,11 @@
         "items": [
           {
             "titulo": "Estatutos de la Comunidad de Propietarios",
-            "descripcion": "Normativa interna que regula la organización, derechos y obligaciones de los propietarios dentro de la urbanización.",
+            "descripcion": "Título constitutivo de la Comunidad: quién pertenece a ella, cómo se calcula la cuota, qué es común y qué se reservó la urbanizadora. Veinticuatro artículos, en texto legible y buscable.",
             "tipo": "documento",
-            "url": "/documentacion-relevante/estatutos-comunidad.pdf",
-            "fecha": "Documento base de funcionamiento de la comunidad.",
-            "cta": "Ver estatutos"
+            "url": "/estatutos-comunidad/",
+            "fecha": "Transcripción del cuadernillo original",
+            "cta": "Leer los estatutos"
           },
           {
             "titulo": "La Entidad Urbanística de Conservación",
