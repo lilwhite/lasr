@@ -1,0 +1,11 @@
+{
+  "LASR-FIXTURE": "LASR-FIXTURE: ficticio — datos inventados para pruebas. Nada de esto corresponde a ninguna persona real.",
+  "items": [
+    {
+      "title": "Titular de ejemplo sobre el núcleo",
+      "source": "Medio de Ejemplo",
+      "date": "2026-08-01",
+      "url": "https://example.invalid/noticia"
+    }
+  ]
+}

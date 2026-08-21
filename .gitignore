@@ -19,6 +19,12 @@ __pycache__/
 dist/
 build/
 
+# Previsualización local del sitio combinado: docker-compose monta la guía en
+# /documentacion/, y quien previsualiza sin Docker suele crear este symlink a
+# mano. No puede entrar en el repositorio: `cp -r docs/* dist/` lo copiaría al
+# artefacto y dejaría un enlace colgante en producción.
+docs/documentacion
+
 # Capa documental (documentacion/): Astro y originales.
 # documentacion/.gitignore ya cubre esto; se repite aquí a propósito, porque
 # un PDF con datos personales no puede depender de un solo fichero de reglas.
