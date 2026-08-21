@@ -112,30 +112,96 @@
     ],
     "unclear_relation_penalty": 10,
     "positive": [
-      {"term": "los angeles de san rafael", "weight": 10},
-      {"term": "urbanizacion los angeles de san rafael", "weight": 8},
-      {"term": "euc", "weight": 6},
-      {"term": "entidad urbanistica de conservacion", "weight": 6},
-      {"term": "urbanismo", "weight": 5},
-      {"term": "vecinos", "weight": 4},
-      {"term": "consultorio", "weight": 4},
-      {"term": "sanidad", "weight": 4},
-      {"term": "seguridad", "weight": 4},
-      {"term": "ocupacion", "weight": 4},
-      {"term": "okupacion", "weight": 4},
-      {"term": "n-603", "weight": 3},
-      {"term": "infraestructuras", "weight": 3},
-      {"term": "pasarela", "weight": 3},
-      {"term": "presa del tejo", "weight": 3},
-      {"term": "mancomunidad", "weight": 3},
-      {"term": "milasr", "weight": 3}
+      {
+        "term": "los angeles de san rafael",
+        "weight": 10
+      },
+      {
+        "term": "urbanizacion los angeles de san rafael",
+        "weight": 8
+      },
+      {
+        "term": "euc",
+        "weight": 6
+      },
+      {
+        "term": "entidad urbanistica de conservacion",
+        "weight": 6
+      },
+      {
+        "term": "urbanismo",
+        "weight": 5
+      },
+      {
+        "term": "vecinos",
+        "weight": 4
+      },
+      {
+        "term": "consultorio",
+        "weight": 4
+      },
+      {
+        "term": "sanidad",
+        "weight": 4
+      },
+      {
+        "term": "seguridad",
+        "weight": 4
+      },
+      {
+        "term": "ocupacion",
+        "weight": 4
+      },
+      {
+        "term": "okupacion",
+        "weight": 4
+      },
+      {
+        "term": "n-603",
+        "weight": 3
+      },
+      {
+        "term": "infraestructuras",
+        "weight": 3
+      },
+      {
+        "term": "pasarela",
+        "weight": 3
+      },
+      {
+        "term": "presa del tejo",
+        "weight": 3
+      },
+      {
+        "term": "mancomunidad",
+        "weight": 3
+      },
+      {
+        "term": "milasr",
+        "weight": 3
+      }
     ],
     "negative": [
-      {"term": "fiestas", "weight": 8},
-      {"term": "concierto", "weight": 8},
-      {"term": "agenda cultural", "weight": 8},
-      {"term": "evento deportivo", "weight": 8},
-      {"term": "deportes", "weight": 8}
+      {
+        "term": "fiestas",
+        "weight": 8
+      },
+      {
+        "term": "concierto",
+        "weight": 8
+      },
+      {
+        "term": "agenda cultural",
+        "weight": 8
+      },
+      {
+        "term": "evento deportivo",
+        "weight": 8
+      },
+      {
+        "term": "deportes",
+        "weight": 8
+      }
     ]
   },
   "categories": {
@@ -186,6 +252,128 @@
       "diputación",
       "junta",
       "el espinar"
+    ]
+  },
+  "publication": {
+    "_comentario": "La puntuación decide qué es candidato; estas dos listas deciden qué se publica. El marcador puntúa la cercanía al topónimo, que no es lo mismo que tratar del conflicto: con solo el umbral entraron en el archivo la muerte de una menor y una niña de diez años identificada con nombre y apellidos.",
+    "exclude": [
+      "menor",
+      "menores",
+      "niña",
+      "niño",
+      "adolescente",
+      "alumno",
+      "alumna",
+      "detenido",
+      "detenidos",
+      "detenida",
+      "detención",
+      "arrestado",
+      "condenado",
+      "condenada",
+      "condena",
+      "juicio por",
+      "acusado",
+      "acusada",
+      "banda",
+      "narcotráfico",
+      "tráfico de drogas",
+      "estafa",
+      "robo",
+      "hurto",
+      "agresión",
+      "violencia de género",
+      "malos tratos",
+      "abusos",
+      "fallece",
+      "fallecido",
+      "fallecida",
+      "muere",
+      "ahogada",
+      "ahogado",
+      "cadáver",
+      "herido",
+      "heridos",
+      "desaparecido",
+      "desaparecida",
+      "accidente",
+      "atropello",
+      "suicidio",
+      "campeona",
+      "campeón",
+      "torneo",
+      "pretemporada",
+      "entrena",
+      "fútbol",
+      "gimnasia",
+      "golf",
+      "novillero",
+      "taurina",
+      "deportiva",
+      "memorial",
+      "concurso",
+      "teatro",
+      "sala los ángeles",
+      "programación cultural",
+      "presenta el sábado",
+      "comida solidaria",
+      "festivos locales",
+      "incendio",
+      "conato",
+      "evacuados",
+      "extinguido"
+    ],
+    "topics": [
+      "entidad urbanística",
+      "entidad urbanistica",
+      "euc",
+      "recepción",
+      "recepcion",
+      "copropietarios",
+      "comunidad de propietarios",
+      "asociación de copropietarios",
+      "junta de propietarios",
+      "cuotas",
+      "derrama",
+      "desanexión",
+      "desanexion",
+      "urbanización",
+      "urbanizacion",
+      "urbanismo",
+      "parcela",
+      "parcelas",
+      "catastro",
+      "licencia de obra",
+      "planeamiento",
+      "plan parcial",
+      "agua",
+      "saneamiento",
+      "depuradora",
+      "pantano",
+      "embalse",
+      "presa",
+      "abastecimiento",
+      "río moros",
+      "rio moros",
+      "alcantarillado",
+      "infraestructura",
+      "infraestructuras",
+      "viales",
+      "asfaltado",
+      "alumbrado",
+      "n-603",
+      "carretera",
+      "puente",
+      "ocupación",
+      "ocupacion",
+      "ocupaciones",
+      "okupa",
+      "mancomunidad",
+      "contencioso",
+      "sentencia",
+      "tribunal",
+      "demanda",
+      "denuncia"
     ]
   }
 }
