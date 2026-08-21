@@ -212,8 +212,9 @@
       "reason": "Pendiente de revisión jurídica: se publica como deuda registrada"
     },
     "docs/sitemap.xml": {
-      "legalStatus": "unchecked",
-      "reason": "Pendiente de revisión jurídica: se publica como deuda registrada"
+      "legalStatus": "cleared",
+      "reviewedAt": "2026-08-21",
+      "reason": "Seis URL públicas del portal, escritas a mano. No lista rutas retiradas ni las tres redirecciones, que llevan noindex. Se añade la transcripción de los estatutos."
     }
   },
   "content": {
