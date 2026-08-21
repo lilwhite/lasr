@@ -20,7 +20,7 @@ export const AREAS: Record<AreaId, Area> = {
     id: 'comunidad-y-recepcion',
     label: 'Comunidad y recepción de LASR',
     lead:
-      'Cómo se gestiona y conserva la urbanización, y cómo pasó de manos privadas a ' +
+      'Cómo se gestiona y conserva el núcleo, y cómo pasó de manos privadas a ' +
       'obligación municipal: la recepción, la entidad de conservación, el agua y las ' +
       'juntas de la Comunidad de Propietarios.',
     order: 1,
