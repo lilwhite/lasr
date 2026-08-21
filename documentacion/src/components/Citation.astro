@@ -7,6 +7,7 @@
  * de este sitio y por eso tiene su propio registro tipográfico.
  */
 import { resolve, entityRoute, sourceShortLabel, formatDate, type Source } from '../lib/graph';
+import { isVisible } from '../lib/policy';
 import { url } from '../lib/url';
 
 interface Props {
@@ -26,12 +27,22 @@ const label = sourceShortLabel(source);
 const fecha = formatDate(source.data.date, 'day');
 const pages = `pág. ${citation.pdfPages.join(', ')}`;
 const printed = citation.printedPages ? `impresa ${citation.printedPages.join(', ')}` : null;
+
+// Era el único enlace del sitio que se emitía sin guarda. Con 293 citas en el
+// corpus, bloquear una sola fuente habría dejado hasta 293 enlaces rotos y
+// `check_links.py` habría tumbado el build. La referencia se conserva igual:
+// lo que desaparece es el enlace, no de dónde sale la afirmación.
+const linkable = isVisible(source);
 ---
 
 <div class="cite">
   {labelled && <span class="cite-label">Consta en</span>}
   <p class="cite-ref">
-    <a href={url(entityRoute(source))}>{label}</a>
+    {linkable ? (
+      <a href={url(entityRoute(source))}>{label}</a>
+    ) : (
+      <span class="unpublished" title="Documento no publicado">{label}</span>
+    )}
     <span class="cite-coords apparatus">
       <span class="sep" aria-hidden="true">·</span>{pages}
       {printed && <><span class="sep" aria-hidden="true">·</span>{printed}</>}
@@ -71,6 +82,7 @@ const printed = citation.printedPages ? `impresa ${citation.printedPages.join(',
     font-size: var(--t-xs);
     color: var(--ink-faint);
   }
+  .unpublished { color: var(--ink-soft); }
   .cite-quote { margin-top: var(--s-2); }
   .cite-quote summary {
     font-size: var(--t-xs);

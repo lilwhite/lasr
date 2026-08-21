@@ -15,7 +15,7 @@ import { url } from '../lib/url';
 import {
   eventSortKey, eventDateText, entityRoute, notesOfEvent, formatDate, type Event,
 } from '../lib/graph';
-import { EVENT_TYPE_LABEL } from '../lib/policy';
+import { EVENT_TYPE_LABEL, visibleOnly } from '../lib/policy';
 import { proseHtml } from '../lib/prose';
 
 interface Props {
@@ -60,7 +60,7 @@ const groups =
       {label && <h3 class="tl-decade">{label}</h3>}
       <ol class="tl-list">
         {list.map((e) => {
-          const notes = notesOfEvent(e.data.id);
+          const notes = visibleOnly(notesOfEvent(e.data.id));
           const inc = uncertainty(e);
           return (
             <li class="tl-item">

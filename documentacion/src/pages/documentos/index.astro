@@ -1,10 +1,10 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { graph, entityRoute, sourceShortLabel, formatDate, notesCiting } from '../../lib/graph';
+import { entityRoute, sourceShortLabel, formatDate, notesCiting } from '../../lib/graph';
 import { url } from '../../lib/url';
-import { DOC_TYPE_LABEL } from '../../lib/policy';
+import { DOC_TYPE_LABEL, published } from '../../lib/policy';
 
-const ranked = [...graph.sources]
+const ranked = [...published.sources]
   .map((s) => ({ s, n: notesCiting(s.data.id).length }))
   .sort((a, b) => b.n - a.n);
 const esenciales = ranked.slice(0, 6);
@@ -15,7 +15,7 @@ const ORDEN = ['sentencia', 'auto', 'escrito-de-parte', 'comunicacion', 'acta',
 const porTipo = ORDEN
   .map((tipo) => ({
     tipo,
-    docs: [...graph.sources]
+    docs: [...published.sources]
       .filter((s) => s.data.docType === tipo)
       .sort((a, b) => a.data.date.getTime() - b.data.date.getTime()),
   }))
@@ -26,7 +26,7 @@ const porTipo = ORDEN
     <h1>Documentos</h1>
     <p class="lede">Estas son las fuentes de todo lo que se afirma en esta web. Cada ficha explica qué es el documento, quién lo emitió y qué se apoya en él.</p>
     <p class="jump">
-      <a href={url('/documentos/mapa/')}>Ver el mapa documental</a> — los {graph.sources.length} documentos
+      <a href={url('/documentos/mapa/')}>Ver el mapa documental</a> — los {published.sources.length} documentos
       situados en el tiempo, agrupados por pleito y unidos por las relaciones que declaran entre sí.
     </p>
     <p class="notice">Los originales no se publican: contienen datos personales y su revisión de
