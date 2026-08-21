@@ -4,6 +4,76 @@ Este archivo recoge los cambios relevantes publicados en `main`.
 
 Formato basado en versiones semánticas (`vMAJOR.MINOR.PATCH`).
 
+## [v1.1.8] - 2026-06-02
+
+### Resumen
+- chore(release): promover fix de despliegue de prensa a producción (#56)
+- chore(release): promover correcciones del buscador de parcelas v1.1.7 (#54)
+- chore(release): promover buscador de parcelas a producción v1.1.6 (#52)
+- chore(workflow): activar actualización automática diaria de prensa (#50)
+- docs(prensa): actualizar archivo curado a mayo 2026 (#48)
+- docs(prensa): promocionar actualización del archivo curado (#45)
+
+## [v1.1.7] - 2026-05-27
+
+### Resumen
+- chore(release): promover correcciones del buscador de parcelas v1.1.7 (#54)
+- chore(release): promover buscador de parcelas a producción v1.1.6 (#52)
+- chore(workflow): activar actualización automática diaria de prensa (#50)
+- docs(prensa): actualizar archivo curado a mayo 2026 (#48)
+- docs(prensa): promocionar actualización del archivo curado (#45)
+- fix(ui): promover ajuste de badges de sentencia (#43)
+
+## [v1.1.6] - 2026-05-27
+
+### Resumen
+- chore(release): promover buscador de parcelas a producción v1.1.6 (#52)
+- chore(workflow): activar actualización automática diaria de prensa (#50)
+- docs(prensa): actualizar archivo curado a mayo 2026 (#48)
+- docs(prensa): promocionar actualización del archivo curado (#45)
+- fix(ui): promover ajuste de badges de sentencia (#43)
+- chore(release): promover dev a main con mejoras de prensa y release (#41)
+
+## [v1.1.5] - 2026-05-26
+
+### Resumen
+- chore(workflow): activar actualización automática diaria de prensa (#50)
+- docs(prensa): actualizar archivo curado a mayo 2026 (#48)
+- docs(prensa): promocionar actualización del archivo curado (#45)
+- fix(ui): promover ajuste de badges de sentencia (#43)
+- chore(release): promover dev a main con mejoras de prensa y release (#41)
+- chore(workflow): adopt dev-main workflow and local Docker validation (#17)
+
+## [v1.1.4] - 2026-05-25
+
+### Resumen
+- docs(prensa): actualizar archivo curado a mayo 2026 (#48)
+- docs(prensa): promocionar actualización del archivo curado (#45)
+- fix(ui): promover ajuste de badges de sentencia (#43)
+- chore(release): promover dev a main con mejoras de prensa y release (#41)
+- chore(workflow): adopt dev-main workflow and local Docker validation (#17)
+- fix(security): harden static site surface and client rendering (#16)
+
+## [v1.1.3] - 2026-04-26
+
+### Resumen
+- docs(prensa): promocionar actualización del archivo curado (#45)
+- fix(ui): promover ajuste de badges de sentencia (#43)
+- chore(release): promover dev a main con mejoras de prensa y release (#41)
+- chore(workflow): adopt dev-main workflow and local Docker validation (#17)
+- fix(security): harden static site surface and client rendering (#16)
+- feat(web): integrar Google Analytics 4 (#15)
+
+## [v1.1.2] - 2026-03-15
+
+### Resumen
+- fix(ui): promover ajuste de badges de sentencia (#43)
+- chore(release): promover dev a main con mejoras de prensa y release (#41)
+- chore(workflow): adopt dev-main workflow and local Docker validation (#17)
+- fix(security): harden static site surface and client rendering (#16)
+- feat(web): integrar Google Analytics 4 (#15)
+- Reorganize documentation section by source categories (#14)
+
 ## [v1.1.1] - 2026-03-15
 
 ### Resumen
