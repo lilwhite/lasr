@@ -16,15 +16,15 @@ El agente debe trabajar de forma estructurada usando skills especializadas:
 
 1. Priorizar cambios mínimos y reversibles
 2. No rehacer arquitectura sin petición explícita
-3. No introducir frameworks, bundlers o dependencias pesadas
-4. Mantener `/docs` como fuente del sitio
+3. No introducir frameworks, bundlers ni dependencias pesadas **en el portal** (`docs/`), que sigue siendo HTML/CSS/JS sin build. La guía documental (`documentacion/`) sí usa Astro; ninguna otra parte del repositorio introduce herramientas de compilación
+4. El sitio se compone de **dos fuentes**: `docs/` (portal, se copia tal cual a la raíz) y `documentacion/` (guía documental, se compila con Astro y se coloca en `/documentacion/`). Ninguna otra carpeta se publica
 5. Separar cambios visuales, de contenido y operativos
 6. Validar siempre antes de proponer despliegue
 7. Documentar decisiones relevantes
 8. Preservar rutas relativas y comportamiento actual
 9. Favorecer mantenibilidad sobre complejidad
 10. Aplicar skills especializadas antes de modificar archivos
-11. **NUNCA subir información sensible** (datos personales, contraseñas, claves, tokens, información privada de vecinos)
+11. **NUNCA subir información sensible** (datos personales, contraseñas, claves, tokens, información privada de vecinos). En particular, `documentacion/private-sources/` contiene los PDF originales del caso, con datos personales: está excluido en dos `.gitignore` y antes de cualquier commit `git status --short | grep private-sources` debe salir vacío
 
 ### Flujo de Trabajo con Ramas y PRs
 
@@ -155,6 +155,29 @@ El portal web está en la carpeta `docs/` para despliegue en GitHub Pages:
 - `docs/assets/js/main.js` - Funcionalidad
 - `docs/DEPLOY.md` - Instrucciones de despliegue
 
+### Guía documental (documentacion/) - se compila y se publica en /documentacion/
+
+Capa de evidencia del sitio: un grafo de afirmaciones trazables sobre la
+documentación primaria del caso. 36 documentos, 150 afirmaciones, 48
+acontecimientos; unas 290 páginas generadas.
+
+- `documentacion/README.md` - Cómo desarrollar, qué valida el build, protección de datos
+- `documentacion/src/content/` - El corpus: Markdown con frontmatter YAML, validado con Zod
+- `documentacion/src/lib/policy.ts` - Punto único de qué se muestra y cómo se etiqueta
+- `documentacion/src/lib/url.ts` - Punto único donde se aplica la base del sitio
+- `documentacion/scripts/` - Herramientas del corpus (OCR, inventario, verificación de citas)
+- `documentacion/private-sources/` - **Originales con datos personales. NUNCA se versiona**
+
+**Sus tres especificaciones**, que hay que leer antes de tocar contenido:
+
+- `documentacion/docs/CONTENT_MODEL.md` - Qué se guarda y con qué reglas
+- `documentacion/docs/WEB_DESIGN.md` - Cómo se muestra
+- `documentacion/docs/WORKFLOW.md` - Cómo se incorpora un documento nuevo
+
+> **Cuidado con el nombre `docs/`.** En la raíz es el **portal publicado**. Dentro
+> de `documentacion/` son las **especificaciones** de la guía. No son lo mismo y
+> conviene nombrarlos siempre completos.
+
 ### Documentación Markdown (docs/)
 
 - `docs/documentacion_relevante.md` - Fuentes de información, jurisprudencia y normativa
@@ -177,16 +200,35 @@ El portal web está en la carpeta `docs/` para despliegue en GitHub Pages:
 
 ## Comandos de desarrollo
 
-No aplica - es un proyecto de documentación sin código fuente.
+El portal (`docs/`) no necesita build: se edita y se abre. La guía documental sí.
+
+```sh
+# Guía documental
+cd documentacion
+npm ci
+npm run dev      # http://localhost:4321/documentacion/
+npm run check    # astro check + build + validación de enlaces. Ejecutar SIEMPRE antes de una PR
+
+# Sitio combinado, con la estructura de rutas real del despliegue
+cd documentacion && npm run build && cd ..
+docker compose up    # http://localhost:8080/
+```
+
+El sitio combinado es la única forma de probar los enlaces entre el portal y la
+guía, y las tres redirecciones de `/cronologia/`, `/recepcion-urbanizacion/` y
+`/sentencia-tsjcyl/`.
+
+`npm run build` sincroniza antes la paleta y los scripts de tema desde
+`docs/assets/`: **la guía no se compila sin el portal**.
 
 ### Despliegue del portal web
 
 El portal está diseñado para GitHub Pages mediante GitHub Actions:
 
 1. Los cambios en `docs/` se validan automáticamente
-2. Las ramas de trabajo y PRs hacia `dev` ejecutan validaciones
+2. Las ramas de trabajo y PRs hacia `dev` ejecutan validaciones, incluida la compilación completa de la guía documental
 3. `dev` actúa como integración previa sin publicación final
-4. Solo `main` publica en GitHub Pages copiando `docs/` a `dist/`
+4. Solo `main` publica en GitHub Pages: copia `docs/` a `dist/` y compila la guía en `dist/documentacion/`. El build de la guía se cachea, porque el cron diario de prensa dispara este workflow sin tocarla
 
 **Activar GitHub Actions:**
 - Settings → Pages → Source: **GitHub Actions**
@@ -202,8 +244,8 @@ Ver `docs/DEPLOY.md` para instrucciones detalladas.
 - Listas con `-` para viñetas
 - Negrita con `**texto**`
 - Cursiva con `*texto*`
-- Usar腥Links cuando sea necesario `[texto](url)`
-- Tables para información estructurada
+- Usar enlaces cuando sea necesario `[texto](url)`
+- Tablas para información estructurada
 
 ### Contenido
 

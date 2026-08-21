@@ -1,0 +1,25 @@
+---
+import { resolve, entityRoute, entityLabel } from '../lib/graph';
+import { url } from '../lib/url';
+import { isVisible } from '../lib/policy';
+
+interface Props {
+  id: string;
+  /** Texto alternativo; por defecto, la etiqueta de la entidad. */
+  label?: string;
+}
+const { id, label } = Astro.props;
+const entry = resolve(id);
+const visible = isVisible(entry);
+const text = label ?? entityLabel(entry);
+---
+
+{visible ? (
+  <a href={url(entityRoute(entry))}>{text}</a>
+) : (
+  <span class="unpublished" title="Contenido no publicado">{text}</span>
+)}
+
+<style>
+  .unpublished { color: var(--ink-soft); }
+</style>

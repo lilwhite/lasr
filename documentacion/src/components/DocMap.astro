@@ -1,0 +1,252 @@
+---
+/**
+ * El mapa documental: los 36 documentos del corpus, colocados en el tiempo y
+ * agrupados por el procedimiento al que pertenecen, con las relaciones que
+ * ellos mismos declaran.
+ *
+ * Cada marcador es un enlace a su ficha: el mapa es un índice navegable, no
+ * una ilustración. La disposición vive en `lib/docmap.ts`; aquí solo se pinta.
+ */
+import { buildDocMap, LABEL_DX } from '../lib/docmap';
+import { url } from '../lib/url';
+
+const map = buildDocMap();
+
+const SHAPE_TITLE: Record<string, string> = {
+  judicial: 'Resolución judicial',
+  parte: 'Escrito o comunicación de parte',
+  otro: 'Documento de gestión o planeamiento',
+};
+---
+
+<div class="map-scroll" tabindex="0" role="group" aria-label="Mapa documental. Se desplaza en horizontal.">
+  <svg
+    class="map"
+    width={map.width}
+    height={map.height}
+    viewBox={`0 0 ${map.width} ${map.height}`}
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <desc>
+      Los {map.totals.sources} documentos del corpus situados en una línea de tiempo
+      de {map.ticks[0].year} a {map.ticks[map.ticks.length - 1].year}. Cada carril es un
+      procedimiento judicial; la banda final reúne los {map.totals.loose} documentos que no
+      pertenecen a ninguno. Las flechas son las {map.totals.edges} relaciones que los propios
+      documentos declaran. La misma información, en texto, está bajo la figura.
+    </desc>
+
+    <defs>
+      {['stamp', 'ok', 'alert', 'faint'].map((tone) => (
+        <marker
+          id={`arrow-${tone}`}
+          viewBox="0 0 8 8"
+          refX="7"
+          refY="4"
+          markerWidth="5"
+          markerHeight="5"
+          orient="auto-start-reverse"
+        >
+          <path d="M 0 1 L 7 4 L 0 7 z" class={`fill-${tone}`} />
+        </marker>
+      ))}
+    </defs>
+
+    {/* Guías de año */}
+    {map.ticks.map((t) => (
+      <line class="guide" x1={t.x} y1={map.axisY + 6} x2={t.x} y2={map.height - 6} />
+    ))}
+
+    {/* Bandas de carril */}
+    {map.lanes.map((lane, i) => (
+      <>
+        {i % 2 === 1 && (
+          <rect class="band" x="0" y={lane.y} width={map.width} height={lane.height} />
+        )}
+        {lane.kind === 'loose' && (
+          <line class="lane-rule" x1="0" y1={lane.y} x2={map.width} y2={lane.y} />
+        )}
+      </>
+    ))}
+
+    {/* Eje: años y cortes de escala */}
+    <line class="axis" x1="0" y1={map.axisY + 4} x2={map.width} y2={map.axisY + 4} />
+    {map.ticks.map((t) => (
+      <text class="year" x={t.labelX} y={map.axisY}>{t.year}</text>
+    ))}
+    {map.breaks.map((b) => (
+      <g class="break">
+        <line x1={b.x} y1={map.axisY - 8} x2={b.x} y2={map.height - 6} />
+        <text x={b.x} y={map.axisY}>≈</text>
+        <title>{b.years} años sin ningún documento en el corpus: el eje se comprime aquí.</title>
+      </g>
+    ))}
+
+    {/* Relaciones declaradas */}
+    {map.edges.map((e) => {
+      const tone = e.type === 'annuls' ? 'alert'
+        : e.type === 'confirms' ? 'ok'
+        : e.type === 'related-to' ? 'faint' : 'stamp';
+      return (
+        <path
+          class={`edge edge--${tone}`}
+          d={e.path}
+          marker-end={`url(#arrow-${tone})`}
+        >
+          <title>{e.from.label} {e.label} {e.to.label}</title>
+        </path>
+      );
+    })}
+
+    {/* Carriles: título y documentos */}
+    {map.lanes.map((lane) => (
+      <>
+        {lane.href ? (
+          <a href={url(lane.href)} class="lane-head">
+            <text x={14 + lane.depth * 16} y={lane.y + 15}>
+              {lane.depth > 0 && <tspan class="nest">└ </tspan>}
+              <tspan class="tag">{lane.tag}</tspan>
+              <tspan dx="8">{lane.title}</tspan>
+            </text>
+          </a>
+        ) : (
+          <g class="lane-head lane-head--plain">
+            <text x={14 + lane.depth * 16} y={lane.y + 15}>{lane.title}</text>
+          </g>
+        )}
+
+        {lane.nodes.map((n) => (
+          <a href={url(n.href)} class={`node node--${n.family}`}>
+            <title>{n.label} · {n.dateText} · {n.title}</title>
+            {n.family === 'judicial' && <circle cx={n.x} cy={n.y} r={n.r} />}
+            {n.family === 'parte' && (
+              <rect x={n.x - n.r} y={n.y - n.r} width={n.r * 2} height={n.r * 2} />
+            )}
+            {n.family === 'otro' && (
+              <path d={`M ${n.x} ${n.y - n.r - 1} L ${n.x + n.r + 1} ${n.y} L ${n.x} ${n.y + n.r + 1} L ${n.x - n.r - 1} ${n.y} Z`} />
+            )}
+            <text class="node-label" x={n.x + LABEL_DX} y={n.y + 3.5}>{n.label}</text>
+          </a>
+        ))}
+      </>
+    ))}
+  </svg>
+</div>
+
+<ul class="legend">
+  {(['judicial', 'parte', 'otro'] as const).map((f) => (
+    <li>
+      <svg class="key" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+        <g class={`node node--${f}`}>
+          {f === 'judicial' && <circle cx="8" cy="8" r="5" />}
+          {f === 'parte' && <rect x="3" y="3" width="10" height="10" />}
+          {f === 'otro' && <path d="M 8 2 L 14 8 L 8 14 L 2 8 Z" />}
+        </g>
+      </svg>
+      {SHAPE_TITLE[f]}
+    </li>
+  ))}
+  <li><span class="key-line key-line--ok"></span> confirma</li>
+  <li><span class="key-line key-line--alert"></span> anula</li>
+  <li><span class="key-line key-line--stamp"></span> cita, ejecuta, resuelve el recurso</li>
+  <li><span class="key-line key-line--faint"></span> relacionado con</li>
+  <li><span class="key-size"></span> el tamaño del marcador es el número de afirmaciones que sostiene</li>
+</ul>
+
+<style>
+  .map-scroll {
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    background: var(--surface);
+    border: var(--rule);
+    border-radius: var(--radius);
+    padding-block: var(--s-2);
+  }
+  .map-scroll:focus-visible { outline: 2px solid var(--stamp); outline-offset: 2px; }
+  .map { display: block; }
+
+  .band { fill: var(--surface-sunk); opacity: 0.55; }
+  .lane-rule { stroke: var(--line-strong); stroke-width: 1; }
+  .guide { stroke: var(--line); stroke-width: 1; opacity: 0.7; }
+  .axis { stroke: var(--line-strong); stroke-width: 1; }
+
+  .year {
+    font-family: var(--mono);
+    font-size: 10px;
+    fill: var(--ink-faint);
+    text-anchor: middle;
+  }
+
+  .break line { stroke: var(--line-strong); stroke-width: 1; stroke-dasharray: 2 4; }
+  .break text {
+    font-family: var(--mono);
+    font-size: 12px;
+    fill: var(--ink-faint);
+    text-anchor: middle;
+  }
+
+  .lane-head text {
+    font-family: var(--sans);
+    font-size: 11.5px;
+    fill: var(--ink-soft);
+  }
+  .lane-head .tag { font-family: var(--mono); fill: var(--ink); }
+  .lane-head .nest { fill: var(--ink-faint); }
+  .lane-head:hover text { fill: var(--stamp-strong); }
+  .lane-head:hover .tag { fill: var(--stamp-strong); }
+
+  .node--judicial :is(circle, rect, path) { fill: var(--stamp); }
+  .node--parte :is(circle, rect, path) { fill: var(--marca); }
+  .node--otro :is(circle, rect, path) { fill: var(--ink-faint); }
+
+  .node-label {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    fill: var(--ink);
+  }
+  .node { cursor: pointer; }
+  .node:hover .node-label,
+  .node:focus-visible .node-label { fill: var(--stamp-strong); text-decoration: underline; }
+  .node:hover :is(circle, rect, path),
+  .node:focus-visible :is(circle, rect, path) { stroke: var(--ink); stroke-width: 2; }
+
+  .edge { fill: none; stroke-width: 1.4; opacity: 0.85; }
+  .edge--stamp { stroke: var(--stamp); }
+  .edge--ok { stroke: var(--ok); }
+  .edge--alert { stroke: var(--alert); }
+  .edge--faint { stroke: var(--ink-faint); stroke-dasharray: 3 3; opacity: 0.7; }
+  .fill-stamp { fill: var(--stamp); }
+  .fill-ok { fill: var(--ok); }
+  .fill-alert { fill: var(--alert); }
+  .fill-faint { fill: var(--ink-faint); }
+
+  .legend {
+    list-style: none;
+    margin: var(--s-3) 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-2) var(--s-5);
+    font-size: var(--t-xs);
+    color: var(--ink-soft);
+  }
+  .legend li { display: flex; align-items: center; gap: var(--s-2); }
+  .key { flex: none; }
+  .key-line {
+    width: 22px;
+    height: 0;
+    border-top: 2px solid currentColor;
+    flex: none;
+  }
+  .key-line--ok { color: var(--ok); }
+  .key-line--alert { color: var(--alert); }
+  .key-line--stamp { color: var(--stamp); }
+  .key-line--faint { color: var(--ink-faint); border-top-style: dashed; }
+  .key-size {
+    flex: none;
+    width: 22px;
+    height: 10px;
+    background:
+      radial-gradient(circle 3px at 4px 5px, var(--ink-faint) 99%, transparent) ,
+      radial-gradient(circle 5px at 15px 5px, var(--ink-faint) 99%, transparent);
+  }
+</style>

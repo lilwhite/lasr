@@ -1,0 +1,72 @@
+---
+import { render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Card from '../../components/Card.astro';
+import Citation from '../../components/Citation.astro';
+import EntityLink from '../../components/EntityLink.astro';
+import Badge from '../../components/Badge.astro';
+import { graph, entitySlug, eventDateText, formatDate } from '../../lib/graph';
+import { visibleOnly, editorialBadge, EVENT_TYPE_LABEL } from '../../lib/policy';
+
+export async function getStaticPaths() {
+  return visibleOnly(graph.events).map((e) => ({
+    params: { slug: entitySlug(e) },
+    props: { event: e },
+  }));
+}
+
+const { event } = Astro.props;
+const d = event.data;
+const { Content } = await render(event);
+const relatedNotes = visibleOnly(graph.notes.filter((n) => n.data.events.includes(d.id)));
+---
+
+<Layout title={d.title} description={d.title}>
+  <p class="eyebrow">Acontecimiento · {EVENT_TYPE_LABEL[d.type]}</p>
+  <h1>{d.title}</h1>
+  <p class="meta-id">{d.id}</p>
+
+  <div class="badge-row">
+    <Badge {...editorialBadge(d.editorialStatus)} />
+    {d.dateStatus === 'disputed' && <Badge label="Fecha disputada" tone="alert" />}
+  </div>
+
+  <p><strong>Fecha:</strong> {eventDateText(event)}</p>
+
+  {d.dateStatus === 'disputed' && (
+    <Card title="Fecha disputada: candidatas documentadas">
+      <p class="muted">
+        La documentación disponible fecha este acontecimiento de forma contradictoria. LASR‑Web no
+        adopta ninguna fecha mientras no exista evidencia suficiente; estas son las candidatas y su
+        rastro documental.
+      </p>
+      {d.dateEvidence.map((ev) => (
+        <div class="candidate">
+          <h3>{formatDate(ev.value)}</h3>
+          {ev.note && <p class="muted">{ev.note}</p>}
+          {ev.citations.map((c) => <Citation citation={c} />)}
+        </div>
+      ))}
+    </Card>
+  )}
+
+  <h2>¿De dónde sale esto?</h2>
+  {d.citations.map((c) => <Citation citation={c} />)}
+
+  <section class="prose">
+    <Content />
+  </section>
+
+  <h2>En el grafo</h2>
+  <ul class="entity-list">
+    {d.procedure && <li><span class="muted">Procedimiento:</span> <EntityLink id={d.procedure} /></li>}
+    {d.actors.map((a) => <li><span class="muted">Actor:</span> <EntityLink id={a} /></li>)}
+    {d.topics.map((t) => <li><span class="muted">Tema:</span> <EntityLink id={t} /></li>)}
+    {relatedNotes.map((n) => <li><span class="muted">Afirmación:</span> <EntityLink id={n.data.id} /></li>)}
+  </ul>
+</Layout>
+
+<style>
+  .candidate { border-top: 1px solid var(--line); padding-top: 0.6rem; margin-top: 0.8rem; }
+  .candidate h3 { margin: 0 0 0.3rem; }
+</style>

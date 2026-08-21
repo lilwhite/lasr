@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Sitemap del portal. Son pocas páginas y escritas a mano, así que este fichero
+  también lo es. El de la guía documental (/documentacion/sitemap.xml) se genera
+  desde el grafo en cada build; robots.txt declara los dos.
+
+  Las tres redirecciones (/cronologia/, /recepcion-urbanizacion/,
+  /sentencia-tsjcyl/) NO se listan a propósito: llevan noindex y su contenido
+  vive ahora en la guía.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://lasr-info.es/</loc></url>
+  <url><loc>https://lasr-info.es/prensa/</loc></url>
+  <url><loc>https://lasr-info.es/parcelas/</loc></url>
+  <url><loc>https://lasr-info.es/documentacion-relevante/</loc></url>
+  <url><loc>https://lasr-info.es/actualizaciones/</loc></url>
+</urlset>

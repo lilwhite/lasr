@@ -1,0 +1,74 @@
+---
+import { render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Citation from '../../components/Citation.astro';
+import EntityLink from '../../components/EntityLink.astro';
+import Badge from '../../components/Badge.astro';
+import { graph, entitySlug, inverseRelations, questionsAnsweredBy } from '../../lib/graph';
+import { visibleOnly, editorialBadge, evidenceBadge, showEvidenceBadge, basisBadge, NOTE_TYPE_LABEL, RELATION_LABEL } from '../../lib/policy';
+
+export async function getStaticPaths() {
+  return visibleOnly(graph.notes).map((n) => ({
+    params: { slug: entitySlug(n) },
+    props: { note: n },
+  }));
+}
+
+const { note } = Astro.props;
+const d = note.data;
+const { Content } = await render(note);
+const inverse = inverseRelations(d.id);
+const questions = visibleOnly(questionsAnsweredBy(d.id));
+---
+
+<Layout title={d.title} description={d.title}>
+  <p class="eyebrow">Afirmación · {NOTE_TYPE_LABEL[d.type]}</p>
+  <h1>{d.title}</h1>
+  <p class="meta-id">{d.id}</p>
+
+  <div class="badge-row">
+    <Badge label={NOTE_TYPE_LABEL[d.type]} tone="neutral" />
+    <Badge {...basisBadge(d.basis)} />
+    <Badge {...editorialBadge(d.editorialStatus)} />
+    {showEvidenceBadge(d.evidenceStatus) && <Badge {...evidenceBadge(d.evidenceStatus)} />}
+  </div>
+
+  <h2>¿De dónde sale esto?</h2>
+  {d.citations.map((c) => <Citation citation={c} />)}
+
+  <section class="prose">
+    <Content />
+  </section>
+
+  {(d.relations.length > 0 || inverse.length > 0) && (
+    <>
+      <h2>Afirmaciones relacionadas</h2>
+      <ul class="entity-list">
+        {d.relations.map((r) => (
+          <li>
+            <span class="muted">{RELATION_LABEL[r.type].direct}:</span> <EntityLink id={r.target} />
+            {r.note && <p class="muted" style="margin:0.2rem 0 0; font-size:0.88rem">{r.note}</p>}
+          </li>
+        ))}
+        {inverse.map((r) => (
+          <li>
+            <span class="muted">{RELATION_LABEL[r.type].inverse}:</span> <EntityLink id={r.from.data.id} />
+            {r.note && <p class="muted" style="margin:0.2rem 0 0; font-size:0.88rem">{r.note}</p>}
+          </li>
+        ))}
+      </ul>
+    </>
+  )}
+
+  {(d.actors.length > 0 || d.events.length > 0 || d.topics.length > 0 || questions.length > 0) && (
+    <>
+      <h2>En el grafo</h2>
+      <ul class="entity-list">
+        {d.topics.map((t) => <li><span class="muted">Tema:</span> <EntityLink id={t} /></li>)}
+        {d.actors.map((a) => <li><span class="muted">Actor:</span> <EntityLink id={a} /></li>)}
+        {d.events.map((e) => <li><span class="muted">Acontecimiento:</span> <EntityLink id={e} /></li>)}
+        {questions.map((q) => <li><span class="muted">Responde a:</span> <EntityLink id={q.data.id} /></li>)}
+      </ul>
+    </>
+  )}
+</Layout>

@@ -420,8 +420,25 @@
     const elements = getElements();
 
     const slug = canonicalSlug(getSlugFromPage());
-    const currentDoc = documents.find((d) => d.slug === slug) || documents[0];
     const root = getRootPrefix();
+
+    // Un slug desconocido daba antes `documents[0]`, así que la página servía
+    // "Documentacion relevante" sin decir nada. Tres páginas del sitio llevaban
+    // meses mostrando el documento equivocado sin que se notara. Un slug que no
+    // está registrado es un error, y como tal se muestra.
+    const currentDoc = documents.find((d) => d.slug === slug);
+    if (!currentDoc) {
+      elements.body.innerHTML = `
+        <div class="error">
+          <p><strong>Documento no encontrado.</strong></p>
+          <p>No hay ningún documento registrado con el identificador
+          <code>${escapeHtml(slug)}</code>.</p>
+          <p><a href="${escapeHtml(root)}/">Volver al inicio</a></p>
+        </div>
+      `;
+      console.error(`docs.js: slug sin documento registrado: "${slug}"`);
+      return;
+    }
 
     try {
       const docPath = buildDocumentPath(root, currentDoc);
