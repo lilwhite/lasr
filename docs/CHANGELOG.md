@@ -4,6 +4,16 @@ Este archivo recoge los cambios relevantes publicados en `main`.
 
 Formato basado en versiones semánticas (`vMAJOR.MINOR.PATCH`).
 
+## [v1.1.12] - 2026-08-21
+
+### Resumen
+- Dev (#66)
+- Fix/retirar datos personales (#65)
+- release: terminología — «núcleo» en lugar de «urbanización» (#62)
+- release: publica la guía documental en /documentacion/ (#60)
+- chore(release): promover fix de despliegue de prensa a producción (#56)
+- chore(release): promover correcciones del buscador de parcelas v1.1.7 (#54)
+
 ## [v1.1.11] - 2026-08-21
 
 ### Resumen
