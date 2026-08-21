@@ -75,7 +75,6 @@
       const source = escapeHtml(item.source || 'Medio no disponible');
       const sourceType = escapeHtml(SOURCE_TYPE_LABELS[item.sourceType] || 'General');
       const category = escapeHtml(window.PressUtils.getCategoryLabel(item.category));
-      const excerpt = escapeHtml((item.summary || item.excerpt || '').slice(0, 220));
       const date = escapeHtml(window.PressUtils.formatDate(item.date));
 
       return `
@@ -88,7 +87,6 @@
               <span class="press-meta-chip">${category}</span>
             </div>
             <h3 class="press-row-title">${title}</h3>
-            ${excerpt ? `<p class="press-row-excerpt">${excerpt}</p>` : ''}
           </div>
           <div class="press-row-action">
             <a href="${escapeHtml(safeUrl)}" class="press-source-link" target="_blank" rel="noopener noreferrer">Ver fuente</a>

@@ -339,7 +339,7 @@
                     tipo: 'prensa',
                     source: item.source,
                     titulo: item.title,
-                    descripcion: item.excerpt || 'Cobertura periodística relacionada con Los Ángeles de San Rafael.',
+                    descripcion: '',
                     url: item.url,
                     fecha: window.PressUtils
                         ? `${window.PressUtils.formatDate(item.date)} · ${window.PressUtils.getCategoryLabel(item.category)}`
@@ -379,7 +379,7 @@
                         <span class="doc-type ${typeClass}">${escapeHtml(doc.tipo || 'Documento')}</span>
                         ${doc.source ? `<span class="press-source-badge">${escapeHtml(doc.source)}</span>` : ''}
                         <h3 class="doc-title">${escapeHtml(doc.titulo)}</h3>
-                        <p class="doc-description press-excerpt">${escapeHtml(doc.descripcion || '')}</p>
+                        ${doc.descripcion ? `<p class="doc-description press-excerpt">${escapeHtml(doc.descripcion)}</p>` : ''}
                         ${articlesHtml}
                         ${doc.fecha ? `<p class="doc-meta">${escapeHtml(doc.fecha)}</p>` : ''}
                         ${linkHtml}
