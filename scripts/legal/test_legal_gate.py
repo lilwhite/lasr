@@ -109,7 +109,14 @@ ok("escaneo" in reason08, "08 · y el motivo lo dice con esas palabras")
 
 f09 = scan_fixture("09-referencia-a-private-sources.md")
 ok({"LEGAL-LEAK-001", "LEGAL-LEAK-002"} <= rules_of(f09),
-   "09 · ruta personal y referencia a los originales")
+   "09 · ruta personal y referencia a los originales en prosa")
+solo_campo = run_rules(
+    "---\nid: SRC-EJEMPLO\nfile: private-sources/pdf/src-2011-ejemplo.pdf\npages: 3\n---\n",
+    "src-ejemplo.md", RULES)
+ok(not [f for f in solo_campo if f.rule == "LEGAL-LEAK-002"],
+   "09 · el campo `file:` que el esquema exige NO es una fuga por sí solo")
+ok([f for f in f09 if f.rule == "LEGAL-LEAK-002"],
+   "09 · pero la misma referencia en prosa sí lo es")
 
 f10 = (FIXTURES / "10-documento-anonimizado.md").read_text(encoding="utf-8")
 ok("legalStatus: cleared-redacted" in f10 and "redactions:" in f10,
@@ -240,6 +247,36 @@ ok(all(legal_scan.is_fixture(p) for p in FIXTURES.iterdir() if p.is_file()),
    "todos los fixtures llevan el marcador")
 ok(not legal_scan.scan(sorted(p for p in FIXTURES.iterdir() if p.is_file()), RULES, None, []),
    "escanearlos uno a uno no produce ni un hallazgo")
+
+
+print("\n== Invariante H · --build traduce las rutas al manifiesto ==")
+with tempfile.TemporaryDirectory() as tmp:
+    raiz = Path(tmp) / "dist"
+    (raiz / "documentacion").mkdir(parents=True)
+    portal = raiz / "documentacion_relevante.md"
+    portal.write_text("x", encoding="utf-8")
+    guia = raiz / "documentacion" / "index.html"
+    guia.write_text("x", encoding="utf-8")
+    ok(legal_scan.manifest_key(portal, str(portal), raiz) == "docs/documentacion_relevante.md",
+       "un fichero del portal se busca en el manifiesto como docs/…")
+    ok(legal_scan.manifest_key(guia, str(guia), raiz) == "documentacion/index.html",
+       "lo que cuelga de documentacion/ es la guía y no se reescribe")
+    ok(legal_scan.manifest_key(portal, "docs/x.md", None) == "docs/x.md",
+       "sin --build la ruta no se toca")
+
+
+print("\n== Invariante G · un symlink materializado no es contenido ==")
+with tempfile.TemporaryDirectory() as tmp:
+    import manifest as manifest_mod
+    falso = Path(tmp) / "docs"
+    falso.mkdir()
+    (falso / "index.html").write_text("<html></html>", encoding="utf-8")
+    # Lo que git escribe cuando core.symlinks=false: el destino, como texto.
+    (falso / "documentacion").write_text("../documentacion/dist", encoding="utf-8")
+    listado = manifest_mod.portal_files(falso)
+    ok("docs/index.html" in listado, "el contenido de verdad sí se inventaría")
+    ok("docs/documentacion" not in listado,
+       f"el symlink materializado no entra en el inventario ({listado})")
 
 
 print("\n== Invariante F · el baseline acota por fichero ==")
