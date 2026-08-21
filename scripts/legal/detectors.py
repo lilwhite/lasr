@@ -427,6 +427,12 @@ def attributed_accusations(text: str, allowlist: frozenset[str]) -> Iterator[tup
     nombre a alguien tres párrafos después no imputa nada a nadie."""
     offset = 0
     for sentence in RE_SENTENCE_SPLIT.split(text):
+        # Un bloque de cuatro mil caracteres no es una frase: en un JSON sin
+        # puntuación el texto entero cae en un solo trozo, y ahí la coocurrencia
+        # de un nombre y un término penal no significa nada.
+        if len(sentence) > 400:
+            offset += len(sentence) + 1
+            continue
         lowered = _normalize(sentence)
         if any(term in lowered for term in (_normalize(t) for t in CRIMINAL_TERMS)):
             for start, end, value in name_candidates(sentence, allowlist):
