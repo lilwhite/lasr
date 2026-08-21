@@ -15,6 +15,7 @@ Revisa dos cosas sobre `dist/`:
 Uso:  python3 scripts/check_links.py [dist]
 """
 
+import os
 import re
 import sys
 import urllib.parse
@@ -27,6 +28,17 @@ EXTS = (".svg", ".png", ".jpg", ".webp", ".xml", ".txt", ".css", ".js", ".woff",
 
 
 def base_from_config() -> str:
+    """La misma base que usó el build.
+
+    `BASE` manda sobre el literal del config, exactamente igual que en
+    `astro.config.mjs`. Leer solo el fichero hacía que un build con la variable
+    puesta se validara contra otra base y marcara como rotos los ~1.700 enlaces
+    internos correctos.
+    """
+    env = os.environ.get("BASE")
+    if env is not None:
+        return env.rstrip("/")
+
     cfg = (REPO / "astro.config.mjs").read_text(encoding="utf-8")
     m = re.search(r"base:\s*process\.env\.BASE\s*\?\?\s*'([^']*)'", cfg) or re.search(r"base:\s*'([^']*)'", cfg)
     b = (m.group(1) if m else "/").rstrip("/")
