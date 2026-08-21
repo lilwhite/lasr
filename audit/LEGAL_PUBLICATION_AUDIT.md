@@ -34,7 +34,8 @@ Dos exposiciones están vivas ahora mismo y ninguna se resuelve con la herramien
 **Acción.** Reescritura del historial. Se ejecuta como operación dedicada, con copia de seguridad previa y verificación de que los objetos quedan inalcanzables.
 
 **Detectado:** 21 de agosto de 2026.
-**Estado:** en resolución.
+**Resuelto en local:** 21 de agosto de 2026 — reescritura hecha y verificada sobre un clon aislado; los objetos son inalcanzables, el proyecto compila y solo desaparece lo previsto.
+**Estado:** pendiente de empujar. Hasta que se fuerce el push, el material sigue accesible en el remoto.
 
 > Este hallazgo se registra sin las coordenadas del material —identificadores de objeto, rutas, tamaños ni alcance nominal—. Documentarlo es obligado (art. 33.5 RGPD); publicar dónde encontrarlo, no. El detalle operativo vive fuera de este documento y fuera del repositorio.
 
