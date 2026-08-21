@@ -3,51 +3,81 @@
  *
  * Ver docs/WEB_DESIGN.md. Dos ideas gobiernan todo lo que sigue:
  *
- *  1. Dos registros tipográficos. La narrativa va en serif; el aparato
- *     documental —páginas, números de resolución, fechas, identificadores— va
- *     en monoespaciada. Esa distinción ES la arquitectura de información: capa
- *     de divulgación y capa de evidencia, hechas visibles.
+ *  1. Dos registros tipográficos. La narrativa va en la serif del portal; el
+ *     aparato documental —páginas, números de resolución, fechas,
+ *     identificadores— va en monoespaciada. Esa distinción ES la arquitectura
+ *     de información: capa de divulgación y capa de evidencia, hechas visibles.
  *  2. Un solo acento. `--stamp` para estructura y enlaces, `--marca` para el
  *     aparato. El verde de sierra aparece una vez, en el motivo de portada.
+ *
+ * Desde la integración en el portal, la PALETA no se define aquí: se hereda de
+ * `portal-tokens.css`, que es copia de `docs/assets/css/tokens.css`. Los tokens
+ * de este fichero son alias sobre aquellos. La consecuencia importante es que el
+ * tema oscuro del portal llega gratis: sus `--color-*` se redefinen bajo
+ * `[data-theme="dark"]` y estos alias los siguen sin una sola regla extra.
+ *
+ * Lo que sí sigue siendo de esta capa: la escala tipográfica, la de espaciado y
+ * las medidas de columna. Son la estructura del aparato documental, no la
+ * identidad visual del sitio.
  */
 
-/* Latin cubre el castellano completo; no hace falta latin-ext. */
-@import '@fontsource/ibm-plex-serif/latin-400.css';
-@import '@fontsource/ibm-plex-serif/latin-600.css';
-@import '@fontsource/ibm-plex-sans/latin-400.css';
-@import '@fontsource/ibm-plex-sans/latin-600.css';
+@import './portal-tokens.css';
+
+/*
+ * De la superfamilia IBM Plex sobrevive solo la monoespaciada. La narrativa y
+ * la interfaz pasan a la tipografía del portal —Georgia y la pila del sistema—,
+ * porque la coherencia con el resto del sitio pesa más que la unidad de la
+ * superfamilia. La mono se queda porque el portal no tiene equivalente y el
+ * registro monoespaciado es lo que sostiene la distinción de las dos capas.
+ */
 @import '@fontsource/ibm-plex-mono/latin-400.css';
 
 :root {
-  /* ---- Color ---------------------------------------------------------- */
-  --paper: #f7f7f5;
-  --surface: #ffffff;
-  --surface-sunk: #f1f2f0;
-  --ink: #16202a;
-  --ink-soft: #55636f;
-  --ink-faint: #7c8791;
-  --line: #dcdfdd;
-  --line-strong: #c3c8c6;
+  /* ---- Color: alias sobre los tokens del portal ------------------------ */
+  /* Ninguno de estos valores es un color: todos apuntan a `--color-*`, que el
+     portal redefine en `[data-theme="dark"]`. Por eso el modo oscuro funciona
+     aquí sin que esta capa escriba una sola regla de tema. */
+  --paper: var(--color-bg);
+  --surface: var(--color-surface);
+  --surface-sunk: var(--color-surface-alt);
+  --ink: var(--color-text);
+  --ink-soft: var(--color-text-light);
+  --ink-faint: var(--color-text-muted);
+  /* Cruzados a propósito: en el portal `--color-border-light` es el filete
+     discreto y `--color-border` el marcado, al revés de lo que sugiere el
+     nombre. */
+  --line: var(--color-border-light);
+  --line-strong: var(--color-border);
 
-  --stamp: #24506e;          /* acento principal: enlaces y estructura */
-  --stamp-strong: #16384f;
-  --stamp-soft: #eaeff4;
+  --stamp: var(--color-primary);      /* acento principal: enlaces y estructura */
+  --stamp-strong: var(--color-primary-dark);
+  --stamp-soft: color-mix(in srgb, var(--color-primary) 8%, var(--color-surface));
+  --on-stamp: #ffffff;                /* texto sobre el acento; ver bloque oscuro */
 
-  --marca: #8c6a22;          /* aparato documental: ecos del subrayado del expediente */
-  --marca-soft: #f6f0e2;
+  /* El ocre del aparato documental es literal y no un alias del acento del
+     portal: `--color-accent` (#D4A574) no llega al contraste AA como texto
+     sobre fondo claro, y este token se usa sobre todo como texto. La metáfora
+     —el subrayado a rotulador de los escaneos— se conserva igual. */
+  --marca: #8c6a22;
+  --marca-soft: color-mix(in srgb, var(--color-accent) 22%, var(--color-surface));
 
-  --sierra: #3d5a4a;         /* SOLO el motivo territorial de portada */
+  --sierra: var(--color-success);     /* SOLO el motivo territorial de portada */
 
-  --warn: #7a5600;
-  --warn-bg: #fbf2dc;
-  --alert: #97301f;
-  --alert-bg: #f9eae6;
-  --ok: #2c6444;
-  --ok-bg: #e7f0ea;
+  --warn: var(--color-warning);
+  --warn-bg: color-mix(in srgb, var(--color-warning) 13%, var(--color-surface));
+  --alert: var(--color-error);
+  --alert-bg: color-mix(in srgb, var(--color-error) 12%, var(--color-surface));
+  --ok: var(--color-success);
+  --ok-bg: color-mix(in srgb, var(--color-success) 12%, var(--color-surface));
+  /* `--info` y `--info-bg` los usaba Badge.astro sin que nadie los definiera:
+     las insignias `neutral` e `info` heredaban color. El portal sí tiene el
+     token, así que la integración lo arregla de paso. */
+  --info: var(--color-info);
+  --info-bg: color-mix(in srgb, var(--color-info) 10%, var(--color-surface));
 
   /* ---- Tipografía ----------------------------------------------------- */
-  --serif: 'IBM Plex Serif', Georgia, 'Times New Roman', serif;
-  --sans: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --serif: var(--font-family-heading);   /* Georgia, la del portal */
+  --sans: var(--font-family);            /* pila del sistema, la del portal */
   --mono: 'IBM Plex Mono', ui-monospace, 'Cascadia Mono', Menlo, monospace;
 
   --t-xs: 0.75rem;
@@ -80,10 +110,27 @@
   --rail: 15rem;      /* columna del aparato documental */
 }
 
+/*
+ * Todo lo demás hereda el tema oscuro por los alias. Estos dos no pueden:
+ *
+ *  - `--marca` es un ocre oscuro elegido para leerse sobre papel claro; sobre
+ *    fondo oscuro se apaga. En oscuro sí sirve el acento del portal, que ahí es
+ *    un arena claro.
+ *  - `--on-stamp` es texto sobre el acento. En claro el acento es un teal
+ *    oscuro y pide texto blanco; en oscuro el portal lo aclara a #87aeb0 y el
+ *    blanco dejaría de contrastar, así que el texto pasa a ser el fondo.
+ */
+[data-theme='dark'] {
+  --marca: var(--color-accent);
+  --marca-soft: color-mix(in srgb, var(--color-accent) 16%, var(--color-surface));
+  --on-stamp: var(--color-bg);
+}
+
 * { box-sizing: border-box; }
 
 html {
-  color-scheme: light;
+  /* `color-scheme` lo fija theme-init.js sobre el elemento raíz, según la
+     preferencia guardada. Declararlo aquí solo serviría para contradecirlo. */
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
 }
