@@ -51,14 +51,17 @@
       if (dateA && !dateB) return -1;
       if (!dateA && dateB) return 1;
 
-      return (Number(b.relevanceScore) || 0) - (Number(a.relevanceScore) || 0);
+      // Sin fechas válidas no hay criterio: se conserva el orden de entrada.
+      return 0;
     });
   }
 
+  // La invariante ya no la lleva cada noticia en un campo: la lleva el fichero.
+  // `fetch_press.py` no escribe lo que no es publicable, así que lo que llega
+  // aquí ES la selección. Filtrar por un `isRelevant` que ya no existe dejaría
+  // el archivo vacío.
   function getRelevantNews(items) {
-    return sortNews(
-      (Array.isArray(items) ? items : []).filter((item) => item && item.isRelevant === true)
-    );
+    return sortNews(Array.isArray(items) ? items : []);
   }
 
   // El archivo publica solo las noticias del conflicto. Las candidatas
