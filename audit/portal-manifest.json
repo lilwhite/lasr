@@ -82,8 +82,9 @@
       "reason": "Imagen: los píxeles no son inspeccionables automáticamente"
     },
     "docs/assets/js/docs.js": {
-      "legalStatus": "unchecked",
-      "reason": "Pendiente de revisión jurídica: se publica como deuda registrada"
+      "legalStatus": "cleared",
+      "reviewedAt": "2026-08-21",
+      "reason": "Renderizador de los documentos en Markdown del portal y su registro de rutas. No contiene contenido ni datos: solo el índice de qué fichero sirve cada página."
     },
     "docs/assets/js/ga4.js": {
       "legalStatus": "unchecked",
