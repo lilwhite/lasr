@@ -1,10 +1,11 @@
 ---
 import { getEntry } from 'astro:content';
+import { published } from '../lib/policy';
 import Layout from '../layouts/Layout.astro';
 import Prose from '../components/Prose.astro';
 import Citation from '../components/Citation.astro';
 import DocMap from '../components/DocMap.astro';
-import { graph, entityRoute, eventSortKey, formatDate, resolve, type Note } from '../lib/graph';
+import { entityRoute, eventSortKey, formatDate, resolve, type Note } from '../lib/graph';
 import { url } from '../lib/url';
 import { AREAS, AREA_ORDER } from '../lib/areas';
 import { topicMembers } from '../lib/graph';
@@ -17,24 +18,24 @@ const claim = resolve('NOTE-2011-TSJCYL-271-001') as Note;
 
 const topicsByArea = AREA_ORDER.map((areaId) => ({
   area: AREAS[areaId],
-  topics: graph.topics
+  topics: published.topics
     .filter((t) => t.data.area === areaId)
     .map((t) => ({ topic: t, members: topicMembers(t.data.id) })),
 }));
 
 // Hitos de portada: los acontecimientos que más afirmaciones sostienen.
-const milestones = [...graph.events]
-  .map((e) => ({ e, n: graph.notes.filter((x) => x.data.events.includes(e.data.id)).length }))
+const milestones = [...published.events]
+  .map((e) => ({ e, n: published.notes.filter((x) => x.data.events.includes(e.data.id)).length }))
   .sort((a, b) => b.n - a.n)
   .slice(0, 6)
   .map(({ e }) => e)
   .sort((a, b) => eventSortKey(a) - eventSortKey(b));
 
-const questions = graph.questions.slice(0, 6);
+const questions = published.questions.slice(0, 6);
 const stats = {
-  documentos: graph.sources.length,
-  afirmaciones: graph.notes.length,
-  acontecimientos: graph.events.length,
+  documentos: published.sources.length,
+  afirmaciones: published.notes.length,
+  acontecimientos: published.events.length,
 };
 ---
 

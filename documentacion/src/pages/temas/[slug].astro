@@ -12,10 +12,10 @@ import {
 import { assertSections, TOPIC_SECTIONS, sections } from '../../lib/prose';
 import { url } from '../../lib/url';
 import { AREAS } from '../../lib/areas';
-import { ACTOR_TYPE_LABEL, DOC_TYPE_LABEL, readerFlags, PREVIEW } from '../../lib/policy';
+import { ACTOR_TYPE_LABEL, DOC_TYPE_LABEL, readerFlags, visibleOnly, canPublish, PREVIEW } from '../../lib/policy';
 
 export async function getStaticPaths() {
-  return graph.topics.map((t) => ({ params: { slug: entitySlug(t) }, props: { topic: t } }));
+  return visibleOnly(graph.topics).map((t) => ({ params: { slug: entitySlug(t) }, props: { topic: t } }));
 }
 
 const { topic } = Astro.props;
@@ -29,22 +29,25 @@ const body = sections(topic);
 const area = AREAS[d.area];
 const members = topicMembers(d.id);
 
-const events = members.events;
-const notes = members.notes;
-const questions = members.questions;
+// Todo lo derivado del grafo se filtra: una entidad bloqueada no debe asomar
+// el título en la página de un tema, aunque su propia página no exista.
+const events = visibleOnly(members.events);
+const notes = visibleOnly(members.notes);
+const questions = visibleOnly(members.questions);
 // Si el etiquetado no declara actores ni procedimientos, se derivan de los
 // miembros del tema: TOPIC-EUC tenía 25 afirmaciones y ninguno declarado.
-const actorsDeclared = members.actors;
-const actors = actorsDeclared.length > 0 ? actorsDeclared : topicActorsDerived(d.id);
+const actorsDeclared = visibleOnly(members.actors);
+const actors = actorsDeclared.length > 0 ? actorsDeclared : visibleOnly(topicActorsDerived(d.id));
 const actorsAreDerived = actorsDeclared.length === 0 && actors.length > 0;
-const procsDeclared = members.procedures;
-const procs = procsDeclared.length > 0 ? procsDeclared : topicProceduresDerived(d.id);
+const procsDeclared = visibleOnly(members.procedures);
+const procs = procsDeclared.length > 0 ? procsDeclared : visibleOnly(topicProceduresDerived(d.id));
 const procsAreDerived = procsDeclared.length === 0 && procs.length > 0;
 
 const keyNotes = notes.filter((n) =>
   ['ruling', 'obligation', 'agreement', 'legal-principle'].includes(n.data.type));
 const disputed = notes.filter((n) => readerFlags(n).length > 0);
-const topSources = topicSourcesRanked(d.id).slice(0, 6);
+// `topicSourcesRanked` devuelve pares documento/recuento, no entidades.
+const topSources = topicSourcesRanked(d.id).filter((x) => canPublish(x.source)).slice(0, 6);
 
 // Índice de la página: solo las secciones que existen de verdad.
 const toc = [
