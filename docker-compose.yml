@@ -1,3 +1,18 @@
+# Previsualización local del sitio COMBINADO, con la misma estructura de rutas
+# que produce el despliegue: el portal en la raíz y la guía documental colgando
+# de /documentacion/.
+#
+# El segundo montaje es lo que hace que los enlaces cruzados —"Guía documental"
+# en el menú, "Portal vecinal" en la guía, las tres redirecciones— se puedan
+# probar de verdad. Sin él, /documentacion/ da 404 y no se ve nada de eso.
+#
+# Requiere haber compilado antes la guía:
+#
+#     cd documentacion && npm run build && cd ..
+#     docker compose up
+#
+# Si documentacion/dist no existe, Docker crearía un directorio vacío y la guía
+# daría 403.
 services:
   web:
     image: nginx:1.27-alpine
@@ -6,4 +21,5 @@ services:
       - "8080:80"
     volumes:
       - ./docs:/usr/share/nginx/html:ro
+      - ./documentacion/dist:/usr/share/nginx/html/documentacion:ro
     restart: unless-stopped

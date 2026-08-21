@@ -19,6 +19,13 @@ __pycache__/
 dist/
 build/
 
+# Capa documental (documentacion/): Astro y originales.
+# documentacion/.gitignore ya cubre esto; se repite aquí a propósito, porque
+# un PDF con datos personales no puede depender de un solo fichero de reglas.
+documentacion/node_modules/
+documentacion/.astro/
+private-sources/
+
 # WhatsApp
 *.zip
 *.mp4

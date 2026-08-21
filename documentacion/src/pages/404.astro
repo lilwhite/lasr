@@ -1,0 +1,15 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { url } from '../lib/url';
+import { NAV } from '../lib/nav';
+---
+<Layout title="Página no encontrada" description="La página que buscas no existe en esta web." noindex={true} width="prose">
+  <h1>Esta página no existe</h1>
+  <p class="lede">Puede que el enlace esté mal copiado o que la página haya cambiado de dirección.</p>
+  <p>Prueba por aquí:</p>
+  <ul>
+    {NAV.filter((n) => n.blurb).map((n) => (
+      <li><a href={url(n.path)}>{n.label}</a> — {n.blurb}</li>
+    ))}
+  </ul>
+</Layout>

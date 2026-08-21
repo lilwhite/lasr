@@ -1,0 +1,57 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { graph, entityRoute, actorMentions } from '../../lib/graph';
+import { url } from '../../lib/url';
+import { ACTOR_TYPE_LABEL } from '../../lib/policy';
+
+// Por relevancia, no alfabético: cuatro actores concentran el 76% de las menciones.
+const ranked = graph.actors
+  .map((a) => {
+    const m = actorMentions(a.data.id);
+    return { a, n: m.notes.length + m.events.length };
+  })
+  .sort((x, y) => y.n - x.n);
+const principales = ranked.filter((r) => r.n >= 10);
+const secundarios = ranked.filter((r) => r.n < 10);
+---
+<Layout title="Quién es quién" description="Las administraciones, tribunales, entidades y empresas que intervienen en la historia de Los Ángeles de San Rafael, y qué papel tiene cada una.">
+  <header class="head">
+    <h1>Quién es quién</h1>
+    <p class="lede">Quién es cada organismo o entidad que aparece una y otra vez en esta historia, y qué papel tiene en ella.</p>
+  </header>
+
+  <section>
+    <h2>Los protagonistas</h2>
+    <ul class="list">
+      {principales.map(({ a, n }) => (
+        <li>
+          <a href={url(entityRoute(a))}>{a.data.name}</a>
+          <p class="apparatus">{ACTOR_TYPE_LABEL[a.data.type]} · aparece en {n} entradas</p>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section>
+    <h2>También intervienen</h2>
+    <ul class="list list--compact">
+      {secundarios.map(({ a }) => (
+        <li>
+          <a href={url(entityRoute(a))}>{a.data.name}</a>
+          <span class="apparatus"> · {ACTOR_TYPE_LABEL[a.data.type]}</span>
+        </li>
+      ))}
+    </ul>
+  </section>
+</Layout>
+
+<style>
+  .head, section { max-width: var(--measure); }
+  .head h1 { margin-bottom: var(--s-3); }
+  .list { list-style: none; margin: 0; padding: 0; }
+  .list > li { padding-block: var(--s-3); border-top: var(--rule); }
+  .list--compact > li { padding-block: var(--s-2); }
+  .list > li > a { font-family: var(--serif); color: var(--ink); text-decoration-color: var(--line-strong); }
+  .list p { margin: var(--s-1) 0 0; }
+  .apparatus { color: var(--ink-faint); }
+</style>

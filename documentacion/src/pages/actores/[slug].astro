@@ -1,0 +1,79 @@
+---
+import { render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import EntityLink from '../../components/EntityLink.astro';
+import { graph, entitySlug } from '../../lib/graph';
+import { visibleOnly, ACTOR_TYPE_LABEL } from '../../lib/policy';
+
+export async function getStaticPaths() {
+  return graph.actors.map((a) => ({
+    params: { slug: entitySlug(a) },
+    props: { actor: a },
+  }));
+}
+
+const { actor } = Astro.props;
+const d = actor.data;
+const { Content } = await render(actor);
+
+const id = d.id;
+const notes = visibleOnly(graph.notes.filter((n) => n.data.actors.includes(id)));
+const events = visibleOnly(graph.events.filter((e) => e.data.actors.includes(id)));
+const sources = visibleOnly(
+  graph.sources.filter(
+    (s) => s.data.issuer === id || (s.data.parties ?? []).some((p) => p.actor === id),
+  ),
+);
+const procedures = visibleOnly(
+  graph.procedures.filter((p) => p.data.organ === id || p.data.parties.some((x) => x.actor === id)),
+);
+---
+
+<Layout title={d.name} description={`Actor: ${d.name}`}>
+  <p class="eyebrow">Actor · {ACTOR_TYPE_LABEL[d.type]}</p>
+  <h1>{d.name}</h1>
+  <p class="meta-id">{d.id}</p>
+  {d.aliases.length > 0 && (
+    <p class="muted">También aparece como: {d.aliases.join(' · ')}</p>
+  )}
+
+  <section class="prose">
+    <Content />
+  </section>
+
+  {notes.length > 0 && (
+    <>
+      <h2>Afirmaciones en las que interviene</h2>
+      <ul class="entity-list">
+        {notes.map((n) => <li><EntityLink id={n.data.id} /></li>)}
+      </ul>
+    </>
+  )}
+
+  {events.length > 0 && (
+    <>
+      <h2>Acontecimientos</h2>
+      <ul class="entity-list">
+        {events.map((e) => <li><EntityLink id={e.data.id} /></li>)}
+      </ul>
+    </>
+  )}
+
+  {sources.length > 0 && (
+    <>
+      <h2>Documentos</h2>
+      <ul class="entity-list">
+        {sources.map((s) => <li><EntityLink id={s.data.id} /></li>)}
+      </ul>
+    </>
+  )}
+
+  {procedures.length > 0 && (
+    <>
+      <h2>Procedimientos</h2>
+      <ul class="entity-list">
+        {procedures.map((p) => <li><EntityLink id={p.data.id} /></li>)}
+      </ul>
+    </>
+  )}
+</Layout>

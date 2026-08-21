@@ -1,0 +1,17 @@
+# Documentos originales: NUNCA se versionan (pueden contener datos personales)
+private-sources/
+
+# Astro / Node
+node_modules/
+dist/
+.astro/
+
+# Copias del portal: la fuente vive en docs/, las genera scripts/sync-portal-assets.mjs
+src/styles/portal-tokens.css
+public/assets/js/theme-init.js
+public/assets/js/theme.js
+public/og.png
+
+# Sistema
+.DS_Store
+Thumbs.db

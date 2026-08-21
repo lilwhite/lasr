@@ -47,6 +47,9 @@ jobs:
             "docs/assets/js/main.js"
             "scripts/build_meta.py"
             "docs/documentacion_relevante.md"
+            "docs/assets/css/tokens.css"
+            "documentacion/package.json"
+            "documentacion/astro.config.mjs"
           )
           
           MISSING_FILES=()
@@ -84,3 +87,44 @@ jobs:
           
           echo ""
           echo "=== Validación completada con éxito ==="
+
+  guia-documental:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: documentacion/package-lock.json
+
+      # `npm run check` encadena astro check, el build y la validación de
+      # enlaces. Ahí es donde se caza una cita a una página inexistente, un ID
+      # roto o un enlace sin la base del sitio: fallos del corpus que de otro
+      # modo solo aparecerían ya desplegados.
+      - name: Validar la guía documental
+        working-directory: documentacion
+        run: |
+          npm ci
+          npm run check
+
+      # Los destinos de las tres redirecciones del portal tienen que existir de
+      # verdad. Si alguien renombra un tema o una ficha, esto lo dice aquí.
+      - name: Comprobar los destinos de las redirecciones
+        working-directory: documentacion
+        run: |
+          for destino in \
+            dist/cronologia/index.html \
+            dist/temas/recepcion-de-la-urbanizacion/index.html \
+            dist/documentos/2011-tsjcyl-271/index.html
+          do
+            if [ ! -f "$destino" ]; then
+              echo "ERROR: falta $destino, al que redirige una página del portal."
+              exit 1
+            fi
+            echo "✓ $destino"
+          done

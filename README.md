@@ -20,14 +20,21 @@ El proyecto incluye:
 
 ```
 📂 LASR/
-├── 📂 docs/                    # Portal web (GitHub Pages)
+├── 📂 docs/                    # Portal web -> raíz del dominio
 │   ├── index.html              # Página principal
 │   ├── DEPLOY.md               # Guía de despliegue
 │   └── 📂 assets/
 │       ├── config.json         # Configuración
 │       ├── content.json        # Contenido
-│       ├── css/styles.css      # Estilos
-│       └── js/main.js         # Funcionalidad
+│       ├── css/tokens.css      # Paleta y tema: fuente única de TODO el sitio
+│       ├── css/styles.css      # Estilos del portal
+│       └── js/main.js          # Funcionalidad
+│
+├── 📂 documentacion/           # Guía documental (Astro) -> /documentacion/
+│   ├── README.md               # Cómo desarrollarla
+│   ├── 📂 docs/                # Sus especificaciones (NO es el portal)
+│   ├── 📂 src/content/         # El corpus: 36 documentos, 150 afirmaciones
+│   └── 📂 scripts/             # Herramientas del corpus (OCR, inventario)
 │
 ├── 📂 .agents/skills/          # Skills para agentes IA
 │   ├── web-design-static-portal/
@@ -47,12 +54,17 @@ El proyecto incluye:
 
 | Componente | Tecnología |
 |------------|------------|
-| 🌐 Hosting | GitHub Pages |
+| 🌐 Hosting | GitHub Pages, dominio propio `lasr-info.es` |
 | ⚡ CI/CD | GitHub Actions |
-| 🎨 Estilos | CSS vanilla |
-| ✨ Scripts | JavaScript vanilla |
-| 📝 Contenido | JSON + Markdown |
-| 🔒 Validación | Python |
+| 🎨 Estilos | CSS vanilla, con los tokens compartidos por las dos mitades |
+| ✨ Scripts | JavaScript vanilla (portal) · Astro estático sin JS de aplicación (guía) |
+| 📝 Contenido | JSON + Markdown (portal) · colecciones validadas con Zod (guía) |
+| 🔒 Validación | Python + `astro check` |
+
+El sitio son **dos fuentes que se combinan en el despliegue**: `docs/` se copia
+tal cual a la raíz y `documentacion/` se compila con Astro y se coloca en
+`/documentacion/`. La paleta y el tema claro/oscuro salen de un único fichero,
+`docs/assets/css/tokens.css`, que la guía copia en su build.
 
 ---
 
@@ -122,10 +134,13 @@ Guía completa en [`docs/WORKFLOW.md`](docs/WORKFLOW.md).
 ## 🐳 Validación local con Docker
 
 ```bash
+cd documentacion && npm run build && cd ..   # la guía hay que compilarla antes
 docker compose up -d
 ```
 
-Luego abre `http://localhost:8080`.
+Luego abre `http://localhost:8080`. Sirve el sitio **combinado**, con la misma
+estructura de rutas que el despliegue: el portal en la raíz y la guía en
+`/documentacion/`. Es la única forma de probar los enlaces cruzados entre ambos.
 
 Para detener:
 

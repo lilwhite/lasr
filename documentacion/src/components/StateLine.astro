@@ -1,0 +1,37 @@
+---
+/**
+ * La fiabilidad de la página, en una línea y en lenguaje llano.
+ * Sustituye a la fila de insignias técnicas.
+ */
+import { pageTrust } from '../lib/policy';
+import { url } from '../lib/url';
+import type { Entity } from '../lib/graph';
+
+interface Props { entry: Entity }
+const flag = pageTrust(Astro.props.entry);
+---
+<p class={`state state--${flag.tone}`}>
+  <span class="state-icon" aria-hidden="true">{flag.icon}</span>
+  {/* El espacio va explícito: Astro colapsa el salto de línea entre la
+      expresión y el enlace, y la frase salía pegada al punto. */}
+  <span><strong>{flag.label}.</strong> {flag.detail}{' '}
+    <a href={url('/metodologia/')}>Cómo verificamos la información</a></span>
+</p>
+
+<style>
+  .state {
+    display: flex;
+    gap: var(--s-2);
+    align-items: baseline;
+    font-size: var(--t-sm);
+    color: var(--ink-soft);
+    border-left: 2px solid var(--line-strong);
+    padding: var(--s-2) 0 var(--s-2) var(--s-3);
+    margin-block: var(--s-4);
+  }
+  .state--alert { border-left-color: var(--alert); }
+  .state--warn { border-left-color: var(--warn); }
+  .state--ok { border-left-color: var(--ok); }
+  .state-icon { font-family: var(--mono); }
+  .state strong { color: var(--ink); font-weight: 600; }
+</style>

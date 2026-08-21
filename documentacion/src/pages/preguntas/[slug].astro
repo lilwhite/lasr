@@ -1,0 +1,61 @@
+---
+import { render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import NoteCard from '../../components/NoteCard.astro';
+import EntityLink from '../../components/EntityLink.astro';
+import Badge from '../../components/Badge.astro';
+import { graph, entitySlug, resolve, type Note } from '../../lib/graph';
+import { visibleOnly, editorialBadge } from '../../lib/policy';
+
+export async function getStaticPaths() {
+  return visibleOnly(graph.questions).map((q) => ({
+    params: { slug: entitySlug(q) },
+    props: { question: q },
+  }));
+}
+
+const { question } = Astro.props;
+const d = question.data;
+const { Content } = await render(question);
+const hasBody = (question.body ?? '').trim().length > 0;
+// La respuesta ES el conjunto de notas de answeredBy (CONTENT_MODEL §3.7)
+const answerNotes = visibleOnly(d.answeredBy.map((id) => resolve(id) as Note));
+---
+
+<Layout title={d.question} description={d.question}>
+  <p class="eyebrow">Pregunta de vecino</p>
+  <h1>{d.question}</h1>
+  <p class="meta-id">{d.id}</p>
+  <div class="badge-row">
+    <Badge {...editorialBadge(d.editorialStatus)} />
+  </div>
+
+  {hasBody && (
+    <section class="prose synthesis">
+      <Content />
+    </section>
+  )}
+
+  <h2>La respuesta, afirmación a afirmación</h2>
+  {answerNotes.length === 0 && (
+    <p class="muted">Todavía no hay afirmaciones publicadas que respondan a esta pregunta.</p>
+  )}
+  {answerNotes.map((n) => <NoteCard note={n} />)}
+
+  {d.topics.length > 0 && (
+    <>
+      <h2>En el grafo</h2>
+      <ul class="entity-list">
+        {d.topics.map((t) => <li><span class="muted">Tema:</span> <EntityLink id={t} /></li>)}
+      </ul>
+    </>
+  )}
+</Layout>
+
+<style>
+  .synthesis {
+    border-left: 3px solid var(--stamp);
+    padding-left: 1rem;
+    color: var(--ink-soft);
+  }
+</style>
