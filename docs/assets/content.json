@@ -393,13 +393,13 @@
   },
   "portal": {
     "ultimas_actualizaciones": {
-      "version": "v1.1.12",
+      "version": "v1.1.13",
       "fecha": "2026-08-21",
       "cambios": [
+        "Promoción a producción: control jurídico previo a publicación (fases 1-4)",
         "Dev",
         "Fix/retirar datos personales",
-        "release: terminología — «núcleo» en lugar de «urbanización»",
-        "release: publica la guía documental en /documentacion/"
+        "release: terminología — «núcleo» en lugar de «urbanización»"
       ]
     }
   }
