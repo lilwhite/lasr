@@ -17,11 +17,19 @@ import hashlib
 import json
 import re
 import subprocess
+import os
 import sys
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
-MASTER = Path(sys.argv[1]) if len(sys.argv) > 1 else Path("/mnt/c/Users/mario/OneDrive/LASR-DOC")
+
+# La carpeta maestra vive fuera del repositorio y es distinta en cada máquina.
+# Orden de preferencia: argumento, variable de entorno, y por último la ruta
+# histórica, que solo sirve en el equipo donde se procesó el corpus.
+DEFAULT_MASTER = "/mnt/c/Users/mario/OneDrive/LASR-DOC"
+MASTER = Path(
+    sys.argv[1] if len(sys.argv) > 1 else os.environ.get("LASR_MASTER_DIR", DEFAULT_MASTER)
+)
 WORK = REPO / "private-sources" / "pdf"
 SOURCES_DIR = REPO / "src" / "content" / "sources"
 JSON_OUT = REPO / "docs" / "sources_inventory.json"

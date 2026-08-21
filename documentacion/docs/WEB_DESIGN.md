@@ -20,7 +20,7 @@ Especificación de la capa pública de LASR-Web. `docs/CONTENT_MODEL.md` define 
 
 **1.7 Una sola fuente de verdad.** Si algo es derivable de las colecciones, se deriva. Nunca convivirán una cronología escrita a mano y otra generada.
 
-**1.8 Rendimiento y privacidad como parte del diseño.** Sitio estático, sin peticiones a terceros, sin JavaScript salvo donde aporte algo real.
+**1.8 Rendimiento y privacidad como parte del diseño.** Sitio estático, sin peticiones a terceros, sin JavaScript salvo donde aporte algo real. Desde la integración en el portal, ese «algo real» son tres ficheros que no hacen nada funcional: los que respetan la preferencia de tema claro/oscuro del resto del sitio. Ninguna página depende de JavaScript para mostrar su contenido.
 
 ---
 
@@ -153,24 +153,30 @@ Movimiento solo funcional: `hover`, foco, apertura de `<details>`. Nada decorati
 
 ## 4. Sistema de componentes
 
-Sobre los seis existentes. `Citation` y `EntityLink` son los más valiosos y apenas cambian de lógica.
+Doce componentes. `Citation` y `EntityLink` son los más valiosos.
 
 | Componente | Papel |
 |---|---|
 | `Citation` | **El aparato documental.** Documento · página · locator · cita literal plegable |
 | `EntityLink` | Enlace a entidad con degradación segura |
 | `EvidenceChain` | "¿De dónde sale esto?": documento → lo que dice → lo que se concluye |
-| `Timeline` + `TimelineItem` | Cronología con divulgación progresiva |
+| `Timeline` | Cronología con divulgación progresiva |
 | `NoteCard` | Una afirmación con su procedencia plegada |
 | `Prose` | Cuerpo Markdown con las referencias convertidas en enlaces |
-| `TopicHeader` · `SectionNav` | Cabecera temática y su índice autofiltrado |
+| `DocMap` | El mapa documental del corpus (§6.5) |
+| `OriginalAccess` | Cómo consultar el original, o por qué no se publica |
 | `EmptySection` | Estado vacío honesto |
 | `StateLine` | La fiabilidad de la página en lenguaje llano |
-| `EntityList` · `ProcedureTree` · `Breadcrumbs` | Listas, árbol de piezas, migas |
-| `Hero` · `TopicCard` · `QuestionCard` · `DocumentCard` · `ActorCard` | Superficies de portada e índices |
 | `Badge` · `Card` | Primitivas |
 
-No se crean `Container`, `Heading`, `Button` ni `Grid`: envolver un `<h2>` en un componente no aporta nada.
+**Lo que no es un componente.** Las cabeceras temáticas, los índices de sección,
+las listas de entidades, el árbol de procedimientos, las migas y las tarjetas de
+portada viven hoy en las plantillas de `src/pages/`. Cada índice tiene su propia
+composición y ninguno se repite lo bastante para justificar un componente; si
+alguno llega a repetirse, ese será el momento de extraerlo.
+
+Por la misma razón no existen `Container`, `Heading`, `Button` ni `Grid`:
+envolver un `<h2>` en un componente no aporta nada.
 
 ---
 
@@ -348,7 +354,7 @@ La accesibilidad no se sacrifica por diseño: parte de la audiencia es mayor y l
 
 ## 12. Rendimiento y despliegue
 
-Sitio estático en GitHub Pages, página de proyecto. Cero JavaScript salvo el filtro de dos índices; el mapa documental (§6.5) tampoco lleva. Cero peticiones a terceros: fuentes autoalojadas, sin analítica, sin CDN.
+Sitio estático en GitHub Pages, bajo `/documentacion/` del dominio del portal. Sin JavaScript de aplicación: solo el filtro de dos índices y los tres ficheros del tema claro/oscuro, compartidos con el portal (§1.8). El mapa documental (§6.5) no lleva ninguno. Cero peticiones a terceros: tipografía autoalojada, sin analítica, sin CDN. El portal sí carga analítica; esta capa no, y el aviso legal lo dice.
 
 Objetivo: portada por debajo de 150 KB con fuentes incluidas.
 
@@ -372,7 +378,7 @@ Cada página emite título, descripción, canónica y OpenGraph propios, para qu
 | Menú de tres enlaces, uno con la URL incrustada a mano | Seis entradas desde un único mapa de rutas |
 | `<head>` con cuatro etiquetas | Canónica, OpenGraph, favicon, sitemap |
 | 19 documentos mostrarían su identificador crudo al lector | Etiquetas legibles: "Plan parcial, 1966" |
-| Sin fuentes propias: la identidad cambia según el sistema operativo | Superfamilia autoalojada |
+| Sin fuentes propias: la identidad cambia según el sistema operativo | Tipografía del portal, con la monoespaciada autoalojada para el aparato documental |
 | Sin escala de espaciado ni tipográfica, sin breakpoints | Sistema de tokens y tres puntos de ruptura |
 | Cronología escrita a mano en los temas *y* generada por plantilla | Una sola, generada; el build falla si alguien duplica |
 | Sin 404, sin favicon, sin `public/`, sin despliegue | Todo ello, con workflow de GitHub Actions |

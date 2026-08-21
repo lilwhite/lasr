@@ -1,0 +1,6 @@
+# Portal vecinal de Los Ángeles de San Rafael.
+User-agent: *
+Allow: /
+
+Sitemap: https://lasr-info.es/sitemap.xml
+Sitemap: https://lasr-info.es/documentacion/sitemap.xml
