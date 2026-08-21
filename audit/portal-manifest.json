@@ -61,8 +61,12 @@
       "reason": "Pendiente de revisión jurídica: se publica como deuda registrada"
     },
     "docs/assets/content.json": {
-      "legalStatus": "unchecked",
-      "reason": "Pendiente de revisión jurídica: se publica como deuda registrada"
+      "legalStatus": "cleared",
+      "reviewedAt": "2026-08-21",
+      "reason": "Revisado el contenido del portal: los nombres que aparecen son instituciones —Procurador del Común, Poder Judicial, entidades urbanísticas— salvo la mención del promotor en la línea temporal, que es figura pública fallecida y hecho histórico sin imputación. El correo publicado es el de contacto del proyecto.",
+      "acceptedRules": [
+        "LEGAL-NAME-001"
+      ]
     },
     "docs/assets/css/styles.css": {
       "legalStatus": "unchecked",
@@ -139,8 +143,9 @@
       "reason": "Configuración del agregador: es entrada del script Python, el front no la usa"
     },
     "docs/doc.html": {
-      "legalStatus": "unchecked",
-      "reason": "Pendiente de revisión jurídica: se publica como deuda registrada · reglas aceptadas: LEGAL-THIRDPARTY-001 (pendiente de la retirada de la analítica y del alojamiento propio de los recursos)",
+      "legalStatus": "cleared",
+      "reviewedAt": "2026-08-21",
+      "reason": "Visor genérico: renderiza el documento que se le pase por parámetro y no tiene contenido propio. Marcado noindex por ser una página huérfana.",
       "acceptedRules": [
         "LEGAL-THIRDPARTY-001"
       ]
