@@ -1,0 +1,5 @@
+LASR-FIXTURE: ficticio — datos inventados para pruebas. Nada de esto corresponde a ninguna persona real.
+
+GITHUB_TOKEN=ghp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+AWS_ACCESS_KEY_ID=AKIAAAAAAAAAAAAAAAAA
+api_key: "abcdefghijklmnopqrstuvwx"
