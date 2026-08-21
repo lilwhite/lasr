@@ -30,8 +30,12 @@
             radius: 5, color: c.color, fillColor: c.fillColor,
             fillOpacity: 0.75, weight: 1.2,
         });
-        const ref14  = p.ref.substring(0, 14);
-        const catUrl = `https://www1.sedecatastro.gob.es/CYCBienInmueble/OVCListaBienes.aspx?RC1=${ref14.substring(0,7)}&RC2=${ref14.substring(7,14)}`;
+        // Refs de 20 caracteres identifican un inmueble concreto: RC3/RC4 evitan
+        // que todos los pisos de un edificio enlacen a la misma ficha de parcela.
+        let catUrl = `https://www1.sedecatastro.gob.es/CYCBienInmueble/OVCListaBienes.aspx?RC1=${p.ref.substring(0,7)}&RC2=${p.ref.substring(7,14)}`;
+        if (p.ref.length === 20) {
+            catUrl += `&RC3=${p.ref.substring(14,18)}&RC4=${p.ref.substring(18,20)}`;
+        }
         m.bindPopup(`
             <div class="popup-ref">${p.ref}</div>
             <div class="popup-dir">${p.dir || (p.via + ' ' + p.nombre + ' ' + p.num)}</div>
