@@ -109,7 +109,14 @@ ok("escaneo" in reason08, "08 · y el motivo lo dice con esas palabras")
 
 f09 = scan_fixture("09-referencia-a-private-sources.md")
 ok({"LEGAL-LEAK-001", "LEGAL-LEAK-002"} <= rules_of(f09),
-   "09 · ruta personal y referencia a los originales")
+   "09 · ruta personal y referencia a los originales en prosa")
+solo_campo = run_rules(
+    "---\nid: SRC-EJEMPLO\nfile: private-sources/pdf/src-2011-ejemplo.pdf\npages: 3\n---\n",
+    "src-ejemplo.md", RULES)
+ok(not [f for f in solo_campo if f.rule == "LEGAL-LEAK-002"],
+   "09 · el campo `file:` que el esquema exige NO es una fuga por sí solo")
+ok([f for f in f09 if f.rule == "LEGAL-LEAK-002"],
+   "09 · pero la misma referencia en prosa sí lo es")
 
 f10 = (FIXTURES / "10-documento-anonimizado.md").read_text(encoding="utf-8")
 ok("legalStatus: cleared-redacted" in f10 and "redactions:" in f10,

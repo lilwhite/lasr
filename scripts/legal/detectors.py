@@ -277,8 +277,24 @@ def scan_local_paths(text: str) -> Iterator[tuple[int, int, str]]:
 RE_PRIVATE_LEFTOVER = re.compile(r"private-sources|LASR-DOC|\.ocr-manifest")
 
 
+# El esquema EXIGE que cada ficha de fuente declare dónde vive su original.
+# Ese campo no es una fuga: es la trazabilidad del modelo, y el fichero no está
+# ni estuvo nunca en el repositorio. Lo que sí delata es una referencia en
+# prosa, en un inventario o en un script — que describe qué contiene cada
+# original, o dónde encontrarlo.
+#
+# Sin esta distinción la regla marcaba 36 hallazgos graves, uno por fuente, y
+# cada documento nuevo habría hecho fallar el CI por rellenar un campo
+# obligatorio. Un gate así se desactiva a la semana.
+RE_CAMPO_DECLARATIVO = re.compile(r"^\s*(?:file|originalFilename)\s*:", re.M)
+
+
 def scan_private_leftovers(text: str) -> Iterator[tuple[int, int, str]]:
-    yield from _finditer(RE_PRIVATE_LEFTOVER, text)
+    for start, end, value in _finditer(RE_PRIVATE_LEFTOVER, text):
+        inicio_linea = text.rfind("\n", 0, start) + 1
+        if RE_CAMPO_DECLARATIVO.match(text, inicio_linea):
+            continue
+        yield start, end, value
 
 
 # El navegador de quien visita el sitio pide estos recursos por su cuenta, así
