@@ -12,7 +12,9 @@ const flag = pageTrust(Astro.props.entry);
 ---
 <p class={`state state--${flag.tone}`}>
   <span class="state-icon" aria-hidden="true">{flag.icon}</span>
-  <span><strong>{flag.label}.</strong> {flag.detail}
+  {/* El espacio va explícito: Astro colapsa el salto de línea entre la
+      expresión y el enlace, y la frase salía pegada al punto. */}
+  <span><strong>{flag.label}.</strong> {flag.detail}{' '}
     <a href={url('/metodologia/')}>Cómo verificamos la información</a></span>
 </p>
 
