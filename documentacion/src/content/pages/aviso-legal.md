@@ -10,7 +10,7 @@ editorialStatus: draft
 
 ## Qué es esta web
 
-Una recopilación documental de iniciativa vecinal sobre la urbanización Los Ángeles de San Rafael. No es una publicación oficial, no representa a ninguna administración, comunidad de propietarios ni asociación, y **no es asesoramiento jurídico**.
+Una recopilación documental de iniciativa vecinal sobre Los Ángeles de San Rafael. No es una publicación oficial, no representa a ninguna administración, comunidad de propietarios ni asociación, y **no es asesoramiento jurídico**.
 
 Las afirmaciones que contiene describen lo que dicen unos documentos concretos. Para cualquier decisión con efectos jurídicos hay que acudir a los originales y a asesoramiento profesional.
 
