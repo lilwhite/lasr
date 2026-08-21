@@ -48,8 +48,16 @@ const archiveNews = u.getArchiveNews(news);
 
 // El fichero publicado solo contiene noticias del conflicto, así que los
 // recuentos se derivan de los datos: el cron los regenera a diario.
-assert(news.every((item) => item.isRelevant === true), 'El fichero no publica ninguna noticia descartada');
+// La invariante se mudó del campo al fichero: ya no hay `isRelevant` que
+// comprobar, lo que hay publicado ES lo publicable. Lo que sí se comprueba es
+// que no se cuele de vuelta ni texto del medio ni andamiaje editorial interno.
+const CAMPOS_PUBLICABLES = new Set(['title', 'source', 'date', 'url', 'sourceType', 'category']);
+const intrusos = [...new Set(news.flatMap((item) => Object.keys(item)))]
+  .filter((k) => !CAMPOS_PUBLICABLES.has(k));
+assert(intrusos.length === 0, `El fichero publica solo los seis campos previstos (sobran: ${intrusos})`);
 assert(news.every((item) => !('excerpt' in item) && !('summary' in item)), 'El fichero no reproduce entradillas de los medios');
+assert(news.every((item) => item.title && item.source && item.date && item.url),
+  'Toda noticia conserva lo que la hace verificable: titular, medio, fecha y enlace');
 assertEqual(archiveNews.length, news.length, 'El archivo es exactamente la selección publicada');
 
 // Se elige el medio con más noticias para que el caso tenga volumen real.
@@ -123,8 +131,6 @@ const landingFixture = [
     date: '2026-03-10T09:00:00Z',
     title: 'A reciente',
     category: 'urbanismo',
-    isRelevant: true,
-    relevanceScore: 9
   },
   {
     id: 'a-2',
@@ -132,8 +138,6 @@ const landingFixture = [
     date: '2026-03-05T09:00:00Z',
     title: 'A antigua',
     category: 'juntas_y_vecinos',
-    isRelevant: true,
-    relevanceScore: 8
   },
   {
     id: 'b-1',
@@ -141,8 +145,6 @@ const landingFixture = [
     date: '2026-03-09T09:00:00Z',
     title: 'B reciente',
     category: 'servicios',
-    isRelevant: true,
-    relevanceScore: 7
   },
   {
     id: 'c-1',
@@ -150,8 +152,6 @@ const landingFixture = [
     date: '2026-03-08T09:00:00Z',
     title: 'C reciente',
     category: 'infraestructuras',
-    isRelevant: true,
-    relevanceScore: 6
   }
 ];
 
@@ -174,8 +174,6 @@ const invalidDateFixture = [
     date: 'sin-fecha',
     title: 'Fecha inválida',
     category: 'urbanismo',
-    isRelevant: true,
-    relevanceScore: 10
   },
   {
     id: 'valid-a',
@@ -183,8 +181,6 @@ const invalidDateFixture = [
     date: '2026-03-07T09:00:00Z',
     title: 'Fecha válida',
     category: 'urbanismo',
-    isRelevant: true,
-    relevanceScore: 8
   }
 ];
 
