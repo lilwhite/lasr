@@ -16,7 +16,6 @@ parties:
     role: demandada
 file: private-sources/pdf/src-2011-jca-segovia-6.pdf
 sha256: b3f347adf742db9803b4af6f5bda9161b26721ea258523384cbc7483231d825d
-originalFilename: "Desestimacion a Oscar contra Ayto..pdf"
 pages: 23
 language: es
 topics: [TOPIC-RECEPCION]
@@ -35,4 +34,4 @@ Sentencia de instancia del **PO 28/2009**, el procedimiento raíz de la recepci�
 
 Fue **revocada en apelación** (rollo 59/2011) por la sentencia del TSJ CyL de 3.6.2011, que estimó el recurso y declaró procedente la recepción (`EVENT-2011-06-03-STSJ-ORDENA-RECEPCION`). Con este documento, el corpus cubre la primera resolución del procedimiento del que derivan la ejecución, los autos de 2012 y las sentencias piloto.
 
-**Nota sobre el fichero**: el nombre original ("Desestimacion a Oscar contra Ayto.") es doblemente inexacto: el fallo es de inadmisión (no desestimación) y la recurrente es la Comunidad de Propietarios. La mayor parte del texto (págs. PDF 3-21) transcribe jurisprudencia del TS sobre el art. 45.2 LJCA.
+**Nota sobre el fichero**: el nombre con el que llegó al corpus es doblemente inexacto —lo daba por desestimación cuando el fallo es de inadmisión, y atribuía el recurso a un particular cuando la recurrente es la Comunidad de Propietarios—, así que no se conserva. La mayor parte del texto (págs. PDF 3-21) transcribe jurisprudencia del TS sobre el art. 45.2 LJCA.

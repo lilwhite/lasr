@@ -9,7 +9,7 @@ from typing import Dict, List
 from core.dedupe import dedupe_items
 from core.normalize import normalize_item, sort_items
 from core.types import NormalizedNewsItem, RawNewsItem
-from helpers import canonicalize_url, load_json, write_json
+from helpers import canonicalize_url, load_json, normalize_text, write_json
 
 
 DEFAULT_CONFIG = Path("docs/data/prensa/sources.json")
@@ -39,6 +39,33 @@ def _collect_from_source(source: Dict, timeout: int, max_per_source: int):
         }
 
     return adapter.collect(source, timeout=timeout, max_per_source=max_per_source)
+
+
+def is_publishable(item, publication: Dict) -> bool:
+    """Dos puertas, en este orden.
+
+    La puntuación de relevancia decide qué es CANDIDATO: mide la cercanía al
+    topónimo. Eso no es lo mismo que tratar del conflicto, y confundirlo tuvo
+    consecuencias — con solo el umbral, el archivo publicó la muerte de una
+    menor de quince años y a una niña de diez identificada con nombre, apellidos
+    y localidad, porque las dos noticias decían «Los Ángeles de San Rafael».
+
+    Así que la relevancia ya no basta. Nada que caiga en `exclude` se publica
+    nunca, por alto que puntúe; y lo que sobrevive tiene que tratar de alguno de
+    los temas declarados. Ante la duda no se publica.
+    """
+    if not item.is_relevant:
+        return False
+
+    text = normalize_text(f"{item.title} {item.summary}")
+    excluded = [normalize_text(t) for t in publication.get("exclude", [])]
+    if any(term and term in text for term in excluded):
+        return False
+
+    topics = [normalize_text(t) for t in publication.get("topics", [])]
+    if not topics:
+        return True
+    return any(term and term in text for term in topics)
 
 
 def _existing_featured(output_path: Path) -> Dict[str, bool]:
@@ -114,7 +141,11 @@ def run(config_path: Path, output_path: Path, timeout: int):
         if item.id not in deduped_ids:
             stats["deduped"] += 1
 
-    ordered = sort_items(deduped)
+    # Solo se almacenan las noticias del conflicto. Las candidatas descartadas
+    # no llegan al fichero publicado: entre ellas hay sucesos, causas penales y
+    # menores identificados que nada tienen que ver con el objeto del sitio.
+    publication = config.get("publication", {})
+    ordered = sort_items([item for item in deduped if is_publishable(item, publication)])
     limited = ordered[:max_items]
     for item in limited:
         stats = source_stats.get(item.source)
@@ -132,8 +163,6 @@ def run(config_path: Path, output_path: Path, timeout: int):
                 "source": item.source,
                 "sourceType": item.source_type,
                 "url": item.url,
-                "summary": item.summary,
-                "excerpt": item.summary,
                 "tags": item.tags,
                 "relatedTo": item.related_to,
                 "score": item.score,
@@ -151,9 +180,8 @@ def run(config_path: Path, output_path: Path, timeout: int):
 
     write_json(output_path, output)
 
-    relevant = [item for item in output if item.get("isRelevant")]
     years = sorted(
-        {item.get("year") for item in relevant if isinstance(item.get("year"), int)}
+        {item.get("year") for item in output if isinstance(item.get("year"), int)}
     )
     year_info = f"{years[0]}-{years[-1]}" if years else "sin rango"
 
@@ -165,8 +193,8 @@ def run(config_path: Path, output_path: Path, timeout: int):
             f"normalized={stats['normalized']} relevant={stats['relevant']} "
             f"deduped={stats['deduped']} final={stats['final']}"
         )
-    print(f"[ok] Total candidatas: {len(output)} | Relevantes: {len(relevant)}")
-    print(f"[ok] Rango histórico relevante: {year_info}")
+    print(f"[ok] Noticias publicadas: {len(output)}")
+    print(f"[ok] Rango histórico publicado: {year_info}")
     print(f"[ok] JSON generado: {output_path}")
 
 

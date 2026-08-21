@@ -1095,13 +1095,7 @@ h1, h2, h3, h4, h5, h6 {
     font-size: var(--font-size-xl);
     color: var(--color-text);
     line-height: 1.35;
-    margin-bottom: 0.45rem;
-}
-
-.press-row-excerpt {
-    font-size: var(--font-size-sm);
-    color: var(--color-text-light);
-    line-height: 1.7;
+    margin-bottom: 0;
 }
 
 .press-source-link {

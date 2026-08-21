@@ -37,6 +37,12 @@ scripts/prensa/
 
 ## Modelo normalizado
 
+Solo se publican las noticias relacionadas con el conflicto: las candidatas
+descartadas no llegan al fichero. Y de las que se publican no se guarda ningún
+texto del medio —ni resumen ni entradilla—, solo titular, medio, fecha y enlace
+al original. El resumen se sigue leyendo del feed para puntuar y clasificar,
+pero se queda en memoria.
+
 Cada noticia se publica con el esquema:
 
 - `id`
@@ -45,14 +51,12 @@ Cada noticia se publica con el esquema:
 - `source`
 - `sourceType` (`local`, `provincial`, `institucional`)
 - `url`
-- `summary`
 - `tags`
 - `relatedTo`
 - `score`
 
 Y por compatibilidad UI actual:
 
-- `excerpt`
 - `relevanceScore`
 - `isRelevant`
 - `category`
@@ -77,7 +81,7 @@ El scoring se define en `docs/data/prensa/sources.json`.
 - negativos por ruido editorial (fiestas/agenda/deportes)
 - penalización adicional por falta de relación clara con LASR
 
-Se publica como relevante (`isRelevant=true`) si supera `relevance_threshold`.
+Se publica si supera `relevance_threshold`; en el fichero todas las entradas llevan por tanto `isRelevant=true`.
 
 ## Ejecución
 
