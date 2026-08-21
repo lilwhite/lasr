@@ -242,6 +242,20 @@ ok(not legal_scan.scan(sorted(p for p in FIXTURES.iterdir() if p.is_file()), RUL
    "escanearlos uno a uno no produce ni un hallazgo")
 
 
+print("\n== Invariante G · un symlink materializado no es contenido ==")
+with tempfile.TemporaryDirectory() as tmp:
+    import manifest as manifest_mod
+    falso = Path(tmp) / "docs"
+    falso.mkdir()
+    (falso / "index.html").write_text("<html></html>", encoding="utf-8")
+    # Lo que git escribe cuando core.symlinks=false: el destino, como texto.
+    (falso / "documentacion").write_text("../documentacion/dist", encoding="utf-8")
+    listado = manifest_mod.portal_files(falso)
+    ok("docs/index.html" in listado, "el contenido de verdad sí se inventaría")
+    ok("docs/documentacion" not in listado,
+       f"el symlink materializado no entra en el inventario ({listado})")
+
+
 print("\n== Invariante F · el baseline acota por fichero ==")
 uno = scan_fixture("09-referencia-a-private-sources.md")
 fuga = next(f for f in uno if f.rule == "LEGAL-LEAK-002")

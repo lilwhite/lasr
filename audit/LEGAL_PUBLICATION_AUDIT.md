@@ -26,15 +26,17 @@ Dos exposiciones están vivas ahora mismo y ninguna se resuelve con la herramien
 
 ## Crítica
 
-### LEGAL-CONFIDENTIAL-001 · Exportación de un grupo de WhatsApp en el historial público
-**Dónde:** commit `bdbaeab` (10 de marzo de 2026), **ancestro de `origin/main`**
-**Qué:** un ZIP de 4.919.896 bytes con la exportación completa de un grupo de copropietarios, el `.txt` del chat (28.871 bytes) y un vídeo de 4.911.328 bytes. Se borraron al día siguiente, pero siguen alcanzables desde el historial y descargables del repositorio público.
+### LEGAL-CONFIDENTIAL-001 · Comunicaciones privadas en el historial del repositorio
+**Categoría:** comunicaciones privadas de particulares, incorporadas al repositorio en marzo de 2026 y retiradas del árbol de trabajo al día siguiente. Permanecieron alcanzables desde el historial.
 
-**Por qué importa.** Un export de WhatsApp lleva dentro nombres, números de teléfono y el contenido íntegro de conversaciones privadas de vecinos que nunca consintieron su publicación. Es el único hallazgo de todo el sitio con encaje penal posible —art. 197 CP, descubrimiento y revelación de secretos— además del incumplimiento del RGPD. Las reglas `*.zip` y `*.mp4` del `.gitignore` se añadieron **después** del daño y no lo revierten.
+**Por qué importa.** Contenido de conversaciones privadas de vecinos que nunca consintieron su publicación, con datos de contacto. Encaje en el art. 197 CP además del incumplimiento del RGPD.
 
-**Acción.** Reescritura del historial con `git-filter-repo`, **que no está instalado**. En este orden: rotar cualquier credencial, reescribir, forzar el push, avisar a todo el que tenga un clon —cambian todos los identificadores de commit— y pedir a GitHub la purga de vistas cacheadas y de forks. Sesión dedicada.
+**Acción.** Reescritura del historial. Se ejecuta como operación dedicada, con copia de seguridad previa y verificación de que los objetos quedan inalcanzables.
 
-**Estado:** abierto. Es la acción más urgente del informe.
+**Detectado:** 21 de agosto de 2026.
+**Estado:** en resolución.
+
+> Este hallazgo se registra sin las coordenadas del material —identificadores de objeto, rutas, tamaños ni alcance nominal—. Documentarlo es obligado (art. 33.5 RGPD); publicar dónde encontrarlo, no. El detalle operativo vive fuera de este documento y fuera del repositorio.
 
 ### LEGAL-PRIVACY-001 · PDF con dos números de documento de identidad servido en producción
 **Dónde:** `docs/documentacion-relevante/estatutos-euc.pdf` en `origin/main`
@@ -215,7 +217,7 @@ Las teselas de OpenStreetMap son las más discretas y las más reveladoras: mien
 
 ## Redacciones necesarias
 
-1. Purgar del historial el ZIP, el `.txt` y el vídeo del commit `bdbaeab`.
+1. Purgar del historial los objetos de `LEGAL-CONFIDENTIAL-001`.
 2. Retirar de producción `estatutos-euc.pdf` promocionando la PR #63.
 3. Dejar de escribir la ruta de la carpeta maestra y los nombres de fichero originales en el inventario.
 4. Reducir las notas de privacidad a un código de estado.
@@ -238,7 +240,7 @@ Ningún hallazgo de este informe exige retirar el proyecto ni dejar de publicar.
 
 Tres cuestiones dependen de una ponderación que un profesional debe hacer, no una herramienta:
 
-1. **El chat de WhatsApp.** Qué obligaciones de notificación genera la exposición, si procede comunicarlo a las personas afectadas y en qué plazo. Es la pregunta más urgente. Al abogado hay que darle: qué se publicó, desde cuándo, cuántas personas aparecen y qué se ha hecho para retirarlo.
+1. **`LEGAL-CONFIDENTIAL-001`.** Qué obligaciones de notificación genera la exposición, si procede comunicarlo a las personas afectadas y en qué plazo. Es la pregunta más urgente. El detalle que un profesional necesitaría para responderla no está en este documento; se le facilita aparte.
 2. **El ámbito de la LSSI.** Si un sitio vecinal sin ánimo de lucro, sin publicidad ni donaciones y sin analítica queda fuera del art. 10, que es la pieza sobre la que se sostiene no publicar los datos de quien lo mantiene.
 3. **La ponderación del art. 85 del RGPD.** Hasta dónde ampara la libertad de información la publicación de resoluciones judiciales identificando a particulares, en un sitio plenamente indexable, cuando el CENDOJ las publica anonimizadas.
 

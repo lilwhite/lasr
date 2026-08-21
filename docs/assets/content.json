@@ -396,8 +396,6 @@
       "version": "v1.1.12",
       "fecha": "2026-08-21",
       "cambios": [
-        "Dev",
-        "Fix/retirar datos personales",
         "release: terminología — «núcleo» en lugar de «urbanización»",
         "release: publica la guía documental en /documentacion/"
       ]
