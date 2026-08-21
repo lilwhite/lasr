@@ -3,7 +3,7 @@
     "hero": {
       "title": "Los Ángeles de San Rafael",
       "subtitle": "Información clara y transparente para los vecinos",
-      "description": "Un espacio informativo sobre la situación urbanística y jurídica de nuestra urbanización. Aquí encontrarás respuestas a tus preguntas y podrás entender cómo se ha llegado hasta aquí.",
+      "description": "Un espacio informativo sobre la situación urbanística y jurídica de nuestro núcleo. Aquí encontrarás respuestas a tus preguntas y podrás entender cómo se ha llegado hasta aquí.",
       "cta": {
         "text": "Ver la situación actual",
         "link": "#situacion"
@@ -294,7 +294,7 @@
         "items": [
           {
             "titulo": "Urbanismo municipal — Ayuntamiento de El Espinar",
-            "descripcion": "Planeamiento, gestión urbanística, licencias y documentación pública municipal relacionada con la urbanización y su contexto administrativo.",
+            "descripcion": "Planeamiento, gestión urbanística, licencias y documentación pública municipal relacionada con el núcleo y su contexto administrativo.",
             "tipo": "institucional",
             "url": "https://elespinar.es/urbanismo/",
             "fecha": "Recurso institucional · Ayuntamiento de El Espinar",
@@ -311,8 +311,8 @@
         ]
       },
       {
-        "titulo": "Documentación de la urbanización",
-        "descripcion": "Documentos propios que regulan la organización, conservación y funcionamiento de la urbanización Los Ángeles de San Rafael.",
+        "titulo": "Documentación del núcleo",
+        "descripcion": "Documentos propios que regulan la organización, conservación y funcionamiento de Los Ángeles de San Rafael.",
         "items": [
           {
             "titulo": "Estatutos de la Comunidad de Propietarios",

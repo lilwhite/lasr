@@ -3,7 +3,7 @@ slug: historia
 title: Historia de Los Ángeles de San Rafael
 summary: >-
   De un plan parcial de 1966 a un barrio del municipio: sesenta años en los que
-  se ha discutido quién conserva la urbanización, quién presta los servicios y
+  se ha discutido quién conserva el núcleo, quién presta los servicios y
   quién los paga.
 updated: 2026-08-19
 editorialStatus: draft
@@ -19,7 +19,7 @@ En noviembre de 1967 se otorgó la escritura que dividió la finca y fijó los e
 
 ## Tres décadas de discusión sobre el reparto de gastos
 
-Lo que más ha pleiteado esta urbanización no es la recepción, sino **cuánto paga cada cual**. Ya en 1996 había procedimientos abiertos sobre juntas celebradas desde 1989 (`NOTE-1996-ASC-CP-ACUERDO-005`).
+Lo que más se ha pleiteado aquí no es la recepción, sino **cuánto paga cada cual**. Ya en 1996 había procedimientos abiertos sobre juntas celebradas desde 1989 (`NOTE-1996-ASC-CP-ACUERDO-005`).
 
 Ese año, la Asociación de Copropietarios y la Comunidad firmaron un acuerdo para volver al criterio estatutario desde el presupuesto de 1997, a cambio de retirar las impugnaciones pendientes (`NOTE-1996-ASC-CP-ACUERDO-001`). No cerró el conflicto: las impugnaciones se reanudaron en 2001 y no han parado.
 
