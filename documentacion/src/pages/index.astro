@@ -1,0 +1,241 @@
+---
+import { getEntry } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import Prose from '../components/Prose.astro';
+import Citation from '../components/Citation.astro';
+import DocMap from '../components/DocMap.astro';
+import { graph, entityRoute, eventSortKey, formatDate, resolve, type Note } from '../lib/graph';
+import { url } from '../lib/url';
+import { AREAS, AREA_ORDER } from '../lib/areas';
+import { topicMembers } from '../lib/graph';
+
+const inicio = await getEntry('pages', 'inicio');
+
+// El hero se apoya en una afirmación real del corpus, con su procedencia.
+// No es un eslogan: es la tesis de la web hecha ejemplo.
+const claim = resolve('NOTE-2011-TSJCYL-271-001') as Note;
+
+const topicsByArea = AREA_ORDER.map((areaId) => ({
+  area: AREAS[areaId],
+  topics: graph.topics
+    .filter((t) => t.data.area === areaId)
+    .map((t) => ({ topic: t, members: topicMembers(t.data.id) })),
+}));
+
+// Hitos de portada: los acontecimientos que más afirmaciones sostienen.
+const milestones = [...graph.events]
+  .map((e) => ({ e, n: graph.notes.filter((x) => x.data.events.includes(e.data.id)).length }))
+  .sort((a, b) => b.n - a.n)
+  .slice(0, 6)
+  .map(({ e }) => e)
+  .sort((a, b) => eventSortKey(a) - eventSortKey(b));
+
+const questions = graph.questions.slice(0, 6);
+const stats = {
+  documentos: graph.sources.length,
+  afirmaciones: graph.notes.length,
+  acontecimientos: graph.events.length,
+};
+---
+
+<Layout
+  title="Entender Los Ángeles de San Rafael"
+  description="Guía documental sobre la historia, la recepción, el agua y la comunidad de Los Ángeles de San Rafael. Cada afirmación enlaza con el documento y la página de la que sale."
+  canonicalPath="/"
+>
+  <section class="hero">
+    <svg class="contours" viewBox="0 0 800 200" aria-hidden="true" focusable="false">
+      <g fill="none" stroke="currentColor" stroke-width="1">
+        <path d="M-20 170 C 120 150, 220 120, 340 128 S 560 160, 700 132 S 800 118, 820 122" />
+        <path d="M-20 148 C 130 126, 235 96, 350 104 S 570 138, 706 108 S 800 96, 820 100" />
+        <path d="M-20 126 C 140 102, 250 72, 360 80 S 580 116, 712 84 S 800 74, 820 78" />
+        <path d="M-20 104 C 150 78, 265 48, 372 56 S 592 94, 718 60 S 800 52, 820 56" />
+        <path d="M-20 82 C 160 54, 280 24, 384 32 S 604 72, 724 36 S 800 30, 820 34" />
+      </g>
+    </svg>
+
+    <p class="eyebrow">El Espinar · Segovia</p>
+    <h1>Entender nuestra urbanización, documento a documento</h1>
+    <p class="hero-lede">{inicio?.data.summary}</p>
+
+    <div class="hero-claim">
+      <p class="hero-claim-text">{claim.data.title}</p>
+      <Citation citation={claim.data.citations[0]} />
+    </div>
+
+    <p class="hero-actions">
+      <a class="cta" href={url('/temas/')}>Explorar los temas</a>
+      <a class="cta cta--ghost" href={url('/cronologia/')}>Ver la cronología</a>
+    </p>
+  </section>
+
+  <section class="band">
+    <h2>Los grandes asuntos</h2>
+    {topicsByArea.map(({ area, topics }) => (
+      <div class="area">
+        <h3 class="area-title">{area.label}</h3>
+        <p class="area-lead">{area.lead}</p>
+        <ul class="cards">
+          {topics.map(({ topic, members }) => (
+            <li class="card">
+              <a href={url(entityRoute(topic))}>{topic.data.title}</a>
+              <p>{topic.data.summary}</p>
+              <p class="card-meta apparatus">
+                {members.notes.length > 0
+                  ? `${members.notes.length} afirmaciones · ${members.sources.length} documentos`
+                  : 'sin documentación todavía'}
+              </p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </section>
+
+  <section class="band">
+    <h2>Cómo hemos llegado hasta aquí</h2>
+    <div class="narrative"><Prose entry={inicio as any} /></div>
+    <ol class="milestones">
+      {milestones.map((e) => (
+        <li>
+          <span class="apparatus">{e.data.date ? formatDate(e.data.date, e.data.datePrecision ?? 'day') : 'Fecha discutida'}</span>
+          <a href={url(entityRoute(e))}>{e.data.title}</a>
+        </li>
+      ))}
+    </ol>
+    <p><a href={url('/cronologia/')}>Ver la cronología completa</a></p>
+  </section>
+
+  <section class="band band--map">
+    <h2>Todo el expediente, de un vistazo</h2>
+    <p class="map-lede">
+      Los {stats.documentos} documentos, colocados en el tiempo y agrupados por el pleito al
+      que pertenecen. Los que nacen de otro —una ejecución de sentencia, un incidente— van
+      sangrados justo debajo. El tamaño de cada marcador es el número de afirmaciones que
+      sostiene, y cada uno lleva a su ficha.
+    </p>
+    <p class="map-hint">Si la pantalla es estrecha, la figura se desplaza en horizontal.</p>
+    <div class="bleed-wide"><DocMap /></div>
+    <p class="map-more">
+      <a href={url('/documentos/mapa/')}>Ver el mapa documental</a>, con cada cadena explicada
+      documento a documento.
+    </p>
+  </section>
+
+  <section class="band">
+    <h2>Preguntas que se hacen los vecinos</h2>
+    <ul class="questions">
+      {questions.map((q) => (
+        <li><a href={url(entityRoute(q))}>{q.data.question}</a></li>
+      ))}
+    </ul>
+    <p><a href={url('/preguntas/')}>Ver todas las preguntas</a></p>
+  </section>
+
+  <section class="band band--closing">
+    <h2>Cada afirmación puede comprobarse</h2>
+    <p class="closing-lede">
+      Hay {stats.documentos} documentos fichados, {stats.afirmaciones} afirmaciones extraídas y
+      {' '}{stats.acontecimientos} acontecimientos datados. Ninguna afirmación se publica sin decir
+      de qué documento sale y en qué página.
+    </p>
+    <p>
+      <a href={url('/metodologia/')}>Cómo trabajamos</a> ·
+      <a href={url('/documentos/')}>Consultar los documentos</a>
+    </p>
+  </section>
+</Layout>
+
+<style>
+  .hero {
+    position: relative;
+    max-width: var(--measure);
+    padding-block: var(--s-6) var(--s-8);
+  }
+  .contours {
+    position: absolute;
+    inset: auto 0 0 -10%;
+    width: 120%;
+    height: 190px;
+    color: var(--sierra);
+    opacity: 0.16;
+    pointer-events: none;
+    z-index: -1;
+  }
+  .hero h1 { font-size: var(--t-2xl); margin-bottom: var(--s-4); }
+  .hero-lede { font-size: var(--t-md); line-height: 1.5; color: var(--ink-soft); max-width: 34rem; }
+
+  .hero-claim {
+    margin-block: var(--s-6);
+    padding: var(--s-4) var(--s-5);
+    background: var(--surface);
+    border: var(--rule);
+    border-radius: var(--radius);
+  }
+  .hero-claim-text {
+    font-family: var(--serif);
+    font-size: var(--t-md);
+    line-height: 1.4;
+    margin: 0 0 var(--s-2);
+    text-wrap: pretty;
+  }
+
+  .hero-actions { display: flex; flex-wrap: wrap; gap: var(--s-3); margin-top: var(--s-5); }
+  .cta {
+    display: inline-block;
+    background: var(--stamp);
+    color: #fff;
+    text-decoration: none;
+    padding: var(--s-2) var(--s-4);
+    border-radius: var(--radius);
+    font-size: var(--t-sm);
+    font-weight: 600;
+    border: 1px solid var(--stamp);
+  }
+  .cta:hover { background: var(--stamp-strong); color: #fff; }
+  .cta--ghost { background: transparent; color: var(--stamp); }
+  .cta--ghost:hover { background: var(--stamp-soft); color: var(--stamp-strong); }
+
+  .band { border-top: var(--rule); padding-block: var(--s-6); }
+  .band h2 { margin-top: 0; }
+  .band--closing { background: var(--surface); margin-inline: calc(-1 * var(--s-4)); padding-inline: var(--s-4); }
+  .closing-lede { max-width: var(--measure); }
+
+  .area { margin-bottom: var(--s-6); }
+  .area-title { font-family: var(--sans); font-size: var(--t-xs); font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-faint); margin-bottom: var(--s-2); }
+  .area-lead { max-width: var(--measure); color: var(--ink-soft); font-size: var(--t-sm); margin-top: 0; }
+
+  .cards { list-style: none; margin: var(--s-4) 0 0; padding: 0; display: grid; gap: var(--s-4); }
+  .card {
+    background: var(--surface);
+    border: var(--rule);
+    border-radius: var(--radius);
+    padding: var(--s-4);
+    margin: 0;
+  }
+  .card > a { font-family: var(--serif); font-size: var(--t-md); text-decoration: none; color: var(--ink); }
+  .card > a:hover { color: var(--stamp-strong); text-decoration: underline; }
+  .card p { font-size: var(--t-sm); color: var(--ink-soft); margin-bottom: 0; }
+  .card-meta { color: var(--ink-faint); margin-top: var(--s-3); }
+
+  .band--map { padding-bottom: var(--s-7); }
+  .map-lede { max-width: var(--measure); color: var(--ink-soft); font-size: var(--t-sm); }
+  .map-hint { font-size: var(--t-xs); color: var(--ink-faint); margin-bottom: var(--s-2); }
+  .map-more { font-size: var(--t-sm); color: var(--ink-soft); max-width: var(--measure); margin-top: var(--s-4); }
+
+  .narrative { max-width: var(--measure); }
+  .milestones { list-style: none; margin: var(--s-5) 0; padding: 0; max-width: var(--measure); }
+  .milestones li { display: grid; gap: var(--s-1); padding-block: var(--s-3); border-top: var(--rule); }
+  .milestones a { font-family: var(--serif); color: var(--ink); text-decoration-color: var(--line-strong); }
+  .milestones span { color: var(--ink-faint); }
+
+  .questions { list-style: none; margin: 0 0 var(--s-4); padding: 0; max-width: var(--measure); }
+  .questions li { padding-block: var(--s-3); border-top: var(--rule); }
+  .questions a { font-family: var(--serif); color: var(--ink); text-decoration-color: var(--line-strong); }
+
+  @media (min-width: 46em) {
+    .cards { grid-template-columns: repeat(2, 1fr); }
+    .milestones li { grid-template-columns: 11rem 1fr; gap: var(--s-4); align-items: baseline; }
+  }
+</style>

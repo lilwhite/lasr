@@ -1,0 +1,134 @@
+---
+import ReviewLayout from '../../../layouts/ReviewLayout.astro';
+import Badge from '../../../components/Badge.astro';
+import { graph, notesOrdered, entitySlug, sourceShortLabel } from '../../../lib/graph';
+import { PREVIEW, editorialBadge, evidenceBadge, basisBadge, NOTE_TYPE_LABEL } from '../../../lib/policy';
+
+export async function getStaticPaths() {
+  return PREVIEW ? [{ params: { list: undefined } }] : [];
+}
+
+const notes = notesOrdered();
+const sourceOptions = graph.sources.map((s) => ({ id: s.data.id, label: sourceShortLabel(s) }));
+const topicOptions = graph.topics.map((t) => ({ id: t.data.id, label: t.data.title }));
+---
+
+<ReviewLayout title="Notas">
+  <h1>Revisión de Atomic Notes</h1>
+  <p class="muted"><span id="shown-count">{notes.length}</span> de {notes.length} notas.</p>
+
+  <form class="filters" aria-label="Filtros">
+    <label>Editorial
+      <select id="f-editorial" data-filter="editorial">
+        <option value="">todas</option>
+        <option value="draft">draft</option>
+        <option value="reviewed">reviewed</option>
+        <option value="verified">verified</option>
+      </select>
+    </label>
+    <label>Evidencia
+      <select id="f-evidence" data-filter="evidence">
+        <option value="">todas</option>
+        <option value="unassessed">unassessed</option>
+        <option value="consistent">consistent</option>
+        <option value="disputed">disputed</option>
+        <option value="incomplete">incomplete</option>
+      </select>
+    </label>
+    <label>Basis
+      <select id="f-basis" data-filter="basis">
+        <option value="">todas</option>
+        <option value="documented">documented</option>
+        <option value="inferred">inferred</option>
+        <option value="interpretation">interpretation</option>
+        <option value="unknown">unknown</option>
+      </select>
+    </label>
+    <label>Source
+      <select id="f-source" data-filter="sources">
+        <option value="">todas</option>
+        {sourceOptions.map((s) => <option value={s.id}>{s.label}</option>)}
+      </select>
+    </label>
+    <label>Topic
+      <select id="f-topic" data-filter="topics">
+        <option value="">todos</option>
+        {topicOptions.map((t) => <option value={t.id}>{t.label}</option>)}
+      </select>
+    </label>
+  </form>
+
+  <ul class="review-list" id="note-list">
+    {notes.map((n) => (
+      <li
+        class="review-row"
+        data-editorial={n.data.editorialStatus}
+        data-evidence={n.data.evidenceStatus}
+        data-basis={n.data.basis}
+        data-sources={[...new Set(n.data.citations.map((c) => c.source))].join(' ')}
+        data-topics={n.data.topics.join(' ')}
+      >
+        <span class="meta-id">{n.data.id}</span>
+        <a class="row-title" href={`/revision/notas/${entitySlug(n)}/`}>{n.data.title}</a>
+        <span class="badge-row" style="margin:0.2rem 0 0">
+          <Badge label={NOTE_TYPE_LABEL[n.data.type]} tone="neutral" />
+          <Badge {...basisBadge(n.data.basis)} />
+          <Badge {...editorialBadge(n.data.editorialStatus)} />
+          <Badge {...evidenceBadge(n.data.evidenceStatus)} />
+        </span>
+      </li>
+    ))}
+  </ul>
+</ReviewLayout>
+
+<script>
+  const selects = document.querySelectorAll<HTMLSelectElement>('select[data-filter]');
+  const rows = document.querySelectorAll<HTMLElement>('.review-row');
+  const counter = document.getElementById('shown-count');
+
+  function apply() {
+    let shown = 0;
+    rows.forEach((row) => {
+      let ok = true;
+      selects.forEach((sel) => {
+        const wanted = sel.value;
+        if (!wanted) return;
+        const attr = row.dataset[sel.dataset.filter as string] ?? '';
+        // Campos multivalor (sources, topics) van separados por espacios
+        if (!attr.split(' ').includes(wanted) && attr !== wanted) ok = false;
+      });
+      row.hidden = !ok;
+      if (ok) shown++;
+    });
+    if (counter) counter.textContent = String(shown);
+  }
+
+  // Preselección desde query params (?editorial=draft&evidence=disputed…)
+  const params = new URLSearchParams(location.search);
+  selects.forEach((sel) => {
+    const key = sel.id.replace('f-', '');
+    const fromUrl = params.get(key) ?? params.get(sel.dataset.filter as string);
+    if (fromUrl) sel.value = fromUrl;
+    sel.addEventListener('change', apply);
+  });
+  apply();
+</script>
+
+<style>
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 0.7rem 0.9rem;
+    margin: 1rem 0;
+    font-size: 0.85rem;
+  }
+  .filters label { display: flex; flex-direction: column; gap: 0.2rem; color: var(--ink-soft); }
+  .filters select { font: inherit; padding: 0.2rem 0.3rem; border: 1px solid var(--line); border-radius: 4px; background: var(--paper); }
+  .review-list { list-style: none; padding: 0; margin: 0; }
+  .review-row { padding: 0.7rem 0; border-bottom: 1px solid var(--line); }
+  .row-title { display: block; font-family: var(--serif); font-size: 1.02rem; margin-top: 0.1rem; }
+</style>

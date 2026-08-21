@@ -1,0 +1,66 @@
+---
+/**
+ * Una afirmación con su procedencia.
+ *
+ * El título de una nota mide 205 caracteres de media: es una frase completa,
+ * no un titular. Va como párrafo a tamaño de cuerpo y NUNCA se trunca — la
+ * afirmación es el contenido.
+ */
+import Citation from './Citation.astro';
+import { entityRoute, type Note } from '../lib/graph';
+import { url } from '../lib/url';
+import { readerFlags, NOTE_TYPE_LABEL } from '../lib/policy';
+
+interface Props { note: Note; citations?: boolean }
+const { note, citations = true } = Astro.props;
+const flags = readerFlags(note);
+---
+<article class="note">
+  <p class="note-kind">{NOTE_TYPE_LABEL[note.data.type]}</p>
+  <p class="note-claim"><a href={url(entityRoute(note))}>{note.data.title}</a></p>
+  {flags.length > 0 && (
+    <p class="note-flags">
+      {flags.map((f) => (
+        <span class={`flag flag--${f.tone}`}><span aria-hidden="true">{f.icon}</span> {f.label}</span>
+      ))}
+    </p>
+  )}
+  {citations && note.data.citations.slice(0, 1).map((c) => <Citation citation={c} />)}
+</article>
+
+<style>
+  .note {
+    border-top: var(--rule);
+    padding-block: var(--s-4);
+  }
+  .note-kind {
+    margin: 0;
+    font-family: var(--sans);
+    font-size: var(--t-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    color: var(--ink-faint);
+  }
+  .note-claim {
+    margin: var(--s-1) 0 0;
+    font-family: var(--serif);
+    font-size: var(--t-base);
+    line-height: 1.45;
+    text-wrap: pretty;
+  }
+  .note-claim a { color: var(--ink); text-decoration-color: var(--line-strong); }
+  .note-claim a:hover { color: var(--stamp-strong); text-decoration-color: currentColor; }
+  .note-flags { margin: var(--s-2) 0 0; display: flex; flex-wrap: wrap; gap: var(--s-2); }
+  .flag {
+    font-size: var(--t-xs);
+    font-family: var(--sans);
+    padding: 0.1rem 0.45rem;
+    border-radius: var(--radius);
+    border: 1px solid currentColor;
+  }
+  .flag--alert { color: var(--alert); background: var(--alert-bg); }
+  .flag--warn { color: var(--warn); background: var(--warn-bg); }
+  .flag--ok { color: var(--ok); background: var(--ok-bg); }
+  .flag--neutral, .flag--info { color: var(--ink-soft); background: var(--surface-sunk); }
+</style>

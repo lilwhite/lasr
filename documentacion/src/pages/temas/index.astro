@@ -1,0 +1,48 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { graph, entityRoute, topicMembers } from '../../lib/graph';
+import { url } from '../../lib/url';
+import { AREAS, AREA_ORDER } from '../../lib/areas';
+
+const byArea = AREA_ORDER.map((id) => ({
+  area: AREAS[id],
+  topics: graph.topics.filter((t) => t.data.area === id).map((t) => ({ t, m: topicMembers(t.data.id) })),
+}));
+---
+<Layout title="Temas" description="Los grandes asuntos de Los Ángeles de San Rafael: la recepción de la urbanización, la entidad de conservación, el agua, las juntas de la comunidad y la desanexión.">
+  <header class="head">
+    <h1>Temas</h1>
+    <p class="lede">Cada tema reúne lo que sabemos sobre un asunto: qué ocurrió, qué está documentado, qué sigue abierto y de dónde sale cada afirmación.</p>
+  </header>
+
+  {byArea.map(({ area, topics }) => (
+    <section>
+      <h2>{area.label}</h2>
+      <p class="area-lead">{area.lead}</p>
+      <ul class="list">
+        {topics.map(({ t, m }) => (
+          <li>
+            <a href={url(entityRoute(t))}>{t.data.title}</a>
+            <p>{t.data.summary}</p>
+            <p class="apparatus">
+              {m.notes.length > 0
+                ? `${m.notes.length} afirmaciones · ${m.events.length} acontecimientos · ${m.sources.length} documentos`
+                : 'sin documentación todavía'}
+            </p>
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
+</Layout>
+
+<style>
+  .head, section { max-width: var(--measure); }
+  .head h1 { margin-bottom: var(--s-3); }
+  .area-lead { color: var(--ink-soft); font-size: var(--t-sm); }
+  .list { list-style: none; margin: var(--s-4) 0 0; padding: 0; }
+  .list > li { padding-block: var(--s-4); border-top: var(--rule); }
+  .list > li > a { font-family: var(--serif); font-size: var(--t-md); color: var(--ink); text-decoration-color: var(--line-strong); }
+  .list p { font-size: var(--t-sm); color: var(--ink-soft); margin-bottom: 0; }
+  .list .apparatus { color: var(--ink-faint); margin-top: var(--s-2); }
+</style>
