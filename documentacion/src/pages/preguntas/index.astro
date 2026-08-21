@@ -1,0 +1,34 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { graph, entityRoute, resolve, type Topic } from '../../lib/graph';
+import { url } from '../../lib/url';
+
+const byTopic = graph.topics.map((t) => ({
+  topic: t,
+  questions: graph.questions.filter((q) => q.data.topics.includes(t.data.id)),
+})).filter((g) => g.questions.length > 0);
+---
+<Layout title="Preguntas" description="Respuestas breves a las preguntas que se hacen los vecinos de Los Ángeles de San Rafael, cada una con el fundamento documental que la sostiene.">
+  <header class="head">
+    <h1>Preguntas</h1>
+    <p class="lede">Cada respuesta tiene dos niveles: una explicación breve y, debajo, las afirmaciones documentadas en las que se apoya.</p>
+  </header>
+  {byTopic.map(({ topic, questions }) => (
+    <section>
+      <h2>{topic.data.title}</h2>
+      <ul class="list">
+        {questions.map((q) => (
+          <li><a href={url(entityRoute(q))}>{q.data.question}</a></li>
+        ))}
+      </ul>
+    </section>
+  ))}
+</Layout>
+
+<style>
+  .head, section { max-width: var(--measure); }
+  .head h1 { margin-bottom: var(--s-3); }
+  .list { list-style: none; margin: 0; padding: 0; }
+  .list > li { padding-block: var(--s-3); border-top: var(--rule); }
+  .list a { font-family: var(--serif); color: var(--ink); text-decoration-color: var(--line-strong); }
+</style>

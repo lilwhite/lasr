@@ -1,0 +1,25 @@
+---
+/**
+ * Estado vacío honesto. Que falte documentación es información, no un fallo
+ * que haya que disimular.
+ */
+import { PREVIEW } from '../lib/policy';
+interface Props { children?: unknown; hint?: string }
+const { hint } = Astro.props;
+---
+<p class="empty">
+  <slot />
+  {PREVIEW && hint && <span class="empty-hint"> ({hint})</span>}
+</p>
+
+<style>
+  .empty {
+    font-size: var(--t-sm);
+    color: var(--ink-soft);
+    background: var(--surface-sunk);
+    border-radius: var(--radius);
+    padding: var(--s-3) var(--s-4);
+    margin-block: var(--s-3);
+  }
+  .empty-hint { font-family: var(--mono); font-size: var(--t-xs); color: var(--warn); }
+</style>

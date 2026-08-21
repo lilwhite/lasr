@@ -1,0 +1,90 @@
+---
+/**
+ * El aparato documental: de dónde sale exactamente una afirmación.
+ *
+ * Se construye SIEMPRE desde el objeto `citation` estructurado (CONTENT_MODEL
+ * §6); las referencias nunca se escriben a mano. Es el elemento característico
+ * de este sitio y por eso tiene su propio registro tipográfico.
+ */
+import { resolve, entityRoute, sourceShortLabel, formatDate, type Source } from '../lib/graph';
+import { url } from '../lib/url';
+
+interface Props {
+  citation: {
+    source: string;
+    pdfPages: number[];
+    printedPages?: number[];
+    locator?: string;
+    quote?: string;
+  };
+  /** Encabeza el bloque con "Consta en". Se apaga dentro de una lista. */
+  labelled?: boolean;
+}
+const { citation, labelled = true } = Astro.props;
+const source = resolve(citation.source) as Source;
+const label = sourceShortLabel(source);
+const fecha = formatDate(source.data.date, 'day');
+const pages = `pág. ${citation.pdfPages.join(', ')}`;
+const printed = citation.printedPages ? `impresa ${citation.printedPages.join(', ')}` : null;
+---
+
+<div class="cite">
+  {labelled && <span class="cite-label">Consta en</span>}
+  <p class="cite-ref">
+    <a href={url(entityRoute(source))}>{label}</a>
+    <span class="cite-coords apparatus">
+      <span class="sep" aria-hidden="true">·</span>{pages}
+      {printed && <><span class="sep" aria-hidden="true">·</span>{printed}</>}
+      {citation.locator && <><span class="sep" aria-hidden="true">·</span>{citation.locator}</>}
+    </span>
+    <span class="cite-date">{fecha}</span>
+  </p>
+  {citation.quote && (
+    <details class="cite-quote">
+      <summary>Ver lo que dice el documento</summary>
+      <blockquote>«{citation.quote}»</blockquote>
+    </details>
+  )}
+</div>
+
+<style>
+  .cite {
+    border-left: 2px solid var(--marca);
+    padding: var(--s-1) 0 var(--s-1) var(--s-3);
+    margin-block: var(--s-3);
+  }
+  .cite-label {
+    display: block;
+    font-family: var(--mono);
+    font-size: var(--t-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    color: var(--ink-faint);
+  }
+  .cite-ref { margin: 0.1rem 0 0; font-size: var(--t-sm); line-height: 1.45; }
+  .cite-ref > a { font-weight: 600; text-decoration: none; }
+  .cite-ref > a:hover { text-decoration: underline; }
+  .cite-coords { color: var(--marca); }
+  .sep { color: var(--line-strong); margin-inline: 0.35em; }
+  .cite-date {
+    display: block;
+    font-size: var(--t-xs);
+    color: var(--ink-faint);
+  }
+  .cite-quote { margin-top: var(--s-2); }
+  .cite-quote summary {
+    font-size: var(--t-xs);
+    color: var(--ink-soft);
+    cursor: pointer;
+    width: fit-content;
+  }
+  .cite-quote summary:hover { color: var(--stamp); }
+  .cite-quote blockquote {
+    font-family: var(--serif);
+    font-size: var(--t-sm);
+    color: var(--ink);
+    border-left: none;
+    padding: var(--s-2) 0 0;
+    margin: 0;
+  }
+</style>

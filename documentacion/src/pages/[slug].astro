@@ -1,0 +1,25 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import Prose from '../components/Prose.astro';
+
+export async function getStaticPaths() {
+  const pages = await getCollection('pages');
+  return pages
+    .filter((p) => p.data.slug !== 'inicio')
+    .map((page) => ({ params: { slug: page.data.slug }, props: { page } }));
+}
+const { page } = Astro.props;
+---
+<Layout title={page.data.title} description={page.data.summary} width="prose" ogType="article">
+  <header class="page-head">
+    <h1>{page.data.title}</h1>
+    <p class="lede">{page.data.summary}</p>
+  </header>
+  <Prose entry={page as any} />
+</Layout>
+
+<style>
+  .page-head { margin-bottom: var(--s-6); }
+  .page-head h1 { margin-bottom: var(--s-3); }
+</style>

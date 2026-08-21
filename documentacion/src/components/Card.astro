@@ -1,0 +1,23 @@
+---
+interface Props {
+  /** Título opcional de la tarjeta (encabezado h3). */
+  title?: string;
+}
+const { title } = Astro.props;
+---
+
+<section class="card">
+  {title && <h3 class="card-title">{title}</h3>}
+  <slot />
+</section>
+
+<style>
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+  }
+  .card-title { margin-top: 0; }
+</style>

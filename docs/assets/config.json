@@ -18,15 +18,42 @@
       "alt": "Los Ángeles de San Rafael"
     },
     "sections": [
-      { "id": "inicio", "label": "Inicio" },
-      { "id": "situacion", "label": "Situación actual" },
-      { "id": "historia", "label": "Línea temporal" },
-      { "id": "sentencia", "label": "La sentencia" },
-      { "id": "incumplimientos", "label": "Incumplimientos" },
-      { "id": "actuaciones", "label": "Vías de actuación" },
-      { "id": "documentos", "label": "Documentos" },
-      { "id": "faq", "label": "Preguntas" },
-      { "id": "contacto", "label": "Contacto" }
+      {
+        "id": "inicio",
+        "label": "Inicio"
+      },
+      {
+        "id": "situacion",
+        "label": "Situación actual"
+      },
+      {
+        "id": "historia",
+        "label": "Línea temporal"
+      },
+      {
+        "id": "sentencia",
+        "label": "La sentencia"
+      },
+      {
+        "id": "incumplimientos",
+        "label": "Incumplimientos"
+      },
+      {
+        "id": "actuaciones",
+        "label": "Vías de actuación"
+      },
+      {
+        "id": "documentos",
+        "label": "Documentos"
+      },
+      {
+        "id": "faq",
+        "label": "Preguntas"
+      },
+      {
+        "id": "contacto",
+        "label": "Contacto"
+      }
     ]
   },
   "colors": {
@@ -42,7 +69,7 @@
   "meta": {
     "ogTitle": "Los Ángeles de San Rafael - Información sobre el conflicto urbanístico",
     "ogDescription": "Portal informativo para vecinos sobre la situación jurídica y urbanística de Los Ángeles de San Rafael",
-    "ogUrl": "https://lilwhite.github.io/lasr",
-    "ogImage": "assets/images/og-image.png"
+    "ogUrl": "https://lasr-info.es",
+    "ogImage": "https://lasr-info.es/assets/images/og-image.png"
   }
 }

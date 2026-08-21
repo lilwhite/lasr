@@ -1,0 +1,110 @@
+---
+import OriginalAccess from '../../components/OriginalAccess.astro';
+import { render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Card from '../../components/Card.astro';
+import NoteCard from '../../components/NoteCard.astro';
+import EntityLink from '../../components/EntityLink.astro';
+import Badge from '../../components/Badge.astro';
+import {
+  graph, entitySlug, notesCiting, eventsCiting, inverseRelations, formatDate,
+} from '../../lib/graph';
+import {
+  visibleOnly, canLinkPdf, DOC_TYPE_LABEL, PUBLICATION_LABEL, PRIVACY_LABEL, RELATION_LABEL,
+} from '../../lib/policy';
+
+export async function getStaticPaths() {
+  return visibleOnly(graph.sources).map((s) => ({
+    params: { slug: entitySlug(s) },
+    props: { source: s },
+  }));
+}
+
+const { source } = Astro.props;
+const d = source.data;
+const { Content } = await render(source);
+const notes = visibleOnly(notesCiting(d.id));
+const events = visibleOnly(eventsCiting(d.id));
+const inverse = inverseRelations(d.id);
+const pdfLinkable = canLinkPdf(source);
+---
+
+<Layout title={d.title} description={`Ficha documental: ${d.title}`}>
+  <p class="eyebrow">{DOC_TYPE_LABEL[d.docType]}</p>
+  <h1>{d.title}</h1>
+  <p class="meta-id">{d.id}</p>
+
+  <div class="badge-row">
+    <Badge label={PUBLICATION_LABEL[d.publicationStatus]} tone={d.publicationStatus === 'public' ? 'ok' : 'warn'} />
+    <Badge label={PRIVACY_LABEL[d.privacyReview.status]} tone={d.privacyReview.status === 'approved' ? 'ok' : 'warn'} />
+  </div>
+
+  <Card title="Ficha">
+    <table>
+      <tbody>
+        <tr><th scope="row">Fecha</th><td>{formatDate(d.date)}</td></tr>
+        <tr><th scope="row">Órgano emisor</th><td><EntityLink id={d.issuer} /></td></tr>
+        {d.resolutionNumber && <tr><th scope="row">Resolución</th><td>{d.resolutionNumber}</td></tr>}
+        {d.rollo && <tr><th scope="row">Rollo</th><td>{d.rollo}</td></tr>}
+        {d.procedure && <tr><th scope="row">Procedimiento</th><td><EntityLink id={d.procedure} /></td></tr>}
+        {d.parties && d.parties.length > 0 && (
+          <tr>
+            <th scope="row">Partes</th>
+            <td>
+              <ul style="margin:0; padding-left:1.1rem">
+                {d.parties.map((p) => (
+                  <li><EntityLink id={p.actor} /> <span class="muted">({p.role})</span></li>
+                ))}
+              </ul>
+            </td>
+          </tr>
+        )}
+        {d.pages && <tr><th scope="row">Páginas (PDF)</th><td>{d.pages}</td></tr>}
+        {d.sha256 && <tr><th scope="row">SHA-256</th><td><code style="word-break:break-all">{d.sha256}</code></td></tr>}
+      </tbody>
+    </table>
+  </Card>
+
+  <OriginalAccess source={source} />
+
+  <section class="prose">
+    <Content />
+  </section>
+
+  {d.relations.length + inverse.length > 0 && (
+    <>
+      <h2>Documentos relacionados</h2>
+      <ul class="entity-list">
+        {d.relations.map((r) => (
+          <li>
+            <span class="muted">{RELATION_LABEL[r.type].direct}:</span>{' '}
+            <EntityLink id={r.target} />
+            {r.note && <p class="muted" style="margin:0.2rem 0 0; font-size:0.88rem">{r.note}</p>}
+          </li>
+        ))}
+        {inverse.map((r) => (
+          <li>
+            <span class="muted">{RELATION_LABEL[r.type].inverse}:</span>{' '}
+            <EntityLink id={r.from.data.id} />
+            {r.note && <p class="muted" style="margin:0.2rem 0 0; font-size:0.88rem">{r.note}</p>}
+          </li>
+        ))}
+      </ul>
+    </>
+  )}
+
+  <h2>Afirmaciones sustentadas por este documento</h2>
+  {notes.length === 0 && <p class="muted">Todavía no hay afirmaciones publicadas extraídas de este documento.</p>}
+  {notes.map((n) => <NoteCard note={n} />)}
+
+  {events.length > 0 && (
+    <>
+      <h2>Acontecimientos que cita este documento</h2>
+      <ul class="entity-list">
+        {events.map((e) => (
+          <li><EntityLink id={e.data.id} /></li>
+        ))}
+      </ul>
+    </>
+  )}
+</Layout>
