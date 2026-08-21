@@ -8,9 +8,13 @@
  * una ilustración. La disposición vive en `lib/docmap.ts`; aquí solo se pinta.
  */
 import { buildDocMap, LABEL_DX } from '../lib/docmap';
+import { published } from '../lib/policy';
 import { url } from '../lib/url';
 
-const map = buildDocMap();
+// El mapa se dibuja sobre los documentos publicables. Construirlo aquí con el
+// valor por defecto pintaba nodos cuya ficha no existe: el enlace del nodo
+// llevaba al vacío y el mapa dejaba de coincidir con el sitio.
+const map = buildDocMap([...published.sources]);
 
 const SHAPE_TITLE: Record<string, string> = {
   judicial: 'Resolución judicial',

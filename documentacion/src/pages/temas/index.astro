@@ -1,12 +1,13 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { graph, entityRoute, topicMembers } from '../../lib/graph';
+import { published } from '../../lib/policy';
+import { entityRoute, topicMembers } from '../../lib/graph';
 import { url } from '../../lib/url';
 import { AREAS, AREA_ORDER } from '../../lib/areas';
 
 const byArea = AREA_ORDER.map((id) => ({
   area: AREAS[id],
-  topics: graph.topics.filter((t) => t.data.area === id).map((t) => ({ t, m: topicMembers(t.data.id) })),
+  topics: published.topics.filter((t) => t.data.area === id).map((t) => ({ t, m: topicMembers(t.data.id) })),
 }));
 ---
 <Layout title="Temas" description="Los grandes asuntos de Los Ángeles de San Rafael: la recepción de la urbanización, la entidad de conservación, el agua, las juntas de la comunidad y la desanexión.">

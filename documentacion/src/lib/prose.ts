@@ -15,17 +15,27 @@
  *      secciones que la plantilla genera desde el grafo.
  */
 
-import { entityRoute, entityShortLabel, hasEntity, type Entity } from './graph';
+import { entityRoute, entityShortLabel, hasEntity, resolve, type Entity } from './graph';
+import { isVisible } from './policy';
 import { url } from './url';
 
 const ENTITY_CODE = /<code>((?:SRC|NOTE|EVENT|ACTOR|PROC|TOPIC|QUESTION)-[A-Z0-9-]+)<\/code>/g;
 
-/** `<code>NOTE-…</code>` → enlace con etiqueta legible para un lector. */
+/**
+ * `<code>NOTE-…</code>` → enlace con etiqueta legible para un lector.
+ *
+ * Si la entidad no es publicable se emite la etiqueta sin enlace: la prosa
+ * sigue diciendo de qué habla —eso no se pierde— pero no lleva a una página
+ * que no existe. Son 327 referencias en el corpus.
+ */
 export function linkify(html: string): string {
   return html.replace(ENTITY_CODE, (whole, id: string) => {
     if (!hasEntity(id)) return whole; // referencia desconocida: se deja tal cual
-    const href = url(entityRoute(id));
     const label = entityShortLabel(id);
+    if (!isVisible(resolve(id))) {
+      return `<span class="ref unpublished" data-id="${id}" title="Contenido no publicado">${label}</span>`;
+    }
+    const href = url(entityRoute(id));
     return `<a class="ref" href="${href}" data-id="${id}" title="${id}">${label}</a>`;
   });
 }

@@ -2,26 +2,27 @@
 import Layout from '../../layouts/Layout.astro';
 import DocMap from '../../components/DocMap.astro';
 import { buildDocMap } from '../../lib/docmap';
-import { graph, resolve, entityRoute, sourceShortLabel, formatDate, kind } from '../../lib/graph';
-import { DOC_TYPE_LABEL, RELATION_LABEL } from '../../lib/policy';
+import { resolve, entityRoute, sourceShortLabel, formatDate, kind } from '../../lib/graph';
+import { DOC_TYPE_LABEL, RELATION_LABEL, canPublish, published } from '../../lib/policy';
 import { url } from '../../lib/url';
 
-const map = buildDocMap();
+const map = buildDocMap([...published.sources]);
 
 /** Relaciones de un documento con otros documentos, dichas en una frase. */
 function relationsOf(id: string): { verb: string; other: string; href: string }[] {
   const out: { verb: string; other: string; href: string }[] = [];
-  const self = graph.sources.find((s) => s.data.id === id)!;
+  const self = published.sources.find((s) => s.data.id === id)!;
   for (const r of self.data.relations) {
     if (kind(r.target) !== 'sources') continue;
     const other = resolve(r.target);
+    if (!canPublish(other)) continue;
     out.push({
       verb: RELATION_LABEL[r.type].direct,
-      other: sourceShortLabel(other as (typeof graph.sources)[number]),
+      other: sourceShortLabel(other as (typeof published.sources)[number]),
       href: entityRoute(other),
     });
   }
-  for (const s of graph.sources) {
+  for (const s of published.sources) {
     for (const r of s.data.relations) {
       if (r.target !== id) continue;
       out.push({

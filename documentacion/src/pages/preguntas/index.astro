@@ -1,11 +1,12 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { graph, entityRoute, resolve, type Topic } from '../../lib/graph';
+import { published } from '../../lib/policy';
+import { entityRoute, resolve, type Topic } from '../../lib/graph';
 import { url } from '../../lib/url';
 
-const byTopic = graph.topics.map((t) => ({
+const byTopic = published.topics.map((t) => ({
   topic: t,
-  questions: graph.questions.filter((q) => q.data.topics.includes(t.data.id)),
+  questions: published.questions.filter((q) => q.data.topics.includes(t.data.id)),
 })).filter((g) => g.questions.length > 0);
 ---
 <Layout title="Preguntas" description="Respuestas breves a las preguntas que se hacen los vecinos de Los Ángeles de San Rafael, cada una con el fundamento documental que la sostiene.">

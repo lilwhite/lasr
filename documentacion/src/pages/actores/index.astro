@@ -1,11 +1,11 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { graph, entityRoute, actorMentions } from '../../lib/graph';
+import { entityRoute, actorMentions } from '../../lib/graph';
 import { url } from '../../lib/url';
-import { ACTOR_TYPE_LABEL } from '../../lib/policy';
+import { ACTOR_TYPE_LABEL, published } from '../../lib/policy';
 
 // Por relevancia, no alfabético: cuatro actores concentran el 76% de las menciones.
-const ranked = graph.actors
+const ranked = published.actors
   .map((a) => {
     const m = actorMentions(a.data.id);
     return { a, n: m.notes.length + m.events.length };
