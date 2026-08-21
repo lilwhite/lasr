@@ -1,0 +1,89 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { graph, entityRoute, sourceShortLabel, notesCiting } from '../../lib/graph';
+import { url } from '../../lib/url';
+import { NOTE_TYPE_LABEL, readerFlags } from '../../lib/policy';
+
+// Agrupadas por el documento que las sostiene: es como se leen y como se
+// revisan, documento a documento.
+const porFuente = [...graph.sources]
+  .map((s) => ({ source: s, notes: notesCiting(s.data.id) }))
+  .filter((g) => g.notes.length > 0)
+  .sort((a, b) => a.source.data.date.getTime() - b.source.data.date.getTime());
+
+const total = graph.notes.length;
+---
+<Layout
+  title="Todas las afirmaciones"
+  description={`Las ${total} afirmaciones extraídas de la documentación de Los Ángeles de San Rafael, agrupadas por el documento que las sostiene.`}
+>
+  <header class="head">
+    <h1>Todas las afirmaciones</h1>
+    <p class="lede">
+      Las {total} afirmaciones que sostienen esta web, agrupadas por el documento del que salen.
+      Cada una enlaza a su ficha, con la cita literal y la página exacta.
+    </p>
+    <p class="tip">Usa la búsqueda del navegador para encontrar una palabra concreta en esta página.</p>
+  </header>
+
+  {porFuente.map(({ source, notes }) => (
+    <section>
+      <h2>
+        <a href={url(entityRoute(source))}>{sourceShortLabel(source)}</a>
+        <span class="apparatus"> · {notes.length} afirmacion{notes.length === 1 ? '' : 'es'}</span>
+      </h2>
+      <p class="src-title">{source.data.title}</p>
+      <ul class="notes">
+        {notes.map((n) => {
+          const flags = readerFlags(n);
+          return (
+            <li>
+              <span class="kind">{NOTE_TYPE_LABEL[n.data.type]}</span>
+              <a href={url(entityRoute(n))}>{n.data.title}</a>
+              {flags.map((f) => (
+                <span class={`flag flag--${f.tone}`}>{f.icon} {f.label}</span>
+              ))}
+            </li>
+          );
+        })}
+      </ul>
+    </section>
+  ))}
+</Layout>
+
+<style>
+  .head, section { max-width: var(--measure); }
+  .head h1 { margin-bottom: var(--s-3); }
+  .tip { font-size: var(--t-sm); color: var(--ink-faint); }
+  section { margin-block: var(--s-7); }
+  section h2 { font-size: var(--t-md); margin-bottom: var(--s-1); }
+  .src-title { font-size: var(--t-sm); color: var(--ink-soft); margin-top: 0; }
+  .notes { list-style: none; margin: var(--s-3) 0 0; padding: 0; }
+  .notes > li { padding-block: var(--s-3); border-top: var(--rule); }
+  .kind {
+    display: block;
+    font-size: var(--t-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    color: var(--ink-faint);
+    margin-bottom: var(--s-1);
+  }
+  .notes a {
+    font-family: var(--serif);
+    color: var(--ink);
+    text-decoration-color: var(--line-strong);
+    text-wrap: pretty;
+  }
+  .notes a:hover { color: var(--stamp-strong); }
+  .flag {
+    display: inline-block;
+    margin-top: var(--s-1);
+    font-size: var(--t-xs);
+    padding: 0.1rem 0.45rem;
+    border-radius: var(--radius);
+    border: 1px solid currentColor;
+  }
+  .flag--alert { color: var(--alert); background: var(--alert-bg); }
+  .flag--warn { color: var(--warn); background: var(--warn-bg); }
+</style>

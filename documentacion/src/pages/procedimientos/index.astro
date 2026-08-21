@@ -1,0 +1,50 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { graph, entityRoute, procedureChildren } from '../../lib/graph';
+import { url } from '../../lib/url';
+
+const roots = graph.procedures.filter((p) => p.data.parent === null);
+---
+<Layout title="Procedimientos" description="Los procedimientos judiciales y administrativos que jalonan la historia de Los Ángeles de San Rafael, con sus piezas e incidentes.">
+  <header class="head">
+    <h1>Procedimientos</h1>
+    <p class="lede">Los pleitos y expedientes de los que salen las resoluciones citadas en esta web. Algunos tienen piezas o incidentes que dependen de ellos.</p>
+  </header>
+  <ul class="tree">
+    {roots.map((p) => (
+      <li>
+        <a href={url(entityRoute(p))}>{p.data.title}</a>
+        <span class="apparatus"> {p.data.number}</span>
+        {procedureChildren(p.data.id).length > 0 && (
+          <ul>
+            {procedureChildren(p.data.id).map((c) => (
+              <li>
+                <a href={url(entityRoute(c))}>{c.data.title}</a>
+                <span class="apparatus"> {c.data.number}</span>
+                {procedureChildren(c.data.id).length > 0 && (
+                  <ul>
+                    {procedureChildren(c.data.id).map((g) => (
+                      <li><a href={url(entityRoute(g))}>{g.data.title}</a>
+                        <span class="apparatus"> {g.data.number}</span></li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            ))}
+          </ul>
+        )}
+      </li>
+    ))}
+  </ul>
+</Layout>
+
+<style>
+  .head { max-width: var(--measure); }
+  .head h1 { margin-bottom: var(--s-3); }
+  .tree { list-style: none; margin: 0; padding: 0; max-width: var(--measure); }
+  .tree > li { padding-block: var(--s-3); border-top: var(--rule); }
+  .tree ul { list-style: none; margin: var(--s-2) 0 0; padding-left: var(--s-4); border-left: var(--rule); }
+  .tree ul li { padding-block: var(--s-2); }
+  .tree a { font-family: var(--serif); color: var(--ink); text-decoration-color: var(--line-strong); }
+  .apparatus { color: var(--ink-faint); }
+</style>
