@@ -125,6 +125,15 @@ press13 = legal_scan.press_findings(
     FIXTURES / "13-enlace-a-articulo.json", "13", (FIXTURES / "13-enlace-a-articulo.json").read_text(encoding="utf-8"))
 ok(not press13, "13 · titular, medio, fecha y enlace están limpios")
 
+f14 = scan_fixture("14-recurso-de-tercero.html")
+hosts = {f.masked for f in f14 if f.rule == "LEGAL-THIRDPARTY-001"}
+ok(hosts == {"cdn.ejemplo.invalid", "analitica.ejemplo.invalid", "tiles.ejemplo.invalid"},
+   f"14 · se ven los tres subrecursos externos, incluida la plantilla de teselas ({sorted(hosts)})")
+ok("www.boe.es" not in hosts,
+   "14 · un enlace no es un subrecurso: no revela nada hasta que alguien lo pulsa")
+ok(not [f for f in f14 if f.rule == "LEGAL-PRIVACY-004"],
+   "14 · «leaflet@1.9.4» y compañía ya no pasan por direcciones de correo")
+
 f15 = scan_fixture("15-token.txt")
 secrets = [f for f in f15 if f.rule == "LEGAL-SECRET-001"]
 ok(len(secrets) >= 3, f"15 · tokens y claves se detectan ({len(secrets)})")
@@ -159,7 +168,7 @@ with tempfile.TemporaryDirectory() as tmp:
     opaque.write_bytes(b"\x00\x01\x02binario opaco\x00" * 20)
     text, reason = extract(opaque)
     ok(text is None, "un binario desconocido no es inspeccionable")
-    findings = legal_scan.scan([opaque], RULES, None, set())
+    findings = legal_scan.scan([opaque], RULES, None, [])
     ok(len(findings) == 1 and findings[0].rule == "LEGAL-OPAQUE-001",
        "produce exactamente un hallazgo, no cero")
     ok(findings[0].status == NEEDS_HUMAN_REVIEW, "y ese hallazgo es revisión humana")
@@ -229,8 +238,19 @@ with tempfile.TemporaryDirectory() as tmp:
 print("\n== Invariante E · el escáner se salta sus propios fixtures ==")
 ok(all(legal_scan.is_fixture(p) for p in FIXTURES.iterdir() if p.is_file()),
    "todos los fixtures llevan el marcador")
-ok(not legal_scan.scan(sorted(p for p in FIXTURES.iterdir() if p.is_file()), RULES, None, set()),
+ok(not legal_scan.scan(sorted(p for p in FIXTURES.iterdir() if p.is_file()), RULES, None, []),
    "escanearlos uno a uno no produce ni un hallazgo")
+
+
+print("\n== Invariante F · el baseline acota por fichero ==")
+uno = scan_fixture("09-referencia-a-private-sources.md")
+fuga = next(f for f in uno if f.rule == "LEGAL-LEAK-002")
+otro_fichero = [{"fingerprint": fuga.fingerprint, "rule": fuga.rule, "path": "otro.md"}]
+mismo_fichero = [{"fingerprint": fuga.fingerprint, "rule": fuga.rule, "path": fuga.path}]
+ok(legal_scan.is_accepted(fuga, mismo_fichero), "aceptado en su fichero, se calla")
+ok(not legal_scan.is_accepted(fuga, otro_fichero), "el mismo valor en otro fichero sigue saltando")
+ok(not legal_scan.is_accepted(fuga, [{"reason": "sin acotador"}]),
+   "una entrada sin huella ni ruta no acepta nada")
 
 
 print()

@@ -1,17 +1,17 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { graph, entityRoute, sourceShortLabel, notesCiting } from '../../lib/graph';
+import { entityRoute, sourceShortLabel, notesCiting } from '../../lib/graph';
 import { url } from '../../lib/url';
-import { NOTE_TYPE_LABEL, readerFlags } from '../../lib/policy';
+import { NOTE_TYPE_LABEL, readerFlags, published, visibleOnly } from '../../lib/policy';
 
 // Agrupadas por el documento que las sostiene: es como se leen y como se
 // revisan, documento a documento.
-const porFuente = [...graph.sources]
-  .map((s) => ({ source: s, notes: notesCiting(s.data.id) }))
+const porFuente = [...published.sources]
+  .map((s) => ({ source: s, notes: visibleOnly(notesCiting(s.data.id)) }))
   .filter((g) => g.notes.length > 0)
   .sort((a, b) => a.source.data.date.getTime() - b.source.data.date.getTime());
 
-const total = graph.notes.length;
+const total = published.notes.length;
 ---
 <Layout
   title="Todas las afirmaciones"

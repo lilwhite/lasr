@@ -6,7 +6,7 @@ import { graph, entitySlug } from '../../lib/graph';
 import { visibleOnly, ACTOR_TYPE_LABEL } from '../../lib/policy';
 
 export async function getStaticPaths() {
-  return graph.actors.map((a) => ({
+  return visibleOnly(graph.actors).map((a) => ({
     params: { slug: entitySlug(a) },
     props: { actor: a },
   }));

@@ -78,6 +78,8 @@ def mask(value: str, rule_id: str) -> str:
         return "•••@" + domain
     if rule_id == "LEGAL-SECRET-001":           # token: solo el prefijo que lo identifica
         return value[:4] + "•" * max(len(value) - 4, 4)
+    if rule_id == "LEGAL-THIRDPARTY-001":       # el hallazgo ES el dominio: sin enmascarar
+        return value
     return "•" * len(value)
 
 
@@ -195,7 +197,7 @@ def scan_phone(text: str) -> Iterator[tuple[int, int, str]]:
     yield from _finditer(RE_PHONE, text)
 
 
-RE_EMAIL = re.compile(r"(?<![\w.+-])([\w.+-]+@[\w-]+(?:\.[\w-]+)+)")
+RE_EMAIL = re.compile(r"(?<![\w.+-])([\w.+-]+@[\w-]+(?:\.[\w-]+)*\.[A-Za-z]{2,})(?![\w-])")
 
 
 def scan_email(text: str) -> Iterator[tuple[int, int, str]]:
@@ -270,6 +272,34 @@ RE_PRIVATE_LEFTOVER = re.compile(r"private-sources|LASR-DOC|\.ocr-manifest")
 
 def scan_private_leftovers(text: str) -> Iterator[tuple[int, int, str]]:
     yield from _finditer(RE_PRIVATE_LEFTOVER, text)
+
+
+# El navegador de quien visita el sitio pide estos recursos por su cuenta, así
+# que el tercero recibe su IP, su user-agent y qué página estaba mirando. Una
+# CSP autoriza la petición; no la evita. Solo se miran SUBRECURSOS —lo que la
+# página carga sola—, nunca los enlaces: un `<a href>` no revela nada hasta que
+# alguien lo pulsa.
+RE_SUBRESOURCE = re.compile(
+    r"""(?is)<(?:script|img|iframe|source|video|audio|embed|link)\b[^>]*?"""
+    r"""(?:src|href)\s*=\s*["'](https?://([^/"'\s]+))"""
+)
+RE_TILE_TEMPLATE = re.compile(r"""["'](https?://(?:\{s\}\.)?([^/"'\s{]+)[^"']*\{z\}[^"']*)["']""")
+RE_CSS_IMPORT = re.compile(r"""@import\s+(?:url\()?["'](https?://([^/"'\s]+))""")
+
+DEFAULT_OWN_HOSTS = ("lasr-info.es", "www.lasr-info.es")
+
+
+def third_party_subresources(text: str, own_hosts: tuple[str, ...]) -> Iterator[tuple[int, int, str]]:
+    seen: set[str] = set()
+    for pattern in (RE_SUBRESOURCE, RE_TILE_TEMPLATE, RE_CSS_IMPORT):
+        for m in pattern.finditer(text):
+            host = m.group(2).lower().lstrip("*.")
+            if any(host == own or host.endswith("." + own) for own in own_hosts):
+                continue
+            if host in seen:
+                continue
+            seen.add(host)
+            yield m.start(2), m.end(2), host
 
 
 # --- Reglas no deterministas: siempre `needs-human-review` ------------------
@@ -444,10 +474,13 @@ def attributed_accusations(text: str, allowlist: frozenset[str]) -> Iterator[tup
 # Catálogo
 # --------------------------------------------------------------------------
 
-def build_rules(allowed_emails: Iterable[str] = (), actor_names: Iterable[str] = ()) -> list[Rule]:
+def build_rules(allowed_emails: Iterable[str] = (), actor_names: Iterable[str] = (),
+                own_hosts: Iterable[str] = DEFAULT_OWN_HOSTS) -> list[Rule]:
     """El catálogo depende del proyecto: los correos legítimos salen del
-    manifiesto y la lista blanca de nombres, de los actores declarados."""
+    manifiesto, la lista blanca de nombres de los actores declarados y los
+    dominios propios del sitio que se está auditando."""
     allowed = {e.strip().lower() for e in allowed_emails}
+    own_hosts = tuple(h.lower() for h in own_hosts)
     allowlist = frozenset(_normalize(n) for n in actor_names if n)
 
     def scan_email_filtered(text: str) -> Iterator[tuple[int, int, str]]:
@@ -477,6 +510,9 @@ def build_rules(allowed_emails: Iterable[str] = (), actor_names: Iterable[str] =
              "Ruta del sistema de ficheros de una persona concreta", scan_local_paths),
         Rule("LEGAL-LEAK-002", "error", "Resto de material privado",
              "Referencia a la carpeta de originales o a su caché", scan_private_leftovers),
+        Rule("LEGAL-THIRDPARTY-001", "warn", "Recurso de un tercero",
+             "La página carga sola un recurso externo: ese tercero recibe la IP de quien visita",
+             lambda text: third_party_subresources(text, own_hosts)),
         Rule("LEGAL-NAME-001", "info", "Posible nombre de particular",
              "Nombre capitalizado que no figura entre los actores declarados",
              lambda text: name_candidates(text, allowlist), human_review=True),

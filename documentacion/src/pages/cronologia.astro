@@ -1,14 +1,14 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { published } from '../lib/policy';
 import Timeline from '../components/Timeline.astro';
-import { graph } from '../lib/graph';
 ---
 <Layout title="Cronología" description="Qué ha ocurrido en Los Ángeles de San Rafael desde 1966: sentencias, juntas, acuerdos y actos administrativos, cada uno con su documentación.">
   <header class="head">
     <h1>Cronología</h1>
-    <p class="lede">Los {graph.events.length} acontecimientos documentados, de 1966 a hoy. Toca cualquiera para ver qué ocurrió y de dónde lo sabemos.</p>
+    <p class="lede">Los {published.events.length} acontecimientos documentados, de 1966 a hoy. Toca cualquiera para ver qué ocurrió y de dónde lo sabemos.</p>
   </header>
-  <Timeline events={graph.events} groupBy="decade" />
+  <Timeline events={published.events} groupBy="decade" />
 </Layout>
 
 <style>
