@@ -1,194 +1,66 @@
 [
   {
-    "id": "news-7208c1f53f38",
-    "feedGuid": "https://www.elnortedecastilla.es/segovia/uso-recreativo-pantano-angeles-san-rafael-mata-20260817152849-nt.html",
     "title": "El uso recreativo del pantano de Los Ángeles de San Rafael seca el río Moros",
-    "date": "2026-08-17",
     "source": "El Norte de Castilla",
-    "sourceType": "provincial",
+    "date": "2026-08-17",
     "url": "https://www.elnortedecastilla.es/segovia/uso-recreativo-pantano-angeles-san-rafael-mata-20260817152849-nt.html",
-    "tags": [
-      "los angeles de san rafael"
-    ],
-    "relatedTo": [
-      "los-angeles-de-san-rafael",
-      "el-espinar"
-    ],
-    "score": 10,
-    "relevanceScore": 10,
-    "isRelevant": true,
-    "category": "contexto_municipal",
-    "publishedAt": "Mon, 17 Aug 2026 13:44:56 +0200",
-    "year": 2026,
-    "canonicalUrl": "https://www.elnortedecastilla.es/segovia/uso-recreativo-pantano-angeles-san-rafael-mata-20260817152849-nt.html",
-    "featured": false
+    "sourceType": "provincial",
+    "category": "contexto_municipal"
   },
   {
-    "id": "news-5a673ff3fe11",
-    "feedGuid": "",
     "title": "Cancelada la reunión convocada por la Asociación de Copropietarios de Los Ángeles de San Rafael",
+    "source": "La Voz de El Espinar",
     "date": "2026-03-06",
-    "source": "La Voz de El Espinar",
-    "sourceType": "local",
     "url": "https://lavozdeelespinar.es/cancelada-la-reunion-asociacion-de-copropietarios-de-los-angeles-de-san-rafael",
-    "tags": [
-      "los angeles de san rafael"
-    ],
-    "relatedTo": [
-      "los-angeles-de-san-rafael"
-    ],
-    "score": 10,
-    "relevanceScore": 10,
-    "isRelevant": true,
-    "category": "contexto_municipal",
-    "publishedAt": "2026-03-06T11:34:03",
-    "year": 2026,
-    "canonicalUrl": "https://lavozdeelespinar.es/cancelada-la-reunion-asociacion-de-copropietarios-de-los-angeles-de-san-rafael",
-    "featured": false
+    "sourceType": "local",
+    "category": "contexto_municipal"
   },
   {
-    "id": "news-56535adb0370",
-    "feedGuid": "",
     "title": "La Asociación de Copropietarios de Los Ángeles de San Rafael convoca una reunión este domingo",
+    "source": "La Voz de El Espinar",
     "date": "2026-03-05",
-    "source": "La Voz de El Espinar",
-    "sourceType": "local",
     "url": "https://lavozdeelespinar.es/la-asociacion-de-copropietarios-de-los-angeles-de-san-rafael-convoca-una-reunion-este-domingo",
-    "tags": [
-      "los angeles de san rafael",
-      "vecinos"
-    ],
-    "relatedTo": [
-      "los-angeles-de-san-rafael"
-    ],
-    "score": 14,
-    "relevanceScore": 14,
-    "isRelevant": true,
-    "category": "juntas_y_vecinos",
-    "publishedAt": "2026-03-05T09:27:46",
-    "year": 2026,
-    "canonicalUrl": "https://lavozdeelespinar.es/la-asociacion-de-copropietarios-de-los-angeles-de-san-rafael-convoca-una-reunion-este-domingo",
-    "featured": false
+    "sourceType": "local",
+    "category": "juntas_y_vecinos"
   },
   {
-    "id": "news-0562e3e1fc17",
-    "feedGuid": "",
     "title": "Crece la preocupación en la “Promoción Jardines” de Los Ángeles de San Rafael por nuevas ocupaciones y conflictos en la zona",
+    "source": "La Voz de El Espinar",
     "date": "2026-02-03",
-    "source": "La Voz de El Espinar",
-    "sourceType": "local",
     "url": "https://lavozdeelespinar.es/crece-la-preocupacion-en-la-promocion-jardines-de-los-angeles-de-san-rafael-por-nuevas-ocupaciones-y-conflictos-en-la-zona",
-    "tags": [
-      "los angeles de san rafael",
-      "ocupacion",
-      "vecinos"
-    ],
-    "relatedTo": [
-      "los-angeles-de-san-rafael"
-    ],
-    "score": 18,
-    "relevanceScore": 18,
-    "isRelevant": true,
-    "category": "juntas_y_vecinos",
-    "publishedAt": "2026-02-03T09:51:42",
-    "year": 2026,
-    "canonicalUrl": "https://lavozdeelespinar.es/crece-la-preocupacion-en-la-promocion-jardines-de-los-angeles-de-san-rafael-por-nuevas-ocupaciones-y-conflictos-en-la-zona",
-    "featured": false
+    "sourceType": "local",
+    "category": "juntas_y_vecinos"
   },
   {
-    "id": "news-59a0c251c86a",
-    "feedGuid": "",
     "title": "Vecinos de Los Ángeles de San Rafael denuncian ocupaciones ilegales",
+    "source": "La Voz de El Espinar",
     "date": "2025-11-08",
-    "source": "La Voz de El Espinar",
-    "sourceType": "local",
     "url": "https://lavozdeelespinar.es/vecinos-de-los-angeles-de-san-rafael-denuncian-ocupaciones-ilegales",
-    "tags": [
-      "los angeles de san rafael",
-      "ocupacion",
-      "vecinos"
-    ],
-    "relatedTo": [
-      "los-angeles-de-san-rafael"
-    ],
-    "score": 18,
-    "relevanceScore": 18,
-    "isRelevant": true,
-    "category": "juntas_y_vecinos",
-    "publishedAt": "2025-11-08T11:53:22",
-    "year": 2025,
-    "canonicalUrl": "https://lavozdeelespinar.es/vecinos-de-los-angeles-de-san-rafael-denuncian-ocupaciones-ilegales",
-    "featured": false
+    "sourceType": "local",
+    "category": "juntas_y_vecinos"
   },
   {
-    "id": "news-25f78f046f98",
-    "feedGuid": "",
     "title": "Europa investigará la gestión del agua en Los Ángeles de San Rafael tras la denuncia de Vecinos Núcleos de El Espinar",
+    "source": "La Voz de El Espinar",
     "date": "2025-11-05",
-    "source": "La Voz de El Espinar",
-    "sourceType": "local",
     "url": "https://lavozdeelespinar.es/europa-investigara-la-gestion-del-agua-en-los-angeles-de-san-rafael-tras-la-denuncia-de-vecinos-nucleos-de-el-espinar",
-    "tags": [
-      "los angeles de san rafael",
-      "vecinos"
-    ],
-    "relatedTo": [
-      "los-angeles-de-san-rafael"
-    ],
-    "score": 14,
-    "relevanceScore": 14,
-    "isRelevant": true,
-    "category": "juntas_y_vecinos",
-    "publishedAt": "2025-11-05T08:31:23",
-    "year": 2025,
-    "canonicalUrl": "https://lavozdeelespinar.es/europa-investigara-la-gestion-del-agua-en-los-angeles-de-san-rafael-tras-la-denuncia-de-vecinos-nucleos-de-el-espinar",
-    "featured": false
+    "sourceType": "local",
+    "category": "juntas_y_vecinos"
   },
   {
-    "id": "news-cb233fb7e0b2",
-    "feedGuid": "",
     "title": "El Ayuntamiento saca a subasta 22 parcelas municipales en Los Ángeles de San Rafael",
-    "date": "2025-02-28",
     "source": "La Voz de El Espinar",
-    "sourceType": "local",
+    "date": "2025-02-28",
     "url": "https://lavozdeelespinar.es/el-ayuntamiento-saca-a-subasta-22-parcelas-municipales-en-los-angeles-de-san-rafael",
-    "tags": [
-      "los angeles de san rafael"
-    ],
-    "relatedTo": [
-      "los-angeles-de-san-rafael"
-    ],
-    "score": 10,
-    "relevanceScore": 10,
-    "isRelevant": true,
-    "category": "contexto_municipal",
-    "publishedAt": "2025-02-28T12:30:55",
-    "year": 2025,
-    "canonicalUrl": "https://lavozdeelespinar.es/el-ayuntamiento-saca-a-subasta-22-parcelas-municipales-en-los-angeles-de-san-rafael",
-    "featured": false
+    "sourceType": "local",
+    "category": "contexto_municipal"
   },
   {
-    "id": "news-a738ded9d901",
-    "feedGuid": "",
     "title": "El inicio de las obras en un puente de la N-603 a la altura de Los Ángeles de San Rafael implicará afecciones al tráfico",
-    "date": "2024-04-06",
     "source": "La Voz de El Espinar",
-    "sourceType": "local",
+    "date": "2024-04-06",
     "url": "https://lavozdeelespinar.es/el-inicio-de-las-obras-en-un-puente-de-la-n-603-a-la-altura-de-los-angeles-de-san-rafael-implicara-afecciones-al-trafico",
-    "tags": [
-      "los angeles de san rafael",
-      "n-603"
-    ],
-    "relatedTo": [
-      "los-angeles-de-san-rafael"
-    ],
-    "score": 13,
-    "relevanceScore": 13,
-    "isRelevant": true,
-    "category": "infraestructuras",
-    "publishedAt": "2024-04-06T11:04:30",
-    "year": 2024,
-    "canonicalUrl": "https://lavozdeelespinar.es/el-inicio-de-las-obras-en-un-puente-de-la-n-603-a-la-altura-de-los-angeles-de-san-rafael-implicara-afecciones-al-trafico",
-    "featured": false
+    "sourceType": "local",
+    "category": "infraestructuras"
   }
 ]
