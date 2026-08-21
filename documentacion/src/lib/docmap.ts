@@ -201,9 +201,9 @@ function firstDate(sources: Source[]): number {
 }
 
 /** Procedimientos con documentos, cada hijo inmediatamente bajo su padre. */
-function orderProcedures(): { proc: Procedure; depth: number; sources: Source[] }[] {
+function orderProcedures(sources: Source[]): { proc: Procedure; depth: number; sources: Source[] }[] {
   const withDocs = new Map<string, Source[]>();
-  for (const s of graph.sources) {
+  for (const s of sources) {
     const p = s.data.procedure;
     if (!p) continue;
     const list = withDocs.get(p);
@@ -246,8 +246,13 @@ function laneTitle(proc: Procedure): string {
   return dash === -1 ? proc.data.title : proc.data.title.slice(dash + 1).trim();
 }
 
-export function buildDocMap(): DocMap {
-  const labels = buildLabels(graph.sources);
+/**
+ * @param sources documentos a dibujar. Por defecto todos, pero las páginas
+ * pasan los publicables: dibujar un nodo cuya ficha no existe deja un enlace
+ * al vacío, y el mapa dejaría de coincidir con el sitio.
+ */
+export function buildDocMap(sources: Source[] = graph.sources): DocMap {
+  const labels = buildLabels(sources);
 
   const toNode = (s: Source): DocNode => {
     const label = labels.get(s.data.id)!;
@@ -269,10 +274,10 @@ export function buildDocMap(): DocMap {
     };
   };
 
-  const scale = buildScale(new Set(graph.sources.map((s) => s.data.date.getUTCFullYear())));
+  const scale = buildScale(new Set(sources.map((s) => s.data.date.getUTCFullYear())));
 
   const lanes: DocLane[] = [];
-  for (const { proc, depth, sources } of orderProcedures()) {
+  for (const { proc, depth, sources: docsDelProc } of orderProcedures(sources)) {
     lanes.push({
       key: proc.data.id,
       kind: 'procedure',
@@ -283,11 +288,11 @@ export function buildDocMap(): DocMap {
       y: 0,
       height: 0,
       rows: 0,
-      nodes: sources.map(toNode),
+      nodes: docsDelProc.map(toNode),
     });
   }
 
-  const loose = graph.sources
+  const loose = sources
     .filter((s) => !s.data.procedure)
     .sort((a, b) => a.data.date.getTime() - b.data.date.getTime());
   lanes.push({
@@ -317,7 +322,7 @@ export function buildDocMap(): DocMap {
   for (const lane of lanes) for (const n of lane.nodes) byId.set(n.id, n);
 
   const edges: DocEdge[] = [];
-  for (const s of graph.sources) {
+  for (const s of sources) {
     for (const r of s.data.relations) {
       const from = byId.get(s.data.id);
       const to = byId.get(r.target);
@@ -349,11 +354,11 @@ export function buildDocMap(): DocMap {
     height: Math.round(cursorY + 8),
     axisY: AXIS_H - 10,
     totals: {
-      sources: graph.sources.length,
-      inProcedure: graph.sources.length - loose.length,
+      sources: sources.length,
+      inProcedure: sources.length - loose.length,
       loose: loose.length,
       edges: edges.length,
-      isolated: graph.sources.length - related.size,
+      isolated: sources.length - related.size,
     },
   };
 }

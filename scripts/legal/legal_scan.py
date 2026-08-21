@@ -130,11 +130,28 @@ def actor_names() -> list[str]:
     return names
 
 
-def load_baseline(path: Path) -> set[str]:
+def load_baseline(path: Path) -> list[dict]:
+    """Hallazgos ya valorados. Cada entrada acota por huella y, opcionalmente,
+    por regla y por fichero: aceptar «esta cadena, en este documento» no puede
+    silenciarla en todo el repositorio."""
     if not path.exists():
-        return set()
+        return []
     data = json.loads(path.read_text(encoding="utf-8"))
-    return {item["fingerprint"] for item in data.get("accepted", [])}
+    return list(data.get("accepted", []))
+
+
+def is_accepted(finding: Finding, baseline: list[dict]) -> bool:
+    for item in baseline:
+        if item.get("fingerprint") not in (None, finding.fingerprint):
+            continue
+        if item.get("rule") not in (None, finding.rule):
+            continue
+        if item.get("path") not in (None, finding.path):
+            continue
+        if item.get("fingerprint") is None and item.get("path") is None:
+            continue                      # una entrada sin ningún acotador no acepta nada
+        return True
+    return False
 
 
 # --------------------------------------------------------------------------
@@ -218,7 +235,7 @@ def press_findings(path: Path, relpath: str, text: str) -> list[Finding]:
     return out
 
 
-def scan(paths: list[Path], rules, manifest, baseline: set[str]) -> list[Finding]:
+def scan(paths: list[Path], rules, manifest, baseline: list[dict]) -> list[Finding]:
     findings: list[Finding] = []
     for path in paths:
         if not path.is_file() or is_fixture(path):
@@ -236,7 +253,7 @@ def scan(paths: list[Path], rules, manifest, baseline: set[str]) -> list[Finding
     accepted = manifest.accepted_rules if manifest else (lambda _: set())
     out = []
     for f in findings:
-        if f.fingerprint in baseline or f.rule in accepted(f.path):
+        if is_accepted(f, baseline) or f.rule in accepted(f.path):
             continue
         out.append(f)
     return out
@@ -326,6 +343,8 @@ def main(argv: list[str]) -> int:
         print("  LEGAL-PDF-001          MEDIO  Metadatos del PDF")
         print("  LEGAL-EXIF-001         GRAVE  EXIF con GPS o autoría")
         print("  LEGAL-PRESS-001        GRAVE  Texto del medio reproducido")
+        print("\nLa lista blanca de correos y de dominios propios sale de")
+        print("audit/portal-manifest.json; la de nombres, de los actores declarados.")
         return 0
 
     try:

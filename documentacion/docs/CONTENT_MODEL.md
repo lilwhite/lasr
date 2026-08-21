@@ -345,7 +345,7 @@ Reglas:
 
 ## 7. Estados
 
-Tres ejes independientes; no mezclarlos. Una nota puede estar humanamente revisada y, a la vez, sustentada por documentación contradictoria: eso es `editorialStatus: reviewed` + `evidenceStatus: disputed`.
+Cuatro ejes independientes; no mezclarlos. Una nota puede estar humanamente revisada y, a la vez, sustentada por documentación contradictoria: eso es `editorialStatus: reviewed` + `evidenceStatus: disputed`. Y puede estar impecablemente revisada y aun así no ser publicable, porque nombra a un particular: eso es el cuarto eje.
 
 **`basis` — naturaleza del conocimiento** (qué clase de apoyo tiene la afirmación):
 
@@ -379,7 +379,52 @@ La promoción `draft → reviewed` es siempre un acto humano; nada se promociona
 
 `disputed` e `incomplete` **no ocultan contenido**: una nota `reviewed` con evidencia controvertida puede publicarse, pero la interfaz debe dejar explícita la discrepancia. El sistema nunca esconde una contradicción documental para simplificar la explicación. Las fechas contradictorias de los Events no usan este eje: tienen su mecanismo específico `dateStatus`/`dateEvidence` (§3.3), sin duplicar información.
 
-Regla de publicación (implementada en `src/lib/policy.ts`): publicable como contenido asentado ⇔ `editorialStatus ∈ {reviewed, verified}` y, en Sources, las reglas de privacidad de §10; `basis` y `evidenceStatus` se muestran siempre al lector cuando aportan cautela. **Todo lo generado con ayuda de IA nace `draft`**, sin excepciones.
+**Todo lo generado con ayuda de IA nace `draft`**, sin excepciones. `basis` y `evidenceStatus` se muestran siempre al lector cuando aportan cautela.
+
+### 7.4 `legalStatus` — ¿puede el sitio publicar esto?
+
+> Esta sección corrige lo que decía la anterior. Durante un tiempo aquí se leía que era publicable lo que tuviera `editorialStatus ∈ {reviewed, verified}`. `policy.ts:31` dejó de aplicar esa regla hace tiempo —devuelve `true` para todo, con el razonamiento escrito en su comentario— y la especificación no se actualizó. La regla real es la de abajo.
+
+El cuarto eje no dice si una afirmación es cierta ni si está revisada: dice si el sitio puede publicarla sin exponer a nadie. Es ortogonal a los otros tres.
+
+| legalStatus | Significado | ¿Genera página? |
+|---|---|---|
+| `unchecked` | (default) Sin revisión jurídica. Se publica y queda inventariado como deuda | Sí |
+| `cleared` | Revisado: no expone datos de ninguna persona física | Sí |
+| `cleared-redacted` | Revisado **tras suprimir algo**. Exige `redactions` | Sí |
+| `needs-human-review` | Hay una cuestión que una persona tiene que valorar | Sí, pero bloquea la rama que lo toque |
+| `blocked` | No se publica | **No** |
+
+**No se confunde con `privacyReview` (§10), y los dos conviven.** `privacyReview` solo existe en Source y decide sobre el PDF original: *¿enlazo el fichero?* `legalStatus` decide sobre lo que el sitio publica: la nota, la cita, la ficha, la página. Un documento puede estar en `privacyReview: needs-redaction` y su ficha en `legalStatus: cleared`, porque la ficha cuenta qué dice el documento sin reproducir el dato.
+
+**`blocked` nunca saca la entidad del grafo.** `graph.ts:resolve()` lanza si un identificador no existe, y las relaciones, las citas y el emisor siguen apuntándole. Se filtra solo en publicación, en `policy.ts`.
+
+**Trazabilidad.** Todo estado distinto de `unchecked` exige `legalReview` con `reviewedAt` y `reason`; `cleared-redacted` exige además `redactions`. Y hay una regla dura sobre qué se escribe ahí:
+
+> `reason` y cada `redactions` describen la **categoría** del dato tratado y la regla aplicada, **nunca su valor**. El build lo comprueba y se niega a terminar si el texto contiene un documento de identidad, un IBAN o una dirección de correo.
+
+```yaml
+legalStatus: cleared-redacted
+legalReview:
+  reviewedAt: 2026-08-21
+  reason: 'LEGAL-PRIVACY-001: la ficha citaba a un particular por su nombre'
+  redactions:
+    - 'nombre de particular → «la parte apelante»'
+    - 'número de documento de identidad → suprimido'
+```
+
+**El eje es interno.** El lector nunca lo ve: solo aparece bajo `PREVIEW` y en `/revision/`. Publicar «pendiente de revisión jurídica» en una página es señalar dónde mirar.
+
+**Regla de publicación real**, implementada en `src/lib/policy.ts` y comprobada por `documentacion/scripts/check_gate.py`:
+
+```
+se publica ⇔ legalStatus ≠ 'blocked'
+se enlaza el PDF original ⇔ legalStatus ≠ 'blocked'
+                            ∧ publicationStatus = 'public'
+                            ∧ privacyReview.status = 'approved'
+```
+
+El eje se declara en las **ocho** colecciones. Olvidarlo en una no rompe nada: esa colección se queda sin eje jurídico para siempre, en silencio. Por eso `scripts/legal/gate.py --check-schema` cuenta que `...legalFields` aparezca ocho veces.
 
 ## 8. IDs estables
 

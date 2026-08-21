@@ -10,7 +10,7 @@ import {
   graph, entitySlug, notesCiting, eventsCiting, inverseRelations, formatDate,
 } from '../../lib/graph';
 import {
-  visibleOnly, canLinkPdf, DOC_TYPE_LABEL, PUBLICATION_LABEL, PRIVACY_LABEL, RELATION_LABEL,
+  visibleOnly, canPublish, canLinkPdf, DOC_TYPE_LABEL, PUBLICATION_LABEL, PRIVACY_LABEL, RELATION_LABEL,
 } from '../../lib/policy';
 
 export async function getStaticPaths() {
@@ -25,7 +25,7 @@ const d = source.data;
 const { Content } = await render(source);
 const notes = visibleOnly(notesCiting(d.id));
 const events = visibleOnly(eventsCiting(d.id));
-const inverse = inverseRelations(d.id);
+const inverse = inverseRelations(d.id).filter((r) => canPublish(r.from));
 const pdfLinkable = canLinkPdf(source);
 ---
 

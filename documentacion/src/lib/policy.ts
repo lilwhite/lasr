@@ -15,30 +15,86 @@ export const PREVIEW: boolean = import.meta.env.DEV || process.env.LASR_PREVIEW 
 
 type Editorial = 'draft' | 'reviewed' | 'verified';
 type Evidence = 'unassessed' | 'consistent' | 'disputed' | 'incomplete';
+export type Legal =
+  | 'unchecked' | 'cleared' | 'cleared-redacted' | 'needs-human-review' | 'blocked';
 
 /**
- * Visibilidad pública.
- *
- * Hasta ahora ocultaba todo lo que estuviera en borrador, y como el corpus
- * entero lo está, el sitio público generaba 26 páginas de 433: un esqueleto.
- * La decisión editorial es publicar el borrador **con el estado a la vista**,
- * porque la trazabilidad ya existe y ocultarlo todo no hace la web más
- * rigurosa, solo inútil.
- *
- * Se conserva como punto único de estrangulamiento: si algún día hay que
- * excluir una entrada concreta, se hace aquí y en ningún otro sitio.
+ * Eje jurídico de una entrada (CONTENT_MODEL §7.4). Lee `data` de forma
+ * genérica, como `readerFlags`, para no necesitar una firma por colección.
  */
-export function isVisible(_entry: Entity): boolean {
-  return true;
+export function legalStatusOf(entry: { data: unknown }): Legal {
+  return ((entry.data as { legalStatus?: Legal }).legalStatus) ?? 'unchecked';
 }
 
-/** Filtra por visibilidad. Hoy identidad; ver `isVisible`. */
+/**
+ * ¿Puede el SITIO publicar esta entrada?
+ *
+ * Solo mira el eje jurídico. No toca `privacyReview`, que existe únicamente en
+ * Source y decide sobre el fichero original, no sobre lo que la ficha cuenta:
+ * componer los dos ejes aquí rompería en notas, temas y actores, que no tienen
+ * ese campo.
+ */
+// La firma acepta cualquier cosa con `data` a propósito: `pages` lleva el eje
+// jurídico pero no forma parte del grafo, así que no es un `Entity`.
+export function canPublish(entry: { data: unknown }): boolean {
+  return legalStatusOf(entry) !== 'blocked';
+}
+
+/**
+ * Visibilidad pública. El punto único de estrangulamiento que este comentario
+ * llevaba tiempo prometiendo.
+ *
+ * Durante un tiempo ocultó todo lo que estuviera en borrador, y como el corpus
+ * entero lo está, el sitio público generaba 26 páginas de 433: un esqueleto. La
+ * decisión editorial fue publicar el borrador **con el estado a la vista**,
+ * porque la trazabilidad ya existe y ocultarlo todo no hace la web más
+ * rigurosa, solo inútil. Eso no ha cambiado: `draft` se sigue publicando.
+ *
+ * Lo que sí excluye ahora es lo que no debe publicarse por razones jurídicas, y
+ * eso se decide aquí y en ningún otro sitio.
+ */
+export function isVisible(entry: Entity): boolean {
+  return canPublish(entry);
+}
+
+/** Filtra por visibilidad. Ver `isVisible`. */
 export function visibleOnly<T extends Entity>(entries: T[]): T[] {
   return entries.filter(isVisible);
 }
 
+/**
+ * El grafo ya filtrado por publicabilidad.
+ *
+ * Las páginas de índice y los recuentos parten SIEMPRE de aquí, nunca de
+ * `graph.*`: si una entidad se bloquea no debe seguir contándose entre «los 150
+ * documentos» ni asomando el título en una lista. Bloquear una entidad y
+ * dejarla en el contador es peor que no bloquearla, porque el hueco se nota.
+ *
+ * `blocked` NO saca la entidad del grafo: `graph.ts:resolve()` lanza si un
+ * identificador no existe, y las relaciones, las citas y el emisor siguen
+ * apuntándole. Se filtra solo en publicación.
+ *
+ * No importar `policy.ts` desde `graph.ts`: sería un ciclo, y los dos módulos
+ * trabajan en el momento de importarse.
+ */
+export const published = {
+  sources: visibleOnly(graph.sources),
+  notes: visibleOnly(graph.notes),
+  events: visibleOnly(graph.events),
+  actors: visibleOnly(graph.actors),
+  procedures: visibleOnly(graph.procedures),
+  topics: visibleOnly(graph.topics),
+  questions: visibleOnly(graph.questions),
+} as const;
+
+/**
+ * El original solo se enlaza si además de las dos condiciones de privacidad la
+ * ficha es publicable. La conjunción nueva va delante y solo puede endurecer:
+ * nunca afloja lo que ya se exigía.
+ */
 export function canLinkPdf(source: Source): boolean {
   return (
+    canPublish(source) &&
     source.data.publicationStatus === 'public' &&
     source.data.privacyReview.status === 'approved'
   );
