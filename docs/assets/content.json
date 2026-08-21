@@ -25,20 +25,6 @@
         "label": "Cumplimiento efectivo",
         "icon": "alert"
       }
-    ],
-    "突出的问题": [
-      {
-        "titulo": "Falta de transparencia",
-        "descripcion": "Más de una década sin asambleas de propietarios, sin presupuestos aprobados ni cuentas presentadas."
-      },
-      {
-        "titulo": "Doble pago",
-        "descripcion": "Los vecinos pagan IBI y cuotas de mantenimiento, pero no reciben servicios municipales equivalentes."
-      },
-      {
-        "titulo": "Sentencia sin ejecutar",
-        "descripcion": "La resolución judicial fijó un criterio favorable a la recepción de fases I y II, pero su implementación material sigue generando controversias."
-      }
     ]
   },
   "situacion": {
@@ -245,9 +231,23 @@
   },
   "documentos": {
     "titulo": "Documentación",
-    "descripcion": "Fuentes externas para ampliar información: normativa, referencias institucionales y prensa.",
+    "descripcion": "La guía documental del caso, y fuentes externas para ampliar información: normativa, referencias institucionales y prensa.",
     "nota": "Repositorio de apoyo en actualización continua.",
     "grupos": [
+      {
+        "titulo": "Guía documental",
+        "descripcion": "La documentación del caso, afirmación a afirmación, con su respaldo.",
+        "items": [
+          {
+            "titulo": "Guía documental de Los Ángeles de San Rafael",
+            "descripcion": "Sentencias, autos, actas y comunicaciones del caso, ordenados y explicados. Cada afirmación indica de qué documento sale y en qué página, para que cualquiera pueda comprobarla.",
+            "tipo": "documento",
+            "url": "/documentacion/",
+            "fecha": "Cronología, temas, preguntas y fichas de documento",
+            "cta": "Abrir la guía documental"
+          }
+        ]
+      },
       {
         "titulo": "Normativa",
         "descripcion": "Marco legal aplicable en Castilla y León.",
