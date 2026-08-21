@@ -68,7 +68,7 @@ versionan ni se publican.
 | `Carta EUC 28_01_16.pdf` | `ebde03b4` | 2 | no | comunicacion | procesado | src-2016-euc-carta.pdf |
 | `Carta EUCpdf · versión 1_260817_221402.pdf` | `a2a3b4fd` | 1 | no | comunicacion | procesado | src-2015-euc-convocatoria.pdf |
 | `Circular y sentencia 1852017 .pdf` | `699d86a1` | 22 | sí | sentencia | procesado | src-2026-cp-lasr-circular-001.pdf |
-| `Desestimacion a Oscar contra Ayto..pdf` | `b3f347ad` | 23 | sí | desconocido | procesado | src-2011-jca-segovia-6.pdf |
+| `Desestimacion a [nombre retirado] contra Ayto..pdf` | `b3f347ad` | 23 | sí | desconocido | procesado | src-2011-jca-segovia-6.pdf |
 | `EMPADRONADO Sí o No.pdf` | `a26d48f4` | 1 | sí | desconocido | material-de-referencia | — |
 | `EXTRACTO LEY 1 1998 de 04 06 98 TEXTO CONSOLIDADO 14052024.pdf` | `87a03ad8` | 3 | no | desconocido | material-de-referencia | — |
 | `Estatutos EUC.pdf` | `a5775585` | 17 | no | estatutos | duplicado-registrado | — |
