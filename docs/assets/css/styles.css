@@ -1098,12 +1098,6 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 0.45rem;
 }
 
-.press-row-excerpt {
-    font-size: var(--font-size-sm);
-    color: var(--color-text-light);
-    line-height: 1.7;
-}
-
 .press-source-link {
     display: inline-flex;
     align-items: center;

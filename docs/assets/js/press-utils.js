@@ -61,132 +61,11 @@
     );
   }
 
-  function isSupplementalMultiSourceCandidate(item) {
-    if (!item || item.isRelevant === true) return false;
-    const sourceType = (item.sourceType || '').toLowerCase();
-    if (sourceType === 'local') return false;
-
-    const score = Number(item.relevanceScore ?? item.score) || 0;
-    if (score < 0) return false;
-
-    const text = `${item.title || ''} ${item.summary || ''} ${item.excerpt || ''}`.toLowerCase();
-    const contextTerms = [
-      'el espinar',
-      'los angeles de san rafael',
-      'los ángeles de san rafael'
-    ];
-    const thematicTerms = [
-      'urbanismo',
-      'urbanizacion',
-      'urbanización',
-      'consultorio',
-      'sanidad',
-      'seguridad',
-      'ocupacion',
-      'okupacion',
-      'infraestructuras',
-      'n-603',
-      'presa del tejo',
-      'mancomunidad',
-      'euc',
-      'entidad urbanistica de conservacion',
-      'entidad urbanística de conservación',
-      'agua',
-      'saneamiento'
-    ];
-
-    const hasContext = contextTerms.some((term) => text.includes(term));
-    const hasTheme = thematicTerms.some((term) => text.includes(term));
-    return hasContext && hasTheme;
-  }
-
+  // El archivo publica solo las noticias del conflicto. Las candidatas
+  // descartadas no se almacenan (ver fetch_press.py), así que aquí no hay
+  // nada que reincorporar: el archivo es exactamente la selección relevante.
   function getArchiveNews(items) {
-    const relevant = getRelevantNews(items);
-    const supplementalBySource = new Map();
-
-    const strictContextualSupplement = sortNews(Array.isArray(items) ? items : []).filter((item) =>
-      isSupplementalMultiSourceCandidate(item)
-    );
-
-    const fallbackBySource = sortNews(Array.isArray(items) ? items : []).filter((item) => {
-      if (!item || item.isRelevant === true) return false;
-      const sourceType = (item.sourceType || '').toLowerCase();
-      if (sourceType === 'local') return false;
-      const score = Number(item.relevanceScore ?? item.score) || 0;
-      if (score < 0) return false;
-      const text = `${item.title || ''} ${item.summary || ''} ${item.excerpt || ''}`.toLowerCase();
-      return text.includes('el espinar');
-    });
-
-    [...strictContextualSupplement, ...fallbackBySource].forEach((item) => {
-      const source = (item.source || '').trim();
-      if (!source) return;
-      const existing = supplementalBySource.get(source) || [];
-      if (existing.length >= 1) return;
-      existing.push(item);
-      supplementalBySource.set(source, existing);
-    });
-
-    const supplemental = [];
-    supplementalBySource.forEach((rows) => supplemental.push(...rows));
-
-    const output = [];
-    const seen = new Set();
-    [...relevant, ...supplemental].forEach((item) => {
-      if (!item || !item.id || seen.has(item.id)) return;
-      seen.add(item.id);
-      output.push(item);
-    });
-
-    return sortNews(output);
-  }
-
-  function mentionLASR(item) {
-    const text = `${item.title || ''} ${item.excerpt || ''}`.toLowerCase();
-    return text.includes('los angeles de san rafael') || text.includes('los ángeles de san rafael');
-  }
-
-  function isContextualFallbackCandidate(item) {
-    if (!item || item.isRelevant === true) return false;
-
-    const allowedCategories = new Set([
-      'juntas_y_vecinos',
-      'urbanismo',
-      'recepcion',
-      'infraestructuras',
-      'servicios',
-      'judicial',
-      'contexto_municipal'
-    ]);
-
-    const text = `${item.title || ''} ${item.excerpt || ''}`.toLowerCase();
-    const contextTerms = [
-      'urbanizacion',
-      'urbanización',
-      'copropietarios',
-      'propietarios',
-      'vecinos',
-      'euc',
-      'eucc',
-      'recepcion',
-      'recepción',
-      'sentencia',
-      'ayuntamiento',
-      'infraestructuras',
-      'servicios'
-    ];
-
-    const hasContextTerm = contextTerms.some((term) => text.includes(term));
-    const hasAllowedCategory = allowedCategories.has(item.category);
-    const hasEnoughScore = (Number(item.relevanceScore) || 0) >= 4;
-
-    return hasAllowedCategory && hasContextTerm && hasEnoughScore;
-  }
-
-  function isStrongFallbackCandidate(item) {
-    if (!item || item.isRelevant === true) return false;
-    const score = Number(item.relevanceScore) || 0;
-    return isContextualFallbackCandidate(item) && score >= 7;
+    return getRelevantNews(items);
   }
 
   function getLandingFeaturedNews(items, limit) {
@@ -301,7 +180,7 @@
 
     const afterQuery = afterYear.filter((item) => {
       if (!normalizedFilters.query) return true;
-      const text = `${item.title || ''} ${item.excerpt || ''}`.toLowerCase();
+      const text = `${item.title || ''} ${item.source || ''}`.toLowerCase();
       return text.includes(normalizedFilters.query);
     });
 

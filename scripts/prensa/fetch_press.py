@@ -114,7 +114,10 @@ def run(config_path: Path, output_path: Path, timeout: int):
         if item.id not in deduped_ids:
             stats["deduped"] += 1
 
-    ordered = sort_items(deduped)
+    # Solo se almacenan las noticias del conflicto. Las candidatas descartadas
+    # no llegan al fichero publicado: entre ellas hay sucesos, causas penales y
+    # menores identificados que nada tienen que ver con el objeto del sitio.
+    ordered = sort_items([item for item in deduped if item.is_relevant])
     limited = ordered[:max_items]
     for item in limited:
         stats = source_stats.get(item.source)
@@ -132,8 +135,6 @@ def run(config_path: Path, output_path: Path, timeout: int):
                 "source": item.source,
                 "sourceType": item.source_type,
                 "url": item.url,
-                "summary": item.summary,
-                "excerpt": item.summary,
                 "tags": item.tags,
                 "relatedTo": item.related_to,
                 "score": item.score,
@@ -151,9 +152,8 @@ def run(config_path: Path, output_path: Path, timeout: int):
 
     write_json(output_path, output)
 
-    relevant = [item for item in output if item.get("isRelevant")]
     years = sorted(
-        {item.get("year") for item in relevant if isinstance(item.get("year"), int)}
+        {item.get("year") for item in output if isinstance(item.get("year"), int)}
     )
     year_info = f"{years[0]}-{years[-1]}" if years else "sin rango"
 
@@ -165,8 +165,8 @@ def run(config_path: Path, output_path: Path, timeout: int):
             f"normalized={stats['normalized']} relevant={stats['relevant']} "
             f"deduped={stats['deduped']} final={stats['final']}"
         )
-    print(f"[ok] Total candidatas: {len(output)} | Relevantes: {len(relevant)}")
-    print(f"[ok] Rango histórico relevante: {year_info}")
+    print(f"[ok] Noticias publicadas: {len(output)}")
+    print(f"[ok] Rango histórico publicado: {year_info}")
     print(f"[ok] JSON generado: {output_path}")
 
 
