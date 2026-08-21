@@ -7,6 +7,7 @@
 
   const documents = [
     { file: 'documentacion_relevante.md', slug: 'documentacion-relevante', title: 'Documentacion relevante', category: 'referencia', order: 0 },
+    { file: 'estatutos-comunidad.md', slug: 'estatutos-comunidad', title: 'Estatutos de la Comunidad', category: 'referencia', order: 1 },
     { file: 'CHANGELOG.md', slug: 'actualizaciones', title: 'Historial de cambios', category: 'portal', order: 99, hideInSidebar: true }
   ];
 

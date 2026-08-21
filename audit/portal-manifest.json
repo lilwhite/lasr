@@ -3,7 +3,8 @@
   "updated": "2026-08-21",
   "_comentario": "Estado jurídico de cada pieza del portal, y a la vez lista blanca de despliegue: gate.py --copy-portal solo copia lo que aparece aquí sin publish:false. Este fichero vive fuera de docs/ a propósito.",
   "allowedEmails": [
-    "info@lasr-info.es"
+    "info@lasr-info.es",
+    "contacto@lasr-info.es"
   ],
   "allowedHosts": [
     "lasr-info.es",
@@ -60,8 +61,12 @@
       "reason": "Pendiente de revisión jurídica: se publica como deuda registrada"
     },
     "docs/assets/content.json": {
-      "legalStatus": "unchecked",
-      "reason": "Pendiente de revisión jurídica: se publica como deuda registrada"
+      "legalStatus": "cleared",
+      "reviewedAt": "2026-08-21",
+      "reason": "Revisado el contenido del portal: los nombres que aparecen son instituciones —Procurador del Común, Poder Judicial, entidades urbanísticas— salvo la mención del promotor en la línea temporal, que es figura pública fallecida y hecho histórico sin imputación. El correo publicado es el de contacto del proyecto.",
+      "acceptedRules": [
+        "LEGAL-NAME-001"
+      ]
     },
     "docs/assets/css/styles.css": {
       "legalStatus": "unchecked",
@@ -77,8 +82,9 @@
       "reason": "Imagen: los píxeles no son inspeccionables automáticamente"
     },
     "docs/assets/js/docs.js": {
-      "legalStatus": "unchecked",
-      "reason": "Pendiente de revisión jurídica: se publica como deuda registrada"
+      "legalStatus": "cleared",
+      "reviewedAt": "2026-08-21",
+      "reason": "Renderizador de los documentos en Markdown del portal y su registro de rutas. No contiene contenido ni datos: solo el índice de qué fichero sirve cada página."
     },
     "docs/assets/js/ga4.js": {
       "legalStatus": "unchecked",
@@ -138,20 +144,12 @@
       "reason": "Configuración del agregador: es entrada del script Python, el front no la usa"
     },
     "docs/doc.html": {
-      "legalStatus": "unchecked",
-      "reason": "Pendiente de revisión jurídica: se publica como deuda registrada · reglas aceptadas: LEGAL-THIRDPARTY-001 (pendiente de la retirada de la analítica y del alojamiento propio de los recursos)",
+      "legalStatus": "cleared",
+      "reviewedAt": "2026-08-21",
+      "reason": "Visor genérico: renderiza el documento que se le pase por parámetro y no tiene contenido propio. Marcado noindex por ser una página huérfana.",
       "acceptedRules": [
         "LEGAL-THIRDPARTY-001"
       ]
-    },
-    "docs/documentacion": {
-      "legalStatus": "unchecked",
-      "reason": "Pendiente de revisión jurídica: se publica como deuda registrada"
-    },
-    "docs/documentacion-relevante/estatutos-comunidad.pdf": {
-      "legalStatus": "needs-human-review",
-      "reviewedAt": "2026-08-21",
-      "reason": "Escaneo sin capa de texto: su contenido no es inspeccionable automáticamente y no consta revisión humana página a página"
     },
     "docs/documentacion-relevante/index.html": {
       "legalStatus": "unchecked",
@@ -166,6 +164,19 @@
       "acceptedRules": [
         "LEGAL-PRIVACY-003",
         "LEGAL-PRIVACY-004"
+      ]
+    },
+    "docs/estatutos-comunidad.md": {
+      "legalStatus": "cleared",
+      "reviewedAt": "2026-08-21",
+      "reason": "Transcripción del cuadernillo de estatutos, cotejada página a página contra el original. El documento no contiene datos de ninguna persona física: la única entidad nombrada es la mercantil urbanizadora. Sustituye al escaneo, que no era inspeccionable y arrastraba metadatos del equipo que lo generó."
+    },
+    "docs/estatutos-comunidad/index.html": {
+      "legalStatus": "cleared",
+      "reviewedAt": "2026-08-21",
+      "reason": "Transcripción del cuadernillo de estatutos, cotejada página a página contra el original. El documento no contiene datos de ninguna persona física: la única entidad nombrada es la mercantil urbanizadora. Sustituye al escaneo, que no era inspeccionable y arrastraba metadatos del equipo que lo generó.",
+      "acceptedRules": [
+        "LEGAL-THIRDPARTY-001"
       ]
     },
     "docs/index.html": {
@@ -202,8 +213,9 @@
       "reason": "Pendiente de revisión jurídica: se publica como deuda registrada"
     },
     "docs/sitemap.xml": {
-      "legalStatus": "unchecked",
-      "reason": "Pendiente de revisión jurídica: se publica como deuda registrada"
+      "legalStatus": "cleared",
+      "reviewedAt": "2026-08-21",
+      "reason": "Seis URL públicas del portal, escritas a mano. No lista rutas retiradas ni las tres redirecciones, que llevan noindex. Se añade la transcripción de los estatutos."
     }
   },
   "content": {
@@ -220,9 +232,10 @@
         "reason": "Pendiente de revisión jurídica: se publica como deuda registrada"
       },
       "documentos": {
-        "legalStatus": "unchecked",
-        "sha256": "9c6ffa81f9d4d337eeae9dbee67e4df5373db2643cd004dd9779abdd31a11939",
-        "reason": "Pendiente de revisión jurídica: se publica como deuda registrada"
+        "legalStatus": "cleared",
+        "sha256": "1080144f7fc7df764b5243ffbe4d7c08bdd4d13638ddbaa36d75b5b7119dc414",
+        "reviewedAt": "2026-08-21",
+        "reason": "Revisada la sección de documentos del portal: son referencias a normativa oficial, a información institucional y a la guía documental. La ficha de los estatutos deja de apuntar a un escaneo y apunta a su transcripción."
       },
       "faq": {
         "legalStatus": "unchecked",

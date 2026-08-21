@@ -62,6 +62,15 @@ def summarize_prs(prs: List[Dict], max_items: int = 6) -> List[str]:
     return lines
 
 
+# GitHub titula una PR con el nombre de la rama cuando no se le da uno. Esos
+# títulos acaban en el changelog del portal, que es público: «Dev» y
+# «Fix/retirar datos personales» no le dicen nada a un vecino y sí filtran la
+# nomenclatura interna del repositorio.
+RAMA_COMO_TITULO = re.compile(
+    r"^(?:feature|fix|docs|visual|chore|dev|main|release)(?:[/-].*)?$", re.I
+)
+
+
 def sanitize_release_changes(lines: List[str], max_items: int = 4) -> List[str]:
     cleaned = []
     for line in lines:
@@ -69,6 +78,8 @@ def sanitize_release_changes(lines: List[str], max_items: int = 4) -> List[str]:
         if text.startswith("- "):
             text = text[2:]
         text = re.sub(r"\s*\(#\d+\)\s*$", "", text)
+        if not text or RAMA_COMO_TITULO.match(text):
+            continue
         cleaned.append(text)
     return cleaned[:max_items]
 
