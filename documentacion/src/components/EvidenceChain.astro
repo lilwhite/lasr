@@ -1,0 +1,55 @@
+---
+/**
+ * "¿De dónde sale esta información?": documento → lo que dice → lo que se
+ * concluye. Tres pasos en vertical, sin diagramas: el grafo existe por dentro
+ * y no se le enseña al lector.
+ */
+import Citation from './Citation.astro';
+import type { Note } from '../lib/graph';
+
+interface Props { note: Note }
+const { note } = Astro.props;
+---
+<div class="chain">
+  <p class="chain-heading">¿De dónde sale esto?</p>
+  {note.data.citations.map((c) => <Citation citation={c} labelled={false} />)}
+  <p class="chain-claim">
+    <span class="chain-step">Se concluye</span>
+    {note.data.title}
+  </p>
+</div>
+
+<style>
+  .chain {
+    background: var(--surface);
+    border: var(--rule);
+    border-radius: var(--radius);
+    padding: var(--s-4);
+    margin-block: var(--s-4);
+  }
+  .chain-heading {
+    margin: 0 0 var(--s-3);
+    font-family: var(--sans);
+    font-size: var(--t-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    color: var(--ink-faint);
+  }
+  .chain-claim {
+    margin: var(--s-4) 0 0;
+    padding-top: var(--s-3);
+    border-top: var(--rule);
+    font-family: var(--serif);
+    text-wrap: pretty;
+  }
+  .chain-step {
+    display: block;
+    font-family: var(--mono);
+    font-size: var(--t-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    color: var(--ink-faint);
+    margin-bottom: var(--s-1);
+  }
+</style>

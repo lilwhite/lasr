@@ -1,0 +1,89 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { graph, entityRoute, sourceShortLabel, formatDate, notesCiting } from '../../lib/graph';
+import { url } from '../../lib/url';
+import { DOC_TYPE_LABEL } from '../../lib/policy';
+
+const ranked = [...graph.sources]
+  .map((s) => ({ s, n: notesCiting(s.data.id).length }))
+  .sort((a, b) => b.n - a.n);
+const esenciales = ranked.slice(0, 6);
+
+const ORDEN = ['sentencia', 'auto', 'escrito-de-parte', 'comunicacion', 'acta',
+  'convenio', 'presupuesto', 'circular', 'informe', 'instrumento-urbanistico',
+  'estatutos', 'resolucion-administrativa'];
+const porTipo = ORDEN
+  .map((tipo) => ({
+    tipo,
+    docs: [...graph.sources]
+      .filter((s) => s.data.docType === tipo)
+      .sort((a, b) => a.data.date.getTime() - b.data.date.getTime()),
+  }))
+  .filter((g) => g.docs.length > 0);
+---
+<Layout title="Documentos" description="Los 36 documentos originales sobre Los Ángeles de San Rafael: qué es cada uno, quién lo emitió y qué afirmaciones sostiene.">
+  <header class="head">
+    <h1>Documentos</h1>
+    <p class="lede">Estas son las fuentes de todo lo que se afirma en esta web. Cada ficha explica qué es el documento, quién lo emitió y qué se apoya en él.</p>
+    <p class="jump">
+      <a href={url('/documentos/mapa/')}>Ver el mapa documental</a> — los {graph.sources.length} documentos
+      situados en el tiempo, agrupados por pleito y unidos por las relaciones que declaran entre sí.
+    </p>
+    <p class="notice">Los originales no se publican: contienen datos personales y su revisión de
+      privacidad sigue pendiente. Las fichas sí indican qué dice cada uno y en qué página.</p>
+  </header>
+
+  <section>
+    <h2>Documentos esenciales</h2>
+    <p class="section-lede">Los que sostienen más afirmaciones del corpus.</p>
+    <ul class="list">
+      {esenciales.map(({ s, n }) => (
+        <li>
+          <a href={url(entityRoute(s))}>{sourceShortLabel(s)}</a>
+          <p>{s.data.title}</p>
+          <p class="apparatus">{DOC_TYPE_LABEL[s.data.docType]} · {formatDate(s.data.date, 'day')} · sostiene {n} afirmacion{n === 1 ? '' : 'es'}</p>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  {porTipo.map(({ tipo, docs }) => (
+    <section>
+      <h2>{DOC_TYPE_LABEL[tipo]}{docs.length > 1 ? 's' : ''}</h2>
+      <ul class="list list--compact">
+        {docs.map((s) => (
+          <li>
+            <a href={url(entityRoute(s))}>{sourceShortLabel(s)}</a>
+            <span class="apparatus"> · {formatDate(s.data.date, 'day')}</span>
+            <p>{s.data.title}</p>
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
+</Layout>
+
+<style>
+  .head, section { max-width: var(--measure); }
+  .head h1 { margin-bottom: var(--s-3); }
+  .notice {
+    font-size: var(--t-sm);
+    color: var(--ink-soft);
+    background: var(--surface-sunk);
+    border-radius: var(--radius);
+    padding: var(--s-3) var(--s-4);
+  }
+  .jump {
+    font-size: var(--t-sm);
+    border-left: 3px solid var(--stamp);
+    padding: var(--s-1) 0 var(--s-1) var(--s-4);
+    color: var(--ink-soft);
+  }
+  .jump a { font-weight: 600; }
+  .section-lede { font-size: var(--t-sm); color: var(--ink-soft); margin-top: 0; }
+  .list { list-style: none; margin: 0; padding: 0; }
+  .list > li { padding-block: var(--s-3); border-top: var(--rule); }
+  .list > li > a { font-family: var(--serif); color: var(--ink); text-decoration-color: var(--line-strong); font-weight: 600; }
+  .list p { font-size: var(--t-sm); color: var(--ink-soft); margin: var(--s-1) 0 0; }
+  .list .apparatus { color: var(--ink-faint); }
+</style>

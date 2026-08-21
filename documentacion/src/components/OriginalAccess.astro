@@ -1,0 +1,92 @@
+---
+/**
+ * Cómo consultar el documento original. Tres estados, en orden de utilidad:
+ *   1. Nuestra copia es publicable → descarga directa.
+ *   2. Existe en un repositorio oficial → se enlaza allí, con su referencia.
+ *   3. Ninguna de las dos → se explica por qué, sin dejar al lector sin salida.
+ *
+ * El caso 2 no exige revisión de privacidad: quien publica es el organismo.
+ */
+import { canLinkPdf, sourceUnavailableNote } from '../lib/policy';
+import { url } from '../lib/url';
+import type { Source } from '../lib/graph';
+
+interface Props { source: Source }
+const { source } = Astro.props;
+const d = source.data;
+const descargable = canLinkPdf(source) && d.file;
+const oficial = d.official;
+---
+
+<section class="original">
+  <h2>Consultar el original</h2>
+
+  {descargable && (
+    <p><a class="download" href={url('/' + d.file)}>Descargar el documento ({d.pages} páginas)</a></p>
+  )}
+
+  {!descargable && oficial && (
+    <div class="official">
+      <p>
+        Este documento está publicado por <strong>{oficial.repository}</strong>, de acceso libre
+        y sin registro.
+      </p>
+      {oficial.ref && (
+        <p class="official-ref">
+          Búscalo con su referencia: <span class="apparatus">{oficial.ref}</span>
+        </p>
+      )}
+      {oficial.url && (
+        <p>
+          <a class="download" href={oficial.url} rel="noopener noreferrer" target="_blank"
+            >Ir a {oficial.repository.split('—')[0].trim()}</a>
+        </p>
+      )}
+      <p class="official-note">
+        {oficial.ref
+          ? 'El buscador no admite enlace directo a una resolución concreta: hay que pegar la referencia.'
+          : 'El repositorio no admite enlace directo: hay que localizarlo por órgano y fecha.'}
+      </p>
+    </div>
+  )}
+
+  {!descargable && !oficial && <p class="unavailable">{sourceUnavailableNote()}</p>}
+
+  {!descargable && oficial && (
+    <p class="unavailable">
+      Nuestra propia copia no se publica: contiene datos personales y su revisión de
+      privacidad sigue pendiente.
+    </p>
+  )}
+</section>
+
+<style>
+  .original {
+    background: var(--surface);
+    border: var(--rule);
+    border-left: 3px solid var(--marca);
+    border-radius: var(--radius);
+    padding: var(--s-4) var(--s-5);
+    margin-block: var(--s-6);
+    max-width: var(--measure);
+  }
+  .original h2 { margin-top: 0; font-size: var(--t-md); }
+  .original p { font-size: var(--t-sm); }
+  .download {
+    display: inline-block;
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 2px solid currentColor;
+  }
+  .official-ref .apparatus {
+    background: var(--marca-soft);
+    padding: 0.1em 0.4em;
+    border-radius: 2px;
+    color: var(--marca);
+  }
+  .official-note, .unavailable {
+    color: var(--ink-soft);
+    font-size: var(--t-xs);
+  }
+  .unavailable { margin-bottom: 0; }
+</style>

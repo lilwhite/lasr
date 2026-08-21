@@ -1,0 +1,288 @@
+/**
+ * LASR-Web — sistema de diseño.
+ *
+ * Ver docs/WEB_DESIGN.md. Dos ideas gobiernan todo lo que sigue:
+ *
+ *  1. Dos registros tipográficos. La narrativa va en la serif del portal; el
+ *     aparato documental —páginas, números de resolución, fechas,
+ *     identificadores— va en monoespaciada. Esa distinción ES la arquitectura
+ *     de información: capa de divulgación y capa de evidencia, hechas visibles.
+ *  2. Un solo acento. `--stamp` para estructura y enlaces, `--marca` para el
+ *     aparato. El verde de sierra aparece una vez, en el motivo de portada.
+ *
+ * Desde la integración en el portal, la PALETA no se define aquí: se hereda de
+ * `portal-tokens.css`, que es copia de `docs/assets/css/tokens.css`. Los tokens
+ * de este fichero son alias sobre aquellos. La consecuencia importante es que el
+ * tema oscuro del portal llega gratis: sus `--color-*` se redefinen bajo
+ * `[data-theme="dark"]` y estos alias los siguen sin una sola regla extra.
+ *
+ * Lo que sí sigue siendo de esta capa: la escala tipográfica, la de espaciado y
+ * las medidas de columna. Son la estructura del aparato documental, no la
+ * identidad visual del sitio.
+ */
+
+@import './portal-tokens.css';
+
+/*
+ * De la superfamilia IBM Plex sobrevive solo la monoespaciada. La narrativa y
+ * la interfaz pasan a la tipografía del portal —Georgia y la pila del sistema—,
+ * porque la coherencia con el resto del sitio pesa más que la unidad de la
+ * superfamilia. La mono se queda porque el portal no tiene equivalente y el
+ * registro monoespaciado es lo que sostiene la distinción de las dos capas.
+ */
+@import '@fontsource/ibm-plex-mono/latin-400.css';
+
+:root {
+  /* ---- Color: alias sobre los tokens del portal ------------------------ */
+  /* Ninguno de estos valores es un color: todos apuntan a `--color-*`, que el
+     portal redefine en `[data-theme="dark"]`. Por eso el modo oscuro funciona
+     aquí sin que esta capa escriba una sola regla de tema. */
+  --paper: var(--color-bg);
+  --surface: var(--color-surface);
+  --surface-sunk: var(--color-surface-alt);
+  --ink: var(--color-text);
+  --ink-soft: var(--color-text-light);
+  --ink-faint: var(--color-text-muted);
+  /* Cruzados a propósito: en el portal `--color-border-light` es el filete
+     discreto y `--color-border` el marcado, al revés de lo que sugiere el
+     nombre. */
+  --line: var(--color-border-light);
+  --line-strong: var(--color-border);
+
+  --stamp: var(--color-primary);      /* acento principal: enlaces y estructura */
+  --stamp-strong: var(--color-primary-dark);
+  --stamp-soft: color-mix(in srgb, var(--color-primary) 8%, var(--color-surface));
+  --on-stamp: #ffffff;                /* texto sobre el acento; ver bloque oscuro */
+
+  /* El ocre del aparato documental es literal y no un alias del acento del
+     portal: `--color-accent` (#D4A574) no llega al contraste AA como texto
+     sobre fondo claro, y este token se usa sobre todo como texto. La metáfora
+     —el subrayado a rotulador de los escaneos— se conserva igual. */
+  --marca: #8c6a22;
+  --marca-soft: color-mix(in srgb, var(--color-accent) 22%, var(--color-surface));
+
+  --sierra: var(--color-success);     /* SOLO el motivo territorial de portada */
+
+  --warn: var(--color-warning);
+  --warn-bg: color-mix(in srgb, var(--color-warning) 13%, var(--color-surface));
+  --alert: var(--color-error);
+  --alert-bg: color-mix(in srgb, var(--color-error) 12%, var(--color-surface));
+  --ok: var(--color-success);
+  --ok-bg: color-mix(in srgb, var(--color-success) 12%, var(--color-surface));
+  /* `--info` y `--info-bg` los usaba Badge.astro sin que nadie los definiera:
+     las insignias `neutral` e `info` heredaban color. El portal sí tiene el
+     token, así que la integración lo arregla de paso. */
+  --info: var(--color-info);
+  --info-bg: color-mix(in srgb, var(--color-info) 10%, var(--color-surface));
+
+  /* ---- Tipografía ----------------------------------------------------- */
+  --serif: var(--font-family-heading);   /* Georgia, la del portal */
+  --sans: var(--font-family);            /* pila del sistema, la del portal */
+  --mono: 'IBM Plex Mono', ui-monospace, 'Cascadia Mono', Menlo, monospace;
+
+  --t-xs: 0.75rem;
+  --t-sm: 0.8125rem;
+  --t-base: 1.0625rem;
+  --t-md: 1.1875rem;
+  --t-lg: clamp(1.25rem, 1.05rem + 0.9vw, 1.5rem);
+  --t-xl: clamp(1.5rem, 1.15rem + 1.6vw, 2rem);
+  --t-2xl: clamp(1.9rem, 1.35rem + 2.6vw, 3rem);
+
+  /* ---- Espacio -------------------------------------------------------- */
+  --s-1: 0.25rem;
+  --s-2: 0.5rem;
+  --s-3: 0.75rem;
+  --s-4: 1rem;
+  --s-5: 1.5rem;
+  --s-6: 2rem;
+  --s-7: 3rem;
+  --s-8: 4rem;
+  --s-9: 6rem;
+
+  /* ---- Trazo y forma -------------------------------------------------- */
+  --radius: 4px;
+  --rule: 1px solid var(--line);
+  --rule-strong: 1px solid var(--line-strong);
+
+  /* ---- Medidas -------------------------------------------------------- */
+  --measure: 42rem;   /* prosa: ~68 caracteres */
+  --wide: 72rem;      /* índices y portada */
+  --rail: 15rem;      /* columna del aparato documental */
+}
+
+/*
+ * Todo lo demás hereda el tema oscuro por los alias. Estos dos no pueden:
+ *
+ *  - `--marca` es un ocre oscuro elegido para leerse sobre papel claro; sobre
+ *    fondo oscuro se apaga. En oscuro sí sirve el acento del portal, que ahí es
+ *    un arena claro.
+ *  - `--on-stamp` es texto sobre el acento. En claro el acento es un teal
+ *    oscuro y pide texto blanco; en oscuro el portal lo aclara a #87aeb0 y el
+ *    blanco dejaría de contrastar, así que el texto pasa a ser el fondo.
+ */
+[data-theme='dark'] {
+  --marca: var(--color-accent);
+  --marca-soft: color-mix(in srgb, var(--color-accent) 16%, var(--color-surface));
+  --on-stamp: var(--color-bg);
+}
+
+* { box-sizing: border-box; }
+
+html {
+  /* `color-scheme` lo fija theme-init.js sobre el elemento raíz, según la
+     preferencia guardada. Declararlo aquí solo serviría para contradecirlo. */
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: var(--t-base);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ---- Titulares: serif, la voz narrativa ------------------------------- */
+h1, h2, h3, h4 {
+  font-family: var(--serif);
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--ink);
+  text-wrap: balance;
+  margin: 0;
+}
+
+h1 { font-size: var(--t-xl); letter-spacing: -0.011em; }
+h2 { font-size: var(--t-lg); margin-block: var(--s-7) var(--s-3); letter-spacing: -0.008em; }
+h3 { font-size: var(--t-md); margin-block: var(--s-5) var(--s-2); }
+h4 { font-size: var(--t-base); margin-block: var(--s-4) var(--s-1); }
+
+p { margin-block: var(--s-3); text-wrap: pretty; }
+
+a {
+  color: var(--stamp);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.16em;
+  text-decoration-color: color-mix(in srgb, var(--stamp) 35%, transparent);
+  transition: text-decoration-color 120ms ease, color 120ms ease;
+}
+a:hover { color: var(--stamp-strong); text-decoration-color: currentColor; }
+
+:where(a, button, summary, input, select, [tabindex]):focus-visible {
+  outline: 2px solid var(--stamp);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+blockquote {
+  margin: var(--s-4) 0;
+  padding-left: var(--s-4);
+  border-left: 2px solid var(--line-strong);
+  color: var(--ink-soft);
+  font-family: var(--serif);
+}
+
+hr { border: 0; border-top: var(--rule); margin-block: var(--s-6); }
+
+ul, ol { padding-left: 1.3em; margin-block: var(--s-3); }
+li { margin-block: var(--s-1); }
+li::marker { color: var(--ink-faint); }
+
+table { border-collapse: collapse; width: 100%; font-size: var(--t-sm); }
+th, td { text-align: left; padding: var(--s-2) var(--s-3); border-bottom: var(--rule); vertical-align: top; }
+th { font-weight: 600; color: var(--ink-soft); }
+
+/* ---- El aparato documental -------------------------------------------- */
+/* Monoespaciada, versalita óptica, ocre. Es el registro "verificable". */
+.apparatus,
+.meta-id,
+code {
+  font-family: var(--mono);
+  font-size: var(--t-xs);
+  letter-spacing: 0.01em;
+  font-variant-numeric: tabular-nums;
+}
+
+.apparatus { color: var(--marca); }
+.meta-id { color: var(--ink-faint); }
+
+code {
+  background: var(--surface-sunk);
+  padding: 0.1em 0.35em;
+  border-radius: 2px;
+  color: var(--ink-soft);
+}
+
+/* Referencia a otra entidad dentro de la prosa (generada por prose.ts). */
+a.ref {
+  font-family: var(--mono);
+  font-size: 0.85em;
+  color: var(--marca);
+  text-decoration-color: color-mix(in srgb, var(--marca) 40%, transparent);
+  white-space: nowrap;
+}
+a.ref:hover { color: #6f5319; }
+
+/* ---- Contenedores ------------------------------------------------------ */
+.container { max-width: var(--wide); margin-inline: auto; padding-inline: var(--s-4); }
+.prose { max-width: var(--measure); }
+.prose > :first-child { margin-top: 0; }
+
+@media (min-width: 40em) {
+  .container { padding-inline: var(--s-5); }
+}
+
+/* Ensancha una figura más allá de la columna de texto sin sangrar la página.
+   Deja siempre 2 rem de aire a cada lado, contando la barra de scroll (que sí
+   entra en 100vw), y a partir de ahí no crece más: el mapa documental mide
+   1.373 px y así cabe entero en un portátil sin obligar a desplazarlo. */
+.bleed-wide {
+  margin-inline: calc(-1 * clamp(0px, (100vw - 100% - 4rem) / 2, 16rem));
+}
+
+/* ---- Utilidades -------------------------------------------------------- */
+.muted { color: var(--ink-soft); }
+.lede { font-size: var(--t-md); line-height: 1.55; color: var(--ink-soft); text-wrap: pretty; }
+
+.eyebrow {
+  font-family: var(--sans);
+  font-size: var(--t-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ink-faint);
+  margin: 0 0 var(--s-2);
+}
+
+.stack > * + * { margin-top: var(--s-4); }
+.badge-row { display: flex; flex-wrap: wrap; gap: var(--s-2); align-items: center; }
+
+.skip-link {
+  position: absolute;
+  left: var(--s-3);
+  top: calc(-1 * var(--s-9));
+  z-index: 10;
+  background: var(--surface);
+  color: var(--ink);
+  padding: var(--s-2) var(--s-3);
+  border: var(--rule-strong);
+  border-radius: var(--radius);
+  transition: top 120ms ease;
+}
+.skip-link:focus { top: var(--s-3); }
+
+.entity-list { list-style: none; padding: 0; margin: var(--s-3) 0; }
+.entity-list > li { padding-block: var(--s-3); border-bottom: var(--rule); }
+.entity-list > li:last-child { border-bottom: none; }

@@ -27,17 +27,25 @@ mi-repo/
 │   └── workflows/
 │       ├── pages.yml      # Workflow de despliegue
 │       └── validate.yml   # Workflow de validación
-├── docs/                   # ← Contenido fuente
+├── docs/                   # ← Fuente 1: el portal, se copia tal cual a la raíz
 │   ├── index.html
 │   ├── assets/
 │   │   ├── config.json
 │   │   ├── content.json
+│   │   ├── css/tokens.css  # Paleta y tema: la usan las DOS fuentes
 │   │   ├── css/styles.css
 │   │   └── js/main.js
 │   └── *.md               # Documentación
+├── documentacion/          # ← Fuente 2: la guía, se compila en /documentacion/
+│   ├── src/               # Corpus y plantillas Astro
+│   └── package.json
 ├── scripts/                # Scripts auxiliares
 └── README.md
 ```
+
+El sitio publicado son **dos fuentes combinadas**. `documentacion/` necesita el
+`docs/` de la raíz para compilarse: de ahí saca la paleta, los scripts de tema y
+la imagen OpenGraph.
 
 ---
 
@@ -91,9 +99,11 @@ Hace:
 2. Validación de estructura
 3. Validación de JSON
 4. Genera `build-meta.json` con fecha de última PR mergeada a `main` (fallback: último commit en `main`)
-5. Copia `docs/` a `dist/`
-6. Crea `.nojekyll`
-7. Despliega en GitHub Pages
+5. Compila la guía documental con Astro y valida sus enlaces (con caché: si `documentacion/` no ha cambiado, se salta)
+6. Copia `docs/` a `dist/`, y después la guía a `dist/documentacion/`
+7. Crea `.nojekyll`
+8. Comprueba que el artefacto contiene la portada, la guía y los destinos de las redirecciones. Si falta alguno, **el despliegue se aborta**
+9. Despliega en GitHub Pages
 
 ---
 

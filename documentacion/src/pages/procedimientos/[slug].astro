@@ -1,0 +1,70 @@
+---
+import { render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Timeline from '../../components/Timeline.astro';
+import EntityLink from '../../components/EntityLink.astro';
+import Badge from '../../components/Badge.astro';
+import { graph, entitySlug, procedureChildren, sourcesOfProcedure, eventsOfProcedure } from '../../lib/graph';
+import { visibleOnly, editorialBadge } from '../../lib/policy';
+
+export async function getStaticPaths() {
+  return visibleOnly(graph.procedures).map((p) => ({
+    params: { slug: entitySlug(p) },
+    props: { proc: p },
+  }));
+}
+
+const { proc } = Astro.props;
+const d = proc.data;
+const { Content } = await render(proc);
+const children = visibleOnly(procedureChildren(d.id));
+const sources = visibleOnly(sourcesOfProcedure(d.id));
+const events = eventsOfProcedure(d.id);
+---
+
+<Layout title={d.title} description={`Procedimiento ${d.number}`}>
+  <p class="eyebrow">Procedimiento {d.type === 'judicial' ? 'judicial' : 'administrativo'}</p>
+  <h1>{d.title}</h1>
+  <p class="meta-id">{d.id} · {d.number}</p>
+
+  <div class="badge-row">
+    <Badge {...editorialBadge(d.editorialStatus)} />
+  </div>
+
+  <ul class="entity-list">
+    <li><span class="muted">Órgano:</span> <EntityLink id={d.organ} /></li>
+    {d.parent && <li><span class="muted">Pieza de:</span> <EntityLink id={d.parent} /></li>}
+    {d.parties.map((p) => (
+      <li><span class="muted">{p.role}:</span> <EntityLink id={p.actor} /></li>
+    ))}
+  </ul>
+
+  <section class="prose">
+    <Content />
+  </section>
+
+  {children.length > 0 && (
+    <>
+      <h2>Piezas e incidentes</h2>
+      <ul class="entity-list">
+        {children.map((c) => <li><EntityLink id={c.data.id} /></li>)}
+      </ul>
+    </>
+  )}
+
+  {sources.length > 0 && (
+    <>
+      <h2>Resoluciones documentadas</h2>
+      <ul class="entity-list">
+        {sources.map((s) => <li><EntityLink id={s.data.id} /></li>)}
+      </ul>
+    </>
+  )}
+
+  {events.length > 0 && (
+    <>
+      <h2>Cronología del procedimiento</h2>
+      <Timeline events={events} />
+    </>
+  )}
+</Layout>

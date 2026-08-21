@@ -1,0 +1,280 @@
+---
+import '../styles/global.css';
+import { PREVIEW, EDITORIAL_UNIFORM } from '../lib/policy';
+import { NAV, FOOTER_NAV } from '../lib/nav';
+import { url, canonicalURL, isCurrent } from '../lib/url';
+
+interface Props {
+  title: string;
+  /** Obligatoria: es lo que se ve al compartir el enlace por WhatsApp. */
+  description: string;
+  /** Ruta canónica sin base; por defecto, la actual. */
+  canonicalPath?: string;
+  ogType?: 'website' | 'article';
+  noindex?: boolean;
+  /** Ancho del contenido principal. */
+  width?: 'prose' | 'wide';
+}
+
+const {
+  title,
+  description,
+  canonicalPath,
+  ogType = 'website',
+  noindex = false,
+  width = 'wide',
+} = Astro.props;
+
+const path = canonicalPath ?? Astro.url.pathname.replace(import.meta.env.BASE_URL ?? '/', '/');
+const canonical = canonicalURL(path, Astro.site);
+const fullTitle = path === '/' ? 'Los Ángeles de San Rafael' : `${title} · Los Ángeles de San Rafael`;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#2D5A5A" />
+    <link rel="icon" href={url('/favicon.svg')} type="image/svg+xml" />
+
+    {/*
+      La misma política que el resto del dominio, menos lo que esta capa no usa:
+      ni analítica ni CDN, así que `script-src` se queda en 'self' y `connect-src`
+      en 'none'. `style-src` necesita 'unsafe-inline' porque Astro incrusta los
+      estilos de componente en el <head>; es lo mismo que ya permite el portal.
+    */}
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; frame-src 'none'; form-action 'none'; upgrade-insecure-requests"
+    />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+
+    {/*
+      Antes de cualquier hoja de estilo: fija el tema guardado sobre el elemento
+      raíz para que no haya destello claro al cargar en oscuro. `is:inline` es
+      obligatorio — el fichero vive en public/ y Astro no debe empaquetarlo.
+      Se comparte con el portal, así que el tema elegido viaja entre las dos
+      mitades del sitio: ambos leen la misma clave de localStorage.
+    */}
+    <script is:inline src={url('/assets/js/theme-init.js')}></script>
+
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content="Los Ángeles de San Rafael — guía documental" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:image" content={canonicalURL('/og.png', Astro.site)} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    {(noindex || PREVIEW) && <meta name="robots" content="noindex" />}
+  </head>
+
+  <body>
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+    {PREVIEW && (
+      <div class="editorial-band" role="status">
+        Modo editorial: se muestran identificadores internos y el área de revisión.
+      </div>
+    )}
+
+    <header class="site-header">
+      <div class="container header-inner">
+        {/*
+          Mismo patrón que las subpáginas del portal (docs/prensa/index.html):
+          botón de tema a la izquierda, marca, y una salida explícita hacia la
+          raíz. La marca apunta a la portada de esta capa; "Portal vecinal" es
+          quien saca de ella, y por eso es un enlace fuera de la base de Astro.
+        */}
+        <button class="theme-toggle" data-theme-toggle type="button" aria-label="Cambiar tema" title="Cambiar tema">
+          <span class="theme-toggle-icon theme-toggle-sun" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.4"/><path d="M12 2v2.4M12 19.6V22M4.93 4.93l1.7 1.7M17.37 17.37l1.7 1.7M2 12h2.4M19.6 12H22M4.93 19.07l1.7-1.7M17.37 6.63l1.7-1.7"/></svg>
+          </span>
+          <span class="theme-toggle-icon theme-toggle-moon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+          </span>
+        </button>
+        <a class="brand" href={url('/')}>
+          <span class="brand-name">Los Ángeles de San&nbsp;Rafael</span>
+          <span class="brand-kicker">guía documental</span>
+        </a>
+        <nav aria-label="Principal">
+          <ul>
+            {NAV.filter((n) => n.path !== '/').map((n) => (
+              <li>
+                <a
+                  href={url(n.path)}
+                  aria-current={isCurrent(n.path, Astro.url.pathname) ? 'page' : undefined}
+                >{n.label}</a>
+              </li>
+            ))}
+            {PREVIEW && <li><a class="nav-editorial" href={url('/revision/')}>Revisión</a></li>}
+            <li><a class="nav-portal" href="/">Portal vecinal</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="contenido" class={width === 'prose' ? 'container main-prose' : 'container'}>
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div class="footer-about">
+          <p>
+            Esta web reconstruye la historia documental de Los Ángeles de San Rafael a partir de
+            sentencias, autos, actas, acuerdos y comunicaciones. Cada afirmación indica de qué
+            documento sale y en qué página.
+          </p>
+          {EDITORIAL_UNIFORM && (
+            <p class="footer-state">
+              <strong>Todo el contenido está en revisión.</strong> Se publica porque es verificable
+              contra su fuente, no porque esté cerrado.
+              <a href={url('/metodologia/')}>Cómo trabajamos</a>
+            </p>
+          )}
+          <p class="footer-disclaimer">No es asesoramiento jurídico.</p>
+        </div>
+        <nav class="footer-nav" aria-label="Secundaria">
+          <ul>
+            {FOOTER_NAV.map((n) => <li><a href={url(n.path)}>{n.label}</a></li>)}
+          </ul>
+        </nav>
+      </div>
+    </footer>
+    <script is:inline src={url('/assets/js/theme.js')}></script>
+    <script is:inline src={url('/assets/js/theme-boot.js')}></script>
+  </body>
+</html>
+
+<style>
+  .editorial-band {
+    background: var(--warn-bg);
+    color: var(--warn);
+    font-size: var(--t-xs);
+    text-align: center;
+    padding: var(--s-1) var(--s-4);
+    border-bottom: var(--rule);
+  }
+
+  .site-header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--line-strong);
+  }
+  .header-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--s-2) var(--s-5);
+    padding-block: var(--s-4);
+  }
+
+  /*
+   * El botón de tema se maqueta aquí en vez de importar el del portal: aquel
+   * vive en styles.css, 2.100 líneas que esta capa no carga. `theme.js` solo
+   * necesita el atributo data-theme-toggle y la clase .is-dark, que él mismo
+   * pone; el resto es presentación local.
+   */
+  .theme-toggle {
+    order: -1;
+    flex: 0 0 auto;
+    align-self: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    padding: 0;
+    background: transparent;
+    color: var(--ink-soft);
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    cursor: pointer;
+  }
+  .theme-toggle:hover { color: var(--stamp); border-color: var(--stamp); }
+  .theme-toggle svg { width: 1.05rem; height: 1.05rem; display: block; }
+  /* Solo un icono a la vez: el sol en claro, la luna en oscuro. */
+  .theme-toggle .theme-toggle-moon { display: none; }
+  .theme-toggle.is-dark .theme-toggle-sun { display: none; }
+  .theme-toggle.is-dark .theme-toggle-moon { display: inline-flex; }
+
+  /* La salida de esta capa hacia la raíz del dominio. */
+  .nav-portal { font-weight: 600; }
+  .nav-portal::before { content: '↖ '; }
+
+  .brand { text-decoration: none; color: var(--ink); display: block; }
+  .brand-name {
+    display: block;
+    font-family: var(--serif);
+    font-size: var(--t-md);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+  }
+  .brand-kicker {
+    display: block;
+    font-family: var(--mono);
+    font-size: var(--t-xs);
+    color: var(--ink-faint);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-top: 0.15rem;
+  }
+  .brand:hover .brand-name { color: var(--stamp-strong); }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-2) var(--s-5);
+    margin: 0;
+    padding: 0;
+  }
+  nav a {
+    text-decoration: none;
+    color: var(--ink-soft);
+    font-size: var(--t-sm);
+    padding-block: var(--s-1);
+    border-bottom: 2px solid transparent;
+  }
+  nav a:hover { color: var(--stamp); }
+  nav a[aria-current='page'] { color: var(--ink); border-bottom-color: var(--stamp); }
+  nav a.nav-editorial { color: var(--warn); }
+
+  main { padding-block: var(--s-6) var(--s-9); min-height: 60vh; }
+  .main-prose { max-width: calc(var(--measure) + 2 * var(--s-5)); }
+
+  .site-footer {
+    border-top: 1px solid var(--line-strong);
+    background: var(--surface);
+    padding-block: var(--s-6);
+    font-size: var(--t-sm);
+    color: var(--ink-soft);
+  }
+  .footer-inner {
+    display: grid;
+    gap: var(--s-5);
+  }
+  .footer-about { max-width: var(--measure); }
+  .footer-about p { margin-block: 0 var(--s-3); }
+  .footer-state { color: var(--ink); }
+  .footer-state a { margin-left: 0.4em; }
+  .footer-disclaimer { font-family: var(--mono); font-size: var(--t-xs); color: var(--ink-faint); }
+
+  .footer-nav ul { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s-2); }
+  .footer-nav a { color: var(--ink-soft); }
+
+  @media (min-width: 52em) {
+    .footer-inner { grid-template-columns: 1fr auto; gap: var(--s-7); }
+  }
+</style>
