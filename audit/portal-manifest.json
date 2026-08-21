@@ -150,11 +150,6 @@
         "LEGAL-THIRDPARTY-001"
       ]
     },
-    "docs/documentacion-relevante/estatutos-comunidad.pdf": {
-      "legalStatus": "needs-human-review",
-      "reviewedAt": "2026-08-21",
-      "reason": "Escaneo sin capa de texto: su contenido no es inspeccionable automáticamente y no consta revisión humana página a página"
-    },
     "docs/documentacion-relevante/index.html": {
       "legalStatus": "unchecked",
       "reason": "Pendiente de revisión jurídica: se publica como deuda registrada · reglas aceptadas: LEGAL-THIRDPARTY-001 (pendiente de la retirada de la analítica y del alojamiento propio de los recursos)",
@@ -168,6 +163,19 @@
       "acceptedRules": [
         "LEGAL-PRIVACY-003",
         "LEGAL-PRIVACY-004"
+      ]
+    },
+    "docs/estatutos-comunidad.md": {
+      "legalStatus": "cleared",
+      "reviewedAt": "2026-08-21",
+      "reason": "Transcripción del cuadernillo de estatutos, cotejada página a página contra el original. El documento no contiene datos de ninguna persona física: la única entidad nombrada es la mercantil urbanizadora. Sustituye al escaneo, que no era inspeccionable y arrastraba metadatos del equipo que lo generó."
+    },
+    "docs/estatutos-comunidad/index.html": {
+      "legalStatus": "cleared",
+      "reviewedAt": "2026-08-21",
+      "reason": "Transcripción del cuadernillo de estatutos, cotejada página a página contra el original. El documento no contiene datos de ninguna persona física: la única entidad nombrada es la mercantil urbanizadora. Sustituye al escaneo, que no era inspeccionable y arrastraba metadatos del equipo que lo generó.",
+      "acceptedRules": [
+        "LEGAL-THIRDPARTY-001"
       ]
     },
     "docs/index.html": {
@@ -222,9 +230,10 @@
         "reason": "Pendiente de revisión jurídica: se publica como deuda registrada"
       },
       "documentos": {
-        "legalStatus": "unchecked",
-        "sha256": "9c6ffa81f9d4d337eeae9dbee67e4df5373db2643cd004dd9779abdd31a11939",
-        "reason": "Pendiente de revisión jurídica: se publica como deuda registrada"
+        "legalStatus": "cleared",
+        "sha256": "1080144f7fc7df764b5243ffbe4d7c08bdd4d13638ddbaa36d75b5b7119dc414",
+        "reviewedAt": "2026-08-21",
+        "reason": "Revisada la sección de documentos del portal: son referencias a normativa oficial, a información institucional y a la guía documental. La ficha de los estatutos deja de apuntar a un escaneo y apunta a su transcripción."
       },
       "faq": {
         "legalStatus": "unchecked",
