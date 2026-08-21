@@ -144,10 +144,6 @@
         "LEGAL-THIRDPARTY-001"
       ]
     },
-    "docs/documentacion": {
-      "legalStatus": "unchecked",
-      "reason": "Pendiente de revisión jurídica: se publica como deuda registrada"
-    },
     "docs/documentacion-relevante/estatutos-comunidad.pdf": {
       "legalStatus": "needs-human-review",
       "reviewedAt": "2026-08-21",

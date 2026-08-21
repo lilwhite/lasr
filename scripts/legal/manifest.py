@@ -148,12 +148,34 @@ def load(path: Path) -> tuple[Manifest, list[str]]:
 # Completitud
 # --------------------------------------------------------------------------
 
+def _es_symlink_materializado(path: Path) -> bool:
+    """Un symlink que no es un symlink.
+
+    En un checkout con `core.symlinks=false` —Windows sin permisos, o un
+    montaje drvfs como el de WSL— git materializa cada enlace como un fichero
+    de texto diminuto cuyo contenido es la ruta de destino. `is_symlink()`
+    devuelve False y el fichero entra en el inventario como si fuera contenido.
+
+    Pasó: `docs/documentacion` se declaró en el manifiesto desde una máquina
+    así, y en CI —donde el fichero ni siquiera existe— `--copy-portal` habría
+    abortado con «Declarado pero ausente». Se descarta por la forma."""
+    try:
+        if path.stat().st_size > 256:
+            return False
+        texto = path.read_text(encoding="utf-8", errors="strict").strip()
+    except (OSError, UnicodeDecodeError):
+        return False
+    return "\n" not in texto and (texto.startswith(("../", "./", "/")) or texto.endswith("dist"))
+
+
 def portal_files(docs_dir: Path) -> list[str]:
     """Todo lo que hoy se publicaría. Los symlinks quedan fuera a propósito:
     no son contenido, y uno de ellos apunta al build de la guía."""
     out = []
     for p in sorted(docs_dir.rglob("*")):
         if p.is_symlink() or not p.is_file() or p.name in IGNORED_NAMES:
+            continue
+        if _es_symlink_materializado(p):
             continue
         out.append(p.relative_to(docs_dir.parent).as_posix())
     return out
