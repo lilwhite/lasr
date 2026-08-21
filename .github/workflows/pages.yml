@@ -148,6 +148,7 @@ jobs:
         run: |
           python3 scripts/legal/legal_scan.py --build dist \
             --baseline audit/legal-baseline.json --severity-threshold error
+          python3 scripts/audit_public_site.py dist
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

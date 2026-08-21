@@ -120,6 +120,16 @@ jobs:
 
       # Los destinos de las tres redirecciones del portal tienen que existir de
       # verdad. Si alguien renombra un tema o una ficha, esto lo dice aquí.
+      # El artefacto se compone igual que en el despliegue y se audita como lo
+      # miraría alguien de fuera. Aquí es barato; en producción, no.
+      - name: Auditar la superficie pública
+        run: |
+          mkdir -p /tmp/dist-validacion
+          python3 scripts/legal/gate.py --copy-portal /tmp/dist-validacion
+          mkdir -p /tmp/dist-validacion/documentacion
+          cp -r documentacion/dist/. /tmp/dist-validacion/documentacion/
+          python3 scripts/audit_public_site.py /tmp/dist-validacion
+
       - name: Comprobar los destinos de las redirecciones
         working-directory: documentacion
         run: |
