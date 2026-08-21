@@ -9,7 +9,8 @@ componente que emitía `href={entityRoute(entry)}` en lugar de
 que la comprobación dijera nada.
 
 Revisa dos cosas sobre `dist/`:
-  1. Que ningún enlace interno omita la base (rompería en GitHub Pages).
+  1. Que ningún enlace interno omita la base (rompería en GitHub Pages), salvo
+     los que apuntan al portal vecinal de la raíz del dominio (ver PORTAL).
   2. Que todo enlace interno apunte a una página que existe.
 
 Uso:  python3 scripts/check_links.py [dist]
@@ -25,6 +26,19 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parent.parent
 HREF = re.compile(r'href="([^"]+)"')
 EXTS = (".svg", ".png", ".jpg", ".webp", ".xml", ".txt", ".css", ".js", ".woff", ".woff2", ".pdf", ".ico")
+
+# Rutas del portal vecinal, que vive en la raíz del dominio y fuera de este
+# build. Son los únicos enlaces internos que legítimamente no llevan la base:
+# salen de esta capa. Se enumeran en vez de aceptar cualquier `/…` porque la
+# comprobación de la base es la que cazó 1.757 enlaces mal construidos, y
+# relajarla del todo la volvería inútil.
+PORTAL = frozenset({
+    "/",
+    "/prensa/",
+    "/parcelas/",
+    "/actualizaciones/",
+    "/documentacion-relevante/",
+})
 
 
 def base_from_config() -> str:
@@ -74,6 +88,8 @@ def main() -> int:
                 continue
             href = urllib.parse.unquote(raw.split("#")[0].split("?")[0])
             if not href.startswith("/"):
+                continue
+            if href in PORTAL:
                 continue
             if base and not (href == base or href.startswith(base + "/")):
                 sin_base[href].add(origen)
