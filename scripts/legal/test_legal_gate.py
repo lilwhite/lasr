@@ -125,6 +125,15 @@ press13 = legal_scan.press_findings(
     FIXTURES / "13-enlace-a-articulo.json", "13", (FIXTURES / "13-enlace-a-articulo.json").read_text(encoding="utf-8"))
 ok(not press13, "13 · titular, medio, fecha y enlace están limpios")
 
+f14 = scan_fixture("14-recurso-de-tercero.html")
+hosts = {f.masked for f in f14 if f.rule == "LEGAL-THIRDPARTY-001"}
+ok(hosts == {"cdn.ejemplo.invalid", "analitica.ejemplo.invalid", "tiles.ejemplo.invalid"},
+   f"14 · se ven los tres subrecursos externos, incluida la plantilla de teselas ({sorted(hosts)})")
+ok("www.boe.es" not in hosts,
+   "14 · un enlace no es un subrecurso: no revela nada hasta que alguien lo pulsa")
+ok(not [f for f in f14 if f.rule == "LEGAL-PRIVACY-004"],
+   "14 · «leaflet@1.9.4» y compañía ya no pasan por direcciones de correo")
+
 f15 = scan_fixture("15-token.txt")
 secrets = [f for f in f15 if f.rule == "LEGAL-SECRET-001"]
 ok(len(secrets) >= 3, f"15 · tokens y claves se detectan ({len(secrets)})")
