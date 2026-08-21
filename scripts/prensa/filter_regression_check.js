@@ -46,26 +46,42 @@ function assertEqual(a, b, label) {
 const allNews = u.sortNews(news);
 const archiveNews = u.getArchiveNews(news);
 
+// El fichero publicado solo contiene noticias del conflicto, así que los
+// recuentos se derivan de los datos: el cron los regenera a diario.
+assert(news.every((item) => item.isRelevant === true), 'El fichero no publica ninguna noticia descartada');
+assert(news.every((item) => !('excerpt' in item) && !('summary' in item)), 'El fichero no reproduce entradillas de los medios');
+assertEqual(archiveNews.length, news.length, 'El archivo es exactamente la selección publicada');
+
+// Se elige el medio con más noticias para que el caso tenga volumen real.
+const countBySource = new Map();
+news.forEach((item) => countBySource.set(item.source, (countBySource.get(item.source) || 0) + 1));
+const [mainSource, expectedBySource] = [...countBySource.entries()].sort((a, b) => b[1] - a[1])[0];
+const mainSourceType = news.find((item) => item.source === mainSource).sourceType;
+
 const caseA = u.applyFiltersTrace(allNews, {
-  sourceType: 'institucional',
+  sourceType: mainSourceType,
   source: '',
   category: '',
   year: '',
   query: ''
 });
-assertEqual(caseA.finalItems.length, 10, 'Institucional + Todos los medios (neutral vacío)');
+assertEqual(
+  caseA.finalItems.length,
+  news.filter((item) => item.sourceType === mainSourceType).length,
+  `Tipo de fuente ${mainSourceType} + Todos los medios (neutral vacío)`
+);
 
 const caseB = u.applyFiltersTrace(allNews, {
-  sourceType: 'institucional',
-  source: 'Ayuntamiento de El Espinar',
+  sourceType: mainSourceType,
+  source: mainSource,
   category: '',
   year: '',
   query: ''
 });
-assertEqual(caseB.finalItems.length, 10, 'Institucional + Ayuntamiento de El Espinar');
+assertEqual(caseB.finalItems.length, expectedBySource, `${mainSourceType} + ${mainSource}`);
 
 const caseCLiteral = u.applyFiltersTrace(allNews, {
-  sourceType: 'institucional',
+  sourceType: mainSourceType,
   source: 'Todos los medios',
   category: '',
   year: '',
@@ -92,13 +108,13 @@ const caseE = u.applyFiltersTrace(archiveNews, {
 assertEqual(caseE.finalItems.length, archiveNews.length, 'Archivo por defecto usa base archiveNews');
 
 const caseF = u.applyFiltersTrace(allNews, {
-  sourceType: 'institucional',
+  sourceType: mainSourceType,
   source: '',
   category: '',
   year: '',
-  query: 'segovia'
+  query: 'espinar'
 });
-assert(caseF.finalItems.length <= caseA.finalItems.length, 'Búsqueda textual restringe en institucional');
+assert(caseF.finalItems.length <= caseA.finalItems.length, 'Búsqueda textual restringe dentro del tipo de fuente');
 
 const landingFixture = [
   {
@@ -106,7 +122,6 @@ const landingFixture = [
     source: 'Medio A',
     date: '2026-03-10T09:00:00Z',
     title: 'A reciente',
-    excerpt: 'Los Ángeles de San Rafael y urbanización',
     category: 'urbanismo',
     isRelevant: true,
     relevanceScore: 9
@@ -116,7 +131,6 @@ const landingFixture = [
     source: 'medio   a',
     date: '2026-03-05T09:00:00Z',
     title: 'A antigua',
-    excerpt: 'Los Ángeles de San Rafael y vecinos',
     category: 'juntas_y_vecinos',
     isRelevant: true,
     relevanceScore: 8
@@ -126,7 +140,6 @@ const landingFixture = [
     source: 'Medio B',
     date: '2026-03-09T09:00:00Z',
     title: 'B reciente',
-    excerpt: 'Los Ángeles de San Rafael y servicios',
     category: 'servicios',
     isRelevant: true,
     relevanceScore: 7
@@ -136,7 +149,6 @@ const landingFixture = [
     source: 'Medio C',
     date: '2026-03-08T09:00:00Z',
     title: 'C reciente',
-    excerpt: 'Los Ángeles de San Rafael y infraestructuras',
     category: 'infraestructuras',
     isRelevant: true,
     relevanceScore: 6
@@ -161,7 +173,6 @@ const invalidDateFixture = [
     source: 'Medio D',
     date: 'sin-fecha',
     title: 'Fecha inválida',
-    excerpt: 'Los Ángeles de San Rafael',
     category: 'urbanismo',
     isRelevant: true,
     relevanceScore: 10
@@ -171,7 +182,6 @@ const invalidDateFixture = [
     source: 'Medio E',
     date: '2026-03-07T09:00:00Z',
     title: 'Fecha válida',
-    excerpt: 'Los Ángeles de San Rafael',
     category: 'urbanismo',
     isRelevant: true,
     relevanceScore: 8
