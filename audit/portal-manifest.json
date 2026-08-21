@@ -106,8 +106,9 @@
       "reason": "Pendiente de revisión jurídica: se publica como deuda registrada"
     },
     "docs/assets/js/press-utils.js": {
-      "legalStatus": "unchecked",
-      "reason": "Pendiente de revisión jurídica: se publica como deuda registrada"
+      "legalStatus": "cleared",
+      "reviewedAt": "2026-08-21",
+      "reason": "Lógica de filtrado y ordenación del archivo de prensa. No contiene contenido ni datos: opera sobre el JSON publicado. Deja de filtrar por un campo interno que ya no se publica."
     },
     "docs/assets/js/theme-init.js": {
       "legalStatus": "unchecked",
@@ -135,7 +136,7 @@
         "legal_scan:LEGAL-PRESS-001",
         "legal_scan:LEGAL-MINOR-001"
       ],
-      "reason": "Archivo de prensa: titular, medio, fecha y enlace de las noticias del conflicto · artefacto generado: se gobierna por invariantes, no por firma"
+      "reason": "Archivo de prensa: titular, medio, fecha, enlace y las dos claves de filtrado. Ni texto del medio ni puntuación editorial interna · artefacto generado: se gobierna por invariantes, no por firma"
     },
     "docs/data/prensa/sources.json": {
       "legalStatus": "cleared",

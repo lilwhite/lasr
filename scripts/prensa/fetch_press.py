@@ -94,6 +94,9 @@ def run(config_path: Path, output_path: Path, timeout: int):
     categories = config.get("categories", {})
     scoring = config.get("scoring", {})
 
+    # El destacado no se publica, pero se sigue leyendo del fichero anterior
+    # para no perderlo si algún día vuelve a hacer falta. Hoy degrada a False
+    # para todas, que es lo que ya valían.
     featured_lookup = _existing_featured(output_path)
 
     collected: List[RawNewsItem] = []
@@ -152,29 +155,29 @@ def run(config_path: Path, output_path: Path, timeout: int):
         if stats is not None:
             stats["final"] += 1
 
+    # Seis campos, y solo seis. Cuatro hacen que esto sea una CITA y no una
+    # copia —titular, medio, fecha y enlace al original—; los otros dos mueven
+    # los filtros del archivo.
+    #
+    # Fuera queda todo lo demás, que era andamiaje interno publicado al mundo:
+    # la puntuación de relevancia es criterio editorial mío, `feedGuid` y
+    # `canonicalUrl` repiten la URL, `publishedAt` repite la fecha, `year` se
+    # deriva de ella, y `id`, `tags`, `relatedTo` y `featured` no los consulta
+    # nadie. Once campos de diecisiete no llegaban a ninguna pantalla.
+    #
+    # `isRelevant` también se va, y con él se muda la invariante: ya no la
+    # lleva cada noticia, la lleva el fichero. Lo que está publicado es lo
+    # publicable, porque lo no publicable no se escribe (ver `is_publishable`).
     output = []
     for item in limited:
         output.append(
             {
-                "id": item.id,
-                "feedGuid": item.feed_guid,
                 "title": item.title,
                 "date": item.date,
                 "source": item.source,
                 "sourceType": item.source_type,
                 "url": item.url,
-                "tags": item.tags,
-                "relatedTo": item.related_to,
-                "score": item.score,
-                "relevanceScore": item.score,
-                "isRelevant": item.is_relevant,
                 "category": item.category,
-                "publishedAt": item.published_at,
-                "year": int(item.date[:4])
-                if item.date and len(item.date) >= 4
-                else None,
-                "canonicalUrl": item.canonical_url,
-                "featured": item.featured,
             }
         )
 
