@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "updated": "2026-08-21",
+  "_comentario": "Hallazgos ya valorados que el escáner no debe volver a levantar. Se identifican por huella —sha256 del valor, truncado— para que el valor no llegue nunca a este fichero. Aceptar aquí es una decisión humana con motivo; no la toma la herramienta.",
+  "accepted": [
+    {
+      "fingerprint": "a40050d43e9f",
+      "rule": "LEGAL-LEAK-002",
+      "path": "audit/LEGAL_PUBLICATION_AUDIT.md",
+      "reviewedAt": "2026-08-21",
+      "reason": "El informe nombra la carpeta de originales para explicar de qué habla; citarla no la expone, y el fichero no se publica."
+    },
+    {
+      "fingerprint": "a40050d43e9f",
+      "rule": "LEGAL-LEAK-002",
+      "path": "audit/LEGAL_PUBLICATION_AUDIT.md",
+      "reviewedAt": "2026-08-21",
+      "reason": "El informe nombra la carpeta de originales para explicar de qué habla; citarla no la expone, y el fichero no se publica."
+    },
+    {
+      "fingerprint": "a40050d43e9f",
+      "rule": "LEGAL-LEAK-002",
+      "path": "audit/LEGAL_PUBLICATION_AUDIT.md",
+      "reviewedAt": "2026-08-21",
+      "reason": "El informe nombra la carpeta de originales para explicar de qué habla; citarla no la expone, y el fichero no se publica."
+    },
+    {
+      "fingerprint": "b47f342f3de5",
+      "rule": "LEGAL-NAME-001",
+      "path": "audit/LEGAL_PUBLICATION_AUDIT.md",
+      "reviewedAt": "2026-08-21",
+      "reason": "No es una persona física: es vocabulario del propio informe."
+    },
+    {
+      "fingerprint": "a64976f1c471",
+      "rule": "LEGAL-NAME-001",
+      "path": "audit/LEGAL_PUBLICATION_AUDIT.md",
+      "reviewedAt": "2026-08-21",
+      "reason": "No es una persona física: es vocabulario del propio informe."
+    }
+  ]
+}

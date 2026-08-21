@@ -1,0 +1,267 @@
+{
+  "version": 1,
+  "updated": "2026-08-21",
+  "_comentario": "Estado jurídico de cada pieza del portal, y a la vez lista blanca de despliegue: gate.py --copy-portal solo copia lo que aparece aquí sin publish:false. Este fichero vive fuera de docs/ a propósito.",
+  "allowedEmails": [
+    "info@lasr-info.es"
+  ],
+  "allowedHosts": [
+    "lasr-info.es",
+    "www.lasr-info.es"
+  ],
+  "assets": {
+    "docs/CHANGELOG.md": {
+      "legalStatus": "cleared",
+      "generator": "scripts/release_sync.py",
+      "invariants": [
+        "legal_scan:LEGAL-PRIVACY-001"
+      ],
+      "reason": "Copia del changelog del repositorio, servida por el portal · artefacto generado: se gobierna por invariantes, no por firma"
+    },
+    "docs/CNAME": {
+      "legalStatus": "unchecked",
+      "reason": "Pendiente de revisión jurídica: se publica como deuda registrada"
+    },
+    "docs/DEPLOY.md": {
+      "legalStatus": "cleared",
+      "publish": false,
+      "reviewedAt": "2026-08-21",
+      "reason": "Guía de despliegue: documentación de operación, no del sitio"
+    },
+    "docs/RELEASES.md": {
+      "legalStatus": "cleared",
+      "publish": false,
+      "reviewedAt": "2026-08-21",
+      "reason": "Política de versionado: documentación de operación, no del sitio"
+    },
+    "docs/WORKFLOW.md": {
+      "legalStatus": "cleared",
+      "publish": false,
+      "reviewedAt": "2026-08-21",
+      "reason": "Modelo de ramas: documentación de operación, no del sitio"
+    },
+    "docs/actualizaciones/index.html": {
+      "legalStatus": "unchecked",
+      "reason": "Pendiente de revisión jurídica: se publica como deuda registrada · reglas aceptadas: LEGAL-THIRDPARTY-001 (pendiente de la retirada de la analítica y del alojamiento propio de los recursos)",
+      "acceptedRules": [
+        "LEGAL-THIRDPARTY-001"
+      ]
+    },
+    "docs/assets/build-meta.json": {
+      "legalStatus": "cleared",
+      "generator": "scripts/build_meta.py",
+      "invariants": [
+        "legal_scan:LEGAL-PRIVACY-001"
+      ],
+      "reason": "Fecha y versión de la última publicación · artefacto generado: se gobierna por invariantes, no por firma"
+    },
+    "docs/assets/config.json": {
+      "legalStatus": "unchecked",
+      "reason": "Pendiente de revisión jurídica: se publica como deuda registrada"
+    },
+    "docs/assets/content.json": {
+      "legalStatus": "unchecked",
+      "reason": "Pendiente de revisión jurídica: se publica como deuda registrada"
+    },
+    "docs/assets/css/styles.css": {
+      "legalStatus": "unchecked",
+      "reason": "Pendiente de revisión jurídica: se publica como deuda registrada"
+    },
+    "docs/assets/css/tokens.css": {
+      "legalStatus": "unchecked",
+      "reason": "Pendiente de revisión jurídica: se publica como deuda registrada"
+    },
+    "docs/assets/images/og-image.png": {
+      "legalStatus": "needs-human-review",
+      "reviewedAt": "2026-08-21",
+      "reason": "Imagen: los píxeles no son inspeccionables automáticamente"
+    },
+    "docs/assets/js/docs.js": {
+      "legalStatus": "unchecked",
+      "reason": "Pendiente de revisión jurídica: se publica como deuda registrada"
+    },
+    "docs/assets/js/ga4.js": {
+      "legalStatus": "unchecked",
+      "reason": "Pendiente de revisión jurídica: se publica como deuda registrada"
+    },
+    "docs/assets/js/main.js": {
+      "legalStatus": "unchecked",
+      "reason": "Pendiente de revisión jurídica: se publica como deuda registrada"
+    },
+    "docs/assets/js/parcelas.js": {
+      "legalStatus": "unchecked",
+      "reason": "Pendiente de revisión jurídica: se publica como deuda registrada · reglas aceptadas: LEGAL-PRIVACY-007 (las coordenadas son del parcelario público del Catastro, no de personas)",
+      "acceptedRules": [
+        "LEGAL-PRIVACY-007"
+      ]
+    },
+    "docs/assets/js/prensa-archive.js": {
+      "legalStatus": "unchecked",
+      "reason": "Pendiente de revisión jurídica: se publica como deuda registrada"
+    },
+    "docs/assets/js/press-utils.js": {
+      "legalStatus": "unchecked",
+      "reason": "Pendiente de revisión jurídica: se publica como deuda registrada"
+    },
+    "docs/assets/js/theme-init.js": {
+      "legalStatus": "unchecked",
+      "reason": "Pendiente de revisión jurídica: se publica como deuda registrada"
+    },
+    "docs/assets/js/theme.js": {
+      "legalStatus": "unchecked",
+      "reason": "Pendiente de revisión jurídica: se publica como deuda registrada"
+    },
+    "docs/automatizacion-prensa.md": {
+      "legalStatus": "cleared",
+      "publish": false,
+      "reviewedAt": "2026-08-21",
+      "reason": "Diseño del agregador: documentación de operación, no del sitio"
+    },
+    "docs/cronologia/index.html": {
+      "legalStatus": "unchecked",
+      "reason": "Pendiente de revisión jurídica: se publica como deuda registrada"
+    },
+    "docs/data/prensa/curated_news.json": {
+      "legalStatus": "cleared",
+      "generator": "scripts/prensa/fetch_press.py",
+      "invariants": [
+        "scripts/prensa/filter_regression_check.js",
+        "legal_scan:LEGAL-PRESS-001",
+        "legal_scan:LEGAL-MINOR-001"
+      ],
+      "reason": "Archivo de prensa: titular, medio, fecha y enlace de las noticias del conflicto · artefacto generado: se gobierna por invariantes, no por firma"
+    },
+    "docs/data/prensa/sources.json": {
+      "legalStatus": "cleared",
+      "publish": false,
+      "reviewedAt": "2026-08-21",
+      "reason": "Configuración del agregador: es entrada del script Python, el front no la usa"
+    },
+    "docs/doc.html": {
+      "legalStatus": "unchecked",
+      "reason": "Pendiente de revisión jurídica: se publica como deuda registrada · reglas aceptadas: LEGAL-THIRDPARTY-001 (pendiente de la retirada de la analítica y del alojamiento propio de los recursos)",
+      "acceptedRules": [
+        "LEGAL-THIRDPARTY-001"
+      ]
+    },
+    "docs/documentacion": {
+      "legalStatus": "unchecked",
+      "reason": "Pendiente de revisión jurídica: se publica como deuda registrada"
+    },
+    "docs/documentacion-relevante/estatutos-comunidad.pdf": {
+      "legalStatus": "needs-human-review",
+      "reviewedAt": "2026-08-21",
+      "reason": "Escaneo sin capa de texto: su contenido no es inspeccionable automáticamente y no consta revisión humana página a página"
+    },
+    "docs/documentacion-relevante/index.html": {
+      "legalStatus": "unchecked",
+      "reason": "Pendiente de revisión jurídica: se publica como deuda registrada · reglas aceptadas: LEGAL-THIRDPARTY-001 (pendiente de la retirada de la analítica y del alojamiento propio de los recursos)",
+      "acceptedRules": [
+        "LEGAL-THIRDPARTY-001"
+      ]
+    },
+    "docs/documentacion_relevante.md": {
+      "legalStatus": "unchecked",
+      "reason": "Pendiente de revisión jurídica: se publica como deuda registrada · reglas aceptadas: LEGAL-PRIVACY-003 (el teléfono y el correo son los de atención al público del Ayuntamiento); LEGAL-PRIVACY-004 (el teléfono y el correo son los de atención al público del Ayuntamiento)",
+      "acceptedRules": [
+        "LEGAL-PRIVACY-003",
+        "LEGAL-PRIVACY-004"
+      ]
+    },
+    "docs/index.html": {
+      "legalStatus": "unchecked",
+      "reason": "Pendiente de revisión jurídica: se publica como deuda registrada · reglas aceptadas: LEGAL-THIRDPARTY-001 (pendiente de la retirada de la analítica y del alojamiento propio de los recursos)",
+      "acceptedRules": [
+        "LEGAL-THIRDPARTY-001"
+      ]
+    },
+    "docs/parcelas/index.html": {
+      "legalStatus": "unchecked",
+      "reason": "Pendiente de revisión jurídica: se publica como deuda registrada · reglas aceptadas: LEGAL-THIRDPARTY-001 (pendiente de la retirada de la analítica y del alojamiento propio de los recursos)",
+      "acceptedRules": [
+        "LEGAL-THIRDPARTY-001"
+      ]
+    },
+    "docs/prensa/index.html": {
+      "legalStatus": "unchecked",
+      "reason": "Pendiente de revisión jurídica: se publica como deuda registrada · reglas aceptadas: LEGAL-THIRDPARTY-001 (pendiente de la retirada de la analítica y del alojamiento propio de los recursos)",
+      "acceptedRules": [
+        "LEGAL-THIRDPARTY-001"
+      ]
+    },
+    "docs/recepcion-urbanizacion/index.html": {
+      "legalStatus": "unchecked",
+      "reason": "Pendiente de revisión jurídica: se publica como deuda registrada"
+    },
+    "docs/robots.txt": {
+      "legalStatus": "unchecked",
+      "reason": "Pendiente de revisión jurídica: se publica como deuda registrada"
+    },
+    "docs/sentencia-tsjcyl/index.html": {
+      "legalStatus": "unchecked",
+      "reason": "Pendiente de revisión jurídica: se publica como deuda registrada"
+    },
+    "docs/sitemap.xml": {
+      "legalStatus": "unchecked",
+      "reason": "Pendiente de revisión jurídica: se publica como deuda registrada"
+    }
+  },
+  "content": {
+    "granularity": "section",
+    "sections": {
+      "actuaciones": {
+        "legalStatus": "unchecked",
+        "sha256": "880844d09cd8d7be0577737042d17ef7b623e5232992c28b123b024845a9ffc9",
+        "reason": "Pendiente de revisión jurídica: se publica como deuda registrada"
+      },
+      "contacto": {
+        "legalStatus": "unchecked",
+        "sha256": "a57b386257998822248143177c490dff326fa47897a007fd3b0e8add3c1ec61c",
+        "reason": "Pendiente de revisión jurídica: se publica como deuda registrada"
+      },
+      "documentos": {
+        "legalStatus": "unchecked",
+        "sha256": "9c6ffa81f9d4d337eeae9dbee67e4df5373db2643cd004dd9779abdd31a11939",
+        "reason": "Pendiente de revisión jurídica: se publica como deuda registrada"
+      },
+      "faq": {
+        "legalStatus": "unchecked",
+        "sha256": "a28609faa0cab41050c07cc8a5b1e4a5e11bfeae9be1d46da1a88b1770aab544",
+        "reason": "Pendiente de revisión jurídica: se publica como deuda registrada"
+      },
+      "historia": {
+        "legalStatus": "unchecked",
+        "sha256": "a614d0d4fedc86dd6e5189d7fb89d7ceba85023c30ed8f97895dd23c45bbe907",
+        "reason": "Pendiente de revisión jurídica: se publica como deuda registrada"
+      },
+      "incumplimientos": {
+        "legalStatus": "unchecked",
+        "sha256": "4c85233723431ea86065db6f162316d269eb9b16f9a7780f5b995b7c075f41b6",
+        "reason": "Pendiente de revisión jurídica: se publica como deuda registrada"
+      },
+      "inicio": {
+        "legalStatus": "unchecked",
+        "sha256": "eba4f353857a7ef9c0df921aa530fd095707942965b959253135a76f4b764885",
+        "reason": "Pendiente de revisión jurídica: se publica como deuda registrada"
+      },
+      "portal": {
+        "legalStatus": "cleared",
+        "generator": "scripts/release_sync.py",
+        "invariants": [
+          "legal_scan:LEGAL-PRIVACY-001"
+        ],
+        "reason": "Metadatos del portal, regenerados en cada versión"
+      },
+      "sentencia": {
+        "legalStatus": "unchecked",
+        "sha256": "cb7aee938ef8074abff2c2c4142c8f943ee2df5723a39077e55d43fbebc9831b",
+        "reason": "Pendiente de revisión jurídica: se publica como deuda registrada"
+      },
+      "situacion": {
+        "legalStatus": "unchecked",
+        "sha256": "1086dc951c9aac50edf7da41f60795bcb35a2cc04db2eb8e4488582df660d7db",
+        "reason": "Pendiente de revisión jurídica: se publica como deuda registrada"
+      }
+    }
+  }
+}
