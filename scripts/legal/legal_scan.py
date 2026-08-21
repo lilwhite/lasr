@@ -326,6 +326,8 @@ def main(argv: list[str]) -> int:
         print("  LEGAL-PDF-001          MEDIO  Metadatos del PDF")
         print("  LEGAL-EXIF-001         GRAVE  EXIF con GPS o autoría")
         print("  LEGAL-PRESS-001        GRAVE  Texto del medio reproducido")
+        print("\nLa lista blanca de correos y de dominios propios sale de")
+        print("audit/portal-manifest.json; la de nombres, de los actores declarados.")
         return 0
 
     try:
