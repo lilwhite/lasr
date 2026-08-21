@@ -14,6 +14,12 @@ on:
       - 'chore/**'
   workflow_dispatch:
 
+# Este workflow solo valida: no escribe en el repositorio ni despliega nada.
+# Sin este bloque heredaba los permisos por defecto del repositorio, que pueden
+# incluir escritura.
+permissions:
+  contents: read
+
 jobs:
   validate:
     runs-on: ubuntu-latest
@@ -128,3 +134,43 @@ jobs:
             fi
             echo "✓ $destino"
           done
+
+  auditoria-juridica:
+    runs-on: ubuntu-latest
+
+    steps:
+      # fetch-depth: 0 no es opcional. El checkout por defecto es superficial y
+      # `gate.py --diff` no podría resolver la base contra la que comparar; sale
+      # con 2 en vez de con 0, porque un gate que no puede comparar no es un
+      # gate. Sin esto, el paso pasaría a ser un fallo permanente.
+      - name: Checkout código
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # Los PDF se abren con poppler por subprocess, nunca con librería Python.
+      # Si falta, el escáner sale con 2 en lugar de saltárselos en silencio.
+      - name: Instalar poppler
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends poppler-utils
+
+      - name: Comprobar el propio detector
+        run: python3 scripts/legal/test_legal_gate.py
+
+      - name: Comprobar el esquema y el manifiesto
+        run: |
+          python3 scripts/legal/gate.py --check-schema
+          python3 scripts/legal/gate.py --check-manifest
+
+      # Solo sobre lo que la rama toca. Lo preexistente se publica y queda
+      # inventariado como deuda: un gate que obligara a clasificar el corpus
+      # entero antes del próximo despliegue se desactivaría el primer día.
+      - name: Estado jurídico de lo que toca esta rama
+        if: github.event_name == 'pull_request'
+        run: python3 scripts/legal/gate.py --diff --base origin/${{ github.base_ref }}
+
+      - name: Escaneo determinista
+        run: |
+          python3 scripts/legal/legal_scan.py \
+            --paths docs documentacion/src audit \
+            --baseline audit/legal-baseline.json \
+            --severity-threshold error

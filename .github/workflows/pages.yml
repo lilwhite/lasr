@@ -87,7 +87,11 @@ jobs:
         uses: actions/cache@v4
         with:
           path: documentacion/dist
-          key: guia-dist-${{ hashFiles('documentacion/src/**', 'documentacion/public/**', 'documentacion/package-lock.json', 'documentacion/astro.config.mjs', 'documentacion/scripts/**', 'docs/assets/css/tokens.css', 'docs/assets/js/theme-init.js', 'docs/assets/js/theme.js', 'docs/assets/images/og-image.png') }}
+          # LASR_PREVIEW entra en la clave a propósito. Un build hecho una vez
+          # con la vista previa activada lleva dentro el área /revision/ y la
+          # metadatería interna; sin esto quedaría cacheado bajo la misma clave
+          # y se republicaría sin volver a compilarse.
+          key: guia-dist-${{ env.LASR_PREVIEW || 'publico' }}-${{ hashFiles('documentacion/src/**', 'documentacion/public/**', 'documentacion/package-lock.json', 'documentacion/astro.config.mjs', 'documentacion/scripts/**', 'docs/assets/css/tokens.css', 'docs/assets/js/theme-init.js', 'docs/assets/js/theme.js', 'docs/assets/images/og-image.png') }}
 
       - name: Compilar la guía documental
         if: steps.cache-guia.outputs.cache-hit != 'true'
@@ -95,13 +99,30 @@ jobs:
         run: |
           npm ci
           npm run build
+
+      # Las validaciones corren SIEMPRE, con caché o sin ella. Estaban dentro
+      # del paso anterior, así que un dist restaurado se publicaba sin que nadie
+      # comprobara sus enlaces ni la puerta de publicación. Solo el build es
+      # cacheable; comprobar que lo cacheado sigue valiendo, no.
+      - name: Validar la guía documental
+        working-directory: documentacion
+        run: |
           python3 scripts/check_links.py
+          python3 scripts/check_gate.py
+
+      - name: Instalar poppler para el escáner
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends poppler-utils
 
       - name: Copiar contenido a dist
         run: |
-          echo "=== Copiando docs/ a dist/ ==="
+          # El portal se copia según audit/portal-manifest.json, no con un
+          # `cp -r docs/*`. La regla queda invertida: nada entra en dist/ por
+          # existir en docs/, entra por estar declarado publicable. Copiar sin
+          # filtro es el mecanismo exacto por el que se publicaron cuatro
+          # documentos internos de despliegue y un PDF con datos personales.
+          echo "=== Copiando el portal según el manifiesto jurídico ==="
           mkdir -p dist
-          cp -r docs/* dist/
+          python3 scripts/legal/gate.py --copy-portal dist
 
           # La guía va DESPUÉS del portal: así ningún fichero de docs/ puede
           # pisar la capa documental si algún día coincidieran los nombres.
@@ -120,6 +141,13 @@ jobs:
 
           echo "✓ Contenido copiado ($(find dist -name '*.html' | wc -l) páginas HTML)"
           ls -la dist/
+
+      # La última puerta antes de lasr-info.es, y el único punto que ve lo que
+      # las plantillas IMPRIMEN en vez de lo que el fuente parecía decir.
+      - name: Auditar el artefacto antes de publicarlo
+        run: |
+          python3 scripts/legal/legal_scan.py --build dist \
+            --baseline audit/legal-baseline.json --severity-threshold error
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

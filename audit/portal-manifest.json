@@ -3,7 +3,8 @@
   "updated": "2026-08-21",
   "_comentario": "Estado jurídico de cada pieza del portal, y a la vez lista blanca de despliegue: gate.py --copy-portal solo copia lo que aparece aquí sin publish:false. Este fichero vive fuera de docs/ a propósito.",
   "allowedEmails": [
-    "info@lasr-info.es"
+    "info@lasr-info.es",
+    "contacto@lasr-info.es"
   ],
   "allowedHosts": [
     "lasr-info.es",

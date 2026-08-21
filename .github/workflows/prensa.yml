@@ -31,6 +31,20 @@ jobs:
             --output docs/data/prensa/curated_news.json \
             --timeout 15
 
+      # El cron empuja directo a main y auto-dispara el despliegue, sin PR ni
+      # revisión humana. Es el único canal de escritura automatizado hacia la
+      # rama que se publica, así que las invariantes del fichero se comprueban
+      # aquí: si fallan, no se empuja. Ya se coló por esta vía la muerte de una
+      # menor y una niña identificada con nombre y apellidos.
+      - name: Invariantes del archivo de prensa
+        run: |
+          sudo apt-get update && sudo apt-get install -y --no-install-recommends poppler-utils
+          node scripts/prensa/filter_regression_check.js
+          python3 scripts/legal/legal_scan.py \
+            --paths docs/data/prensa \
+            --baseline audit/legal-baseline.json \
+            --severity-threshold error
+
       - name: Comprobar si hay cambios
         id: changes
         run: |

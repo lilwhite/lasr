@@ -235,12 +235,34 @@ def press_findings(path: Path, relpath: str, text: str) -> list[Finding]:
     return out
 
 
-def scan(paths: list[Path], rules, manifest, baseline: list[dict]) -> list[Finding]:
+def manifest_key(path: Path, relpath: str, build_root: Path | None) -> str:
+    """La ruta con la que buscar en el manifiesto.
+
+    En modo `--build` los ficheros están en `dist/`, pero el manifiesto declara
+    `docs/`. Sin esta traducción, las reglas aceptadas no se aplican sobre el
+    artefacto y la última puerta del despliegue falla por hallazgos que alguien
+    ya había valorado. Lo que cuelga de `dist/documentacion/` es la guía y no
+    tiene entrada en el manifiesto: se deja tal cual."""
+    if build_root is None:
+        return relpath
+    try:
+        dentro = path.resolve().relative_to(build_root.resolve()).as_posix()
+    except ValueError:
+        return relpath
+    if dentro.startswith("documentacion/"):
+        return dentro
+    return "docs/" + dentro
+
+
+def scan(paths: list[Path], rules, manifest, baseline: list[dict],
+         build_root: Path | None = None) -> list[Finding]:
     findings: list[Finding] = []
+    claves: dict[str, str] = {}
     for path in paths:
         if not path.is_file() or is_fixture(path):
             continue
         relpath = path.relative_to(REPO).as_posix() if path.is_relative_to(REPO) else str(path)
+        claves[relpath] = manifest_key(path, relpath, build_root)
         text, reason = extract(path)
         if text is None:
             rule = "LEGAL-OPAQUE-002" if path.suffix.lower() == ".pdf" else "LEGAL-OPAQUE-001"
@@ -253,7 +275,7 @@ def scan(paths: list[Path], rules, manifest, baseline: list[dict]) -> list[Findi
     accepted = manifest.accepted_rules if manifest else (lambda _: set())
     out = []
     for f in findings:
-        if is_accepted(f, baseline) or f.rule in accepted(f.path):
+        if is_accepted(f, baseline) or f.rule in accepted(claves.get(f.path, f.path)):
             continue
         out.append(f)
     return out
@@ -366,7 +388,8 @@ def main(argv: list[str]) -> int:
 
     files = walk(roots)
     baseline = load_baseline(Path(args.baseline))
-    findings = scan(files, rules, loaded, baseline)
+    findings = scan(files, rules, loaded, baseline,
+                    build_root=Path(args.build) if args.build else None)
 
     opaque_count = sum(1 for f in findings if f.rule.startswith("LEGAL-OPAQUE"))
     inspected = len(files) - opaque_count
