@@ -1,4 +1,4 @@
-Release v1.1.15
+Release v1.1.16
 
 Nueva versión del portal de Los Ángeles de San Rafael con mejoras funcionales y de contenido.
 

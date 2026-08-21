@@ -4,6 +4,16 @@ Este archivo recoge los cambios relevantes publicados en `main`.
 
 Formato basado en versiones semánticas (`vMAJOR.MINOR.PATCH`).
 
+## [v1.1.16] - 2026-08-21
+
+### Resumen
+- Promoción a producción: el archivo de prensa sin andamiaje interno (#79)
+- Promoción a producción: frontera de publicación efectiva y estatutos en texto (#77)
+- Promoción a producción: control jurídico previo a publicación (fases 1-4) (#72)
+- Dev (#66)
+- Fix/retirar datos personales (#65)
+- release: terminología — «núcleo» en lugar de «urbanización» (#62)
+
 ## [v1.1.15] - 2026-08-21
 
 ### Resumen

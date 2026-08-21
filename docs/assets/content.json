@@ -393,7 +393,7 @@
   },
   "portal": {
     "ultimas_actualizaciones": {
-      "version": "v1.1.15",
+      "version": "v1.1.16",
       "fecha": "2026-08-21",
       "cambios": [
         "Promoción a producción: el archivo de prensa sin andamiaje interno",
