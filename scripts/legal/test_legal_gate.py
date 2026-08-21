@@ -242,6 +242,22 @@ ok(not legal_scan.scan(sorted(p for p in FIXTURES.iterdir() if p.is_file()), RUL
    "escanearlos uno a uno no produce ni un hallazgo")
 
 
+print("\n== Invariante H · --build traduce las rutas al manifiesto ==")
+with tempfile.TemporaryDirectory() as tmp:
+    raiz = Path(tmp) / "dist"
+    (raiz / "documentacion").mkdir(parents=True)
+    portal = raiz / "documentacion_relevante.md"
+    portal.write_text("x", encoding="utf-8")
+    guia = raiz / "documentacion" / "index.html"
+    guia.write_text("x", encoding="utf-8")
+    ok(legal_scan.manifest_key(portal, str(portal), raiz) == "docs/documentacion_relevante.md",
+       "un fichero del portal se busca en el manifiesto como docs/…")
+    ok(legal_scan.manifest_key(guia, str(guia), raiz) == "documentacion/index.html",
+       "lo que cuelga de documentacion/ es la guía y no se reescribe")
+    ok(legal_scan.manifest_key(portal, "docs/x.md", None) == "docs/x.md",
+       "sin --build la ruta no se toca")
+
+
 print("\n== Invariante G · un symlink materializado no es contenido ==")
 with tempfile.TemporaryDirectory() as tmp:
     import manifest as manifest_mod

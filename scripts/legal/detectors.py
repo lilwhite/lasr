@@ -204,7 +204,14 @@ def scan_email(text: str) -> Iterator[tuple[int, int, str]]:
     yield from _finditer(RE_EMAIL, text, 1)
 
 
-RE_CARD = re.compile(r"(?<![\d-])((?:\d[ -]?){12,18}\d)(?![\d-])")
+# Los separadores solo caben en grupos de cuatro, que es como se escribe una
+# tarjeta. Admitirlos entre cualquier par de dígitos hacía que las coordenadas
+# de un `<path d="…">` SVG —«9134246575343 514 632»— pasaran por numeración
+# válida en cuanto Luhn cuadraba por casualidad. Y un dígito pegado a un punto
+# decimal no empieza una tarjeta.
+RE_CARD = re.compile(
+    r"(?<![\d.,-])(\d{4}(?:[ -]?\d{4}){2,3}[ -]?\d{0,3})(?![\d.,-])"
+)
 
 
 def scan_card(text: str) -> Iterator[tuple[int, int, str]]:
