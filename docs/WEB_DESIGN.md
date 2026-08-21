@@ -78,6 +78,7 @@ Se implementa con un campo `area` en `topics`: un enum cerrado, **no una jerarqu
 | Ruta | Qué es |
 |---|---|
 | `/documentos/` · `/documentos/<slug>/` | Fichas de documento |
+| `/documentos/mapa/` | Mapa documental (§6.5) |
 | `/notas/<slug>/` | Afirmaciones |
 | `/acontecimientos/<slug>/` | Acontecimientos (`/cronologia/` es su índice) |
 | `/procedimientos/` · `/procedimientos/<slug>/` | Procedimientos judiciales |
@@ -210,13 +211,17 @@ Monoespaciada para las coordenadas, serif para la cita. La cita literal va siemp
 
 ### 6.2 La cadena de procedencia
 
-Tres pasos en vertical, sin diagramas ni grafos:
+Tres pasos en vertical, sin diagramas ni grafos. La regla es de esta pieza, no del
+sitio entero: junto a una afirmación, un grafo compite con lo único que importa ahí
+—de dónde sale lo que se acaba de leer—. El mapa de conjunto tiene su sitio, y es
+§6.5.
 
 **Documento** → tipo, fecha, emisor, enlace a la ficha.
 **Lo que dice** → cita literal con su página.
 **Lo que se concluye** → la afirmación.
 
-El grafo completo existe internamente y nunca se le enseña al vecino.
+El grafo completo existe internamente. Al pie de una afirmación no se enseña; como
+índice del corpus, sí (§6.5).
 
 ### 6.3 Estados en lenguaje llano
 
@@ -235,6 +240,45 @@ Mientras todo el corpus esté en borrador, el estado editorial es **del sitio**,
 ### 6.4 Documentos sin PDF
 
 Ningún documento es publicable hoy: los 36 están en revisión de privacidad. La ficha muestra qué es, quién lo emitió, cuándo, cuántas páginas tiene, qué dice y qué afirmaciones sostiene, con sus citas literales — y explica en una frase por qué el original no está disponible. Una ficha así ya es útil; un enlace roto no.
+
+### 6.5 El mapa documental
+
+`/documentos/mapa/` es la vista de conjunto del corpus: los 36 documentos situados en
+el tiempo, agrupados por el procedimiento judicial al que pertenecen, unidos por las
+relaciones que ellos mismos declaran. Su página vive dentro de Documentos, y la figura
+—sin las cadenas en texto— se repite en la portada, como banda propia después de la
+narrativa histórica.
+
+Es la única excepción a la regla de §6.2, y está medida: la portada abre con una
+afirmación documentada y su procedencia, no con el mapa, y el mapa llega cuando el
+lector ya sabe de qué se le habla. No aparece en ningún otro sitio —ni en las páginas
+temáticas, ni junto a una afirmación—, porque ahí competiría con la lectura en lugar
+de situarla.
+
+**Cada marcador es un enlace.** La figura es un índice navegable, no una ilustración.
+Si un elemento del mapa no lleva a ninguna parte, sobra.
+
+**Qué se dibuja y qué no.** Solo las relaciones declaradas en `relations` —confirma,
+anula, resuelve el recurso, ejecuta, cita—. Nunca se traza una arista porque dos
+documentos compartan tema, emisor o año: eso no es una relación, y la línea afirmaría
+algo que ningún documento dice. Con el corpus de hoy son 20 aristas, y hay documentos
+sin ninguna: el hueco se declara en la página, no se disimula.
+
+**La escala del tiempo miente en voz alta.** El corpus va de 1966 a 2026 y 34 de los 36
+documentos caen entre 2002 y 2026. Los tramos de dos o más años consecutivos sin
+ningún documento se comprimen a un hueco fijo con un corte visible; dentro de cada
+tramo la distancia sí es proporcional. Un año suelto en blanco se dibuja entero:
+cortar ahí sería ruido.
+
+**Redundancia obligatoria.** Ni el color ni la posición son el único portador: la
+familia documental va también en la forma del marcador, y bajo la figura está la misma
+información en texto —cada cadena, documento a documento, con sus relaciones dichas en
+palabras—. Esa lista no es un apaño de accesibilidad: es la versión que funciona en un
+móvil de 360 px y la que encuentra la búsqueda del navegador.
+
+**Cero JavaScript.** La figura es SVG generado en el build desde el grafo; ni una
+coordenada escrita a mano. Se desplaza con `overflow-x` nativo, en una región
+enfocable por teclado.
 
 ---
 
@@ -304,7 +348,7 @@ La accesibilidad no se sacrifica por diseño: parte de la audiencia es mayor y l
 
 ## 12. Rendimiento y despliegue
 
-Sitio estático en GitHub Pages, página de proyecto. Cero JavaScript salvo el filtro de dos índices. Cero peticiones a terceros: fuentes autoalojadas, sin analítica, sin CDN.
+Sitio estático en GitHub Pages, página de proyecto. Cero JavaScript salvo el filtro de dos índices; el mapa documental (§6.5) tampoco lleva. Cero peticiones a terceros: fuentes autoalojadas, sin analítica, sin CDN.
 
 Objetivo: portada por debajo de 150 KB con fuentes incluidas.
 

@@ -197,6 +197,14 @@ a.ref:hover { color: #6f5319; }
   .container { padding-inline: var(--s-5); }
 }
 
+/* Ensancha una figura más allá de la columna de texto sin sangrar la página.
+   Deja siempre 2 rem de aire a cada lado, contando la barra de scroll (que sí
+   entra en 100vw), y a partir de ahí no crece más: el mapa documental mide
+   1.373 px y así cabe entero en un portátil sin obligar a desplazarlo. */
+.bleed-wide {
+  margin-inline: calc(-1 * clamp(0px, (100vw - 100% - 4rem) / 2, 16rem));
+}
+
 /* ---- Utilidades -------------------------------------------------------- */
 .muted { color: var(--ink-soft); }
 .lede { font-size: var(--t-md); line-height: 1.55; color: var(--ink-soft); text-wrap: pretty; }

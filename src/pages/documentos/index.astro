@@ -25,6 +25,10 @@ const porTipo = ORDEN
   <header class="head">
     <h1>Documentos</h1>
     <p class="lede">Estas son las fuentes de todo lo que se afirma en esta web. Cada ficha explica qué es el documento, quién lo emitió y qué se apoya en él.</p>
+    <p class="jump">
+      <a href={url('/documentos/mapa/')}>Ver el mapa documental</a> — los {graph.sources.length} documentos
+      situados en el tiempo, agrupados por pleito y unidos por las relaciones que declaran entre sí.
+    </p>
     <p class="notice">Los originales no se publican: contienen datos personales y su revisión de
       privacidad sigue pendiente. Las fichas sí indican qué dice cada uno y en qué página.</p>
   </header>
@@ -69,6 +73,13 @@ const porTipo = ORDEN
     border-radius: var(--radius);
     padding: var(--s-3) var(--s-4);
   }
+  .jump {
+    font-size: var(--t-sm);
+    border-left: 3px solid var(--stamp);
+    padding: var(--s-1) 0 var(--s-1) var(--s-4);
+    color: var(--ink-soft);
+  }
+  .jump a { font-weight: 600; }
   .section-lede { font-size: var(--t-sm); color: var(--ink-soft); margin-top: 0; }
   .list { list-style: none; margin: 0; padding: 0; }
   .list > li { padding-block: var(--s-3); border-top: var(--rule); }

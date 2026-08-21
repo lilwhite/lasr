@@ -1,0 +1,175 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import DocMap from '../../components/DocMap.astro';
+import { buildDocMap } from '../../lib/docmap';
+import { graph, resolve, entityRoute, sourceShortLabel, formatDate, kind } from '../../lib/graph';
+import { DOC_TYPE_LABEL, RELATION_LABEL } from '../../lib/policy';
+import { url } from '../../lib/url';
+
+const map = buildDocMap();
+
+/** Relaciones de un documento con otros documentos, dichas en una frase. */
+function relationsOf(id: string): { verb: string; other: string; href: string }[] {
+  const out: { verb: string; other: string; href: string }[] = [];
+  const self = graph.sources.find((s) => s.data.id === id)!;
+  for (const r of self.data.relations) {
+    if (kind(r.target) !== 'sources') continue;
+    const other = resolve(r.target);
+    out.push({
+      verb: RELATION_LABEL[r.type].direct,
+      other: sourceShortLabel(other as (typeof graph.sources)[number]),
+      href: entityRoute(other),
+    });
+  }
+  for (const s of graph.sources) {
+    for (const r of s.data.relations) {
+      if (r.target !== id) continue;
+      out.push({
+        verb: RELATION_LABEL[r.type].inverse,
+        other: sourceShortLabel(s),
+        href: entityRoute(s),
+      });
+    }
+  }
+  return out;
+}
+
+const t = map.totals;
+const desde = map.ticks[0].year;
+const hasta = map.ticks[map.ticks.length - 1].year;
+---
+
+<Layout
+  title="Mapa documental"
+  description={`Los ${t.sources} documentos del corpus de Los Ángeles de San Rafael, situados en el tiempo, agrupados por procedimiento judicial y unidos por las relaciones que ellos mismos declaran.`}
+>
+  <nav class="crumbs" aria-label="Migas de pan">
+    <a href={url('/documentos/')}>Documentos</a> <span aria-hidden="true">›</span> Mapa documental
+  </nav>
+
+  <header class="head">
+    <h1>Mapa documental</h1>
+    <p class="lede">
+      Los {t.sources} documentos del corpus, colocados en el tiempo y agrupados por el
+      pleito al que pertenecen. Sirve para lo que una lista alfabética no sirve: ver de un
+      vistazo qué sentencia responde a cuál, cuánto tardó cada cosa y qué documentos quedan
+      fuera de toda cadena. Cada marcador lleva a su ficha.
+    </p>
+  </header>
+
+  <figure class="figure">
+    <p class="scroll-hint">
+      La figura empieza en 1966 y se desplaza en horizontal; casi todos los documentos
+      están de 2002 en adelante. Debajo está la misma información en texto.
+    </p>
+    <div class="bleed-wide"><DocMap /></div>
+    <figcaption>
+      {t.inProcedure} de los {t.sources} documentos pertenecen a un procedimiento judicial;
+      los {t.loose} restantes forman la banda final. Las flechas son las {t.edges} relaciones
+      que los documentos declaran entre sí. El eje va de {desde} a {hasta} y se comprime, con
+      un corte visible, en los tramos sin ningún documento. La figura se desplaza en horizontal.
+    </figcaption>
+  </figure>
+
+  <section class="prose">
+    <h2>Cómo leerlo</h2>
+    <p>
+      Cada franja horizontal es un <a href={url('/procedimientos/')}>procedimiento judicial</a>:
+      todos sus documentos, de la primera demanda a la última resolución, en la misma línea.
+      Cuando un pleito nace de otro —una ejecución de sentencia, un incidente— aparece
+      justo debajo y sangrado. El tamaño del marcador dice cuántas afirmaciones de esta web se
+      apoyan en ese documento, así que los círculos grandes son los papeles que más pesan.
+    </p>
+    <p>
+      Solo se dibujan las relaciones que los documentos declaran: que una sentencia confirma
+      o anula otra, que un auto ejecuta una sentencia, que un escrito cita una resolución
+      anterior. No se traza ninguna línea por el hecho de que dos documentos hablen del mismo
+      asunto o los firme el mismo organismo: eso no es una relación, y dibujarla sería
+      afirmar algo que ningún documento dice.
+    </p>
+  </section>
+
+  {map.lanes.map((lane) => (
+    <section class="lane">
+      <h2>
+        {lane.href ? <a href={url(lane.href)}>{lane.tag}</a> : lane.title}
+        {lane.href && <span class="lane-desc"> · {lane.title}</span>}
+      </h2>
+      <ol class="chain">
+        {[...lane.nodes].sort((a, b) => a.date.getTime() - b.date.getTime()).map((n) => (
+          <li>
+            <a class="chain-doc" href={url(n.href)}>{n.label}</a>
+            <span class="apparatus"> · {formatDate(n.date, 'day')} · {DOC_TYPE_LABEL[n.docType]}</span>
+            <p class="chain-title">{n.title}</p>
+            <p class="apparatus">
+              {n.noteCount === 0
+                ? 'Sin afirmaciones extraídas todavía.'
+                : `Sostiene ${n.noteCount} afirmaci${n.noteCount === 1 ? 'ón' : 'ones'}.`}
+              {relationsOf(n.id).map((r) => (
+                <span class="rel"> {r.verb} <a href={url(r.href)}>{r.other}</a>.</span>
+              ))}
+            </p>
+          </li>
+        ))}
+      </ol>
+    </section>
+  ))}
+
+  <section class="prose limits">
+    <h2>Lo que el mapa no dice</h2>
+    <p>
+      Solo {t.edges} relaciones están declaradas en el corpus, y {t.isolated} documentos no
+      tienen ninguna. Eso no significa que estén sueltos en la realidad: significa que la
+      relación aún no se ha anotado al procesarlos. El mapa enseña el estado del trabajo,
+      no un mapa completo del pleito.
+    </p>
+    <p>
+      El eje tampoco está a escala uniforme. Entre {desde} y 2002 hay dos documentos y
+      treinta y seis años; dibujarlo a escala real dejaría dos tercios del ancho en blanco.
+      Los tramos de dos o más años sin ningún documento se comprimen a un hueco fijo, marcado
+      con un corte. Las distancias dentro de cada tramo sí son proporcionales al tiempo.
+    </p>
+  </section>
+</Layout>
+
+<style>
+  .crumbs {
+    font-size: var(--t-sm);
+    color: var(--ink-faint);
+    margin-bottom: var(--s-4);
+  }
+  .head, .prose, .lane { max-width: var(--measure); }
+  .head h1 { margin-bottom: var(--s-3); }
+
+  .figure { margin: var(--s-6) 0 var(--s-7); max-width: none; }
+  .scroll-hint {
+    display: none;
+    font-size: var(--t-xs);
+    color: var(--ink-soft);
+    margin: 0 0 var(--s-2);
+  }
+  @media (max-width: 60em) {
+    .scroll-hint { display: block; }
+  }
+
+  .figure figcaption {
+    font-size: var(--t-sm);
+    color: var(--ink-soft);
+    margin-top: var(--s-3);
+    max-width: var(--measure);
+  }
+
+  .lane h2 { font-size: var(--t-md); margin-block: var(--s-6) var(--s-2); }
+  .lane h2 a { font-family: var(--mono); font-size: 0.9em; }
+  .lane-desc { font-family: var(--sans); font-size: var(--t-sm); color: var(--ink-soft); font-weight: 400; }
+
+  .chain { list-style: none; margin: 0; padding: 0; }
+  .chain > li { padding-block: var(--s-3); border-top: var(--rule); }
+  .chain-doc { font-family: var(--mono); font-size: var(--t-sm); }
+  .chain-title { font-size: var(--t-sm); margin: var(--s-1) 0 0; }
+  .apparatus { font-family: var(--mono); font-size: var(--t-xs); color: var(--ink-faint); }
+  .apparatus a { color: var(--stamp); }
+  .rel { color: var(--ink-soft); }
+
+  .limits { margin-top: var(--s-7); }
+</style>

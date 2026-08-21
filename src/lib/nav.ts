@@ -24,6 +24,7 @@ export const NAV: NavItem[] = [
 /** Enlaces secundarios: viven en el pie y en el cuerpo, no en el menú. */
 export const FOOTER_NAV: NavItem[] = [
   { path: '/historia/', label: 'Historia de la urbanización' },
+  { path: '/documentos/mapa/', label: 'Mapa documental' },
   { path: '/actores/', label: 'Quién es quién' },
   { path: '/procedimientos/', label: 'Procedimientos judiciales' },
   { path: '/notas/', label: 'Todas las afirmaciones' },

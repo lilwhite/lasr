@@ -3,6 +3,7 @@ import { getEntry } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import Prose from '../components/Prose.astro';
 import Citation from '../components/Citation.astro';
+import DocMap from '../components/DocMap.astro';
 import { graph, entityRoute, eventSortKey, formatDate, resolve, type Note } from '../lib/graph';
 import { url } from '../lib/url';
 import { AREAS, AREA_ORDER } from '../lib/areas';
@@ -105,6 +106,22 @@ const stats = {
     <p><a href={url('/cronologia/')}>Ver la cronología completa</a></p>
   </section>
 
+  <section class="band band--map">
+    <h2>Todo el expediente, de un vistazo</h2>
+    <p class="map-lede">
+      Los {stats.documentos} documentos, colocados en el tiempo y agrupados por el pleito al
+      que pertenecen. Los que nacen de otro —una ejecución de sentencia, un incidente— van
+      sangrados justo debajo. El tamaño de cada marcador es el número de afirmaciones que
+      sostiene, y cada uno lleva a su ficha.
+    </p>
+    <p class="map-hint">Si la pantalla es estrecha, la figura se desplaza en horizontal.</p>
+    <div class="bleed-wide"><DocMap /></div>
+    <p class="map-more">
+      <a href={url('/documentos/mapa/')}>Ver el mapa documental</a>, con cada cadena explicada
+      documento a documento.
+    </p>
+  </section>
+
   <section class="band">
     <h2>Preguntas que se hacen los vecinos</h2>
     <ul class="questions">
@@ -201,6 +218,11 @@ const stats = {
   .card > a:hover { color: var(--stamp-strong); text-decoration: underline; }
   .card p { font-size: var(--t-sm); color: var(--ink-soft); margin-bottom: 0; }
   .card-meta { color: var(--ink-faint); margin-top: var(--s-3); }
+
+  .band--map { padding-bottom: var(--s-7); }
+  .map-lede { max-width: var(--measure); color: var(--ink-soft); font-size: var(--t-sm); }
+  .map-hint { font-size: var(--t-xs); color: var(--ink-faint); margin-bottom: var(--s-2); }
+  .map-more { font-size: var(--t-sm); color: var(--ink-soft); max-width: var(--measure); margin-top: var(--s-4); }
 
   .narrative { max-width: var(--measure); }
   .milestones { list-style: none; margin: var(--s-5) 0; padding: 0; max-width: var(--measure); }
