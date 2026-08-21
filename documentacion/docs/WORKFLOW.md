@@ -139,4 +139,4 @@ Un commit por documento, con el cuerpo explicando qué aporta y qué decisiones 
 
 **No promociona nada a `reviewed`.** Todo el contenido nace `editorialStatus: draft` y ahí se queda. La promoción es un acto humano, con el PDF delante y el checklist de `CONTENT_MODEL.md` §7: comprobar que la fuente existe, que la cita corresponde a la página indicada, que la nota representa fielmente la fuente, que no se ha añadido ninguna conclusión no sustentada y que `type` y `basis` son correctos.
 
-Mientras eso no ocurra, `src/lib/policy.ts` mantiene el contenido fuera de la web pública. Es deliberado.
+El borrador **sí se publica**, con el estado a la vista: ocultar todo el corpus dejaba la web en 26 páginas de 433, es decir, inútil. Lo que `src/lib/policy.ts` sigue siendo es el punto único donde se decide qué se muestra y con qué etiqueta, de modo que excluir una entrada concreta sea un cambio de una línea y en un solo sitio.
