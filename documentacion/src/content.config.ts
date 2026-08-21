@@ -26,6 +26,87 @@ const editorialStatus = z.enum(['draft', 'reviewed', 'verified']);
 const evidenceStatus = z.enum(['unassessed', 'consistent', 'disputed', 'incomplete']);
 const urlSlug = z.string().regex(/^[a-z0-9]+(-[a-z0-9]+)*$/, 'Slug en kebab-case');
 
+/**
+ * Cuarto eje: ¿puede el SITIO publicar esto? (CONTENT_MODEL §7.4)
+ *
+ * Es ortogonal a los otros tres y no los reinterpreta. En particular no se
+ * confunde con `privacyReview`, que solo existe en Source y decide sobre el
+ * PDF original: privacyReview responde «¿enlazo el fichero?», legalStatus
+ * responde «¿publico lo que cuento de él?». Un documento puede estar en
+ * `needs-redaction` y su ficha en `cleared`, porque la ficha explica qué dice
+ * sin reproducir el dato.
+ *
+ * Nace `unchecked` a propósito. El corpus preexistente se publica y queda
+ * inventariado como deuda; el gate solo exige decisión sobre lo que una rama
+ * toca. Un gate que obligara a clasificar 285 entradas antes del próximo
+ * despliegue se desactivaría el primer día.
+ */
+const legalStatus = z
+  .enum(['unchecked', 'cleared', 'cleared-redacted', 'needs-human-review', 'blocked'])
+  .default('unchecked');
+
+/**
+ * Guardia de última milla: un texto de trazabilidad describe la CATEGORÍA del
+ * dato, nunca el dato. Aquí solo van las tres formas más groseras; la
+ * autoridad es `scripts/legal/detectors.py`, que corre sobre todo el corpus en
+ * CI y sí valida letra de control y dígitos de control.
+ */
+const noPii = (value: string) =>
+  !/\b\d{8}\s?-?\s?[A-HJ-NP-TV-Z]\b/.test(value) &&
+  !/\b[A-Z]{2}\d{2}[A-Z0-9]{11,30}\b/.test(value) &&
+  !/[\w.+-]+@[\w-]+\.[A-Za-z]{2,}/.test(value);
+
+const SIN_DATO = 'Describe la categoría del dato y la regla aplicada, nunca su valor';
+
+const legalReview = z
+  .object({
+    reviewedAt: z.date(),
+    reason: z.string().min(12).refine(noPii, SIN_DATO),
+    redactions: z.array(z.string().refine(noPii, SIN_DATO)).nonempty().optional(),
+  })
+  .strict()
+  .optional();
+
+/**
+ * Se esparce en las OCHO colecciones, siempre dentro del `z.object({ … })` y
+ * antes del `.strict()`. Nunca después de un `.refine()`: eso ya no es un
+ * ZodObject y no admite campos nuevos.
+ *
+ * Olvidarlo en una colección no rompe nada — esa colección simplemente se
+ * queda sin eje jurídico para siempre, en silencio. Por eso
+ * `gate.py --check-schema` cuenta que aparezca ocho veces.
+ */
+const legalFields = { legalStatus, legalReview };
+
+type ConEjeJuridico = {
+  legalStatus?: string;
+  legalReview?: { redactions?: string[] };
+};
+
+// `astro:content` reexporta `z` como valor, no como espacio de nombres, así que
+// `z.RefinementCtx` no se resuelve. Se declara la forma mínima que se usa.
+type RefinementCtx = { addIssue: (issue: { code: 'custom'; message: string }) => void };
+
+/** Un estado declarado sin motivo no es trazabilidad, es una casilla marcada. */
+function checkLegal(data: ConEjeJuridico, ctx: RefinementCtx): void {
+  if (data.legalStatus && data.legalStatus !== 'unchecked' && data.legalReview === undefined) {
+    ctx.addIssue({
+      code: 'custom',
+      message:
+        `legalStatus "${data.legalStatus}" exige legalReview con reviewedAt y reason ` +
+        '(CONTENT_MODEL §7.4)',
+    });
+  }
+  if (data.legalStatus === 'cleared-redacted' && !data.legalReview?.redactions?.length) {
+    ctx.addIssue({
+      code: 'custom',
+      message:
+        'legalStatus "cleared-redacted" exige legalReview.redactions no vacío: ' +
+        'qué se suprimió y por qué',
+    });
+  }
+}
+
 const citation = z.object({
   source: sourceRef,
   pdfPages: z.array(z.number().int().positive()).nonempty(),
@@ -80,7 +161,9 @@ const sources = defineCollection({
       date: z.date().nullable().optional(),
       notes: z.string().optional(),
     }).strict(),
-  }).strict(),
+    ...legalFields,
+  }).strict()
+    .superRefine(checkLegal),
 });
 
 const notes = defineCollection({
@@ -97,10 +180,12 @@ const notes = defineCollection({
     events: z.array(eventRef).default([]),
     topics: z.array(topicRef).default([]),
     relations: z.array(relation).default([]),
+    ...legalFields,
   }).strict()
     .refine((n) => n.basis !== 'documented' || n.citations.length > 0, {
       message: 'Una nota con basis "documented" exige al menos una citation (CONTENT_MODEL §6)',
-    }),
+    })
+    .superRefine(checkLegal),
 });
 
 const dateEvidence = z.object({
@@ -127,13 +212,15 @@ const events = defineCollection({
     citations: z.array(citation).default([]),
     topics: z.array(topicRef).default([]),
     editorialStatus,
+    ...legalFields,
   }).strict()
     .refine((e) => e.dateStatus !== 'disputed' || (e.date === null && e.dateEvidence.length >= 2), {
       message: 'Un evento con fecha disputada exige date: null y ≥2 entradas en dateEvidence (CONTENT_MODEL §3.3)',
     })
     .refine((e) => e.date !== null || e.dateStatus === 'disputed' || e.dateStatus === 'unknown', {
       message: 'date solo puede ser null cuando dateStatus es disputed o unknown',
-    }),
+    })
+    .superRefine(checkLegal),
 });
 
 const actors = defineCollection({
@@ -147,7 +234,9 @@ const actors = defineCollection({
     ]),
     aliases: z.array(z.string()).default([]),
     topics: z.array(topicRef).default([]),
-  }).strict(),
+    ...legalFields,
+  }).strict()
+    .superRefine(checkLegal),
 });
 
 const procedures = defineCollection({
@@ -162,7 +251,9 @@ const procedures = defineCollection({
     parties: z.array(party).default([]),
     topics: z.array(topicRef).default([]),
     editorialStatus,
-  }).strict(),
+    ...legalFields,
+  }).strict()
+    .superRefine(checkLegal),
 });
 
 const topics = defineCollection({
@@ -175,7 +266,9 @@ const topics = defineCollection({
     // Agrupación editorial de navegación, no jerarquía: ver CONTENT_MODEL §3.6.
     area: z.enum(['comunidad-y-recepcion', 'desanexion']),
     relatedTopics: z.array(topicRef).default([]),
-  }).strict(),
+    ...legalFields,
+  }).strict()
+    .superRefine(checkLegal),
 });
 
 const questions = defineCollection({
@@ -187,7 +280,9 @@ const questions = defineCollection({
     topics: z.array(topicRef).default([]),
     answeredBy: z.array(noteRef).default([]),
     editorialStatus,
-  }).strict(),
+    ...legalFields,
+  }).strict()
+    .superRefine(checkLegal),
 });
 
 const pages = defineCollection({
@@ -198,7 +293,9 @@ const pages = defineCollection({
     summary: z.string(),
     updated: z.date(),
     editorialStatus,
-  }).strict(),
+    ...legalFields,
+  }).strict()
+    .superRefine(checkLegal),
 });
 
 export const collections = { sources, notes, events, actors, procedures, topics, questions, pages };
